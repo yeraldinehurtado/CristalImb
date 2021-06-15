@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Abstract\" />
+    <Folder Include="Models\Business\" />
+    <Folder Include="Models\DAL\" />
+  </ItemGroup>
+
 </Project>
