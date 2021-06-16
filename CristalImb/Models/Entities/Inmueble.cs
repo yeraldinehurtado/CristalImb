@@ -30,5 +30,12 @@ namespace CristalImb.Models.Entities
 
         [Required(ErrorMessage = "La zona es obligatoria")]
         public string Zona { get; set; }
+
+        public bool oferta { get; set; }
+
+        public string RutaImagen { get; set; }
+
+        [Required(ErrorMessage = "El estado es obligatorio")]
+        public string Estado { get; set; }
     }
 }
