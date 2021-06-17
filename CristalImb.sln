@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CristalImb", "CristalImb\CristalImb.csproj", "{1D311CE9-16B9-4507-BA23-9ACBAFA6B506}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CristalImb.Model", "DAL\CristalImb.Model.csproj", "{E7B8B861-2ED7-4C19-9EE2-6E2E5189B18D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CristalImb.Business", "Business\CristalImb.Business.csproj", "{99457406-DDBD-478B-AEE1-B4D45032CF60}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D311CE9-16B9-4507-BA23-9ACBAFA6B506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D311CE9-16B9-4507-BA23-9ACBAFA6B506}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D311CE9-16B9-4507-BA23-9ACBAFA6B506}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D311CE9-16B9-4507-BA23-9ACBAFA6B506}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7B8B861-2ED7-4C19-9EE2-6E2E5189B18D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E7B8B861-2ED7-4C19-9EE2-6E2E5189B18D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7B8B861-2ED7-4C19-9EE2-6E2E5189B18D}.Release|Any CPU.ActiveCfg = Release|Any CPU
