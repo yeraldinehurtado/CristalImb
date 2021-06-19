@@ -7,5 +7,6 @@ namespace CristalImb.Business.Business
 {
     public class PropietarioService
     {
+        
     }
 }
