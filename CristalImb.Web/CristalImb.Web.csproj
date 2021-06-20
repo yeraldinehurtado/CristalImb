@@ -11,11 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Abstract\" />
-    <Folder Include="Models\DAL\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Business\CristalImb.Business.csproj" />
     <ProjectReference Include="..\DAL\CristalImb.Model.csproj" />
   </ItemGroup>
