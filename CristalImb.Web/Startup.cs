@@ -1,6 +1,10 @@
+using CristalImb.Business.Abstract;
+using CristalImb.Business.Business;
+using CristalImb.Model.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +28,13 @@ namespace CristalImb.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddControllersWithViews();
+
+            var conexion = Configuration["ConnectionStrings:conexion_sqlServer"];
+            services.AddDbContext<AppDbContext>(options =>
+                    options.UseSqlServer(conexion));
+
+            services.AddScoped<IPropietarioService, PropietarioService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

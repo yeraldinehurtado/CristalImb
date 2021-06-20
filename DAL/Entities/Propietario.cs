@@ -27,8 +27,12 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "El teléfono es obligatorio")]
         public int Telefono { get; set; }
 
+        [Required(ErrorMessage = "El correo es obligatorio")]
+        public int Correo { get; set; }
+
         [DisplayName("Dirección")]
         [Required(ErrorMessage = "La dirección es obligatoria")]
         public string Direccion { get; set; }
+
     }
 }

@@ -1,0 +1,126 @@
+﻿@model IEnumerable<CristalImb.Model.Entities.Propietario>
+
+@{
+    ViewData["Title"] = "IndexPropietario";
+}
+
+@section Styles{
+    <style>
+        .contenido {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        tr td {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #08006f;
+        }
+    </style>
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="m-0 row justify-content-center align-items-baseline">
+            <div class="contenido">
+                <div class="botonCrear col-12 p-3 text-center accent-teal">
+                    <br />
+                    <p>
+                        <a asp-action="RegistrarPropietario" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar propietario.</a>
+                    </p>
+                    <br />
+                </div>
+                <div>
+                    <table class="table table-striped table-bordered col-12" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Identificacion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Apellido)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Telefono)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Correo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Direccion)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Identificacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Apellido)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Telefono)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Correo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Direccion)
+                                </td>
+                                <td>
+                                    <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
+                                    <a asp-action="DetallePropietario" asp-route-id="@x.PropietarioId" class="btn alert-secondary"><i class="fas fa-info-circle"></i></a> |
+                                    <form asp-action="EliminarCliente" asp-route-id="@x.PropietarioId" class="d-inline">
+                                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/tabla.js"></script>
+    <script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarPropietario")) { <text>
+            Swal.fire({
+            title: "Guardar propietario",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarPropietario")) { <text>
+            Swal.fire({
+            title: "Editar propietario",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+            Swal.fire({
+            title: "Error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+
+    </script>
+}
