@@ -27,7 +27,7 @@
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
-                        <a asp-action="RegistrarPropietario" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar propietario.</a>
+                        <a onclick="mostrarModal('@Url.Action("RegistrarPropietario","Propietario", "null", Context.Request.Scheme)', 'Registrar propietario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar propietario.</a>
                     </p>
                     <br />
                 </div>
@@ -58,33 +58,33 @@
                         <tbody>
                             @foreach (var x in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Identificacion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Apellido)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Telefono)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Correo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Direccion)
-                                </td>
-                                <td>
-                                    <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
-                                    <a asp-action="DetallePropietario" asp-route-id="@x.PropietarioId" class="btn alert-secondary"><i class="fas fa-info-circle"></i></a> |
-                                    <form asp-action="EliminarCliente" asp-route-id="@x.PropietarioId" class="d-inline">
-                                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Identificacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Apellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Telefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Correo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Direccion)
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
+                                        <a asp-action="DetallePropietario" asp-route-id="@x.PropietarioId" class="btn alert-secondary"><i class="fas fa-info-circle"></i></a> |
+                                        <form asp-action="EliminarCliente" asp-route-id="@x.PropietarioId" class="d-inline">
+                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -95,32 +95,36 @@
 </section>
 
 @section Scripts{
-    <script src="~/js/tabla.js"></script>
+    <script src="~/js/Tabla.js"></script>
+    <script src="~/js/modal.js"></script>
+
     <script>
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarPropietario")) { <text>
-            Swal.fire({
-            title: "Guardar propietario",
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarPropietario")) {
+        <text>
+        Swal.fire({
+        title: "Guardar propietario",
             icon: 'success',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarPropietario")) { <text>
-            Swal.fire({
-            title: "Editar propietario",
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarPropietario")) {
+        <text>
+        Swal.fire({
+        title: "Editar propietario",
             icon: 'success',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
-            Swal.fire({
-            title: "Error",
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+        <text>
+        Swal.fire({
+        title: "Error",
             icon: 'error',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-
     </script>
 }
