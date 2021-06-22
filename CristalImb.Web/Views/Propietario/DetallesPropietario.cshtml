@@ -1,0 +1,46 @@
+﻿@model CristalImb.Model.Entities.Propietario
+
+@{
+    ViewData["Title"] = "DetallesPropietario";
+}
+
+@section Styles{
+    <style>
+        .detalle {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-top: 5%;
+        }
+    </style>
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="detalle">
+            <h2>Propietario</h2>
+            <hr />
+            <form asp-route-id="@Model.PropietarioId">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Nombre: @Model.Identificacion</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Correo: @Model.Nombre</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dirección: @Model.Apellido</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dirección: @Model.Telefono</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dirección: @Model.Correo</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dirección: @Model.Direccion</label>
+                </div>
+                <a asp-action="IndexPropietario">Volver</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -5,20 +5,10 @@
     Layout = null;
 }
 
-@section Styles{
-    <style>
-        .registrar {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            margin-top: 10%;
-        }
-    </style>
-}
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-10">
         <div class="registrar">
-            <h1>Registrar propietario</h1>
-            <hr />
             <form asp-action="RegistrarPropietario">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
