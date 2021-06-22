@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CristalImb.Web.ViewModels.Usuarios;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace CristalImb.Web.Controllers
         }
 
         public IActionResult CrearUsuarios()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CrearUsuarios(UsuarioViewModel usuarioViewModel)
         {
             return View();
         }

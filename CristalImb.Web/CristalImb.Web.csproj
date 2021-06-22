@@ -19,8 +19,4 @@
     <ProjectReference Include="..\DAL\CristalImb.Model.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>

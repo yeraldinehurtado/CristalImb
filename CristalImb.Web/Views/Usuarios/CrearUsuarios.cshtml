@@ -1,1 +1,72 @@
-﻿
+﻿@model CristalImb.Web.ViewModels.Usuarios.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "CrearUsuarios";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="Crear">
+            <form asp-action="Crear usuarios">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Identificacion" class="control-label"></label>
+                    <input asp-for="Identificacion" class="form-control" />
+                    <span asp-validation-for="Identificacion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Rol" class="control-label"></label>
+                    <input asp-for="Rol" class="form-control" />
+                    <span asp-validation-for="Rol" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Crear" class="btn btn-primary" onclick="guardarUsuario()" />
+                </div>
+            </form>
+            <div>
+                <a asp-action="IndexUsuarios">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function guardarUsuario() {
+            Swal.fire({
+                title: "Guardar usuario",
+                text: "¿Está seguro que desea guardar el usuario?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                denyButtonText: 'No guardar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('formulario').submit();
+                } else if (result.isDenied) {
+                    Swal.fire('Usuario no guardado', '', 'info')
+                }
+            })
+            return false;
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
