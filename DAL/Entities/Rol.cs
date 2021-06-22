@@ -21,7 +21,7 @@ namespace CristalImb.Model.Entities
         public string Modulo { get; set; }
 
         public int Permisos { get; set; }
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
 
     }
 }
