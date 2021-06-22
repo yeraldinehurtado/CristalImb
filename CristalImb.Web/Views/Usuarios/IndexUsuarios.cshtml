@@ -5,19 +5,13 @@
 
 <div class="container-fluid">
     <div class="row">
-
-        <div class="col-sm-6">
-            <h1 class="m-0">Usuarios</h1>
-            <p>
-                <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')">Registrar usuario</a>
-            </p>
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Admin">Inicio</a></li>
-                <li class="breadcrumb-item active">Usuarios</li>
-            </ol>
-        </div>
+        <div class="botonCrear col-12 p-3 text-center accent-teal">
+            <br />
+                <p>
+                    <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
+                </p>
+            <br />
+         </div>
     </div>
 </div>
 
