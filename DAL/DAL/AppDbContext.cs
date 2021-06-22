@@ -1,4 +1,5 @@
 ﻿using CristalImb.Model.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Model.DAL
 {
-    public class AppDbContext: DbContext
+    public class AppDbContext: IdentityDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) :
             base(options)
@@ -17,5 +18,7 @@ namespace CristalImb.Model.DAL
         }
         public DbSet<Rol> roles { get; set; }
         public DbSet<Propietario> propietarios { get; set; }
+
+        public DbSet<UsuarioIdentity> usuarios { get; set; }
     }
 }
