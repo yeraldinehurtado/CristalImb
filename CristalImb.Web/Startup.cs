@@ -1,9 +1,13 @@
 using CristalImb.Business.Abstract;
 using CristalImb.Business.Business;
 using CristalImb.Model.DAL;
+using CristalImb.Model.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +39,38 @@ namespace CristalImb.Web
                     options.UseSqlServer(conexion));
 
             services.AddScoped<IPropietarioService, PropietarioService>();
+
+            //password config
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 4;
+                options.User.RequireUniqueEmail = true;
+            });
+
+            services.AddIdentity<UsuarioIdentity, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+               .AddDefaultUI()
+               .AddDefaultTokenProviders()
+               .AddEntityFrameworkStores<AppDbContext>();
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Admin/NoAutorizado");
+                options.Cookie.Name = "Cookie";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
+                options.LoginPath = new PathString("/Usuarios/Login");
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

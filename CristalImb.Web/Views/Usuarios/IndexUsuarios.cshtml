@@ -1,1 +1,89 @@
-﻿
+﻿@model IEnumerable<CristalImb.Model.Entities.UsuarioIdentity>
+@section Styles{
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-6">
+            <h1 class="m-0">Usuarios</h1>
+            <p>
+                <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')">Registrar usuario</a>
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a asp-action="Dashboard" asp-controller="Admin">Inicio</a></li>
+                <li class="breadcrumb-item active">Usuarios</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-11 align-self-center text-center">
+                <table id="tabla" class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Identificacion)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rol)
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var usuario in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => usuario.Identificacion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => usuario.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => usuario.Rol)
+                            </td>
+                            <td>
+
+                                <a class="btn btn-success"
+                                   asp-route-usuarioId="@usuario.Id"
+                                   asp-action="DetalleRol" asp-controller="Rol">
+                                    Detalle
+                                </a>
+                            </td>
+                            <td>
+                                <form asp-action="eliminar" asp-route-id="@usuario.Id" method="post">
+                                    <span id=""></span>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este usuario?')">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/tabla.js"></script>
+    <script src="~/js/modal.js"></script>
+}
