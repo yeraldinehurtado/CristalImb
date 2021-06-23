@@ -43,7 +43,6 @@ namespace CristalImb.Web.Controllers
                 UsuarioIdentity usuarioIdentity = new()
                 {
                     UserName = usuarioViewModel.Email,
-                    Email = usuarioViewModel.Email,
                     Identificacion = usuarioViewModel.Identificacion,
                     Rol = usuarioViewModel.Rol
                 };
