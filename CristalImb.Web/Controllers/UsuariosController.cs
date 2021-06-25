@@ -17,11 +17,10 @@ namespace CristalImb.Web.Controllers
         private readonly SignInManager<UsuarioIdentity> _signInManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IHttpContextAccessor httpContextAccessor)
+        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> IndexUsuarios()
@@ -49,7 +48,7 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
-                    var resultado = await _userManager.CreateAsync(usuarioIdentity, usuarioViewModel.Password);
+                    var resultado = await _userManager.CreateAsync(usuarioIdentity, usuarioViewModel.Password); //objeto usermanager para crear el usuario
                     if (resultado.Succeeded)
                         return RedirectToAction("IndexUsuarios"); //guardar usuario
                     else
