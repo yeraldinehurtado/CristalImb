@@ -16,11 +16,13 @@ namespace CristalImb.Web.Controllers
         private readonly UserManager<UsuarioIdentity> _userManager;
         private readonly SignInManager<UsuarioIdentity> _signInManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        const string SesionNombre = "_Nombre";
 
-        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager)
+        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> IndexUsuarios()
