@@ -1,0 +1,23 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+
+@{
+    ViewData["Title"] = "CrearRol";
+    Layout = null;
+}
+
+<div class="col-6">
+    <form asp-action="CrearRol" method="Post">
+
+        <div class="form-group">
+            <label>Ingrese el nombre del rol</label>
+            <input type="text" id="rol" name="rol" class="form-control" placeholder="Nombre del rol" />
+            <br />
+            <input type="submit" value="Crear" class="btn btn-outline-primary btn-block" />
+            <a asp-action="IndexRol" class="btn btn-outline-danger btn-block">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
