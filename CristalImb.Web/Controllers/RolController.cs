@@ -1,6 +1,9 @@
 ﻿using CristalImb.Model.Entities;
+using CristalImb.Web.ViewModels.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +38,48 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> CrearRol(string rol)
         {
             await _roleManager.CreateAsync(new IdentityRole(rol));
+            return RedirectToAction(nameof(IndexRol));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AsignarRolesUsuario()
+        {
+            var listausuario = await _userManager.Users.ToListAsync();
+            var listaRoles = await _roleManager.Roles.ToListAsync();
+
+            ViewBag.Usuarios = new SelectList(listausuario, "Id", "Identificacion");
+            ViewBag.Roles = new SelectList(listaRoles, "Name", "Name");
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AsignarRolesUsuario(RolesUsuarioViewModel rolesUsuarioViewModel) //trae usuario
+        {
+            var usuario = await _userManager.FindByIdAsync(rolesUsuarioViewModel.UsuarioId);
+            await _userManager.AddToRoleAsync(usuario, rolesUsuarioViewModel.NombreRol); //agregamos un rol
+
+            return RedirectToAction("IndexUsuarios", "Usuarios");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Detalle(string usuarioId)
+        {
+            var usuario = await _userManager.FindByIdAsync(usuarioId);
+            ViewBag.NombreUsuario = usuario.Identificacion;
+            ViewBag.UsuarioId = usuario.Id;
+            var listaRolesUsuario = await _userManager.GetRolesAsync(usuario);
+
+            return View(listaRolesUsuario);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EliminarRol(string rol)
+        {
+            var rolToDelete = await _roleManager.FindByNameAsync(rol); //con el rol manager busca el rol
+            var result = await _roleManager.DeleteAsync(rolToDelete);
+
             return RedirectToAction(nameof(IndexRol));
         }
 

@@ -55,11 +55,7 @@
                             </td>
                             <td>
 
-                                <a class="btn btn-success"
-                                   asp-route-usuarioId="@usuario.Id"
-                                   asp-action="DetalleRol" asp-controller="Rol">
-                                    Detalle
-                                </a>
+                                <a class="btn btn-success" asp-route-usuarioId="@usuario.Id" asp-action="Detalle" asp-controller="Rol">Detalle</a>
                             </td>
                             <td>
                                 <form asp-action="eliminar" asp-route-id="@usuario.Id" method="post">

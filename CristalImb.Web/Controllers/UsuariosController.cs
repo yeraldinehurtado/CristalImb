@@ -1,8 +1,10 @@
 ﻿using CristalImb.Model.Entities;
+using CristalImb.Web.ViewModels.Roles;
 using CristalImb.Web.ViewModels.Usuarios;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -65,6 +67,7 @@ namespace CristalImb.Web.Controllers
             }
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Eliminar(string id)
