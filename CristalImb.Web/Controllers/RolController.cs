@@ -1,5 +1,6 @@
 ﻿using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.Roles;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -75,12 +76,11 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EliminarRol(string rol)
+        public async Task<IActionResult> EliminarRolUsuario(string rol, string usuarioId)
         {
-            var rolToDelete = await _roleManager.FindByNameAsync(rol); //con el rol manager busca el rol
-            var result = await _roleManager.DeleteAsync(rolToDelete);
-
-            return RedirectToAction(nameof(IndexRol));
+            var user = await _userManager.FindByIdAsync(usuarioId);
+            var result = await _userManager.RemoveFromRoleAsync(user, rol);
+            return RedirectToAction(nameof(Detalle), new { UsuarioId = user.Id });             //se devuelve a detalle con el parametro del registro de usuari
         }
 
     }
