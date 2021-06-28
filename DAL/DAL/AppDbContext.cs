@@ -23,5 +23,6 @@ namespace CristalImb.Model.DAL
 
         public DbSet<UsuarioIdentity> usuarios { get; set; }
         public DbSet<Empleado> empleados { get; set; }
+        public DbSet<Cita> citas { get; set; }
     }
 }
