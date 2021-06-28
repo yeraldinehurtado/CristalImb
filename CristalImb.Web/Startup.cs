@@ -40,6 +40,8 @@ namespace CristalImb.Web
 
             services.AddScoped<IPropietarioService, PropietarioService>();
 
+            services.AddScoped<ICitaService, CitaService>();
+
             //password config
             services.Configure<IdentityOptions>(options =>
             {

@@ -1,0 +1,58 @@
+﻿@model CristalImb.Model.Entities.Cita
+
+@{
+    ViewData["Title"] = "DetallesCita";
+}
+
+@section Styles{
+    <style>
+        .detalle {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-top: 5%;
+        }
+    </style>
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="detalle">
+            <h2>Cita</h2>
+            <hr />
+            <form asp-route-id="@Model.CitaId">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">Identificacion: @Model.Identificacion</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Nombre: @Model.Nombre</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Apellido: @Model.Apellido</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Telefono: @Model.Telefono</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Correo: @Model.Correo</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Dirección: @Model.Direccion</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Servicio: @Model.Servicio</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Fecha: @Model.Fecha</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Hora: @Model.Hora</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Estado: @Model.Estado</label>
+                </div>
+                <a asp-action="IndexPropietario">Volver</a>
+            </form>
+        </div>
+    </div>
+</div>

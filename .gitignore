@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Business/Abstract/IUsuarioService.cs
+/CristalImb.Web/Controllers/UsuarioController.cs
+/CristalImb.Web/Views/Usuarios/DetallesUsuario.cshtml
+/CristalImb.Web/Views/Usuarios/EditarUsuario.cshtml
