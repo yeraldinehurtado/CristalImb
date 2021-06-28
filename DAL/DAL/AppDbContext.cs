@@ -19,6 +19,9 @@ namespace CristalImb.Model.DAL
         public DbSet<Rol> roles { get; set; }
         public DbSet<Propietario> propietarios { get; set; }
 
+        public DbSet<Inmueble> inmuebles { get; set; }
+
         public DbSet<UsuarioIdentity> usuarios { get; set; }
+        public DbSet<Empleado> empleados { get; set; }
     }
 }

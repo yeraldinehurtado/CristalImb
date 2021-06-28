@@ -11,6 +11,9 @@ namespace CristalImb.Model.Entities
     {
         [Key]
         public int InmuebleId { get; set; }
+        [Required(ErrorMessage = "El código es obligatorio")]
+        [DisplayName("Código")]
+        public string Codigo { get; set; }
 
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }

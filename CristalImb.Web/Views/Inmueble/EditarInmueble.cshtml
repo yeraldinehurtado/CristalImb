@@ -1,0 +1,87 @@
+﻿@model CristalImb.Model.Entities.Inmueble
+
+@{
+    ViewData["Title"] = "EditarInmueble";
+}
+
+@section Styles{
+    <style>
+        .editar {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-top: 5%;
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="editar">
+            <h1>Editar inmueble</h1>
+            <hr />
+            <form asp-action="EditarInmueble">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="InmuebleId" />
+                <div class="form-group">
+                    <label asp-for="Codigo" class="control-label"></label>
+                    <input asp-for="Codigo" class="form-control" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label"></label>
+                    <input asp-for="Descripcion" class="form-control" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Tipo" class="control-label"></label>
+                    <input asp-for="Tipo" class="form-control" />
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Servicio" class="control-label"></label>
+                    <input asp-for="Servicio" class="form-control" />
+                    <span asp-validation-for="Servicio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Area" class="control-label"></label>
+                    <input asp-for="Area" class="form-control" />
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Zona" class="control-label"></label>
+                    <input asp-for="Zona" class="form-control" />
+                    <span asp-validation-for="Zona" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="oferta" class="control-label"></label>
+                    <input asp-for="oferta" class="form-control" />
+                    <span asp-validation-for="oferta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RutaImagen" class="control-label"></label>
+                    <input asp-for="RutaImagen" class="form-control" />
+                    <span asp-validation-for="RutaImagen" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Estado" class="control-label"></label>
+                    <input asp-for="Estado" class="form-control" />
+                    <span asp-validation-for="Estado" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a asp-action="IndexInmueble">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
