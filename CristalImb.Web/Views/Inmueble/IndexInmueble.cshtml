@@ -27,7 +27,7 @@
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
-                        <a asp-action="RegistrarInmueble" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar inmueble.</a>
+                        <a onclick="mostrarModal('@Url.Action("RegistrarInmueble","Inmueble", "null", Context.Request.Scheme)', 'Registrar inmueble')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar inmueble.</a>
                     </p>
                     <br />
                 </div>
@@ -42,10 +42,10 @@
                                     @Html.DisplayNameFor(model => model.Descripcion)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Tipo)
+                                    @Html.DisplayNameFor(model => model.TipoId)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Servicio)
+                                    @Html.DisplayNameFor(model => model.ServicioInmuebleId)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Valor)
@@ -70,44 +70,44 @@
                         <tbody>
                             @foreach (var x in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Codigo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Descripcion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Tipo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Servicio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Valor)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Area)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Zona)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.oferta)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.RutaImagen)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Estado)
-                                </td>
-                                <td>
-                                    <a asp-action="EditarInmueble" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                    <form asp-action="EliminarInmueble" asp-route-id="@x.InmuebleId" class="d-inline">
-                                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.TipoId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.ServicioInmuebleId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Valor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Area)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Zona)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.oferta)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.RutaImagen)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Estado)
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarInmueble" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
+                                        <form asp-action="EliminarInmueble" asp-route-id="@x.InmuebleId" class="d-inline">
+                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -118,32 +118,36 @@
 </section>
 
 @section Scripts{
-    <script src="~/js/tabla.js"></script>
+    <script src="~/js/Tabla.js"></script>
+    <script src="~/js/modal.js"></script>
+
     <script>
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarInmueble")) { <text>
-            Swal.fire({
-            title: "Guardar inmueble",
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarInmueble")) {
+        <text>
+        Swal.fire({
+            title: "Guardar Inmueble",
             icon: 'success',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarInmueble")) { <text>
-            Swal.fire({
-                title: "Editar inmueble",
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarInmueble")) {
+        <text>
+        Swal.fire({
+            title: "Editar Inmueble",
             icon: 'success',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
-            Swal.fire({
-            title: "Error",
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+        <text>
+        Swal.fire({
+        title: "Error",
             icon: 'error',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-
     </script>
 }

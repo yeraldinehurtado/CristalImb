@@ -19,10 +19,10 @@ namespace CristalImb.Model.Entities
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "El tipo es obligatorio")]
-        public string Tipo { get; set; }
+        public int TipoId { get; set; }
 
         [Required(ErrorMessage = "El servicio es obligatorio")]
-        public string Servicio { get; set; }
+        public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
         public int Valor { get; set; }

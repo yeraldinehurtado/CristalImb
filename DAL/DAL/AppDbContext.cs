@@ -16,6 +16,13 @@ namespace CristalImb.Model.DAL
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.seed();
+        }
+
         public DbSet<Rol> roles { get; set; }
         public DbSet<Propietario> propietarios { get; set; }
 
@@ -24,5 +31,10 @@ namespace CristalImb.Model.DAL
         public DbSet<UsuarioIdentity> usuarios { get; set; }
         public DbSet<Empleado> empleados { get; set; }
         public DbSet<Cita> citas { get; set; }
+        public DbSet<TipoInmueble> tipoInmuebles { get; set; }
+        public DbSet<ServiciosInmueble> serviciosInmueble { get; set; }
+        public DbSet<ZonaInmueble> zonas { get; set; }
+        public DbSet<Cargo> cargos { get; set; }
+        public DbSet<EstadoCita> estados { get; set; }
     }
 }

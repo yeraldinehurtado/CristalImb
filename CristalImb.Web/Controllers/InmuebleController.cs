@@ -2,6 +2,7 @@
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,14 @@ namespace CristalImb.Web.Controllers
     public class InmuebleController : Controller
     {
         private readonly IInmuebleService _inmuebleService;
-        public InmuebleController(IInmuebleService inmuebleService)
+        private readonly ITipoInmuebleService _tipoInmuebleService;
+        private readonly IServiciosInmuebleService _serviciosInmuebleService;
+
+        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IServiciosInmuebleService serviciosInmuebleService)
         {
             _inmuebleService = inmuebleService;
+            _tipoInmuebleService = tipoInmuebleService;
+            _serviciosInmuebleService = serviciosInmuebleService;
         }
 
         [HttpGet]
@@ -25,8 +31,10 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult RegistrarInmueble()
+        public async Task<IActionResult> RegistrarInmuebleAsync()
         {
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoId", "Nombre");
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View();
         }
 
