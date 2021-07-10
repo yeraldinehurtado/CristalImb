@@ -26,7 +26,7 @@ namespace CristalImb.Web.ViewModels.Usuarios
 
         [DisplayName("Contraseña")]
         [Required(ErrorMessage = "La contraseña es requerida")]
-        [StringLength(16, ErrorMessage = "El {0} debe tener al menos {2} y maximo {1} caracteres.", MinimumLength = 10)]
+        [StringLength(16, ErrorMessage = "El {0} debe tener al menos {2} y maximo {1} caracteres.", MinimumLength = 4)]
         public string Password { get; set; }
 
         
