@@ -1,6 +1,7 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,14 @@ namespace CristalImb.Web.Controllers
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;
-        public CitaController(ICitaService citaService)
+        private readonly IServiciosInmuebleService _serviciosInmuebleService;
+        private readonly IEstadoCitaService _estadoCitaService;
+
+        public CitaController(ICitaService citaService, IServiciosInmuebleService serviciosInmuebleService, IEstadoCitaService estadoCitaService)
         {
             _citaService = citaService;
+            _serviciosInmuebleService = serviciosInmuebleService;
+            _estadoCitaService = estadoCitaService;
         }
 
         [HttpGet]
@@ -24,8 +30,10 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult RegistrarCita()
+        public async Task<IActionResult> RegistrarCitaAsync()
         {
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
+            ViewData["ListaEstados"] = new SelectList(await _estadoCitaService.ObtenerCitas(), "EstadoId", "Nombre");
             return View();
         }
 
@@ -42,6 +50,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarCita(int id = 0)
         {
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View(await _citaService.ObtenerCitaId(id));
         }
 

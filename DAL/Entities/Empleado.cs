@@ -36,6 +36,6 @@ namespace CristalImb.Model.Entities
 
         [Required(ErrorMessage = "El cargo es obligatorio")]
         [DisplayName("Cargo")]
-        public string Cargo { get; set; }
+        public int CargoId { get; set; }
     }
 }

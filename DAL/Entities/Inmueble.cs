@@ -36,7 +36,6 @@ namespace CristalImb.Model.Entities
 
         public bool oferta { get; set; }
 
-        public string RutaImagen { get; set; }
 
         [Required(ErrorMessage = "El estado es obligatorio")]
         public string Estado { get; set; }

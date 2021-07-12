@@ -45,7 +45,7 @@
                                     @Html.DisplayNameFor(model => model.Apellido)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Estado)
+                                    @Html.DisplayNameFor(model => model.EstadoId)
                                 </th>
                             </tr>
                         </thead>
@@ -63,7 +63,7 @@
                                         @Html.DisplayFor(modelx => x.Apellido)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelx => x.Estado)
+                                        @Html.DisplayFor(modelx => x.EstadoId)
                                     </td>                                    
                                     <td>
                                         <a asp-action="EditarCita" asp-route-id="@x.CitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
