@@ -51,6 +51,8 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarInmueble(int id = 0)
         {
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoId", "Nombre");
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }
 

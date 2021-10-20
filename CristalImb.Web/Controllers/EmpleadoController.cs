@@ -2,6 +2,7 @@
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,12 @@ namespace CristalImb.Web.Controllers
     public class EmpleadoController : Controller
     {
         private readonly IEmpleadoService _empleadoService;
-        public EmpleadoController(IEmpleadoService empleadoService)
+        private readonly ICargoService _cargoService;
+
+        public EmpleadoController(IEmpleadoService empleadoService, ICargoService cargoService)
         {
             _empleadoService = empleadoService;
+            _cargoService = cargoService;
         }
 
         [HttpGet]
@@ -25,8 +29,9 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult RegistrarEmpleado()
+        public async Task<IActionResult> RegistrarEmpleadoAsync()
         {
+            ViewData["ListaCargos"] = new SelectList(await _cargoService.ObtenerCargos(), "CargoId", "Nombre");
             return View();
         }
 
@@ -43,6 +48,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarEmpleado(int id = 0)
         {
+            ViewData["ListaCargos"] = new SelectList(await _cargoService.ObtenerCargos(), "CargoId", "Nombre");
             return View(await _empleadoService.ObtenerEmpleadoId(id));
         }
 

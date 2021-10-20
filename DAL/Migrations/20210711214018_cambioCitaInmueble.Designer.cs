@@ -4,14 +4,16 @@ using CristalImb.Model.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210711214018_cambioCitaInmueble")]
+    partial class cambioCitaInmueble
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,8 +110,9 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CargoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -195,6 +198,9 @@ namespace CristalImb.Model.Migrations
 
                     b.Property<string>("Estado")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RutaImagen")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ServicioInmuebleId")

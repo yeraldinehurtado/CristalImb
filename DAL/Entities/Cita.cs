@@ -35,7 +35,7 @@ namespace CristalImb.Model.Entities
         public string Direccion { get; set; }
 
         [Required(ErrorMessage = "El tipo de sevicio es obligatorio")]
-        public string Servicio { get; set; }
+        public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "La fecha de la cita es obligatoria")]
         public DateTime Fecha { get; set; }
@@ -44,7 +44,7 @@ namespace CristalImb.Model.Entities
         public DateTime Hora { get; set; }
 
         [Required(ErrorMessage = "El estado de la cita es obligatorio")]
-        public string Estado { get; set; }
+        public int EstadoId { get; set; }
 
     }
 }
