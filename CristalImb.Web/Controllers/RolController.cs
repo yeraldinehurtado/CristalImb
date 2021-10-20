@@ -59,7 +59,7 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> AsignarRolesUsuario(RolesUsuarioViewModel rolesUsuarioViewModel) //trae usuario
         {
             var usuario = await _userManager.FindByIdAsync(rolesUsuarioViewModel.UsuarioId);
-            await _userManager.AddToRoleAsync(usuario, rolesUsuarioViewModel.NombreRol); //agregamos un rol
+            await _userManager.AddToRoleAsync(usuario, rolesUsuarioViewModel.NombreRol); //agregamos rol
 
             return RedirectToAction("IndexUsuarios", "Usuarios");
         }
@@ -68,7 +68,7 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> Detalle(string usuarioId)
         {
             var usuario = await _userManager.FindByIdAsync(usuarioId);
-            ViewBag.NombreUsuario = usuario.Identificacion;
+            ViewBag.NombreUsuario = usuario.UserName;
             ViewBag.UsuarioId = usuario.Id;
             var listaRolesUsuario = await _userManager.GetRolesAsync(usuario);
 
