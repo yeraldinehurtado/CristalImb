@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
@@ -42,6 +43,51 @@ namespace CristalImb.Web.Controllers
             return RedirectToAction(nameof(IndexRol));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditarRol(string rol)
+        {
+            return View(await _roleManager.FindByNameAsync(rol));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarRol(string? rol, IdentityRole identityRole)
+        {
+            if (ModelState.IsValid)
+            {
+                if (rol == null)
+                {
+                    await _roleManager.UpdateAsync(identityRole);
+                    return RedirectToAction("IndexRol");
+                }
+                else
+                {
+                    if (rol != identityRole.Name)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Hubo un error realizando la operación";
+                        return RedirectToAction("IndexRol");
+                    }
+                    try
+                    {
+                        await _roleManager.UpdateAsync(identityRole);
+                        TempData["Accion"] = "EditarRol";
+                        TempData["Mensaje"] = "Rol editado con éxito.";
+                        return RedirectToAction("IndexRol");
+                    }
+                    catch (Exception)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Hubo un error realizando la operación";
+                        return RedirectToAction("IndexRol");
+                    }
+                }
+            }
+            else
+            {
+                return View(rol);
+            }
+        }
 
         [HttpGet]
         public async Task<IActionResult> AsignarRolesUsuario()
@@ -81,6 +127,19 @@ namespace CristalImb.Web.Controllers
             var user = await _userManager.FindByIdAsync(usuarioId);
             var result = await _userManager.RemoveFromRoleAsync(user, rol);
             return RedirectToAction(nameof(Detalle), new { UsuarioId = user.Id });                                                                         
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EliminarRol(string rol)
+        {
+            //get role to delete using role Name
+            //delete role using roleManager
+            //redirect to displayroles
+
+            var roleToDelete = await _roleManager.FindByNameAsync(rol);
+            var result = await _roleManager.DeleteAsync(roleToDelete);
+
+            return RedirectToAction(nameof(IndexRol));
         }
 
     }

@@ -35,8 +35,9 @@
                                 <tr>
                                     <td>@r.Name</td>
                                     <td>
+                                        <a asp-action="EditarRol" asp-route-rol="@r.Name" class="btn alert-primary">Editar</a> |
                                         <a name="rol" id="rol" class="btn btn-outline-danger" asp-route-rol="@r.Name" asp-action="EliminarRol"
-                                           onclick="return confirm('¿Desea eliminar este rol?')">Eliminar</a>
+                                           onclick="return confirm('Desea eliminar este rol?')">Eliminar rol</a>
                                     </td>
                                 </tr>
                             }
