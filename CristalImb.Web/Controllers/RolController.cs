@@ -70,7 +70,7 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
-                        await _roleManager.UpdateAsync(identityRole);
+                        var result = await _roleManager.UpdateAsync(identityRole);
                         TempData["Accion"] = "EditarRol";
                         TempData["Mensaje"] = "Rol editado con éxito.";
                         return RedirectToAction("IndexRol");
