@@ -9,7 +9,7 @@
         <div class="editar">
             <h1>Editar rol</h1>
             <hr />
-            <form asp-action="EditarRol">
+            <form asp-action="EditarRol" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Name" />
                 <div class="form-group">

@@ -50,6 +50,19 @@ namespace CristalImb.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "cargos",
+                columns: table => new
+                {
+                    CargoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cargos", x => x.CargoId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "citas",
                 columns: table => new
                 {
@@ -61,10 +74,10 @@ namespace CristalImb.Model.Migrations
                     Telefono = table.Column<int>(type: "int", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Servicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServicioInmuebleId = table.Column<int>(type: "int", nullable: false),
                     Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Hora = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    EstadoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -83,11 +96,24 @@ namespace CristalImb.Model.Migrations
                     Telefono = table.Column<int>(type: "int", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
-                    Cargo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CargoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_empleados", x => x.EmpleadoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "estados",
+                columns: table => new
+                {
+                    EstadoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_estados", x => x.EstadoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,13 +124,12 @@ namespace CristalImb.Model.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Servicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TipoId = table.Column<int>(type: "int", nullable: false),
+                    ServicioInmuebleId = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<int>(type: "int", nullable: false),
                     Area = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Zona = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     oferta = table.Column<bool>(type: "bit", nullable: false),
-                    RutaImagen = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -123,7 +148,8 @@ namespace CristalImb.Model.Migrations
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<int>(type: "int", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -144,6 +170,45 @@ namespace CristalImb.Model.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_roles", x => x.RolId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "serviciosInmueble",
+                columns: table => new
+                {
+                    ServicioInmuebleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_serviciosInmueble", x => x.ServicioInmuebleId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tipoInmuebles",
+                columns: table => new
+                {
+                    TipoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tipoInmuebles", x => x.TipoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "zonas",
+                columns: table => new
+                {
+                    ZonaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_zonas", x => x.ZonaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -252,6 +317,60 @@ namespace CristalImb.Model.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "cargos",
+                columns: new[] { "CargoId", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Administrador" },
+                    { 2, "Analista" },
+                    { 3, "Secretaria" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "estados",
+                columns: new[] { "EstadoId", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Por confirmar" },
+                    { 2, "Confirmado" },
+                    { 3, "Ejecutado" },
+                    { 4, "Cerrado" },
+                    { 5, "Cancelado" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "serviciosInmueble",
+                columns: new[] { "ServicioInmuebleId", "Nombre" },
+                values: new object[,]
+                {
+                    { 2, "Arriendo" },
+                    { 1, "Venta" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "tipoInmuebles",
+                columns: new[] { "TipoId", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Casa" },
+                    { 2, "Apartamento" },
+                    { 3, "Lote" },
+                    { 4, "Bodega" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "zonas",
+                columns: new[] { "ZonaId", "Nombre" },
+                values: new object[,]
+                {
+                    { 4, "Castilla" },
+                    { 1, "Laureles" },
+                    { 2, "Villa Hermosa" },
+                    { 3, "Aranjuez" },
+                    { 5, "Poblado" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -310,10 +429,16 @@ namespace CristalImb.Model.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "cargos");
+
+            migrationBuilder.DropTable(
                 name: "citas");
 
             migrationBuilder.DropTable(
                 name: "empleados");
+
+            migrationBuilder.DropTable(
+                name: "estados");
 
             migrationBuilder.DropTable(
                 name: "inmuebles");
@@ -323,6 +448,15 @@ namespace CristalImb.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "roles");
+
+            migrationBuilder.DropTable(
+                name: "serviciosInmueble");
+
+            migrationBuilder.DropTable(
+                name: "tipoInmuebles");
+
+            migrationBuilder.DropTable(
+                name: "zonas");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

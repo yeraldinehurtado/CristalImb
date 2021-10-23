@@ -57,17 +57,10 @@ namespace CristalImb.Web.Controllers
             {
                 if (rol == null)
                 {
-                    await _roleManager.UpdateAsync(identityRole);
                     return RedirectToAction("IndexRol");
                 }
                 else
                 {
-                    if (rol != identityRole.Name)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "Hubo un error realizando la operación";
-                        return RedirectToAction("IndexRol");
-                    }
                     try
                     {
                         var result = await _roleManager.UpdateAsync(identityRole);
@@ -85,11 +78,38 @@ namespace CristalImb.Web.Controllers
             }
             else
             {
-                return View(rol);
+                return View(identityRole);
             }
         }
 
         [HttpGet]
+        public async Task<IActionResult> ActualizarEstado(string? rol, IdentityRole identityRole)
+        {
+            if (ModelState.IsValid)
+            {
+                var stateRol = await _roleManager.FindByNameAsync(rol);
+                if ( rol == null){
+                    return RedirectToAction("IndexRol");
+                }
+                try
+                {
+                    var result = await _roleManager.UpdateAsync(identityRole);
+                    return RedirectToAction("IndexRol");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Hubo un error realizando la operación";
+                    return RedirectToAction("IndexRol");
+                }
+            }
+            else
+            {
+                return View(rol);
+            }
+        }
+
+            [HttpGet]
         public async Task<IActionResult> AsignarRolesUsuario()
         {
             var listausuario = await _userManager.Users.ToListAsync();

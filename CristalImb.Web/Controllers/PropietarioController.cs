@@ -21,6 +21,7 @@ namespace CristalImb.Web.Controllers
         {
             var listPropietario = await _propietarioService.ObtenerPropietario();
             return View(await _propietarioService.ObtenerPropietario());
+            
         }
 
         [HttpGet]
@@ -85,6 +86,35 @@ namespace CristalImb.Web.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(int? id)
+        {
+            if(id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexPropietario");
+            }
+            Propietario propietario = await _propietarioService.ObtenerPropietarioId(id.Value);
+            try
+            {
+                if (propietario.Estado == true)
+                    propietario.Estado = false;
+                else if (propietario.Estado == false)
+                    propietario.Estado = true;
+
+                await _propietarioService.EditarPropietario(propietario);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexPropietario");
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexPropietario");
+            }
+        }
         public async Task<IActionResult> DetallesPropietario(int? id)
         {
             if (id != null)

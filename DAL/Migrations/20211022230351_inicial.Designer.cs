@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210710212022_inicial")]
+    [Migration("20211022230351_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,8 +18,40 @@ namespace CristalImb.Model.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CristalImb.Model.Entities.Cargo", b =>
+                {
+                    b.Property<int>("CargoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CargoId");
+
+                    b.ToTable("cargos");
+
+                    b.HasData(
+                        new
+                        {
+                            CargoId = 1,
+                            Nombre = "Administrador"
+                        },
+                        new
+                        {
+                            CargoId = 2,
+                            Nombre = "Analista"
+                        },
+                        new
+                        {
+                            CargoId = 3,
+                            Nombre = "Secretaria"
+                        });
+                });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Cita", b =>
                 {
@@ -40,9 +72,8 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EstadoId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
@@ -57,9 +88,8 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Servicio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ServicioInmuebleId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
@@ -80,9 +110,8 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cargo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CargoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -104,6 +133,48 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("EmpleadoId");
 
                     b.ToTable("empleados");
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.EstadoCita", b =>
+                {
+                    b.Property<int>("EstadoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("EstadoId");
+
+                    b.ToTable("estados");
+
+                    b.HasData(
+                        new
+                        {
+                            EstadoId = 1,
+                            Nombre = "Por confirmar"
+                        },
+                        new
+                        {
+                            EstadoId = 2,
+                            Nombre = "Confirmado"
+                        },
+                        new
+                        {
+                            EstadoId = 3,
+                            Nombre = "Ejecutado"
+                        },
+                        new
+                        {
+                            EstadoId = 4,
+                            Nombre = "Cerrado"
+                        },
+                        new
+                        {
+                            EstadoId = 5,
+                            Nombre = "Cancelado"
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
@@ -128,16 +199,11 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RutaImagen")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ServicioInmuebleId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Servicio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TipoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Valor")
                         .HasColumnType("int");
@@ -172,6 +238,9 @@ namespace CristalImb.Model.Migrations
                     b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Identificacion")
                         .HasColumnType("int");
@@ -212,6 +281,112 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("RolId");
 
                     b.ToTable("roles");
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.ServiciosInmueble", b =>
+                {
+                    b.Property<int>("ServicioInmuebleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ServicioInmuebleId");
+
+                    b.ToTable("serviciosInmueble");
+
+                    b.HasData(
+                        new
+                        {
+                            ServicioInmuebleId = 1,
+                            Nombre = "Venta"
+                        },
+                        new
+                        {
+                            ServicioInmuebleId = 2,
+                            Nombre = "Arriendo"
+                        });
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.TipoInmueble", b =>
+                {
+                    b.Property<int>("TipoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipoId");
+
+                    b.ToTable("tipoInmuebles");
+
+                    b.HasData(
+                        new
+                        {
+                            TipoId = 1,
+                            Nombre = "Casa"
+                        },
+                        new
+                        {
+                            TipoId = 2,
+                            Nombre = "Apartamento"
+                        },
+                        new
+                        {
+                            TipoId = 3,
+                            Nombre = "Lote"
+                        },
+                        new
+                        {
+                            TipoId = 4,
+                            Nombre = "Bodega"
+                        });
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.ZonaInmueble", b =>
+                {
+                    b.Property<int>("ZonaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ZonaId");
+
+                    b.ToTable("zonas");
+
+                    b.HasData(
+                        new
+                        {
+                            ZonaId = 1,
+                            Nombre = "Laureles"
+                        },
+                        new
+                        {
+                            ZonaId = 2,
+                            Nombre = "Villa Hermosa"
+                        },
+                        new
+                        {
+                            ZonaId = 3,
+                            Nombre = "Aranjuez"
+                        },
+                        new
+                        {
+                            ZonaId = 4,
+                            Nombre = "Castilla"
+                        },
+                        new
+                        {
+                            ZonaId = 5,
+                            Nombre = "Poblado"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

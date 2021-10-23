@@ -16,7 +16,7 @@ namespace CristalImb.Model.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CristalImb.Model.Entities.Cargo", b =>
@@ -236,6 +236,9 @@ namespace CristalImb.Model.Migrations
                     b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Identificacion")
                         .HasColumnType("int");
