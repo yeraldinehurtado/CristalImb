@@ -56,6 +56,8 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
+                                <th> </th>
+                                <th> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,6 +105,8 @@
                                             <button type="submit"><i class="fas fa-toggle-off"></i></button>
                                         </form>
                                     }
+                                </td>
+                                <td>
                                     <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
                                     <a asp-action="DetallesPropietario" asp-route-id="@x.PropietarioId" class="btn alert-secondary"><i class="fas fa-info-circle"></i></a> |
                                     <form asp-action="EliminarPropietario" asp-route-id="@x.PropietarioId" class="d-inline">
