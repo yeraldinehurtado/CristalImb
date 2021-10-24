@@ -12,6 +12,10 @@ namespace CristalImb.Model.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Modulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Permisos = table.Column<int>(type: "int", nullable: true),
+                    Estado = table.Column<bool>(type: "bit", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -154,22 +158,6 @@ namespace CristalImb.Model.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_propietarios", x => x.PropietarioId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "roles",
-                columns: table => new
-                {
-                    RolId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreRol = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Modulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Permisos = table.Column<int>(type: "int", nullable: false),
-                    Estado = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_roles", x => x.RolId);
                 });
 
             migrationBuilder.CreateTable(
@@ -445,9 +433,6 @@ namespace CristalImb.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "propietarios");
-
-            migrationBuilder.DropTable(
-                name: "roles");
 
             migrationBuilder.DropTable(
                 name: "serviciosInmueble");
