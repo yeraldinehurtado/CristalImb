@@ -11,9 +11,11 @@ namespace CristalImb.Web.Controllers
     public class PropietarioController : Controller
     {
         private readonly IPropietarioService _propietarioService;
-        public PropietarioController(IPropietarioService propietarioService)
+        private readonly IInmuebleService _inmuebleService;
+        public PropietarioController(IPropietarioService propietarioService, IInmuebleService inmuebleService)
         {
             _propietarioService = propietarioService;
+            _inmuebleService = inmuebleService;
         }
 
         [HttpGet]
@@ -86,6 +88,12 @@ namespace CristalImb.Web.Controllers
 
         }
 
+        public async Task<IActionResult> SeleccionarInmuebles()
+        {
+            var selectInmuebles = await _inmuebleService.ObtenerInmueble();
+            return View(await _inmuebleService.ObtenerInmueble());
+        }
+
         [HttpPost]
         public async Task<IActionResult> ActualizarEstado(int? id)
         {
@@ -115,6 +123,8 @@ namespace CristalImb.Web.Controllers
                 return RedirectToAction("IndexPropietario");
             }
         }
+
+
         public async Task<IActionResult> DetallesPropietario(int? id)
         {
             if (id != null)

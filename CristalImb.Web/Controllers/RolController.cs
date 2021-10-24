@@ -82,34 +82,38 @@ namespace CristalImb.Web.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ActualizarEstado(string? rol, IdentityRole identityRole)
+
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(string? rol, Rol rol1)
         {
-            if (ModelState.IsValid)
+            if (rol == null)
             {
-                var stateRol = await _roleManager.FindByNameAsync(rol);
-                if ( rol == null){
-                    return RedirectToAction("IndexRol");
-                }
-                try
-                {
-                    var result = await _roleManager.UpdateAsync(identityRole);
-                    return RedirectToAction("IndexRol");
-                }
-                catch (Exception)
-                {
-                    TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Hubo un error realizando la operación";
-                    return RedirectToAction("IndexRol");
-                }
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexRol");
             }
-            else
+            IdentityRole identityRole = await _roleManager.FindByNameAsync(rol);
+            try
             {
-                return View(rol);
+                if (rol1.Estado == true)
+                    rol1.Estado = false;
+                else if (rol1.Estado == false)
+                    rol1.Estado = true;
+
+                await _roleManager.UpdateAsync(identityRole);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexRol");
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexRol");
             }
         }
 
-            [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> AsignarRolesUsuario()
         {
             var listausuario = await _userManager.Users.ToListAsync();
