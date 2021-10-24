@@ -90,8 +90,8 @@ namespace CristalImb.Web.Controllers
 
         public async Task<IActionResult> SeleccionarInmuebles()
         {
-            var selectInmuebles = await _inmuebleService.ObtenerPropietario();
-            return View(await _propietarioService.ObtenerPropietario());
+            var selectInmuebles = await _inmuebleService.ObtenerInmueble();
+            return View(await _inmuebleService.ObtenerInmueble());
         }
 
         [HttpPost]
