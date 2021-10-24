@@ -153,6 +153,7 @@ namespace CristalImb.Model.Migrations
                     Telefono = table.Column<int>(type: "int", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Inmuebles = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
