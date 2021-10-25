@@ -121,6 +121,19 @@ namespace CristalImb.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "estadosInmueble",
+                columns: table => new
+                {
+                    IdEstadoInm = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NombreEstado = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_estadosInmueble", x => x.IdEstadoInm);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "inmuebles",
                 columns: table => new
                 {
@@ -428,6 +441,9 @@ namespace CristalImb.Model.Migrations
 
             migrationBuilder.DropTable(
                 name: "estados");
+
+            migrationBuilder.DropTable(
+                name: "estadosInmueble");
 
             migrationBuilder.DropTable(
                 name: "inmuebles");

@@ -73,6 +73,43 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
+        public IActionResult Registrar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Registrar(UsuarioViewModel usuarioViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                UsuarioIdentity usuarioIdentity = new()
+                {
+                    Identificacion = usuarioViewModel.Identificacion,
+                    UserName = usuarioViewModel.Email,
+                    Email = usuarioViewModel.Email,
+                    Rol = usuarioViewModel.Rol
+                };
+
+                try
+                {
+                    var resultado = await _userManager.CreateAsync(usuarioIdentity, usuarioViewModel.Password); //objeto usermanager para crear el usuario
+                    if (resultado.Succeeded)
+                        return RedirectToAction("Login"); //guardar usuario
+                    else
+                        return View(usuarioViewModel);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+            }
+            return View();
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> Eliminar(string id)

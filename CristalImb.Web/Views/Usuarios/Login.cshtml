@@ -65,7 +65,7 @@
 
 
                         <div>
-                            <a asp-action="CrearUsuarios">Registrarme</a>
+                            <a asp-action="Registrar">Registrarme</a>
                         </div>
                         <hr />
                         <div>
@@ -97,12 +97,13 @@
 <script src="~/adminlte/dist/js/adminlte.min.js"></script>
 
 <script>
-    @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("CrearUsuario")) { <text>
-        Swal.fire({
-            title: "Registro",
-            type: "success",
-            html: "@TempData["Mensaje"]"
-        });
-             </text>
-    }
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Registrar")) { <text>
+        alertify.success('Registrado correctamente.');
+                 </text>
+        }
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+        alertify.alert('Error', '@TempData["Mensaje"]');
+                 </text>
+        }
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 </script>

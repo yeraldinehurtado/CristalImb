@@ -10,11 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<< HEAD:DAL/Migrations/20211024205012_inicial.Designer.cs
-    [Migration("20211024205012_inicial")]
-=======
-    [Migration("20211024211543_inicial")]
->>>>>>> 1c0793c874fac26534bf177354b0fee63cb014b9:DAL/Migrations/20211024211543_inicial.Designer.cs
+    [Migration("20211025005821_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,6 +175,21 @@ namespace CristalImb.Model.Migrations
                             EstadoId = 5,
                             Nombre = "Cancelado"
                         });
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
+                {
+                    b.Property<int>("IdEstadoInm")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NombreEstado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEstadoInm");
+
+                    b.ToTable("estadosInmueble");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
