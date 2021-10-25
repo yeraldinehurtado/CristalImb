@@ -10,9 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211025023532_inicial")]
->>>>>>> 1c0793c874fac26534bf177354b0fee63cb014b9:DAL/Migrations/20211024211543_inicial.Designer.cs
-    partial class inicial
+    [Migration("20211024214833_nuevaTabla")]
+    partial class nuevaTabla
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,6 +177,21 @@ namespace CristalImb.Model.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
+                {
+                    b.Property<int>("IdEstadoInm")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NombreEstado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEstadoInm");
+
+                    b.ToTable("estadosInmueble");
+                });
+
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
                 {
                     b.Property<int>("InmuebleId")
@@ -246,9 +260,6 @@ namespace CristalImb.Model.Migrations
                     b.Property<int>("Identificacion")
                         .HasColumnType("int");
 
-                    b.Property<string>("Inmuebles")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -259,6 +270,32 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("PropietarioId");
 
                     b.ToTable("propietarios");
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.Rol", b =>
+                {
+                    b.Property<int>("RolId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Modulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NombreRol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Permisos")
+                        .HasColumnType("int");
+
+                    b.HasKey("RolId");
+
+                    b.ToTable("roles");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.ServiciosInmueble", b =>
@@ -376,10 +413,6 @@ namespace CristalImb.Model.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -396,8 +429,6 @@ namespace CristalImb.Model.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -573,22 +604,6 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("CristalImb.Model.Entities.Rol", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
-
-                    b.Property<bool>("Estado")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Modulo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Permisos")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("Rol");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.UsuarioIdentity", b =>

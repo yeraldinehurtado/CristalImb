@@ -10,7 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211025023532_inicial")]
+<<<<<<< HEAD:DAL/Migrations/20211024205012_inicial.Designer.cs
+    [Migration("20211024205012_inicial")]
+=======
+    [Migration("20211024211543_inicial")]
 >>>>>>> 1c0793c874fac26534bf177354b0fee63cb014b9:DAL/Migrations/20211024211543_inicial.Designer.cs
     partial class inicial
     {
@@ -583,6 +586,7 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Modulo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Permisos")

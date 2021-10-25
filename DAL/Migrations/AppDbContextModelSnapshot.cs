@@ -175,6 +175,21 @@ namespace CristalImb.Model.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
+                {
+                    b.Property<int>("IdEstadoInm")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NombreEstado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEstadoInm");
+
+                    b.ToTable("estadosInmueble");
+                });
+
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
                 {
                     b.Property<int>("InmuebleId")

@@ -49,6 +49,7 @@ namespace CristalImb.Web
             services.AddScoped<ITipoInmuebleService, TipoInmuebleService>();
             services.AddScoped<IServiciosInmuebleService, ServiciosInmuebleService>();
             services.AddScoped<IEstadoCitaService, EstadoCitaService>();
+            services.AddScoped<IEstadosInmuebleService, EstadosInmuebleService>();
 
             //password config
             services.Configure<IdentityOptions>(options =>
