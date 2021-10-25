@@ -61,7 +61,7 @@ namespace CristalImb.Web
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddIdentity<UsuarioIdentity, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<UsuarioIdentity, Rol>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddDefaultUI()
                .AddDefaultTokenProviders()
                .AddEntityFrameworkStores<AppDbContext>();

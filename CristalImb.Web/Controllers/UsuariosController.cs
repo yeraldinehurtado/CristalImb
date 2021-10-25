@@ -31,11 +31,11 @@ namespace CristalImb.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<IActionResult> IndexUsuarios()
-        {
-            var listaUsers = await _userManager.Users.ToListAsync();
-            return View(listaUsers);
-        }
+            public async Task<IActionResult> IndexUsuarios()
+            {
+                var listaUsers = await _userManager.Users.ToListAsync();
+                return View(listaUsers);
+            }
 
         public IActionResult CrearUsuarios()
         {

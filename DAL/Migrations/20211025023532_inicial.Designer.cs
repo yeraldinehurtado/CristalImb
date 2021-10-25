@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211024211543_inicial")]
+    [Migration("20211025023532_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -582,7 +582,6 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Modulo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Permisos")
