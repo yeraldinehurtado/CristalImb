@@ -1,4 +1,4 @@
-﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+﻿@model IEnumerable<CristalImb.Model.Entities.Rol>
 
 @{
     ViewData["Title"] = "IndexRol";
@@ -22,28 +22,53 @@
             </div>
             <div class="col-6">
                 <h3 class="text-center">Roles</h3>
-                    <table class="table table-striped table-bordered col-12" id="tabla">
-                        <thead class="bg-dark text-white">
-                            <tr>
-                                <th>Rol</th>
-                                <th> </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var r in Model)
-                            {
-                            <tr>
-                                <td>@r.Name</td>
-
-                                <td>
-                                    <a asp-action="EditarRol" asp-route-rol="@r.Name" class="btn alert-primary">Editar</a> |
-                                    <a name="rol" id="rol" class="btn btn-outline-danger" asp-route-rol="@r.Name" asp-action="EliminarRol"
-                                       onclick="return confirm('Desea eliminar este rol?')">Eliminar rol</a>
-                                </td>
-                            </tr>
-                            }
-                        </tbody>
-                    </table>
+                <table class="table table-striped table-bordered col-12" id="tabla">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>Rol</th>
+                            <th>Estado</th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in Model)
+                        {
+                        <tr>
+                            <td>@r.Name</td>
+                            <td>
+                                @if (r.Estado == true)
+                                {
+                                    <p>Activo</p>
+                                }
+                                else
+                                {
+                                    <p>Desactivo</p>
+                                }
+                            </td>
+                            <td>
+                                @if (r.Estado == true)
+                                {
+                                    <form asp-action="ActualizarEstado" asp-route-id="@r.Name">
+                                        <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                    </form>
+                                }
+                                else if (r.Estado == false)
+                                {
+                                    <form asp-action="ActualizarEstado" asp-route-id="@r.Name">
+                                        <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                    </form>
+                                }
+                            </td>
+                            <td>
+                                <a asp-action="EditarRol" asp-route-rol="@r.Name" class="btn alert-primary">Editar</a> |
+                                <a name="rol" id="rol" class="btn btn-outline-danger" asp-route-rol="@r.Name" asp-action="EliminarRol"
+                                   onclick="return confirm('Desea eliminar este rol?')">Eliminar rol</a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

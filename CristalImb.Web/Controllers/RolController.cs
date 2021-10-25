@@ -17,17 +17,17 @@ namespace CristalImb.Web.Controllers
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
         private readonly SignInManager<UsuarioIdentity> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<Rol> _roleManager;
 
-        public RolController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, RoleManager<IdentityRole> roleManager)
+        public RolController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, RoleManager<Rol> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        public IActionResult IndexRol()
+        public async Task<IActionResult> IndexRol()
         {
-            var listRoles = _roleManager.Roles.ToList();
+            var listRoles = await _roleManager.Roles.ToListAsync();
             return View(listRoles);
         }
 
@@ -39,7 +39,7 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearRol(string rol)
         {
-            await _roleManager.CreateAsync(new IdentityRole(rol));
+            await _roleManager.CreateAsync(new Rol(rol));
             return RedirectToAction(nameof(IndexRol));
         }
 
@@ -51,7 +51,7 @@ namespace CristalImb.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditarRol(string? rol, IdentityRole identityRole)
+        public async Task<ActionResult> EditarRol(string? rol, Rol rol1)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace CristalImb.Web.Controllers
                 {
                     try
                     {
-                        var result = await _roleManager.UpdateAsync(identityRole);
+                        var result = await _roleManager.UpdateAsync(rol1);
                         TempData["Accion"] = "EditarRol";
                         TempData["Mensaje"] = "Rol editado con éxito.";
                         return RedirectToAction("IndexRol");
@@ -78,7 +78,7 @@ namespace CristalImb.Web.Controllers
             }
             else
             {
-                return View(identityRole);
+                return View(rol1);
             }
         }
 
@@ -92,7 +92,7 @@ namespace CristalImb.Web.Controllers
                 TempData["Mensaje"] = "Error";
                 return RedirectToAction("IndexRol");
             }
-            IdentityRole identityRole = await _roleManager.FindByNameAsync(rol);
+            await _roleManager.FindByNameAsync(rol);
             try
             {
                 if (rol1.Estado == true)
@@ -100,7 +100,7 @@ namespace CristalImb.Web.Controllers
                 else if (rol1.Estado == false)
                     rol1.Estado = true;
 
-                await _roleManager.UpdateAsync(identityRole);
+                await _roleManager.UpdateAsync(rol1);
                 TempData["Accion"] = "EditarEstado";
                 TempData["Mensaje"] = "Estado editardo correctamente";
                 return RedirectToAction("IndexRol");

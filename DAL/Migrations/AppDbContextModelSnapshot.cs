@@ -595,7 +595,6 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Modulo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Permisos")

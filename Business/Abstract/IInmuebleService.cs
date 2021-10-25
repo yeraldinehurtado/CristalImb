@@ -14,6 +14,7 @@ namespace CristalImb.Business.Abstract
         Task<Inmueble> ObtenerInmuebleId(int id);
         Task EditarInmueble(Inmueble inmueble);
         Task EliminarInmueble(int id);
+        Task AgregarInmProp(Propietario propietario, Inmueble inmueble);
 
     }
 }

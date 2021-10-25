@@ -46,6 +46,12 @@ namespace CristalImb. Business.Business
             await _context.SaveChangesAsync();
         }
 
+        public async Task AgregarInmProp(Propietario propietario, Inmueble inmueble)
+        {
+            _context.Add(propietario.Inmuebles);
+            await _context.SaveChangesAsync();
+        }
+
         
     }
 }

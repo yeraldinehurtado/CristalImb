@@ -10,8 +10,11 @@ namespace CristalImb.Model.Entities
 {
     public class Rol:IdentityRole
     {
+        public Rol(string Name) : base(Name)
+        {
+        }
+
         [DisplayName("Módulo")]
-        [Required(ErrorMessage = "El módulo es obligatorio")]
         public string Modulo { get; set; }
 
         public int Permisos { get; set; }
