@@ -1,6 +1,7 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
+using CristalImb.Web.ViewModels.InmPropietarios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,15 +13,17 @@ namespace CristalImb.Web.Controllers
 {
     public class InmuebleController : Controller
     {
+        private readonly IPropietarioService _propietarioService;
         private readonly IInmuebleService _inmuebleService;
         private readonly ITipoInmuebleService _tipoInmuebleService;
         private readonly IServiciosInmuebleService _serviciosInmuebleService;
 
-        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IServiciosInmuebleService serviciosInmuebleService)
+        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService)
         {
             _inmuebleService = inmuebleService;
             _tipoInmuebleService = tipoInmuebleService;
             _serviciosInmuebleService = serviciosInmuebleService;
+            _propietarioService = propietarioService;
         }
 
         [HttpGet]
@@ -124,6 +127,46 @@ namespace CristalImb.Web.Controllers
                 return RedirectToAction("IndexInmueble");
             }
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SeleccionarInmuebles()
+        {
+            var listaInmuebles = await _inmuebleService.ObtenerInmueble();
+
+            ViewBag.Inmuebles = new SelectList(listaInmuebles, "Codigo");
+
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> SeleccionarInmuebles(Propietario propietario, Inmueble inmueble) 
+        {
+            if (propietario.PropietarioId == 0)
+            {
+                await _inmuebleService.AgregarInmProp(propietario, inmueble);
+                return RedirectToAction("IndexPropietario");
+            }
+            else
+            {
+                try
+                {
+                    await _inmuebleService.ObtenerInmuebleId(inmueble.InmuebleId);
+                    await _inmuebleService.AgregarInmProp(propietario, inmueble);
+                    await _inmuebleService.EditarInmueble(inmueble);
+                    return RedirectToAction("IndexPropietario");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Hubo un error realizando la operación";
+                    return RedirectToAction("IndexPropietario");
+                }
+            }
+            
+            
+            
+
+            return RedirectToAction("IndexUsuarios", "Usuarios");
         }
     }
 }
