@@ -99,6 +99,36 @@ namespace CristalImb.Web.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexInmueble");
+            }
+            Inmueble inmueble = await _inmuebleService.ObtenerInmuebleId(id.Value);
+            try
+            {
+                if (inmueble.Estado == true)
+                    inmueble.Estado = false;
+                else if (inmueble.Estado == false)
+                    inmueble.Estado = true;
+
+                await _inmuebleService.EditarInmueble(inmueble);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexInmueble");
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexInmueble");
+            }
+        }
+
         public async Task<IActionResult> DetallesInmueble(int? id)
         {
             if (id != null)

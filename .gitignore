@@ -365,3 +365,8 @@ FodyWeavers.xsd
 /CristalImb.Web/Controllers/UsuarioController.cs
 /CristalImb.Web/Views/Usuarios/DetallesUsuario.cshtml
 /CristalImb.Web/Views/Usuarios/EditarUsuario.cshtml
+/DAL/Migrations/20211026003902_tab.cs
+/DAL/Migrations/20211026003902_tab.cs
+/DAL/Migrations/20211026003902_tab.Designer.cs
+/DAL/Migrations/20211026010745_cambio1.cs
+/DAL/Migrations/20211026010745_cambio1.Designer.cs
