@@ -3,15 +3,24 @@
 
 }
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="botonCrear col-12 p-3 text-center accent-teal">
             <br />
-                <p>
-                    <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
-                </p>
+            <p>
+                <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
+            </p>
             <br />
-         </div>
+        </div>
+        <div class="botonAsignar col-12 p-3 text-center accent-teal">
+            <br />
+            <a asp-action="AsignarRolesUsuario" asp-controller="Rol" class="btn btn-outline-success">
+                <i class="fas fa-plus"></i>
+                <p> Asignar roles</p>
+            </a>
+            <br />
+        </div>
     </div>
 </div>
 

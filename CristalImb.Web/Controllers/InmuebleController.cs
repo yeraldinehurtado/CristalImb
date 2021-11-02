@@ -2,6 +2,7 @@
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.InmPropietarios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,8 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace CristalImb.Web.Controllers
 {
+    
     public class InmuebleController : Controller
     {
         private readonly IPropietarioService _propietarioService;

@@ -67,62 +67,62 @@
                         <tbody>
                             @foreach (var x in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Codigo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Descripcion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.TipoId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.ServicioInmuebleId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Valor)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Area)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Zona)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.oferta)
-                                </td>
-                                <td>
-                                    @if (x.Estado == true)
-                                    {
-                                        <p>Activo</p>
-                                    }
-                                    else
-                                    {
-                                        <p>Desactivo</p>
-                                    }
-                                </td>
-                                <td>
-                                    @if (x.Estado == true)
-                                    {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@x.InmuebleId">
-                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.TipoId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.ServicioInmuebleId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Valor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Area)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Zona)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.oferta)
+                                    </td>
+                                    <td>
+                                        @if (x.Estado == true)
+                                        {
+                                            <p>Activo</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Desactivo</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (x.Estado == true)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@x.InmuebleId">
+                                                <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                            </form>
+                                        }
+                                        else if (x.Estado == false)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@x.InmuebleId">
+                                                <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                            </form>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarInmueble" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
+                                        <form asp-action="EliminarInmueble" asp-route-id="@x.InmuebleId" class="d-inline">
+                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
                                         </form>
-                                    }
-                                    else if (x.Estado == false)
-                                    {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@x.InmuebleId">
-                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                        </form>
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-action="EditarInmueble" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
-                                    <form asp-action="EliminarInmueble" asp-route-id="@x.InmuebleId" class="d-inline">
-                                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
