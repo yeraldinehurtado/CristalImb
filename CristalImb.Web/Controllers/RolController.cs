@@ -46,39 +46,47 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarRol(string rol)
         {
-            return View(await _roleManager.FindByNameAsync(rol));
+            if (rol == null || rol == "")
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexRol");
+            }
+            try
+            {
+                return View(await _roleManager.FindByNameAsync(rol));
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ingresaste un valor inválido";
+                return RedirectToAction("IndexRol");
+            }
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditarRol(string? rol, Rol rol1)
+        public async Task<ActionResult> EditarRol(IdentityRole identityRole)
         {
-            if (ModelState.IsValid)
+            try
             {
-                if (rol == null)
+                var role = await _roleManager.FindByIdAsync(identityRole.Id);
+                role.Name = identityRole.Name;
+                var result = await _roleManager.UpdateAsync(role);
+                if (!result.Succeeded)
                 {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Error";
                     return RedirectToAction("IndexRol");
                 }
-                else
-                {
-                    try
-                    {
-                        var result = await _roleManager.UpdateAsync(rol1);
-                        TempData["Accion"] = "EditarRol";
-                        TempData["Mensaje"] = "Rol editado con éxito.";
-                        return RedirectToAction("IndexRol");
-                    }
-                    catch (Exception)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "Hubo un error realizando la operación";
-                        return RedirectToAction("IndexRol");
-                    }
-                }
+                TempData["Accion"] = "Editar";
+                TempData["Mensaje"] = "Rol editado correctamente";
+                return RedirectToAction("IndexRol");
             }
-            else
+            catch (Exception)
             {
-                return View(rol1);
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ingresaste un valor inválido";
+                return RedirectToAction("IndexRol");
             }
         }
 
