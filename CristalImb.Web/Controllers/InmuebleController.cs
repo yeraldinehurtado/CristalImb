@@ -2,6 +2,7 @@
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.InmPropietarios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,8 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace CristalImb.Web.Controllers
 {
+    
     public class InmuebleController : Controller
     {
         private readonly IPropietarioService _propietarioService;
@@ -97,6 +100,36 @@ namespace CristalImb.Web.Controllers
                 return View(inmueble);
             }
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexInmueble");
+            }
+            Inmueble inmueble = await _inmuebleService.ObtenerInmuebleId(id.Value);
+            try
+            {
+                if (inmueble.Estado == true)
+                    inmueble.Estado = false;
+                else if (inmueble.Estado == false)
+                    inmueble.Estado = true;
+
+                await _inmuebleService.EditarInmueble(inmueble);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexInmueble");
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexInmueble");
+            }
         }
 
         public async Task<IActionResult> DetallesInmueble(int? id)

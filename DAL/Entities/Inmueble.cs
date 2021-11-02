@@ -38,6 +38,6 @@ namespace CristalImb.Model.Entities
 
 
         [Required(ErrorMessage = "El estado es obligatorio")]
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
     }
 }
