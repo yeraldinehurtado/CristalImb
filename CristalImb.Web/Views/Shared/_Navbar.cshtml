@@ -14,10 +14,13 @@
         
     </ul>
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item d-none d-sm-inline-block">
-            <a asp-action="Login" asp-controller="Usuarios" class="nav-link">Iniciar sesión</a>
+        <li class="nav-item">
+            <a asp-action="CerrarSesion" asp-controller="Usuarios" class="nav-link">
+                <p id="cerrarSesion">
+                    Cerrar sesión
+                </p>
+            </a>
         </li>
-
     </ul>
 </nav>
 <!-- /.navbar -->

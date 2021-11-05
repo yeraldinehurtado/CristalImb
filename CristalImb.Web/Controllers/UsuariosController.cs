@@ -235,36 +235,12 @@ namespace CristalImb.Web.Controllers
             return View(resetearPasswordDto);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        [HttpGet]
         public async Task<IActionResult> CerrarSesion()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Usuarios");
+            _httpContextAccessor.HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Landing");
         }
     }
 }
