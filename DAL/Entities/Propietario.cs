@@ -38,5 +38,7 @@ namespace CristalImb.Model.Entities
 
         public bool Estado { get; set; }
 
+        public virtual List<InmPropietarios> InmPropietario { get; set; }
+
     }
 }

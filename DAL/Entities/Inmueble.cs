@@ -39,5 +39,7 @@ namespace CristalImb.Model.Entities
 
         [Required(ErrorMessage = "El estado es obligatorio")]
         public bool Estado { get; set; }
+
+        public virtual List<InmPropietarios> InmPropietario { get; set; }
     }
 }
