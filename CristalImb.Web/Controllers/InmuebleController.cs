@@ -196,10 +196,20 @@ namespace CristalImb.Web.Controllers
                 }
             }
             
-            
-            
 
             return RedirectToAction("IndexUsuarios", "Usuarios");
+        }
+
+        public async Task<IActionResult> VerInmuebles(int? id)
+        {
+            if (id != null)
+            {
+                return View(await _inmuebleService.ObtenerInmuebleId(id.Value));
+            }
+
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Hubo un error realizando la operación";
+            return RedirectToAction("IndexPropietario");
         }
     }
 }
