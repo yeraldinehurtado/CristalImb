@@ -4,22 +4,26 @@
 }
 
 <div class="container-fluid">
-    <form asp-action="CrearInmPropietarios" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly"></div>
-        <input type="hidden" asp-for="PropietarioId" />
-        <div class="row">
-            <div class="col-4">
-                <div class="form-group">
-                    <label class="control-label">Inmuebles</label>
-                    <select asp-items="ViewBag.ListarInmueble" asp-for="InmuebleId" class="form-control"></select>
-                    <span asp-validation-for="InmuebleId" class="text-danger"></span>
+        <form asp-action="CrearInmPropietarios" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="PropietarioId" />
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="control-label">Inmuebles</label>
+                        <select asp-items="ViewBag.ListarInmueble" asp-for="InmuebleId" class="form-control">
+                            <option selected disabled>--Seleccione un inmueble--</option>
+                        </select>
+                        <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                    </div>
                 </div>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Agregar inmueble" class="btn btn-primary" />
             </div>
-        </div><br />
-        <div class="form-group">
-            <input type="submit" value="Agregar inmueble" class="btn btn-primary" />
-        </div>
-    </form>
+        </form>
 
 </div>
+
+
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
