@@ -162,7 +162,7 @@ namespace CristalImb.Web.Controllers
 
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> CrearInmPropietarios(int id)
         {
             ViewBag.ListarInmueble = new SelectList(await _inmuebleService.ObtenerInmueble(), "InmuebleId", "Codigo");
