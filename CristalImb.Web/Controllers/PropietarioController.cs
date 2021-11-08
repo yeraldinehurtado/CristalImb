@@ -1,6 +1,10 @@
 ﻿using CristalImb.Business.Abstract;
+using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
+using CristalImb.Web.ViewModels.InmPropietarios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +16,13 @@ namespace CristalImb.Web.Controllers
     {
         private readonly IPropietarioService _propietarioService;
         private readonly IInmuebleService _inmuebleService;
-        public PropietarioController(IPropietarioService propietarioService, IInmuebleService inmuebleService)
+        private readonly IInmPropietariosService _inmPropietariosService;
+
+        public PropietarioController(IPropietarioService propietarioService, IInmuebleService inmuebleService, IInmPropietariosService inmPropietariosService)
         {
             _propietarioService = propietarioService;
             _inmuebleService = inmuebleService;
+            _inmPropietariosService = inmPropietariosService;
         }
 
         [HttpGet]
@@ -154,5 +161,59 @@ namespace CristalImb.Web.Controllers
             }
 
         }
+
+
+        public async Task<IActionResult> CrearInmPropietarios(int id)
+        {
+            ViewBag.ListarInmueble = new SelectList(await _inmuebleService.ObtenerInmueble(), "InmuebleId", "Codigo");
+            //ViewBag.ListarInsumo = new SelectList(await _insumoService.ObtenerListaInsumos(), "InsumoId", "Nombre");
+            InmPropietariosViewModel inmPropietariosViewModel = new()
+            {
+                PropietarioId = id
+            };
+            return View(inmPropietariosViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CrearInmPropietarios(InmPropietariosViewModel inmPropietariosViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                InmPropietarios inmPropietarios = new()
+                {
+                    PropietarioId = inmPropietariosViewModel.PropietarioId,
+                    InmuebleId = inmPropietariosViewModel.InmuebleId,
+                    FechaInicio = inmPropietariosViewModel.FechaInicio,
+                    FechaFin = inmPropietariosViewModel.FechaFin,
+                    
+                };
+
+                try
+                {
+                    var InmuebleExiste = await _inmPropietariosService.InmuebleExiste(inmPropietarios.PropietarioId, inmPropietarios.InmuebleId);
+
+                    if (InmuebleExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "El inmueble ya se encuentra registrado";
+                        return RedirectToAction("Index");
+                    }
+                    await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
+                    TempData["Accion"] = "Crear";
+                    TempData["Mensaje"] = "inmueble añadido con éxito";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Hubo un error al añadir el procuto";
+                    return RedirectToAction("Index");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Alguno de los valores no comple con los requisitos";
+            return RedirectToAction("Index");
+        }
+
     }
 }
