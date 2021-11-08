@@ -87,7 +87,7 @@
                                     @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
-                                    <a href="#">Ver inmuebles</a>
+                                    <a asp-action="VerInmuebles" asp-route-id="@x.PropietarioId">Ver inmuebles</a>
                                 </td>
                                 <td>
                                     @if (x.Estado == true)

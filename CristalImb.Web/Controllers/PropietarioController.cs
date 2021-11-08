@@ -205,7 +205,7 @@ namespace CristalImb.Web.Controllers
                 }
                 catch (Exception)
                 {
-                    TempData["Accion"] = "Error";
+                    TempData["Accion"] = "No se pudo registrar el inmueble";
                     TempData["Mensaje"] = "Error";
                     return RedirectToAction("IndexPropietario");
                 }
@@ -214,6 +214,10 @@ namespace CristalImb.Web.Controllers
             TempData["Mensaje"] = "Se encontró un error";
             return RedirectToAction("IndexPropietario");
         }
-
+        [HttpGet]
+        public async Task<IActionResult> VerInmuebles()
+        {
+            return View(await _inmPropietariosService.ObtenerInmPropietarios());
+        }
     }
 }
