@@ -1,27 +1,25 @@
 ﻿@model CristalImb.Web.ViewModels.InmPropietarios.InmPropietarioViewModel
+@{
+    ViewData["Title"] = "SeleccionarInmueble";
+}
 
-
-
-<h3 class="text-center">Seleccionar inmuebles</h3>
-<hr />
-
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-6 offset-3">
-            <form asp-action="SeleccionarInmuebles" method="post" id="inm_form">
+<div class="container-fluid">
+    <form asp-action="CrearDetalle" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" asp-for="PropietarioId" />
+        <div class="row">
+            <div class="col-4">
                 <div class="form-group">
-                    <label>Seleccione los inmuebles</label>
-                    <select asp-for="InmuebleCodCatastro" asp-items="@ViewBag.InmPropietarios" id="inm" class="select" multiple>
-                        <option>--Seleccione inmuebles--</option>
-                    </select>
+                    <label class="control-label">Producto</label>
+                    <select asp-items="ViewBag.ListarInmueble" asp-for="IdInmueble" class="form-control"></select>
+                    <span asp-validation-for="IdInmueble" class="text-danger"></span>
                 </div>
-
-
-                <input type="submit" class="btn btn-outline-primary btn-block" value="Confirmar" />
-                <a asp-action="IndexPropietario" asp-controller="Propietario" class="btn btn-outline-danger btn-block">Cancelar</a>
-            </form>
+            </div>
+        </div><br />
+        <div class="form-group">
+            <input type="submit" value="Agregar producto" class="btn btn-primary" />
         </div>
-    </div>
+    </form>
+
 </div>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
