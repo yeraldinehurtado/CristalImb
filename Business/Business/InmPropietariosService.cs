@@ -21,14 +21,14 @@ namespace CristalImb.Business.Business
         }
         public async Task<IEnumerable<InmPropietarios>> ObtenerInmPropietarios()
         {
-            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Proietario).ToListAsync();
+            return await _context.inmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).ToListAsync();
 
 
 
         }
         public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId(int Id)
         {
-            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.PropietarioId == Id).ToListAsync();
+            return await _context.inmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.PropietarioId == Id).ToListAsync();
         }
         public async Task RegistrarInmPropietarios(InmPropietarios inmPropietarios)
         {
@@ -37,7 +37,7 @@ namespace CristalImb.Business.Business
         }
         public async Task<InmPropietarios> ObtenerInmPropietariosId(int Id)
         {
-            return await _context.InmPropietarios.FirstOrDefaultAsync(e => e.InmProId == Id);
+            return await _context.inmPropietarios.FirstOrDefaultAsync(e => e.InmProId == Id);
         }
         public async Task EditarInmPropietarios(InmPropietarios inmPropietarios)
         {
@@ -53,7 +53,7 @@ namespace CristalImb.Business.Business
 
         public async Task<InmPropietarios> InmuebleExiste(int PropietarioId, int Inmueble)
         {
-            return await _context.InmPropietarios.Where(c => c.PropietarioId == PropietarioId).FirstOrDefaultAsync(n => n.InmuebleId == Inmueble);
+            return await _context.inmPropietarios.Where(c => c.PropietarioId == PropietarioId).FirstOrDefaultAsync(n => n.InmuebleId == Inmueble);
         }
     }
 }

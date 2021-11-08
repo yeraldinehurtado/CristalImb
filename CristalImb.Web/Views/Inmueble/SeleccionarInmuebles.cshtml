@@ -1,4 +1,4 @@
-﻿@model CristalImb.Web.ViewModels.InmPropietarios.InmPropietarioViewModel
+﻿@model CristalImb.Web.ViewModels.InmPropietarios.InmPropietariosViewModel
 @{
     ViewData["Title"] = "SeleccionarInmueble";
 }
@@ -11,8 +11,8 @@
             <div class="col-4">
                 <div class="form-group">
                     <label class="control-label">Producto</label>
-                    <select asp-items="ViewBag.ListarInmueble" asp-for="IdInmueble" class="form-control"></select>
-                    <span asp-validation-for="IdInmueble" class="text-danger"></span>
+                    <select asp-items="ViewBag.ListarInmueble" asp-for="InmuebleId" class="form-control"></select>
+                    <span asp-validation-for="InmuebleId" class="text-danger"></span>
                 </div>
             </div>
         </div><br />
