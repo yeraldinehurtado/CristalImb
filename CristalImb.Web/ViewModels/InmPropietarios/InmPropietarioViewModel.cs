@@ -7,6 +7,7 @@ namespace CristalImb.Web.ViewModels.InmPropietarios
 {
     public class InmPropietarioViewModel
     {
+        public string IdInmueble { get; set; }
         public string InmuebleCodCatastro { get; set; }
     }
 }

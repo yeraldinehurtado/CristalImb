@@ -2,25 +2,22 @@
 
 
 
-<h3 class="text-center">Seleccionar inmuebles</h3>
+<h3 class="text-center">Asignar inmueble a propietario.</h3>
 <hr />
-
-
 
 <div class="container">
     <div class="row">
         <div class="col-6 offset-3">
-            <form asp-action="SeleccionarInmuebles" method="post" id="inm_form">
+            <form asp-action="AsignarRolesUsuario" method="post">
                 <div class="form-group">
-                    <label>Seleccione los inmuebles</label>
-                    <select asp-for="InmuebleCodCatastro" asp-items="@ViewBag.InmPropietarios" id="inm" class="select" multiple>
-                        <option>--Seleccione inmuebles--</option>
+                    <label>Seleccione el usuario</label>
+                    <select asp-for="IdInmueble" asp-items="@ViewBag.InmPropietarios" class="form-control">
+                        <option selected disabled>--Seleccione inmuebles--</option>
                     </select>
                 </div>
 
-
-                <input type="submit" class="btn btn-outline-primary btn-block" value="Confirmar" />
-                <a asp-action="IndexPropietario" asp-controller="Propietario" class="btn btn-outline-danger btn-block">Cancelar</a>
+                <input type="submit" class="btn btn-outline-primary btn-block" value="Asignar" />
+                <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancelar</a>
             </form>
         </div>
     </div>
