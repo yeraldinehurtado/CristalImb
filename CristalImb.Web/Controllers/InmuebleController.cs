@@ -162,54 +162,5 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> SeleccionarInmuebles()
-        {
-            var listaInmuebles = await _inmuebleService.ObtenerInmueble();
-
-            ViewBag.Inmuebles = new SelectList(listaInmuebles, "Codigo");
-
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> SeleccionarInmuebles(Propietario propietario, Inmueble inmueble) 
-        {
-            if (propietario.PropietarioId == 0)
-            {
-                await _inmuebleService.AgregarInmProp(propietario, inmueble);
-                return RedirectToAction("IndexPropietario");
-            }
-            else
-            {
-                try
-                {
-                    await _inmuebleService.ObtenerInmuebleId(inmueble.InmuebleId);
-                    await _inmuebleService.AgregarInmProp(propietario, inmueble);
-                    await _inmuebleService.EditarInmueble(inmueble);
-                    return RedirectToAction("IndexPropietario");
-                }
-                catch (Exception)
-                {
-                    TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Hubo un error realizando la operación";
-                    return RedirectToAction("IndexPropietario");
-                }
-            }
-            
-
-            return RedirectToAction("IndexUsuarios", "Usuarios");
-        }
-
-        public async Task<IActionResult> VerInmuebles(int? id)
-        {
-            if (id != null)
-            {
-                return View(await _inmuebleService.ObtenerInmuebleId(id.Value));
-            }
-
-            TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Hubo un error realizando la operación";
-            return RedirectToAction("IndexPropietario");
-        }
     }
 }
