@@ -196,23 +196,23 @@ namespace CristalImb.Web.Controllers
                     {
                         TempData["Accion"] = "Error";
                         TempData["Mensaje"] = "El inmueble ya se encuentra registrado";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("IndexPropietario");
                     }
                     await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
                     TempData["Accion"] = "Crear";
                     TempData["Mensaje"] = "inmueble añadido con éxito";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
                 {
                     TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Hubo un error al añadir el procuto";
-                    return RedirectToAction("Index");
+                    TempData["Mensaje"] = "Error";
+                    return RedirectToAction("IndexPropietario");
                 }
             }
             TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Alguno de los valores no comple con los requisitos";
-            return RedirectToAction("Index");
+            TempData["Mensaje"] = "Se encontró un error";
+            return RedirectToAction("IndexPropietario");
         }
 
     }
