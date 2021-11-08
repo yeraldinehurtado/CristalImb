@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CristalImb.Model.Entities.Propietario>
 
 @{
-    ViewData["Title"] = "IndexPropietario";
+    ViewData["Title"] = "Propietarios";
 }
 
 @section Styles{
@@ -57,8 +57,12 @@
                                     @Html.DisplayNameFor(model => model.Inmuebles)
                                 </th>
                                 <th>
+                                    Agregar Inmuebles
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
+                                <th> </th>
                                 <th> </th>
                                 <th> </th>
                                 <th> </th>
@@ -90,6 +94,9 @@
                                     <a asp-action="VerInmuebles" asp-route-id="@x.PropietarioId">Ver inmuebles</a>
                                 </td>
                                 <td>
+                                    <a asp-action="CrearInmPropietarios" asp-route-id="@x.PropietarioId">Agregar inmuebles</a>
+                                </td>
+                                <td>
                                     @if (x.Estado == true)
                                     {
                                         <p>Activo</p>
@@ -114,7 +121,7 @@
                                     }
                                 </td>
                                 <td>
-                                    <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a> 
+                                    <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form asp-action="EliminarPropietario" asp-route-id="@x.PropietarioId" class="d-inline">

@@ -183,8 +183,8 @@ namespace CristalImb.Web.Controllers
                     PropietarioId = inmPropietariosViewModel.PropietarioId,
                     InmuebleId = inmPropietariosViewModel.InmuebleId,
                     FechaInicio = inmPropietariosViewModel.FechaInicio,
-                    FechaFin = inmPropietariosViewModel.FechaFin,
-                    
+                    FechaFin = inmPropietariosViewModel.FechaFin
+
                 };
 
                 try

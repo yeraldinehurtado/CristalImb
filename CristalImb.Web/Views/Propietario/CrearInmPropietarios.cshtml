@@ -11,9 +11,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label class="control-label">Inmuebles</label>
-                        <select asp-items="ViewBag.ListarInmueble" asp-for="InmuebleId" class="form-control">
-                            <option selected disabled>--Seleccione un inmueble--</option>
-                        </select>
+                        <select asp-items="ViewBag.ListarInmueble" asp-for="InmuebleId" class="form-control"></select>
                         <span asp-validation-for="InmuebleId" class="text-danger"></span>
                     </div>
                 </div>
