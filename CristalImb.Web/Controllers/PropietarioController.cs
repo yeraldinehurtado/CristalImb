@@ -215,9 +215,10 @@ namespace CristalImb.Web.Controllers
             return RedirectToAction("IndexPropietario");
         }
         [HttpGet]
-        public async Task<IActionResult> VerInmuebles()
+        public async Task<IActionResult> VerInmuebles(int id)
         {
-            return View(await _inmPropietariosService.ObtenerInmPropietarios());
+            ViewBag.PropietarioId = id;
+            return View(await _inmPropietariosService.ObtenerInmPropietariosId(id));
         }
     }
 }
