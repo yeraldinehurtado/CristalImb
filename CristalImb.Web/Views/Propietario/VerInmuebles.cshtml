@@ -3,12 +3,25 @@
 @{
     ViewData["Title"] = "VerInmuebles";
 }
+
     <section class="content">
         <table class="table" id="tabla">
             <thead>
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.Inmueble.Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inmueble.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inmueble.Valor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inmueble.Zona)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inmueble.Estado)
                     </th>
                 </tr>
             </thead>
@@ -18,6 +31,18 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Zona)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Estado)
                     </td>
                 </tr>
                 }
