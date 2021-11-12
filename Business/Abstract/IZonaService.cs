@@ -13,6 +13,6 @@ namespace CristalImb.Business.Abstract
         Task GuardarZona(Zona zona);
         Task<Zona> ObtenerZonaId(int id);
         Task EditarZona(Zona zona);
-        Task EliminarTipoInmueble(int id);
+        Task EliminarZona(int id);
     }
 }

@@ -40,7 +40,7 @@ namespace CristalImb.Business.Business
             await _context.SaveChangesAsync();
         }
 
-        public async Task EliminarTipoInmueble(int id)
+        public async Task EliminarZona(int id)
         {
             var zona = await ObtenerZonaId(id);
             _context.Remove(zona);

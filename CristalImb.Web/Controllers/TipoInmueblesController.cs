@@ -20,7 +20,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexTipoInmuebles()
         {
-            var listPropietario = await _tipoInmuebleService.ObtenerTipos();
+            var listTipoInmueble = await _tipoInmuebleService.ObtenerTipos();
             return View(await _tipoInmuebleService.ObtenerTipos());
 
         }
