@@ -8,10 +8,14 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Model.Entities
 {
-    public class ZonaInmueble
+    public class Zona
     {
         [Key]
         public int ZonaId { get; set; }
-        public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "La zona es requerida.")]
+        [DisplayName("Nombre de zona")]
+        public string NombreZona { get; set; }
+        public virtual List<Inmueble> Inmuebles { get; set; }
     }
 }
