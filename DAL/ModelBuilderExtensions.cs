@@ -12,28 +12,6 @@ namespace CristalImb.Model
     {
         public static void seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TipoInmueble>().HasData(
-                new TipoInmueble
-                {
-                    TipoId = 1,
-                    Nombre = "Casa"
-                },
-                new TipoInmueble
-                {
-                    TipoId = 2,
-                    Nombre = "Apartamento"
-                },
-                new TipoInmueble
-                {
-                    TipoId = 3,
-                    Nombre = "Lote"
-                },
-                new TipoInmueble
-                {
-                    TipoId = 4,
-                    Nombre = "Bodega"
-                }
-                );
 
             modelBuilder.Entity<ServiciosInmueble>().HasData(
                 new ServiciosInmueble
@@ -48,33 +26,7 @@ namespace CristalImb.Model
                 }
                 );
 
-            modelBuilder.Entity<ZonaInmueble>().HasData(
-                new ZonaInmueble
-                {
-                    ZonaId = 1,
-                    Nombre = "Laureles"
-                },
-                new ZonaInmueble
-                {
-                    ZonaId = 2,
-                    Nombre = "Villa Hermosa"
-                },
-                new ZonaInmueble
-                {
-                    ZonaId = 3,
-                    Nombre = "Aranjuez"
-                },
-                new ZonaInmueble
-                {
-                    ZonaId = 4,
-                    Nombre = "Castilla"
-                },
-                new ZonaInmueble
-                {
-                    ZonaId = 5,
-                    Nombre = "Poblado"
-                }
-                );
+           
 
             modelBuilder.Entity<Cargo>().HasData(
                 new Cargo
