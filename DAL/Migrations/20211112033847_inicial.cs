@@ -172,7 +172,8 @@ namespace CristalImb.Model.Migrations
                 {
                     TipoInmuebleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreTipoInm = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NombreTipoInm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,7 +186,8 @@ namespace CristalImb.Model.Migrations
                 {
                     ZonaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreZona = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NombreZona = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

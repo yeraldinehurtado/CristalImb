@@ -16,6 +16,7 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "La zona es requerida.")]
         [DisplayName("Nombre de zona")]
         public string NombreZona { get; set; }
+        public bool Estado { get; set; }
         public virtual List<Inmueble> Inmuebles { get; set; }
     }
 }
