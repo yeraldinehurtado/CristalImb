@@ -39,7 +39,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RegistrarInmuebleAsync()
         {
-            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoId", "Nombre");
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoInmuebleId", "NombreTipoInm");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View();
         }
@@ -57,7 +57,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarInmueble(int id = 0)
         {
-            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoId", "Nombre");
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoInmuebleId", "NombreTipoInm");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }

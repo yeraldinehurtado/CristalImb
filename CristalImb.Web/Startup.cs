@@ -47,6 +47,7 @@ namespace CristalImb.Web
             services.AddScoped<ICitaService, CitaService>();
 
             services.AddScoped<ITipoInmuebleService, TipoInmuebleService>();
+            services.AddScoped<IZonaService, ZonaService>();
             services.AddScoped<IServiciosInmuebleService, ServiciosInmuebleService>();
             services.AddScoped<IEstadoCitaService, EstadoCitaService>();
             services.AddScoped<IEstadosInmuebleService, EstadosInmuebleService>();

@@ -27,7 +27,7 @@
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
-                        <a onclick="mostrarModal('@Url.Action("RegistrarTipoInmueble","TipoInmueble", "null", Context.Request.Scheme)', 'Registrar tipo de inmueble')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar tipo de inmueble.</a>
+                        <a onclick="mostrarModal('@Url.Action("RegistrarTipoInmueble","TipoInmuebles", "null", Context.Request.Scheme)', 'Registrar tipo de inmueble')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar tipo de inmueble.</a>
                     </p>
                     <br />
                 </div>
@@ -38,6 +38,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.NombreTipoInm)
                                 </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
