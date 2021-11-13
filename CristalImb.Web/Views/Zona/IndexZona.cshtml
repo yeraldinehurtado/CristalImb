@@ -1,5 +1,99 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<CristalImb.Model.Entities.Zona>
+
 @{
+    ViewData["Title"] = "IndexZona";
+}
+
+@section Styles{
+    <style>
+        .contenido {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        tr td {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #08006f;
+        }
+    </style>
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="m-0 row justify-content-center align-items-baseline">
+            <div class="contenido">
+                <div class="botonCrear col-12 p-3 text-center accent-teal">
+                    <br />
+                    <p>
+                        <a onclick="mostrarModal('@Url.Action("RegistrarZona","Zona", "null", Context.Request.Scheme)', 'Registrar Zona')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar Zona.</a>
+                    </p>
+                    <br />
+                </div>
+                <div>
+                    <table class="table table-striped table-bordered col-12" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.NombreZona)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.NombreZona)
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarZona" asp-route-id="@x.ZonaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        <form asp-action="EliminarZona" asp-route-id="@x.ZonaId" class="d-inline">
+                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/Tabla.js"></script>
+    <script src="~/js/modal.js"></script>
+
+    <script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarZona")) {
+        <text>
+        Swal.fire({
+        title: "Guardar zona",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarZona")) {
+        <text>
+        Swal.fire({
+        title: "Editar zona",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+        <text>
+        Swal.fire({
+        title: "Error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+    </script>
 }

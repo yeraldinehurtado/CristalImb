@@ -89,36 +89,6 @@ namespace CristalImb.Web.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> ActualizarEstado(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
-                return RedirectToAction("IndexTipoInmuebles");
-            }
-            TipoInmuebles tipoInmuebles = await _tipoInmuebleService.ObtenerTipoInmuebleId(id.Value);
-            try
-            {
-                if (tipoInmuebles.Estado == true)
-                    tipoInmuebles.Estado = false;
-                else if (tipoInmuebles.Estado == false)
-                    tipoInmuebles.Estado = true;
-
-                await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
-                TempData["Accion"] = "EditarEstado";
-                TempData["Mensaje"] = "Estado editardo correctamente";
-                return RedirectToAction("IndexTipoInmuebles");
-            }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
-                return RedirectToAction("IndexTipoInmuebles");
-            }
-        }
-
-        [HttpPost]
         public async Task<IActionResult> EliminarTipoInmueble(int id)
         {
             try
