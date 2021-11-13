@@ -1,0 +1,45 @@
+﻿@model CristalImb.Model.Entities.TipoInmuebles
+
+@{
+    ViewData["Title"] = "EditarTipoInmuebke";
+}
+
+@section Styles{
+    <style>
+        .editar {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-top: 5%;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="editar">
+                <h1>Editar tipo de inmueble</h1>
+                <hr />
+                <form asp-action="EditarTipoInm">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="TipoInmuebleId" />
+                    <div class="form-group">
+                        <label asp-for="NombreTipoInm" class="control-label"></label>
+                        <input asp-for="NombreTipoInm" class="form-control" />
+                        <span asp-validation-for="NombreTipoInm" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                    </div>
+                </form>
+                <div>
+                    <a asp-action="IndexTipoInmueble">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
