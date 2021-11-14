@@ -7,7 +7,7 @@
 }
 
 body {
-    background: #0b2027;
+    background: #07c2f9;
     font-family: 'Roboto', sans-serif;
     line-height: 18px;
 }
@@ -20,8 +20,8 @@ a {
 .btn-menu {
     display: none;
     padding: 0px;
-    background: #0d2c44;
-    color: #fff;
+    background: #07c2f9;
+    color: #07c2f9;
 }
 
     .btn-menu .icono {
@@ -46,10 +46,10 @@ a {
     }
 
     .contenedor-menu .menu li a {
-        color: #494949;
+        color: #07c2f9;
         display: block;
         padding: 15px 20px;
-        background: #e9e9e9;
+        background: #07c2f9;
     }
 
         .contenedor-menu .menu li a:hover {
@@ -78,11 +78,11 @@ a {
 
         .contenedor-menu .menu ul li a {
             background: #424242;
-            color: #e9e9e9;
+            color: #07c2f9;
         }
 
     .contenedor-menu .menu .activado > a {
-        background: #1a95d5;
+        background: #07c2f9;
         color: #fff;
     }
 
@@ -116,7 +116,7 @@ a {
 }
 
 body {
-    background: #0b2027;
+    background: #07c2f9;
     font-family: 'Roboto', sans-serif;
     line-height: 18px;
 }
@@ -129,8 +129,8 @@ a {
 .btn-menu {
     display: none;
     padding: 10px;
-    background: #0d2c44;
-    color: #fff;
+    background: #07c2f9;
+    color: #07c2f9;
 }
 
     .btn-menu .icono {
@@ -158,11 +158,11 @@ a {
         color: #494949;
         display: block;
         padding: 15px 20px;
-        background: #e9e9e9;
+        background: #07c2f9;
     }
 
         .contenedor-menu .menu li a:hover {
-            background: #1a95d5;
+            background: #07c2f9;
             color: #fff;
         }
 
@@ -187,7 +187,7 @@ a {
 
         .contenedor-menu .menu ul li a {
             background: #424242;
-            color: #e9e9e9;
+            color: #07c2f9;
         }
 
     .contenedor-menu .menu .activado > a {
