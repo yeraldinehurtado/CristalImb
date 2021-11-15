@@ -374,3 +374,7 @@ FodyWeavers.xsd
 /DAL/Migrations/20211026021948_santi.Designer.cs
 /DAL/Migrations/20211107210504_sant.Designer.cs
 /DAL/Migrations/20211107210504_sant.cs
+/DAL/Migrations/20211114223445_inicial.Designer.cs
+/DAL/Migrations/20211114223445_inicial.cs
+/DAL/Migrations/20211115012933_inicial.Designer.cs
+/DAL/Migrations/20211115012933_inicial.cs
