@@ -11,38 +11,14 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Inmueble.Codigo)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Inmueble.Descripcion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Inmueble.Valor)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Inmueble.Zona)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Inmueble.Estado)
-                    </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var x in Model)
                 {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Inmueble.Descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Inmueble.Valor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Inmueble.Zona)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Inmueble.Estado)
+                        @Html.DisplayFor(modelx => x.Inmueble.Codigo)
                     </td>
                 </tr>
                 }
