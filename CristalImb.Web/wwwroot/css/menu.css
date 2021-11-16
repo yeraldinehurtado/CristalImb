@@ -46,10 +46,10 @@ a {
     }
 
     .contenedor-menu .menu li a {
-        color: #07c2f9;
+        color: #fff;
         display: block;
         padding: 15px 20px;
-        background: #07c2f9;
+        background: #fff;
     }
 
         .contenedor-menu .menu li a:hover {
@@ -77,12 +77,12 @@ a {
     }
 
         .contenedor-menu .menu ul li a {
-            background: #424242;
-            color: #07c2f9;
+            background: #fff;
+            color: #fff;
         }
 
     .contenedor-menu .menu .activado > a {
-        background: #07c2f9;
+        background: #fff;
         color: #fff;
     }
 
@@ -155,7 +155,7 @@ a {
     }
 
     .contenedor-menu .menu li a {
-        color: #494949;
+        color: #fff;
         display: block;
         padding: 15px 20px;
         background: #07c2f9;
