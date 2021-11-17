@@ -212,18 +212,18 @@ namespace CristalImb.Web.Controllers
                     await _inmPropietariosService.EliminarInmPropietarios(id);
                     TempData["Accion"] = "EliminarInmPropietario";
                     TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
-                    return RedirectToAction("VerInmuebles");
+                    return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
                 {
-                    return RedirectToAction("VerInmuebles");
+                    return RedirectToAction("IndexPropietario");
                 }
             }
             else
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Error.";
-                return RedirectToAction("VerInmuebles");
+                return RedirectToAction("IndexPropietario");
             }
 
         }

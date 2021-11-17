@@ -90,10 +90,10 @@
                                     @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
-                                    <a asp-action="VerInmuebles" asp-route-id="@x.PropietarioId">Ver inmuebles</a>
+                                    <a onclick="mostrarModal('@Url.Action("VerInmuebles","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Ver Inmuebles')"> Ver inmuebles.</a>
                                 </td>
                                 <td>
-                                    <a asp-action="CrearInmPropietarios" asp-route-id="@x.PropietarioId">Agregar inmuebles</a>
+                                    <a onclick="mostrarModal('@Url.Action("CrearInmPropietarios","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Crear inmpropietarios')"> Agregar inmuebles.</a>
                                 </td>
                                 <td>
                                     @if (x.Estado == true)
