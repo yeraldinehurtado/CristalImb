@@ -168,6 +168,24 @@ namespace CristalImb.Web.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EliminarInmPropietario(int id)
+        {
+            try
+            {
+                TempData["Accion"] = "Confirmación";
+                await _inmPropietariosService.EliminarInmPropietarios(id);
+                TempData["Accion"] = "EditarInmPropietario";
+                TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
+                return RedirectToAction(nameof(DetallesPropietario));
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("DetallesPropietario");
+            }
+
+        }
+
         [HttpGet]
         public async Task<IActionResult> CrearInmPropietarios(int id)
         {

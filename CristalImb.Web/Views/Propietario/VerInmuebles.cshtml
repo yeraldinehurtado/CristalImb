@@ -11,17 +11,36 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Inmueble.Codigo)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inmueble.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inmueble.Valor)
+                </th>
+                <th>
+                    Acciones
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
-                    </td>
-                    
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inmueble.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inmueble.Valor)
+                </td>
+                <td>
+                    <form asp-action="EliminarInmPropietario" asp-route-id="@item.InmProId" class="d-inline">
+                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

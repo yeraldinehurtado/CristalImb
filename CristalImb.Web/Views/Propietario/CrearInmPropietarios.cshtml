@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-12">
             <h2>Lista de inmuebles</h2>
-            <form asp-action="CrearInmPropietarios" asp-controller="Propietarios" method="post">
+            <form asp-action="CrearInmPropietarios" asp-controller="Propietario" method="post">
                 <input type="hidden" asp-for="PropietarioId" />
                 <input type="hidden" asp-route-codigoIndex="" id="listaCodigo" />
                 <table id="tablacodigo" class="table table-bordered">
@@ -71,7 +71,7 @@
     function agregarInmueble() {
         let codigoId = $("#codigos option:selected").val();
         let codigoText = $("#codigos option:selected").text();
-
+        let contador = 0;
 
         if (codigoId != 0) {
             $("#tablacodigo").append(`
