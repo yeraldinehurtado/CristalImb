@@ -23,32 +23,29 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <form asp-action="CrearInmPropietarios" asp-controller="Propietario" method="post">
-                <div asp-validation-summary="ModelOnly"></div>
-                <input type="hidden" asp-for="PropietarioId" />
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label>Inmuebles</label>
-                            <select asp-items="ViewBag.ListarInmueble" class="form-control" asp-for="InmuebleId" id="codigos"></select>
-                            <span asp-validation-for="InmuebleId" class="text-danger"></span>
-                        </div>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Inmuebles</label>
+                        <select asp-items="ViewBag.ListarInmueble" class="form-control" asp-for="InmuebleId" id="codigos"></select>
+                        <span asp-validation-for="InmuebleId" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input onclick="agregarInmueble()" type="submit" value="Agregar inmueble" class="btn btn-primary" />
-                </div>
-            </form>
-            
+            </div><br />
+            <div class="form-group">
+                <input onclick="agregarInmueble()" type="submit" value="Agregar inmueble" class="btn btn-primary" />
+            </div>
         </div>
     </div>
-
+    <br /><hr /><br />
     <div class="row">
         <div class="col-12">
             <h2>Lista de inmuebles</h2>
             <form asp-action="CrearInmPropietarios" asp-controller="Propietario" method="post">
+                <div asp-validation-summary="ModelOnly"></div>
                 <input type="hidden" asp-for="PropietarioId" />
-                <input type="hidden" asp-route-codigoIndex="" id="listaCodigo" />
+                <input type="hidden" asp-route-codigoIndex="" id="listacodigo" />
                 <table id="tablacodigo" class="table table-bordered">
                     <thead>
                         <tr>
@@ -59,7 +56,7 @@
                     <tbody>
                     </tbody>
                 </table>
-                <input id="agregar" type="submit" value="Guardar inmueble" class="btn btn-block btn-secondary" />
+                <input id="agregar" type="submit" value="Guardar inmueble" class="btn btn-primary" />
             </form>
         </div>
     </div>
@@ -76,11 +73,11 @@
         let codigoText = $("#codigos option:selected").text();
         let contador = 0;
 
-        if (codigoId != 0) {
+        
             $("#tablacodigo").append(`
             <tr id="${contador}">
                 <td>
-                    <input type="hidden" name="InmPropietarios[${contador}].InmuebleId" value="${codigoId}" />
+                    <input type="hidden" name="AgregarInmuebles[${contador}].InmuebleId" value="${codigoId}" />
                     ${codigoText}
                 </td>
                 <td>
@@ -89,13 +86,13 @@
             </tr>
             `);
             contador++;
-        }
+        
         
     }
     function eliminarInmueble(contador) {
-        @*let codigoIndex = [];
-        codigoIndex.push(contador);
-        $("#listacodigo").attr("asp-route-codigoIndex", codigoIndex)*@
+        let codigosIndex = [];
+        codigosIndex.push(contador);
+        $("#listacodigo").attr("asp-route-codigoIndex", codigosIndex)
         $("#" + contador).remove();
     }
 </script>
