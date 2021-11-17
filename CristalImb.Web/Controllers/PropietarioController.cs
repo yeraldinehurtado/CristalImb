@@ -157,11 +157,11 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> CrearInmPropietarios(int id)
         {
             ViewBag.ListarInmueble = new SelectList(await _inmuebleService.ObtenerInmueble(), "InmuebleId", "Codigo");
-            InmPropietariosViewModel inmPropietariosViewModel = new()
+            InmPropietariosViewModel inmPropietarios = new()
             {
                 PropietarioId = id
             };
-            return View(inmPropietariosViewModel);
+            return View(inmPropietarios);
         }
 
         [HttpPost]
@@ -169,17 +169,22 @@ namespace CristalImb.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                InmPropietarios inmPropietarios = new()
-                {
-                    PropietarioId = inmPropietariosViewModel.PropietarioId,
-                    InmuebleId = inmPropietariosViewModel.InmuebleId,
-                    FechaInicio = inmPropietariosViewModel.FechaInicio,
-                    FechaFin = inmPropietariosViewModel.FechaFin
-
-                };
-
                 try
                 {
+                    int propietario = inmPropietariosViewModel.PropietarioId;
+                    foreach (var x in inmPropietariosViewModel.inmProp)
+                    {
+                        InmPropietarios inmPropietarios = new()
+                        {
+                            PropietarioId = propietario,
+                            InmuebleId = x.InmuebleId,
+                            FechaInicio = x.FechaInicio,
+                            FechaFin = x.FechaFin
+
+                        };
+                        await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
+                    }
+                    /*
                     var InmuebleExiste = await _inmPropietariosService.InmuebleExiste(inmPropietarios.PropietarioId, inmPropietarios.InmuebleId);
 
                     if (InmuebleExiste != null)
@@ -188,7 +193,7 @@ namespace CristalImb.Web.Controllers
                         TempData["Mensaje"] = "El inmueble ya se encuentra registrado";
                         return RedirectToAction("IndexPropietario");
                     }
-                    await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
+                    await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);*/
                     TempData["Accion"] = "Crear";
                     TempData["Mensaje"] = "inmueble añadido con éxito";
                     return RedirectToAction("CrearInmPropietarios");

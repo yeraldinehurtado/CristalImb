@@ -28,8 +28,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label>Inmuebles</label>
-                        <select asp-items="ViewBag.ListarInmueble" class="form-control" asp-for="InmuebleId" id="codigos"></select>
-                        <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                        <select asp-items="ViewBag.ListarInmueble" class="form-control" id="codigos"></select>
                     </div>
                 </div>
             </div><br />
@@ -43,8 +42,7 @@
         <div class="col-12">
             <h2>Lista de inmuebles</h2>
             <form asp-action="CrearInmPropietarios" asp-controller="Propietario" method="post">
-                <div asp-validation-summary="ModelOnly"></div>
-                <input type="hidden" asp-for="PropietarioId" />
+                <input type="hidden" asp-for="PropietarioId"/>
                 <input type="hidden" asp-route-codigoIndex="" id="listacodigo" />
                 <table id="tablacodigo" class="table table-bordered">
                     <thead>
