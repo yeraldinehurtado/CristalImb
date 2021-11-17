@@ -24,29 +24,28 @@ namespace CristalImb.Business.Business
             return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).ToListAsync();
 
 
-
         }
-        public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId(int Id)
+        public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId(int id)
         {
-            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.PropietarioId == Id).ToListAsync();
+            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.PropietarioId == id).ToListAsync();
         }
         public async Task RegistrarInmPropietarios(InmPropietarios inmPropietarios)
         {
             _context.Add(inmPropietarios);
             await _context.SaveChangesAsync();
         }
-        public async Task<InmPropietarios> ObtenerInmPropietariosId(int Id)
+        public async Task<InmPropietarios> ObtenerInmPropietariosId(int id)
         {
-            return await _context.InmPropietarios.FirstOrDefaultAsync(e => e.InmProId == Id);
+            return await _context.InmPropietarios.FirstOrDefaultAsync(e => e.InmProId == id);
         }
         public async Task EditarInmPropietarios(InmPropietarios inmPropietarios)
         {
             _context.Update(inmPropietarios);
             await _context.SaveChangesAsync();
         }
-        public async Task EliminarInmPropietarios(int Id)
+        public async Task EliminarInmPropietarios(int id)
         {
-            var inmPropietarios = await ObtenerInmPropietariosId(Id);
+            var inmPropietarios = await ObtenerInmPropietariosId(id);
             _context.Remove(inmPropietarios);
             await _context.SaveChangesAsync();
         }

@@ -10,11 +10,11 @@ namespace CristalImb.Business.Abstract
     public interface IInmPropietariosService
     {
         Task<IEnumerable<InmPropietarios>> ObtenerInmPropietarios();
-        Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId(int Id);
+        Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId(int id);
         Task RegistrarInmPropietarios(InmPropietarios inmPropietarios);
-        Task<InmPropietarios> ObtenerInmPropietariosId(int Id);
+        Task<InmPropietarios> ObtenerInmPropietariosId(int id);
         Task EditarInmPropietarios(InmPropietarios inmPropietarios);
-        Task EliminarInmPropietarios(int Id);
+        Task EliminarInmPropietarios(int id);
         Task<InmPropietarios> InmuebleExiste(int PropietarioId, int Inmueble);
 
 

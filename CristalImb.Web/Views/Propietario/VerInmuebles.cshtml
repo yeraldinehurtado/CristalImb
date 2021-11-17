@@ -4,28 +4,29 @@
     ViewData["Title"] = "VerInmuebles";
 }
 
-    <section class="content">
-        <table class="table" id="tabla">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Inmueble.Codigo)
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var x in Model)
-                {
+<section class="content">
+    <table class="table" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inmueble.Codigo)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelx => x.Inmueble.Codigo)
+                        @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
                     </td>
+                    
                 </tr>
-                }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
 
-    </section>
+</section>
 @section Scripts{
 
     <script src="~/js/tabla.js"></script>

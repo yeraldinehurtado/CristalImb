@@ -30,7 +30,13 @@ namespace CristalImb.Web.Controllers
         {
             var listPropietario = await _propietarioService.ObtenerPropietario();
             return View(await _propietarioService.ObtenerPropietario());
-            
+
+        }
+
+        public async Task<IActionResult> VerInmuebles(int id)
+        {
+            ViewBag.PropietarioId = id;
+            return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId(id));
         }
 
         [HttpGet]
@@ -104,7 +110,7 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ActualizarEstado(int? id)
         {
-            if(id == null || id == 0)
+            if (id == null || id == 0)
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Error";
@@ -213,11 +219,6 @@ namespace CristalImb.Web.Controllers
             TempData["Mensaje"] = "Se encontró un error";
             return RedirectToAction("IndexPropietario");
         }
-        [HttpGet]
-        public async Task<IActionResult> VerInmuebles(int id)
-        {
-            ViewBag.PropietarioId = id;
-            return View(await _inmPropietariosService.ObtenerInmPropietariosId(id));
-        }
+
     }
 }
