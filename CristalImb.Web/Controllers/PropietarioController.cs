@@ -203,16 +203,26 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EliminarInmPropietario(int id)
         {
-            try
+            if (ModelState.IsValid)
             {
-                TempData["Accion"] = "Confirmación";
-                await _inmPropietariosService.EliminarInmPropietarios(id);
-                TempData["Accion"] = "EliminarInmPropietario";
-                TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
-                return RedirectToAction(nameof(VerInmuebles));
+                try
+                {
+                    TempData["Accion"] = "Confirmación";
+                    InmPropietarios inmPropietarios = await _inmPropietariosService.ObtenerInmPropietariosId(id);
+                    await _inmPropietariosService.EliminarInmPropietarios(id);
+                    TempData["Accion"] = "EliminarInmPropietario";
+                    TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
+                    return RedirectToAction("VerInmuebles");
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("VerInmuebles");
+                }
             }
-            catch (Exception)
+            else
             {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error.";
                 return RedirectToAction("VerInmuebles");
             }
 
