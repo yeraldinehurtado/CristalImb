@@ -131,24 +131,10 @@ namespace CristalImb.Web.Controllers
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
                 return RedirectToAction("IndexPropietario");
             }
         }
 
-
-        public async Task<IActionResult> DetallesPropietario(int? id)
-        {
-            if (id != null)
-            {
-                return View(await _propietarioService.ObtenerPropietarioId(id.Value));
-            }
-
-            TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Hubo un error realizando la operación";
-            return RedirectToAction("IndexPropietario");
-        }
 
         [HttpPost]
         public async Task<IActionResult> EliminarPropietario(int id)
@@ -161,30 +147,11 @@ namespace CristalImb.Web.Controllers
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Hubo un error realizando la operación";
                 return RedirectToAction("IndexPropietario");
             }
 
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EliminarInmPropietario(int id)
-        {
-            try
-            {
-                TempData["Accion"] = "Confirmación";
-                await _inmPropietariosService.EliminarInmPropietarios(id);
-                TempData["Accion"] = "EditarInmPropietario";
-                TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
-                return RedirectToAction(nameof(DetallesPropietario));
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("DetallesPropietario");
-            }
-
-        }
 
         [HttpGet]
         public async Task<IActionResult> CrearInmPropietarios(int id)
@@ -224,7 +191,7 @@ namespace CristalImb.Web.Controllers
                     await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
                     TempData["Accion"] = "Crear";
                     TempData["Mensaje"] = "inmueble añadido con éxito";
-                    return RedirectToAction("IndexPropietario");
+                    return RedirectToAction("CrearInmPropietarios");
                 }
                 catch (Exception)
                 {
@@ -238,5 +205,23 @@ namespace CristalImb.Web.Controllers
             return RedirectToAction("IndexPropietario");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EliminarInmPropietario(int id)
+        {
+            try
+            {
+                TempData["Accion"] = "Confirmación";
+                await _inmPropietariosService.EliminarInmPropietarios(id);
+                TempData["Accion"] = "EliminarInmPropietario";
+                TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
+                return RedirectToAction(nameof(VerInmuebles));
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("VerInmuebles");
+            }
+
+        }
     }
+
 }
