@@ -1,27 +1,98 @@
 ﻿@model CristalImb.Web.ViewModels.InmPropietarios.InmPropietariosViewModel
+
 @{
-    ViewData["Title"] = "SeleccionarInmueble";
+    ViewData["Title"] = "Agregar inmuebles";
+}
+
+@section Styles{
+    <style>
+        .contenido {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        tr td {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #08006f;
+        }
+    </style>
 }
 
 <div class="container-fluid">
-        <form asp-action="CrearInmPropietarios" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-12">
             <div asp-validation-summary="ModelOnly"></div>
             <input type="hidden" asp-for="PropietarioId" />
             <div class="row">
                 <div class="col-4">
                     <div class="form-group">
-                        <label class="control-label">Inmuebles</label>
-                        <select asp-items="ViewBag.ListarInmueble" asp-for="InmuebleId" class="form-control"></select>
-                        <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                        <label>Inmuebles</label>
+                        <select asp-items="ViewBag.ListarInmueble" class="form-control" id="codigos"></select>
+                        @*<span asp-validation-for="InmuebleId" class="text-danger"></span>*@
                     </div>
                 </div>
-            </div><br />
-            <div class="form-group">
-                <input type="submit" value="Agregar inmueble" class="btn btn-primary" />
             </div>
-        </form>
+            <div class="form-group">
+                <input onclick="agregarInmueble()" type="submit" value="Agregar inmueble" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-12">
+            <h2>Lista de inmuebles</h2>
+            <form asp-action="CrearInmPropietarios" asp-controller="Propietarios" method="post">
+                <input type="hidden" asp-for="PropietarioId" />
+                <input type="hidden" asp-route-codigoIndex="" id="listaCodigo" />
+                <table id="tablacodigo" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Inmueble</td>
+                            <td>Acciones</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <input id="agregar" type="submit" value="Guardar inmueble" class="btn btn-block btn-secondary" />
+            </form>
+        </div>
+    </div>
 </div>
 
 
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+@section Scripts {
+
+}
+<script>
+    function agregarInmueble() {
+        let codigoId = $("#codigos option:selected").val();
+        let codigoText = $("#codigos option:selected").text();
+
+
+        if (codigoId != 0) {
+            $("#tablacodigo").append(`
+            <tr id="${contador}">
+                <td>
+                    <input type="hidden" name="InmPropietarios[${contador}].InmuebleId" value="${codigoId}" />
+                    ${codigoText}
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt" onclick="eliminarInmueble(${contador})"></i></button>
+                </td>
+            </tr>
+            `);
+            contador++;
+        }
+        
+    }
+    function eliminarInmueble(contador) {
+        @*let codigoIndex = [];
+        codigoIndex.push(contador);
+        $("#listacodigo").attr("asp-route-codigoIndex", codigoIndex)*@
+        $("#" + contador).remove();
+    }
+</script>
