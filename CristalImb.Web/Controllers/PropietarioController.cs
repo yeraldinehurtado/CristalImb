@@ -196,7 +196,7 @@ namespace CristalImb.Web.Controllers
                     await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);*/
                     TempData["Accion"] = "Crear";
                     TempData["Mensaje"] = "inmueble añadido con éxito";
-                    return RedirectToAction("CrearInmPropietarios");
+                    return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
                 {
