@@ -157,11 +157,11 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> CrearInmPropietarios(int id)
         {
             ViewBag.ListarInmueble = new SelectList(await _inmuebleService.ObtenerInmueble(), "InmuebleId", "Codigo");
-            InmPropietariosViewModel inmPropietarios = new()
+            InmPropietariosViewModel inmProp = new()
             {
                 PropietarioId = id
             };
-            return View(inmPropietarios);
+            return View(inmProp);
         }
 
         [HttpPost]

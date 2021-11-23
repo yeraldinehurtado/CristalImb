@@ -28,23 +28,6 @@ namespace CristalImb.Model
 
            
 
-            modelBuilder.Entity<Cargo>().HasData(
-                new Cargo
-                {
-                    CargoId = 1,
-                    Nombre = "Administrador"
-                },
-                new Cargo
-                {
-                    CargoId = 2,
-                    Nombre = "Analista"
-                },
-                new Cargo
-                {
-                    CargoId = 3,
-                    Nombre = "Secretaria"
-                }
-                );
 
             modelBuilder.Entity<EstadoCita>().HasData(
                new EstadoCita

@@ -51,10 +51,9 @@
                                     @Html.DisplayNameFor(model => model.Direccion)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Estado)
-                                </th>
+                                    @Html.DisplayNameFor(model => model.Cargo)
                                 <th>
-                                    @Html.DisplayNameFor(model => model.CargoId)
+                                    @Html.DisplayNameFor(model => model.Estado)
                                 </th>
                             </tr>
                         </thead>
@@ -78,10 +77,10 @@
                                     @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.Estado)
+                                    @Html.DisplayFor(modelx => x.Cargo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.CargoId)
+                                    @Html.DisplayFor(modelx => x.Estado)
                                 </td>
                                 <td>
                                     <a asp-action="EditarEmpleado" asp-route-id="@x.EmpleadoId" class="btn alert-primary"><i class="fas fa-edit"></i></a>

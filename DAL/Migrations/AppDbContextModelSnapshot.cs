@@ -32,23 +32,6 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("CargoId");
 
                     b.ToTable("cargos");
-
-                    b.HasData(
-                        new
-                        {
-                            CargoId = 1,
-                            Nombre = "Administrador"
-                        },
-                        new
-                        {
-                            CargoId = 2,
-                            Nombre = "Analista"
-                        },
-                        new
-                        {
-                            CargoId = 3,
-                            Nombre = "Secretaria"
-                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Cita", b =>
@@ -108,8 +91,9 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CargoId")
-                        .HasColumnType("int");
+                    b.Property<string>("Cargo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()

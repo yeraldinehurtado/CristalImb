@@ -15,10 +15,10 @@ namespace CristalImb.Web.Controllers
         private readonly IEmpleadoService _empleadoService;
         private readonly ICargoService _cargoService;
 
-        public EmpleadoController(IEmpleadoService empleadoService, ICargoService cargoService)
+        public EmpleadoController(IEmpleadoService empleadoService)
         {
             _empleadoService = empleadoService;
-            _cargoService = cargoService;
+           
         }
 
         [HttpGet]
@@ -31,7 +31,6 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RegistrarEmpleadoAsync()
         {
-            ViewData["ListaCargos"] = new SelectList(await _cargoService.ObtenerCargos(), "CargoId", "Nombre");
             return View();
         }
 
