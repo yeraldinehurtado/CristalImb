@@ -86,23 +86,5 @@ namespace CristalImb.Web.Controllers
             }
 
         }
-
-        [HttpPost]
-        public async Task<IActionResult> EliminarZona(int id)
-        {
-            try
-            {
-                TempData["Accion"] = "Confirmación";
-                await _zonaService.EliminarZona(id);
-                return RedirectToAction(nameof(IndexZona));
-            }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Hubo un error realizando la operación";
-                return RedirectToAction("IndexZona");
-            }
-
-        }
     }
 }
