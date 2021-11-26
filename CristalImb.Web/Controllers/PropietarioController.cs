@@ -136,23 +136,6 @@ namespace CristalImb.Web.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> EliminarPropietario(int id)
-        {
-            try
-            {
-                TempData["Accion"] = "Confirmación";
-                await _propietarioService.EliminarPropietario(id);
-                return RedirectToAction(nameof(IndexPropietario));
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("IndexPropietario");
-            }
-
-        }
-
-
         [HttpGet]
         public async Task<IActionResult> CrearInmPropietarios(int id)
         {

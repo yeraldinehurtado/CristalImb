@@ -64,7 +64,6 @@
                                 </th>
                                 <th> </th>
                                 <th> </th>
-                                <th> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,11 +120,6 @@
                                 </td>
                                 <td>
                                     <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                </td>
-                                <td>
-                                    <form asp-action="EliminarPropietario" asp-route-id="@x.PropietarioId" class="d-inline">
-                                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
                                 </td>
                             </tr>
                             }
