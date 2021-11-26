@@ -161,18 +161,6 @@ namespace CristalImb.Web.Controllers
             return RedirectToAction(nameof(Detalle), new { UsuarioId = user.Id });                                                                         
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EliminarRol(string rol)
-        {
-            //get role to delete using role Name
-            //delete role using roleManager
-            //redirect to displayroles
-
-            var roleToDelete = await _roleManager.FindByNameAsync(rol);
-            var result = await _roleManager.DeleteAsync(roleToDelete);
-
-            return RedirectToAction(nameof(IndexRol));
-        }
 
     }
 }
