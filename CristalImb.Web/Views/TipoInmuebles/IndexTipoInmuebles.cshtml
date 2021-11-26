@@ -50,9 +50,6 @@
                                     </td>
                                     <td>
                                         <a asp-action="EditarTipoInmueble" asp-route-id="@x.TipoInmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                        <form asp-action="EliminarTipoInmueble" asp-route-id="@x.TipoInmuebleId" class="d-inline">
-                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
                                     </td>
                                 </tr>
                             }

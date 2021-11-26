@@ -87,24 +87,5 @@ namespace CristalImb.Web.Controllers
 
         }
 
-
-        [HttpPost]
-        public async Task<IActionResult> EliminarTipoInmueble(int id)
-        {
-            try
-            {
-                TempData["Accion"] = "Confirmación";
-                await _tipoInmuebleService.EliminarTipoInmueble(id);
-                return RedirectToAction(nameof(IndexTipoInmuebles));
-            }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Hubo un error realizando la operación";
-                return RedirectToAction("IndexTipoInmuebles");
-            }
-
-        }
-
     }
 }
