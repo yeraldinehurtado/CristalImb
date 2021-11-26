@@ -86,5 +86,33 @@ namespace CristalImb.Web.Controllers
             }
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexZona");
+            }
+            Zona zona = await _zonaService.ObtenerZonaId(id.Value);
+            try
+            {
+                if (zona.Estado == true)
+                    zona.Estado = false;
+                else if (zona.Estado == false)
+                    zona.Estado = true;
+
+                await _zonaService.EditarZona(zona);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexZona");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("IndexZona");
+            }
+        }
     }
 }
