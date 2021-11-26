@@ -21,9 +21,6 @@ namespace CristalImb.Web.ViewModels.Usuarios
         [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "El rol es requerido")]
-        public int Rol { get; set; }
-
         [DisplayName("Contraseña")]
         [Required(ErrorMessage = "La contraseña es requerida")]
         [StringLength(16, ErrorMessage = "El {0} debe tener al menos {2} y maximo {1} caracteres.", MinimumLength = 4)]

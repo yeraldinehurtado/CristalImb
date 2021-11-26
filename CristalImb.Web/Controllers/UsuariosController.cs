@@ -51,8 +51,7 @@ namespace CristalImb.Web.Controllers
                 {
                     Identificacion = usuarioViewModel.Identificacion,
                     UserName = usuarioViewModel.Email,
-                    Email = usuarioViewModel.Email,
-                    Rol = usuarioViewModel.Rol
+                    Email = usuarioViewModel.Email
                 };
 
                 try
@@ -87,8 +86,7 @@ namespace CristalImb.Web.Controllers
                 {
                     Identificacion = usuarioViewModel.Identificacion,
                     UserName = usuarioViewModel.Email,
-                    Email = usuarioViewModel.Email,
-                    Rol = usuarioViewModel.Rol
+                    Email = usuarioViewModel.Email
                 };
 
                 try
