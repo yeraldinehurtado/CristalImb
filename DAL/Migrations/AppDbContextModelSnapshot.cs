@@ -91,12 +91,11 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Cargo")
+                    b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired()
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Estado")
@@ -166,7 +165,11 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
                     b.Property<string>("NombreEstado")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdEstadoInm");
@@ -223,6 +226,12 @@ namespace CristalImb.Model.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("EstadosInmuebleIdEstadoInm")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEstadoInm")
+                        .HasColumnType("int");
+
                     b.Property<int>("ServicioInmuebleId")
                         .HasColumnType("int");
 
@@ -235,17 +244,15 @@ namespace CristalImb.Model.Migrations
                     b.Property<int>("Valor")
                         .HasColumnType("int");
 
-                    b.Property<string>("Zona")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ZonaId")
+                    b.Property<int>("ZonaId")
                         .HasColumnType("int");
 
                     b.Property<bool>("oferta")
                         .HasColumnType("bit");
 
                     b.HasKey("InmuebleId");
+
+                    b.HasIndex("EstadosInmuebleIdEstadoInm");
 
                     b.HasIndex("TipoInmueblesTipoInmuebleId");
 
@@ -617,17 +624,25 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
                 {
+                    b.HasOne("CristalImb.Model.Entities.EstadosInmueble", "EstadosInmueble")
+                        .WithMany("Inmuebles")
+                        .HasForeignKey("EstadosInmuebleIdEstadoInm");
+
                     b.HasOne("CristalImb.Model.Entities.TipoInmuebles", "TipoInmuebles")
                         .WithMany("Inmuebles")
                         .HasForeignKey("TipoInmueblesTipoInmuebleId");
 
-                    b.HasOne("CristalImb.Model.Entities.Zona", "zona")
+                    b.HasOne("CristalImb.Model.Entities.Zona", "Zona")
                         .WithMany("Inmuebles")
-                        .HasForeignKey("ZonaId");
+                        .HasForeignKey("ZonaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EstadosInmueble");
 
                     b.Navigation("TipoInmuebles");
 
-                    b.Navigation("zona");
+                    b.Navigation("Zona");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -679,6 +694,11 @@ namespace CristalImb.Model.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
+                {
+                    b.Navigation("Inmuebles");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>

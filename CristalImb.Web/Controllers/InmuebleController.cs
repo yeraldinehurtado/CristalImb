@@ -19,12 +19,16 @@ namespace CristalImb.Web.Controllers
         private readonly IPropietarioService _propietarioService;
         private readonly IInmuebleService _inmuebleService;
         private readonly ITipoInmuebleService _tipoInmuebleService;
+        private readonly IZonaService _zonaService;
+        private readonly IEstadosInmuebleService _estadosInmuebleService;
         private readonly IServiciosInmuebleService _serviciosInmuebleService;
 
-        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService)
+        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IEstadosInmuebleService estadosInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService)
         {
             _inmuebleService = inmuebleService;
             _tipoInmuebleService = tipoInmuebleService;
+            _zonaService = zonaService;
+            _estadosInmuebleService = estadosInmuebleService;
             _serviciosInmuebleService = serviciosInmuebleService;
             _propietarioService = propietarioService;
         }
@@ -40,6 +44,8 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> RegistrarInmuebleAsync()
         {
             ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoInmuebleId", "NombreTipoInm");
+            ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObtenerEstadosInm(), "IdEstadoInm", "NombreEstado");
+            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerZonas(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View();
         }
@@ -58,6 +64,8 @@ namespace CristalImb.Web.Controllers
         public async Task<IActionResult> EditarInmueble(int id = 0)
         {
             ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoInmuebleId", "NombreTipoInm");
+            ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObtenerEstadosInm(), "IdEstadoInm", "NombreEstado");
+            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerZonas(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }

@@ -89,34 +89,32 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        public async Task<IActionResult> DetallesEstadosInm(int? id)
-        {
-            if (id != null)
-            {
-                return View(await _estadosInmuebleService.ObtenerEstadosInmId(id.Value));
-            }
-
-            TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Hubo un error realizando la operación";
-            return RedirectToAction("IndexEstadosInm");
-        }
-
         [HttpPost]
-        public async Task<IActionResult> EliminarEstadoInm(int id)
+        public async Task<IActionResult> ActualizarEstado(int? id)
         {
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexTipoInmuebles");
+            }
+            EstadosInmueble estadosInmueble = await _estadosInmuebleService.ObtenerEstadosInmId(id.Value);
             try
             {
-                TempData["Accion"] = "Confirmación";
-                await _estadosInmuebleService.EliminarEstadoInm(id);
-                return RedirectToAction(nameof(IndexEstadosInm));
+                if (estadosInmueble.Estado == true)
+                    estadosInmueble.Estado = false;
+                else if (estadosInmueble.Estado == false)
+                    estadosInmueble.Estado = true;
+
+                await _estadosInmuebleService.EditarEstadoInm(estadosInmueble);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexEstadosInm");
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Hubo un error realizando la operación";
                 return RedirectToAction("IndexEstadosInm");
             }
-
         }
     }
 }

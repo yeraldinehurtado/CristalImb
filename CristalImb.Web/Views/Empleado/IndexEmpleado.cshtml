@@ -48,10 +48,11 @@
                                     @Html.DisplayNameFor(model => model.Telefono)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Direccion)
+                                    @Html.DisplayNameFor(model => model.Email)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Cargo)
+                                    @Html.DisplayNameFor(model => model.Direccion)
+                                </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
@@ -74,19 +75,37 @@
                                     @Html.DisplayFor(modelx => x.Telefono)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelx => x.Email)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.Cargo)
+                                    @if (x.Estado == true)
+                                    {
+                                        <p>Activo</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Desactivo</p>
+                                    }
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.Estado)
+                                    @if (x.Estado == true)
+                                    {
+                                        <form asp-action="ActualizarEstado" asp-route-id="@x.EmpleadoId">
+                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                        </form>
+                                    }
+                                    else if (x.Estado == false)
+                                    {
+                                        <form asp-action="ActualizarEstado" asp-route-id="@x.EmpleadoId">
+                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                        </form>
+                                    }
                                 </td>
                                 <td>
                                     <a asp-action="EditarEmpleado" asp-route-id="@x.EmpleadoId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                    <form asp-action="EliminarEmpleado" asp-route-id="@x.EmpleadoId" class="d-inline">
-                                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                    </form>
                                 </td>
                             </tr>
                             }

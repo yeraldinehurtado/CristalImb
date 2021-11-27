@@ -384,3 +384,7 @@ FodyWeavers.xsd
 /DAL/Migrations/20211123160835_cambioEmpleado2.Designer.cs
 /DAL/Migrations/20211126230242_cambioUsuarios.cs
 /DAL/Migrations/20211126230242_cambioUsuarios.Designer.cs
+/DAL/Migrations/20211127030959_inicial.cs
+/DAL/Migrations/20211127030959_inicial.Designer.cs
+/DAL/Migrations/20211127032215_cambioZona.cs
+/DAL/Migrations/20211127032215_cambioZona.Designer.cs

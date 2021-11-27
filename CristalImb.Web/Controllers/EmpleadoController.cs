@@ -47,7 +47,6 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarEmpleado(int id = 0)
         {
-            ViewData["ListaCargos"] = new SelectList(await _cargoService.ObtenerCargos(), "CargoId", "Nombre");
             return View(await _empleadoService.ObtenerEmpleadoId(id));
         }
 
@@ -91,34 +90,34 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        public async Task<IActionResult> DetallesEmpleados(int? id)
-        {
-            if (id != null)
-            {
-                return View(await _empleadoService.ObtenerEmpleadoId(id.Value));
-            }
-
-            TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Hubo un error realizando la operación";
-            return RedirectToAction("IndexEmpleado");
-        }
-
         [HttpPost]
-        public async Task<IActionResult> EliminarEmpleado(int id)
+        public async Task<IActionResult> ActualizarEstado(int? id)
         {
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexTipoInmuebles");
+            }
+            Empleado empleado = await _empleadoService.ObtenerEmpleadoId(id.Value);
             try
             {
-                TempData["Accion"] = "Confirmación";
-                await _empleadoService.EliminarEmpleado(id);
-                return RedirectToAction(nameof(IndexEmpleado));
+                if (empleado.Estado == true)
+                    empleado.Estado = false;
+                else if (empleado.Estado == false)
+                    empleado.Estado = true;
+
+                await _empleadoService.EditarEmpleado(empleado);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editardo correctamente";
+                return RedirectToAction("IndexEmpleado");
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Hubo un error realizando la operación";
                 return RedirectToAction("IndexEmpleado");
             }
-
         }
+
     }
 }
+

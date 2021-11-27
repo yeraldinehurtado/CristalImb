@@ -21,6 +21,10 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "El tipo es obligatorio")]
         public int TipoId { get; set; }
 
+        [Required(ErrorMessage = "El estado de inmueble es obligatorio")]
+        public int IdEstadoInm { get; set; }
+        public int ZonaId { get; set; }
+
         [Required(ErrorMessage = "El servicio es obligatorio")]
         public int ServicioInmuebleId { get; set; }
 
@@ -30,9 +34,7 @@ namespace CristalImb.Model.Entities
         [DisplayName("Área")]
         [Required(ErrorMessage = "El area es obligatorio")]
         public string Area { get; set; }
-
-        [Required(ErrorMessage = "La zona es obligatoria")]
-        public string Zona { get; set; }
+        [Required(ErrorMessage = "la zona es obligatoria")]
 
         public bool oferta { get; set; }
 
@@ -40,8 +42,9 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "El estado es obligatorio")]
         public bool Estado { get; set; }
 
+        public virtual EstadosInmueble EstadosInmueble { get; set; }
         public virtual TipoInmuebles TipoInmuebles { get; set; }
-        public virtual Zona zona { get; set; }
+        public virtual Zona Zona { get; set; }
         public virtual List<InmPropietarios> InmPropietario { get; set; }
     }
 }

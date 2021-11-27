@@ -26,8 +26,10 @@
                 </div>
 
                 <input type="submit" class="btn btn-outline-primary btn-block" value="Asignar" />
-                <a asp-action="Index" class="btn btn-outline-danger btn-block">Cancelar</a>
+                <a asp-action="IndexRol" class="btn btn-outline-danger btn-block">Cancelar</a>
             </form>
         </div>
     </div>
 </div>
+
+return RedirectToAction("IndexUsuarios", "Usuarios");

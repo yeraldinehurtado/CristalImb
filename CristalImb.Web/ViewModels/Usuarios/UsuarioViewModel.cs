@@ -21,11 +21,22 @@ namespace CristalImb.Web.ViewModels.Usuarios
         [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }
 
-        [DisplayName("Contraseña")]
         [Required(ErrorMessage = "La contraseña es requerida")]
-        [StringLength(16, ErrorMessage = "El {0} debe tener al menos {2} y maximo {1} caracteres.", MinimumLength = 4)]
+        [Display(Name = "Contraseña", Order = -9,
+        Prompt = "Ingrese la contraseña", Description = "Contraseña")]
+        [DataType(DataType.Password)]
+        [StringLength(20, ErrorMessage = "La contraseña debe tener al menos {2} y maximo {1} caracteres.", MinimumLength = 4)]
         public string Password { get; set; }
 
-        
+        [Required(ErrorMessage = "La confirmación de contraseña es requerida")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirmar contraseña", Order = -9,
+        Prompt = "Confirme la contraseña", Description = "Confirme la contraseña")]
+        [Compare("Password",
+            ErrorMessage = "El Password y confirmar password debe coincidir")]
+        public string ConfirmarPassword { get; set; }
+
+
+
     }
 }
