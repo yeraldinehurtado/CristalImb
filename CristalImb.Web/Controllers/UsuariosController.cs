@@ -129,6 +129,7 @@ namespace CristalImb.Web.Controllers
         }
 
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
@@ -138,6 +139,9 @@ namespace CristalImb.Web.Controllers
 
                 if (result.Succeeded)
                 {
+                    var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);
+
+                    _httpContextAccessor.HttpContext.Session.SetString(SesionNombre, usuario.Email);
                     return RedirectToAction("Dashboard", "Admin");
                 }
 
