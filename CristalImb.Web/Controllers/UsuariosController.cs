@@ -139,9 +139,6 @@ namespace CristalImb.Web.Controllers
 
                 if (result.Succeeded)
                 {
-                    var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);
-
-                    _httpContextAccessor.HttpContext.Session.SetString(SesionNombre, usuario.Email);
                     return RedirectToAction("Dashboard", "Admin");
                 }
 
