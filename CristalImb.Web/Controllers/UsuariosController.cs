@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Admin, Administrador")]
+    [Authorize(Roles = "Administrador")]
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;

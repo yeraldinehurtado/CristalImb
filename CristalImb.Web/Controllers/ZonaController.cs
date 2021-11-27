@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Admin, Administrador, Empleado")]
+    [Authorize]
     public class ZonaController : Controller
     {
         private readonly IZonaService _zonaService;
