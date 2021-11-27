@@ -1,5 +1,6 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
+    [Authorize(Roles = "Admin, Administrador, Empleado")]
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;
@@ -28,7 +30,8 @@ namespace CristalImb.Web.Controllers
             var listCita = await _citaService.ObtenerCita();
             return View(await _citaService.ObtenerCita());
         }
-
+        
+        [Authorize(Roles = "Cliente")]
         [HttpGet]
         public async Task<IActionResult> RegistrarCitaAsync()
         {
@@ -37,6 +40,7 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Cliente")]
         [HttpPost]
         public async Task<IActionResult> RegistrarCita(Cita cita)
         {

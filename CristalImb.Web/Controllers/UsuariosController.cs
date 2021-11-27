@@ -2,6 +2,7 @@
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.Roles;
 using CristalImb.Web.ViewModels.Usuarios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
+    [Authorize(Roles = "Admin, Administrador, Empleado")]
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;

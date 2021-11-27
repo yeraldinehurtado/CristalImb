@@ -1,5 +1,6 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
+    [Authorize(Roles = "Admin, Administrador, Empleado")]
     public class ZonaController : Controller
     {
         private readonly IZonaService _zonaService;

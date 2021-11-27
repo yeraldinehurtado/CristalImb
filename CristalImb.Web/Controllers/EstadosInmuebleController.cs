@@ -1,6 +1,7 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
+    [Authorize(Roles = "Admin, Administrador, Empleado")]
     public class EstadosInmuebleController : Controller
     {
         private readonly IEstadosInmuebleService _estadosInmuebleService;
