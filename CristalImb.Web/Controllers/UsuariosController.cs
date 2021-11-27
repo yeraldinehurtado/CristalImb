@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Admin, Administrador, Empleado")]
+    [Authorize(Roles = "Admin, Administrador")]
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
@@ -121,12 +121,14 @@ namespace CristalImb.Web.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View(); 
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
@@ -146,13 +148,13 @@ namespace CristalImb.Web.Controllers
                 return View(loginViewModel);
             }
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult OlvidePassword()
         {
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> OlvidePassword(OlvidePasswordDto olvidePasswordDto)
         {
@@ -195,7 +197,7 @@ namespace CristalImb.Web.Controllers
 
 
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult ResetearPassword(string token, string email)
         {
@@ -205,7 +207,7 @@ namespace CristalImb.Web.Controllers
             }
             return View();
         }
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> ResetearPassword(ResetearPasswordDto resetearPasswordDto)
         {
