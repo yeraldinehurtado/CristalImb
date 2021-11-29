@@ -13,7 +13,6 @@ namespace CristalImb.Model.Entities
         public Rol(string Name) : base(Name)
         {
         }
-
         [DisplayName("Módulo")]
         public string Modulo { get; set; }
 
