@@ -108,7 +108,7 @@ namespace CristalImb.Web.Controllers
 
                 await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
                 TempData["Accion"] = "EditarEstado";
-                TempData["Mensaje"] = "Estado editardo correctamente";
+                TempData["Mensaje"] = "Estado editado correctamente";
                 return RedirectToAction("IndexTipoInmuebles");
             }
             catch (Exception)

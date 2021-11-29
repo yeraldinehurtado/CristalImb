@@ -53,9 +53,6 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EstadoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -68,9 +65,6 @@ namespace CristalImb.Model.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServicioInmuebleId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
@@ -118,44 +112,20 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.EstadoCita", b =>
                 {
-                    b.Property<int>("EstadoId")
+                    b.Property<int>("EstadoCitaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("EstadoId");
+                    b.HasKey("EstadoCitaId");
 
-                    b.ToTable("estados");
-
-                    b.HasData(
-                        new
-                        {
-                            EstadoId = 1,
-                            Nombre = "Por confirmar"
-                        },
-                        new
-                        {
-                            EstadoId = 2,
-                            Nombre = "Confirmado"
-                        },
-                        new
-                        {
-                            EstadoId = 3,
-                            Nombre = "Ejecutado"
-                        },
-                        new
-                        {
-                            EstadoId = 4,
-                            Nombre = "Cerrado"
-                        },
-                        new
-                        {
-                            EstadoId = 5,
-                            Nombre = "Cancelado"
-                        });
+                    b.ToTable("estadoCita");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
@@ -308,24 +278,15 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ServicioInmuebleId");
 
                     b.ToTable("serviciosInmueble");
-
-                    b.HasData(
-                        new
-                        {
-                            ServicioInmuebleId = 1,
-                            Nombre = "Venta"
-                        },
-                        new
-                        {
-                            ServicioInmuebleId = 2,
-                            Nombre = "Arriendo"
-                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.TipoInmuebles", b =>

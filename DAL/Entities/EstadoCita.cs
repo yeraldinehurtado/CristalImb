@@ -10,7 +10,8 @@ namespace CristalImb.Model.Entities
     public class EstadoCita
     {
         [Key]
-        public int EstadoId { get; set; }
+        public int EstadoCitaId { get; set; }
         public string Nombre { get; set; }
+        public bool Estado { get; set; }
     }
 }

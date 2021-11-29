@@ -10,5 +10,8 @@ namespace CristalImb.Business.Abstract
     public interface IEstadoCitaService
     {
         Task<IEnumerable<EstadoCita>> ObtenerCitas();
+        Task GuardarEstadoCita(EstadoCita estadoCita);
+        Task<EstadoCita> ObtenerEstadoCitaId(int id);
+        Task EditarEstadoCita(EstadoCita estadoCita);
     }
 }

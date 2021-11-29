@@ -1,0 +1,126 @@
+﻿@model IEnumerable<CristalImb.Model.Entities.EstadoCita>
+
+@{
+    ViewData["Title"] = "IndexEstadoCita";
+}
+
+@section Styles{
+    <style>
+        .contenido {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        tr td {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #08006f;
+        }
+    </style>
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="m-0 row justify-content-center align-items-baseline">
+            <div class="contenido">
+                <div class="botonCrear col-12 p-3 text-center accent-teal">
+                    <br />
+                    <p>
+                        <a onclick="mostrarModal('@Url.Action("RegistrarEstadoCita","EstadoCita", "null", Context.Request.Scheme)', 'Registrar estado de cita')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar estado de cita.</a>
+                    </p>
+                    <br />
+                </div>
+                <div>
+                    <table class="table table-striped table-bordered col-12" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Estado)
+                                </th>
+                                <th> </th>
+                                <th> </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelx => x.Nombre)
+                                </td>
+                                <td>
+                                    @if (x.Estado == true)
+                                    {
+                                        <p>Activo</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Desactivo</p>
+                                    }
+                                </td>
+                                <td>
+                                    @if (x.Estado == true)
+                                    {
+                                        <form asp-action="ActualizarEstado" asp-route-id="@x.EstadoCitaId">
+                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                        </form>
+                                    }
+                                    else if (x.Estado == false)
+                                    {
+                                        <form asp-action="ActualizarEstado" asp-route-id="@x.EstadoCitaId">
+                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                        </form>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="EditarEstadoCita" asp-route-id="@x.EstadoCitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/Tabla.js"></script>
+    <script src="~/js/modal.js"></script>
+
+    <script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarEstadoCita")) {
+        <text>
+        Swal.fire({
+        title: "Guardar estado cita",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarEstadoCita")) {
+        <text>
+        Swal.fire({
+        title: "Editar estado cita",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+        <text>
+        Swal.fire({
+        title: "Error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+    </script>
+}

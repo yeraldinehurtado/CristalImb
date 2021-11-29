@@ -1,0 +1,33 @@
+﻿@model CristalImb.Model.Entities.ServiciosInmueble
+
+@{
+    ViewData["Title"] = "RegistrarServiciosInmueble";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="registrar">
+            <form asp-action="RegistrarServiciosInmueble">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Registrar" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a asp-action="IndexServiciosInmueble">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

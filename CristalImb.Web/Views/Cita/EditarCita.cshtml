@@ -53,11 +53,6 @@
                         <span asp-validation-for="Direccion" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ServicioInmuebleId" class="control-label"></label>
-                        <select asp-items="ViewBag.ListaServicios" asp-for="ServicioInmuebleId" class="form-control"></select>
-                        <span asp-validation-for="ServicioInmuebleId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
                         <label asp-for="Fecha" class="control-label"></label>
                         <input asp-for="Fecha" class="form-control" />
                         <span asp-validation-for="Fecha" class="text-danger"></span>
@@ -66,11 +61,6 @@
                         <label asp-for="Hora" class="control-label"></label>
                         <input asp-for="Hora" class="form-control" />
                         <span asp-validation-for="Hora" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EstadoId" class="control-label"></label>
-                        <select asp-items="ViewBag.ListaEstados" asp-for="EstadoId" class="form-control"></select>
-                        <span asp-validation-for="EstadoId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-primary" />

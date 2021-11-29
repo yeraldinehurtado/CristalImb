@@ -19,7 +19,25 @@ namespace CristalImb.Business.Business
 
         public async Task<IEnumerable<EstadoCita>> ObtenerCitas()
         {
-            return await _context.estados.ToListAsync();
+            return await _context.estadoCita.ToListAsync();
+        }
+        public async Task GuardarEstadoCita(EstadoCita estadoCita)
+        {
+            _context.Add(estadoCita);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<EstadoCita> ObtenerEstadoCitaId(int id)
+        {
+            return await _context.estadoCita.FirstOrDefaultAsync(x => x.EstadoCitaId == id);
+        }
+
+        public async Task EditarEstadoCita(EstadoCita estadoCita)
+        {
+            _context.Update(estadoCita);
+            await _context.SaveChangesAsync();
         }
     }
 }
+    
+

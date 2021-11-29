@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Admin, Administrador, Empleado")]
+    
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;
@@ -31,16 +31,15 @@ namespace CristalImb.Web.Controllers
             return View(await _citaService.ObtenerCita());
         }
         
-        [Authorize(Roles = "Cliente")]
+        
         [HttpGet]
         public async Task<IActionResult> RegistrarCitaAsync()
         {
-            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
-            ViewData["ListaEstados"] = new SelectList(await _estadoCitaService.ObtenerCitas(), "EstadoId", "Nombre");
+           
             return View();
         }
 
-        [Authorize(Roles = "Cliente")]
+        
         [HttpPost]
         public async Task<IActionResult> RegistrarCita(Cita cita)
         {
