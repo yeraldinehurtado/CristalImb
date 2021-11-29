@@ -105,6 +105,7 @@ namespace CristalImb.Web.Controllers
             Rol rol = await _rolService.ObtenerRolPorId(id);
             try
             {
+
                 if (rol.Estado == true)
                     rol.Estado = false;
                 else if (rol.Estado == false)
