@@ -93,7 +93,8 @@ namespace CristalImb.Web.Controllers
             }
         }
 
-        public async Task<IActionResult> ActualizarEstado(string id)
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(string? id)
         {
             if (id == null)
             {
@@ -111,13 +112,11 @@ namespace CristalImb.Web.Controllers
 
                 await _rolService.EditarRol(rol);
                 TempData["Accion"] = "EditarEstado";
-                TempData["Mensaje"] = "Estado editado correctamente";
+                TempData["Mensaje"] = "Estado editardo correctamente";
                 return RedirectToAction("IndexRol");
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Ingresaste un valor inválido";
                 return RedirectToAction("IndexRol");
             }
         }
