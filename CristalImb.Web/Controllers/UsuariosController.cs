@@ -135,20 +135,24 @@ namespace CristalImb.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RecordarMe, false);
+                var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);
+                var rol = await _userManager.GetRolesAsync(usuario);
 
-                if (result.Succeeded)
+                if (rol.Contains("Administrador") || rol.Contains("Empleado"))
                 {
                     return RedirectToAction("Dashboard", "Admin");
                 }
-
-                return View();
+                else if (rol.Contains("Cliente"))
+                {
+                    return RedirectToAction("RegistrarCita", "Cita");
+                }
+                return RedirectToAction("Dashboard", "Admin");
             }
-            else
-            {
-                return View(loginViewModel);
-            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Correo o contraseña incorrecto";
+            return View();
         }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult OlvidePassword()

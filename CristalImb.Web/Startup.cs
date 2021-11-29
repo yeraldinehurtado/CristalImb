@@ -38,6 +38,7 @@ namespace CristalImb.Web
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(conexion));
 
+            services.AddScoped<IRolService, RolService>();
             services.AddScoped<IPropietarioService, PropietarioService>();
 
             services.AddScoped<IInmuebleService, InmuebleService>();

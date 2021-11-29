@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    
+    [Authorize]
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;

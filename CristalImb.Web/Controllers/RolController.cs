@@ -1,4 +1,5 @@
-﻿using CristalImb.Model.Entities;
+﻿using CristalImb.Business.Abstract;
+using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,18 +14,19 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Administrador")]
     public class RolController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
         private readonly SignInManager<UsuarioIdentity> _signInManager;
         private readonly RoleManager<Rol> _roleManager;
+        private readonly IRolService _rolService;
 
-        public RolController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, RoleManager<Rol> roleManager)
+        public RolController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, RoleManager<Rol> roleManager, IRolService rolService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _rolService = rolService;
         }
         public async Task<IActionResult> IndexRol()
         {
@@ -91,37 +93,34 @@ namespace CristalImb.Web.Controllers
             }
         }
 
-
         [HttpPost]
-        public async Task<IActionResult> ActualizarEstado(string? rol, Rol rol1)
+        public async Task<IActionResult> ActualizarEstado(string? id)
         {
-            if (rol == null)
+            if (id == null)
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Error";
                 return RedirectToAction("IndexRol");
             }
-            await _roleManager.FindByNameAsync(rol);
+            Rol rol = await _rolService.ObtenerRolPorId(id);
             try
             {
-                if (rol1.Estado == true)
-                    rol1.Estado = false;
-                else if (rol1.Estado == false)
-                    rol1.Estado = true;
 
-                await _roleManager.UpdateAsync(rol1);
+                if (rol.Estado == true)
+                    rol.Estado = false;
+                else if (rol.Estado == false)
+                    rol.Estado = true;
+
+                await _rolService.EditarRol(rol);
                 TempData["Accion"] = "EditarEstado";
                 TempData["Mensaje"] = "Estado editardo correctamente";
                 return RedirectToAction("IndexRol");
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
                 return RedirectToAction("IndexRol");
             }
         }
-
         [HttpGet]
         public async Task<IActionResult> AsignarRolesUsuario()
         {
