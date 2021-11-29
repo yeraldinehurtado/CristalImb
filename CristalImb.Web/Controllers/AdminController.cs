@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize]
     public class AdminController : Controller
     {
         public IActionResult Index()
