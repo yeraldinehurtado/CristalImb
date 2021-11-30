@@ -21,6 +21,10 @@ namespace CristalImb.Business.Business
         {
             return await _context.estadosInmueble.ToListAsync();
         }
+        public async Task<IEnumerable<EstadosInmueble>> ObteneEstadosInmueblesEstado()
+        {
+            return await _context.estadosInmueble.Where(s => s.Estado == true).ToListAsync();
+        }
 
         public async Task GuardarEstadoInm(EstadosInmueble estadosInmueble)
         {

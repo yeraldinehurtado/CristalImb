@@ -21,6 +21,10 @@ namespace CristalImb.Business.Business
         {
             return await _context.estadoCita.ToListAsync();
         }
+        public async Task<IEnumerable<EstadoCita>> ObtenerEstadosCitaEstado()
+        {
+            return await _context.estadoCita.Where(s => s.Estado == true).ToListAsync();
+        }
         public async Task GuardarEstadoCita(EstadoCita estadoCita)
         {
             _context.Add(estadoCita);

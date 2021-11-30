@@ -18,5 +18,6 @@ namespace CristalImb.Model.Entities
         public string NombreTipoInm { get; set; }
         public bool Estado { get; set; }
         public virtual List<Inmueble> Inmuebles { get; set; }
+
     }
 }

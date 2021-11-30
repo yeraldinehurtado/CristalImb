@@ -10,6 +10,7 @@ namespace CristalImb.Business.Abstract
     public interface IServiciosInmuebleService
     {
         Task<IEnumerable<ServiciosInmueble>> ObtenerServicios();
+        Task<IEnumerable<ServiciosInmueble>> ObtenerListaServiciosEstado();
         Task GuardarServiciosInmueble(ServiciosInmueble serviciosInmueble);
         Task<ServiciosInmueble> ObtenerServiciosInmuebleId(int id);
         Task EditarServiciosInmueble(ServiciosInmueble serviciosInmueble);

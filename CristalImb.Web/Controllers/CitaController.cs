@@ -10,18 +10,20 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize]
+   
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;
         private readonly IServiciosInmuebleService _serviciosInmuebleService;
         private readonly IEstadoCitaService _estadoCitaService;
+        private readonly IInmuebleService _inmuebleService;
 
-        public CitaController(ICitaService citaService, IServiciosInmuebleService serviciosInmuebleService, IEstadoCitaService estadoCitaService)
+        public CitaController(ICitaService citaService, IServiciosInmuebleService serviciosInmuebleService, IEstadoCitaService estadoCitaService, IInmuebleService inmuebleService)
         {
             _citaService = citaService;
             _serviciosInmuebleService = serviciosInmuebleService;
             _estadoCitaService = estadoCitaService;
+            _inmuebleService = inmuebleService;
         }
 
         [HttpGet]
@@ -35,7 +37,10 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RegistrarCitaAsync()
         {
-           
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
+            ViewData["ListaInmuebles"] = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Codigo");
+            ViewData["ListaEstados"] = new SelectList(await _estadoCitaService.ObtenerEstadosCitaEstado(), "EstadoCitaId", "Nombre");
+
             return View();
         }
 
@@ -53,7 +58,9 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarCita(int id = 0)
         {
-            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerServicios(), "ServicioInmuebleId", "Nombre");
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
+            ViewData["ListaInmuebles"] = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Codigo");
+            ViewData["ListaEstados"] = new SelectList(await _estadoCitaService.ObtenerEstadosCitaEstado(), "EstadoCitaId", "Nombre");
             return View(await _citaService.ObtenerCitaId(id));
         }
 

@@ -104,8 +104,8 @@ namespace CristalImb.Web.Controllers
 
         public async Task<IActionResult> SeleccionarInmuebles()
         {
-            var selectInmuebles = await _inmuebleService.ObtenerInmueble();
-            return View(await _inmuebleService.ObtenerInmueble());
+            var selectInmuebles = await _inmuebleService.ObtenerListaInmueblesEstado();
+            return View(await _inmuebleService.ObtenerListaInmueblesEstado());
         }
 
         [HttpPost]
@@ -140,7 +140,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CrearInmPropietarios(int id)
         {
-            ViewBag.ListarInmueble = new SelectList(await _inmuebleService.ObtenerInmueble(), "InmuebleId", "Codigo");
+            ViewBag.ListarInmueble = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Codigo");
             InmPropietariosViewModel inmProp = new()
             {
                 PropietarioId = id

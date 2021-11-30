@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
@@ -147,6 +147,8 @@ namespace CristalImb.Web.Controllers
                     return RedirectToAction("RegistrarCita", "Cita");
                 }
                 return RedirectToAction("Dashboard", "Admin");
+
+
             }
             TempData["Accion"] = "Error";
             TempData["Mensaje"] = "Correo o contraseña incorrecto";

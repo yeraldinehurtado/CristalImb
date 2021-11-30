@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize]
+    
     public class EstadosInmuebleController : Controller
     {
         private readonly IEstadosInmuebleService _estadosInmuebleService;

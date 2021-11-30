@@ -390,3 +390,9 @@ FodyWeavers.xsd
 /DAL/Migrations/20211127032215_cambioZona.Designer.cs
 /DAL/Migrations/20211128002458_inicial.cs
 /DAL/Migrations/20211128002458_inicial.Designer.cs
+/DAL/Migrations/20211129190144_inicial.cs
+/DAL/Migrations/20211129194529_cambiosCita.cs
+/DAL/Migrations/20211129190144_inicial.Designer.cs
+/DAL/Migrations/20211129194529_cambiosCita.Designer.cs
+/DAL/Migrations/20211130001346_cambioValor.Designer.cs
+/DAL/Migrations/20211130001346_cambioValor.cs

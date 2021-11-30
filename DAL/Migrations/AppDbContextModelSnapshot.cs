@@ -53,23 +53,38 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("EstadoCitaId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Hora")
+                    b.Property<DateTime>("FechaHora")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Identificacion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InmuebleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ServicioInmuebleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
 
+                    b.Property<int?>("serviciosInmuebleServicioInmuebleId")
+                        .HasColumnType("int");
+
                     b.HasKey("CitaId");
+
+                    b.HasIndex("EstadoCitaId");
+
+                    b.HasIndex("InmuebleId");
+
+                    b.HasIndex("serviciosInmuebleServicioInmuebleId");
 
                     b.ToTable("citas");
                 });
@@ -205,14 +220,17 @@ namespace CristalImb.Model.Migrations
                     b.Property<int>("ServicioInmuebleId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ServiciosInmuebleServicioInmuebleId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TipoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TipoInmueblesTipoInmuebleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Valor")
-                        .HasColumnType("int");
+                    b.Property<long>("Valor")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("ZonaId")
                         .HasColumnType("int");
@@ -223,6 +241,8 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("InmuebleId");
 
                     b.HasIndex("EstadosInmuebleIdEstadoInm");
+
+                    b.HasIndex("ServiciosInmuebleServicioInmuebleId");
 
                     b.HasIndex("TipoInmueblesTipoInmuebleId");
 
@@ -564,6 +584,31 @@ namespace CristalImb.Model.Migrations
                     b.HasDiscriminator().HasValue("UsuarioIdentity");
                 });
 
+            modelBuilder.Entity("CristalImb.Model.Entities.Cita", b =>
+                {
+                    b.HasOne("CristalImb.Model.Entities.EstadoCita", "estadoCita")
+                        .WithMany("citas")
+                        .HasForeignKey("EstadoCitaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CristalImb.Model.Entities.Inmueble", "inmuebles")
+                        .WithMany("citas")
+                        .HasForeignKey("InmuebleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "serviciosInmueble")
+                        .WithMany("citas")
+                        .HasForeignKey("serviciosInmuebleServicioInmuebleId");
+
+                    b.Navigation("estadoCita");
+
+                    b.Navigation("inmuebles");
+
+                    b.Navigation("serviciosInmueble");
+                });
+
             modelBuilder.Entity("CristalImb.Model.Entities.InmPropietarios", b =>
                 {
                     b.HasOne("CristalImb.Model.Entities.Inmueble", "Inmueble")
@@ -589,6 +634,10 @@ namespace CristalImb.Model.Migrations
                         .WithMany("Inmuebles")
                         .HasForeignKey("EstadosInmuebleIdEstadoInm");
 
+                    b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "ServiciosInmueble")
+                        .WithMany("Inmuebles")
+                        .HasForeignKey("ServiciosInmuebleServicioInmuebleId");
+
                     b.HasOne("CristalImb.Model.Entities.TipoInmuebles", "TipoInmuebles")
                         .WithMany("Inmuebles")
                         .HasForeignKey("TipoInmueblesTipoInmuebleId");
@@ -600,6 +649,8 @@ namespace CristalImb.Model.Migrations
                         .IsRequired();
 
                     b.Navigation("EstadosInmueble");
+
+                    b.Navigation("ServiciosInmueble");
 
                     b.Navigation("TipoInmuebles");
 
@@ -657,6 +708,11 @@ namespace CristalImb.Model.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CristalImb.Model.Entities.EstadoCita", b =>
+                {
+                    b.Navigation("citas");
+                });
+
             modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
                 {
                     b.Navigation("Inmuebles");
@@ -664,12 +720,21 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
                 {
+                    b.Navigation("citas");
+
                     b.Navigation("InmPropietario");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Propietario", b =>
                 {
                     b.Navigation("InmPropietario");
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.ServiciosInmueble", b =>
+                {
+                    b.Navigation("citas");
+
+                    b.Navigation("Inmuebles");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.TipoInmuebles", b =>

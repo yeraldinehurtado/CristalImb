@@ -11,6 +11,10 @@ namespace CristalImb.Model.Entities
     {
         [Key]
         public int CitaId { get; set; }
+        public int InmuebleId { get; set; }
+        public int ServicioInmuebleId { get; set; }
+        public int EstadoCitaId { get; set; }
+
 
         [DisplayName("Identificación")]
         [Required(ErrorMessage = "La identificación es obligatoria")]
@@ -35,10 +39,12 @@ namespace CristalImb.Model.Entities
         public string Direccion { get; set; }
 
         [Required(ErrorMessage = "La fecha de la cita es obligatoria")]
-        public DateTime Fecha { get; set; }
+        public DateTime FechaHora { get; set; }
 
-        [Required(ErrorMessage = "La hora de la cita es obligatoria")]
-        public DateTime Hora { get; set; }
+        public virtual Inmueble inmuebles { get; set; }
+        public virtual ServiciosInmueble serviciosInmueble { get; set; }
+        public virtual EstadoCita estadoCita { get; set; }
+
 
     }
 }

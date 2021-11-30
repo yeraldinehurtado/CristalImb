@@ -29,7 +29,7 @@ namespace CristalImb.Model.Entities
         public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
-        public int Valor { get; set; }
+        public long Valor { get; set; }
 
         [DisplayName("Área")]
         [Required(ErrorMessage = "El area es obligatorio")]
@@ -45,6 +45,8 @@ namespace CristalImb.Model.Entities
         public virtual EstadosInmueble EstadosInmueble { get; set; }
         public virtual TipoInmuebles TipoInmuebles { get; set; }
         public virtual Zona Zona { get; set; }
+        public virtual ServiciosInmueble ServiciosInmueble { get; set; }
         public virtual List<InmPropietarios> InmPropietario { get; set; }
+        public virtual List<Cita> citas { get; set; }
     }
 }
