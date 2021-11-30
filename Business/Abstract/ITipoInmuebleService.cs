@@ -10,6 +10,7 @@ namespace CristalImb.Business.Abstract
     public interface ITipoInmuebleService
     {
         Task<IEnumerable<TipoInmuebles>> ObtenerTipos();
+        Task<IEnumerable<TipoInmuebles>> ObtenerListaTiposEstado();
         Task GuardarTipoInmueble(TipoInmuebles tipoInmuebles);
         Task<TipoInmuebles> ObtenerTipoInmuebleId(int id);
         Task EditarTipoInmueble(TipoInmuebles tipoInmuebles);

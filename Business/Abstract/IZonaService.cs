@@ -10,6 +10,7 @@ namespace CristalImb.Business.Abstract
     public interface IZonaService
     {
         Task<IEnumerable<Zona>> ObtenerZonas();
+        Task<IEnumerable<Zona>> ObtenerListaZonaEstado();
         Task GuardarZona(Zona zona);
         Task<Zona> ObtenerZonaId(int id);
         Task EditarZona(Zona zona);

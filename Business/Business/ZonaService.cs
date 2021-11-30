@@ -23,6 +23,11 @@ namespace CristalImb.Business.Business
             return await _context.zonas.ToListAsync();
         }
 
+        public async Task<IEnumerable<Zona>> ObtenerListaZonaEstado()
+        {
+            return await _context.zonas.Where(s => s.Estado == true).ToListAsync();
+        }
+
         public async Task GuardarZona(Zona zona)
         {
             _context.Add(zona);
