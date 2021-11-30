@@ -396,3 +396,5 @@ FodyWeavers.xsd
 /DAL/Migrations/20211129194529_cambiosCita.Designer.cs
 /DAL/Migrations/20211130001346_cambioValor.Designer.cs
 /DAL/Migrations/20211130001346_cambioValor.cs
+/DAL/Migrations/20211130155321_inicial.cs
+/DAL/Migrations/20211130155321_inicial.Designer.cs
