@@ -62,7 +62,7 @@ namespace CristalImb.Web.Controllers
                     if (resultado.Succeeded)
                         return RedirectToAction("IndexUsuarios"); //guardar usuario
                     else
-                        return View(usuarioViewModel);
+                        return RedirectToAction("IndexUsuarios");
                 }
                 catch (Exception)
                 {
@@ -146,7 +146,6 @@ namespace CristalImb.Web.Controllers
                 {
                     return RedirectToAction("RegistrarCita", "Cita");
                 }
-                return RedirectToAction("Dashboard", "Admin");
 
 
             }

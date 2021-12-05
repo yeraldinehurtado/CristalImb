@@ -10,6 +10,8 @@ namespace CristalImb.Web.ViewModels.Usuarios
     public class UsuarioViewModel
     {
         [DisplayName("Identificación")]
+       // [Range(0, 11, ErrorMessage = "Ingresar máximo 10 digitos")]
+        [RegularExpression("^\\d+", ErrorMessage = "Documento incorrecto")]
         [Required(ErrorMessage = "La identificación es requerida")]
         public int Identificacion { get; set; }
 
