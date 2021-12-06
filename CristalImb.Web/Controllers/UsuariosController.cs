@@ -117,9 +117,9 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditarUsuario(string usuarioIdentity)
+        public async Task<IActionResult> EditarUsuario(string id)
         {
-            if (usuarioIdentity == null || usuarioIdentity == "")
+            if (id == null || id == "")
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Error";
@@ -127,7 +127,7 @@ namespace CristalImb.Web.Controllers
             }
             try
             {
-                return View(await _userManager.FindByNameAsync(usuarioIdentity));
+                return View(await _userManager.FindByNameAsync(id));
             }
             catch (Exception)
             {
@@ -138,15 +138,13 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditarUsuario(UsuarioIdentity usuarioIdentity)
+        public async Task<ActionResult> EditarUsuario(IdentityUser identityUser)
         {
             try
             {
-                var usuario = await _userManager.FindByIdAsync(usuarioIdentity.Id);
-                usuario.Identificacion = usuarioIdentity.Identificacion;
-                usuario.UserName = usuarioIdentity.UserName;
-                usuario.Email = usuarioIdentity.Email;
-                var result = await _userManager.UpdateAsync(usuario);
+                var user = await _userManager.FindByIdAsync(identityUser.Id);
+                user.Email = identityUser.Email;
+                var result = await _userManager.UpdateAsync(user);
                 if (!result.Succeeded)
                 {
                     TempData["Accion"] = "Error";
@@ -154,7 +152,7 @@ namespace CristalImb.Web.Controllers
                     return RedirectToAction("IndexUsuarios");
                 }
                 TempData["Accion"] = "Editar";
-                TempData["Mensaje"] = "usuario editado correctamente";
+                TempData["Mensaje"] = "Rol editado correctamente";
                 return RedirectToAction("IndexUsuarios");
             }
             catch (Exception)
