@@ -171,7 +171,7 @@ namespace CristalImb.Web.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return RedirectToAction("IndexUsuarios");
             }
             UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(Guid.Parse(id));
             if (usuarioIdentity == null)
