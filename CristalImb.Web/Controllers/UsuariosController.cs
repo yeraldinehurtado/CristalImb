@@ -277,8 +277,8 @@ namespace CristalImb.Web.Controllers
                     MailMessage mensaje = new();
                     mensaje.To.Add(olvidePasswordDto.Email);//destinatario
                     mensaje.Subject = "Cristalimb - recuperar contraseña";
-                    mensaje.Body = passwordResetLink;
-                    mensaje.IsBodyHtml = false;
+                    mensaje.Body = "Hola. <br><br> Hemos recibido una solicitud para restablecer tu contraseña en CristalImb. <br><br> Ingresa al siguiente link para restablecerla: " + passwordResetLink;
+                    mensaje.IsBodyHtml = true;
                     mensaje.From = new MailAddress("alejd066@gmail.com", "Notificaciones");
                     SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
                     smtpClient.Port = 587;
