@@ -1,4 +1,5 @@
 ﻿using CristalImb.Business.Dtos.Usuarios;
+using CristalImb.Business.Abstract;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.Roles;
 using CristalImb.Web.ViewModels.Usuarios;
@@ -21,17 +22,21 @@ namespace CristalImb.Web.Controllers
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
         private readonly SignInManager<UsuarioIdentity> _signInManager;
+        private readonly IUsuariosService _usuariosService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         const string SesionNombre = "_Nombre";
 
 
 
-        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IHttpContextAccessor httpContextAccessor)
+        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IUsuariosService usuariosService, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _usuariosService = usuariosService;
             _httpContextAccessor = httpContextAccessor;
         }
+
+
 
             public async Task<IActionResult> IndexUsuarios()
             {
@@ -39,6 +44,7 @@ namespace CristalImb.Web.Controllers
                 return View(listaUsers);
             }
 
+        [HttpGet]
         public IActionResult CrearUsuarios()
         {
             return View();
@@ -62,7 +68,7 @@ namespace CristalImb.Web.Controllers
                     if (resultado.Succeeded)
                         return RedirectToAction("IndexUsuarios"); //guardar usuario
                     else
-                        return View(usuarioViewModel);
+                        return RedirectToAction("IndexUsuarios");
                 }
                 catch (Exception)
                 {
@@ -74,6 +80,7 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Registrar()
         {
             return View();
@@ -109,9 +116,88 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
-
+        [HttpGet]
+        public async Task<IActionResult> EditarUsuario(string usuarioIdentity)
+        {
+            if (usuarioIdentity == null || usuarioIdentity == "")
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexUsuarios");
+            }
+            try
+            {
+                return View(await _userManager.FindByNameAsync(usuarioIdentity));
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ingresaste un valor inválido";
+                return RedirectToAction("IndexUsuarios");
+            }
+        }
 
         [HttpPost]
+        public async Task<ActionResult> EditarUsuario(UsuarioIdentity usuarioIdentity)
+        {
+            try
+            {
+                var usuario = await _userManager.FindByIdAsync(usuarioIdentity.Id);
+                usuario.Identificacion = usuarioIdentity.Identificacion;
+                usuario.UserName = usuarioIdentity.UserName;
+                usuario.Email = usuarioIdentity.Email;
+                var result = await _userManager.UpdateAsync(usuario);
+                if (!result.Succeeded)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Error";
+                    return RedirectToAction("IndexUsuarios");
+                }
+                TempData["Accion"] = "Editar";
+                TempData["Mensaje"] = "usuario editado correctamente";
+                return RedirectToAction("IndexUsuarios");
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ingresaste un valor inválido";
+                return RedirectToAction("IndexUsuarios");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+            UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(Guid.Parse(id));
+            if (usuarioIdentity == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                if (usuarioIdentity.Estado == true)
+                    usuarioIdentity.Estado = false;
+                else if (usuarioIdentity.Estado == false)
+                    usuarioIdentity.Estado = true;
+
+                await _usuariosService.EditarUsuario(usuarioIdentity);
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editado correctamente";
+                return RedirectToAction("IndexUsuarios");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("IndexUsuarios");
+            }
+
+        }
+
+
+            [HttpPost]
         public async Task<IActionResult> Eliminar(string id)
         {
             //buscamos el usuario

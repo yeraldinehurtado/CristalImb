@@ -11,7 +11,10 @@ namespace CristalImb.Web.ViewModels.Usuarios
     {
         [DisplayName("Identificación")]
         [Required(ErrorMessage = "La identificación es requerida")]
-        public int Identificacion { get; set; }
+        [StringLength(10, ErrorMessage = "Máximo 10 caracteres")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
+
+        public string Identificacion { get; set; }
 
         [DisplayName("Nombre de usuario")]
         [Required(ErrorMessage = "El nombre de usuario es requerido")]
@@ -20,6 +23,7 @@ namespace CristalImb.Web.ViewModels.Usuarios
         [Required(ErrorMessage = "El email es requerido")]
         [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }
+        public bool Estado { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]
         [Display(Name = "Contraseña", Order = -9,

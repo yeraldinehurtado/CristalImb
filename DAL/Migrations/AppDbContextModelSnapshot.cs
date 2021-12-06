@@ -140,7 +140,7 @@ namespace CristalImb.Model.Migrations
 
                     b.HasKey("EstadoCitaId");
 
-                    b.ToTable("estadoCita");
+                    b.ToTable("estadoCitas");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
@@ -575,11 +575,13 @@ namespace CristalImb.Model.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("Identificacion")
-                        .HasColumnType("int");
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
 
-                    b.Property<int>("Rol")
-                        .HasColumnType("int");
+                    b.Property<string>("Identificacion")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasDiscriminator().HasValue("UsuarioIdentity");
                 });

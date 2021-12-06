@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize]
     public class PropietarioController : Controller
     {
         private readonly IPropietarioService _propietarioService;

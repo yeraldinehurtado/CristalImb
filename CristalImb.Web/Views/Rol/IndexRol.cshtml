@@ -49,13 +49,13 @@
                             <td>
                                 @if (r.Estado == true)
                                 {
-                                    <form asp-action="ActualizarEstado" asp-route-id="@r.Name">
+                                    <form asp-action="ActualizarEstado" asp-route-id="@r.Id">
                                         <button type="submit"><i class="fas fa-toggle-on"></i></button>
                                     </form>
                                 }
                                 else if (r.Estado == false)
                                 {
-                                    <form asp-action="ActualizarEstado" asp-route-id="@r.Name">
+                                    <form asp-action="ActualizarEstado" asp-route-id="@r.Id">
                                         <button type="submit"><i class="fas fa-toggle-off"></i></button>
                                     </form>
                                 }

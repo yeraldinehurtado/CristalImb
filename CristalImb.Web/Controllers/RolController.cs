@@ -94,18 +94,19 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ActualizarEstado(string? id)
+        public async Task<IActionResult> ActualizarEstado(string id)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(id))
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
-                return RedirectToAction("IndexRol");
+                return NotFound();
             }
-            Rol rol = await _rolService.ObtenerRolPorId(id);
+            Rol rol = await _rolService.ObtenerRolId(Guid.Parse(id));
+            if (rol == null)
+            {
+                return NotFound();
+            }
             try
             {
-
                 if (rol.Estado == true)
                     rol.Estado = false;
                 else if (rol.Estado == false)
@@ -113,13 +114,14 @@ namespace CristalImb.Web.Controllers
 
                 await _rolService.EditarRol(rol);
                 TempData["Accion"] = "EditarEstado";
-                TempData["Mensaje"] = "Estado editardo correctamente";
+                TempData["Mensaje"] = "Estado editado correctamente";
                 return RedirectToAction("IndexRol");
             }
             catch (Exception)
             {
                 return RedirectToAction("IndexRol");
             }
+
         }
         [HttpGet]
         public async Task<IActionResult> AsignarRolesUsuario()

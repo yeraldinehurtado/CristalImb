@@ -36,7 +36,8 @@ namespace CristalImb.Model.DAL
         public DbSet<InmPropietarios> InmPropietarios { get; set; }
         public DbSet<Zona> zonas { get; set; }
         public DbSet<Cargo> cargos { get; set; }
-        public DbSet<EstadoCita> estadoCita { get; set; }
+        public DbSet<EstadoCita> estadoCitas { get; set; }
         public DbSet<EstadosInmueble> estadosInmueble { get; set; }
+        public DbSet<UsuarioIdentity> usuarioIdentity { get; set; }
     }
 }

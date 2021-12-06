@@ -63,7 +63,7 @@
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
                                 <th></th>
-                                <th> </th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -121,11 +121,6 @@
                                     </td>
                                     <td>
                                         <a asp-action="EditarInmueble" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                    <td>
-                                        <form asp-action="EliminarInmueble" asp-route-id="@x.InmuebleId" class="d-inline">
-                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
                                     </td>
                                 </tr>
                             }

@@ -9,36 +9,37 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Business.Business
 {
-    public class RolService : IRolService
+    public class UsuariosService:IUsuariosService
     {
 
         private readonly AppDbContext _context;
-        public RolService(AppDbContext context)
+        public UsuariosService(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Rol> ObtenerRolId(Guid id)
+        public async Task<UsuarioIdentity> ObtenerUsuarioId(Guid id)
         {
-            return await _context.roles.FirstOrDefaultAsync(x => x.Id == id.ToString());
+            return await _context.usuarioIdentity.FirstOrDefaultAsync(x => x.Id == id.ToString());
         }
 
-        public async Task EditarRol(Rol rol)
+        public async Task EditarUsuario(UsuarioIdentity usuarioIdentity)
         {
-            _context.Update(rol);
+            _context.Update(usuarioIdentity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task GuardarUsuario(Rol rol)
+        public async Task GuardarUsuario(UsuarioIdentity usuarioIdentity)
         {
-            _context.Add(rol);
+            _context.Add(usuarioIdentity);
             await _context.SaveChangesAsync();
         }
 
 
+        
 
-
-
+        
     }
 }
+    
 
