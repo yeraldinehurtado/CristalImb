@@ -21,13 +21,15 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
 </head>
-<body style="background-color: #73E1FF" class="hold-transition login-page">
+<body style="background-color: #B3FCFD " class="hold-transition login-page">>
     <div class="login-box">
-        <div class="login-logo">
-        </div>
-        <div class="card">
-            <div class="card-body login-card-body">
-                <p class="login-box-msg">Iniciar Sesión</p>
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a class="h1"><b>Cristal Inmobiliaria</b></a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Ingresa tus datos para iniciar sesión</p>
 
                 <form method="post" asp-action="Login">
                     <span asp-validation-for="Email" class="text-danger small"></span>
@@ -64,7 +66,7 @@
                         <br />
 
 
-                        
+
                         <hr />
                         <div>
                             <a asp-action="OlvidePassword">Olvidé mi contraseña</a>
@@ -73,15 +75,17 @@
                     <div asp-validation-summary="All" class="text-danger small"></div>
                 </form>
             </div>
+            <!-- /.card-body -->
         </div>
+        <!-- /.card -->
     </div>
-    <script src="~/plugins/jquery/jquery.min.js"></script>
-    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/adminlte.min.js"></script>
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
-</body>
+        <script src="~/plugins/jquery/jquery.min.js"></script>
+        <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/adminlte.min.js"></script>
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
+    </body>
 </html>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

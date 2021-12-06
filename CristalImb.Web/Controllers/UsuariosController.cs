@@ -207,37 +207,45 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        [AllowAnonymous]
+        
         [HttpGet]
         public IActionResult Login()
         {
             return View(); 
         }
 
-        [AllowAnonymous]
+        
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid)
             {
-                var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);
-                var rol = await _userManager.GetRolesAsync(usuario);
-
-                if (rol.Contains("Administrador") || rol.Contains("Empleado"))
+                var resultado = await _signInManager.PasswordSignInAsync(loginViewModel.Email, loginViewModel.Password, loginViewModel.RecordarMe, false);
+                if (resultado.Succeeded)
                 {
-                    return RedirectToAction("Dashboard", "Admin");
-                }
-                else if (rol.Contains("Cliente"))
-                {
-                    return RedirectToAction("RegistrarCita", "Cita");
-                }
+                    var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);
+                    var rol = await _userManager.GetRolesAsync(usuario);
+
+                    if (rol.Contains("Administrador") || rol.Contains("Empleado"))
+                    {
+                        return RedirectToAction("Dashboard", "Admin");
+                    }
+                    else if (rol.Contains("Cliente"))
+                    {
+                        return RedirectToAction("RegistrarCita", "Cita");
+                    }
 
 
+                }
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Correo o contraseña incorrecto";
+                return View();
             }
             TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Correo o contraseña incorrecto";
-            return View();
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
+            return View(loginViewModel);
+
         }
 
         [AllowAnonymous]
@@ -271,7 +279,7 @@ namespace CristalImb.Web.Controllers
                     mensaje.Subject = "CrudCristalimb recuperar password";
                     mensaje.Body = passwordResetLink;
                     mensaje.IsBodyHtml = false;
-                    mensaje.From = new MailAddress("alejd066@gmail.com", "Alejandro");
+                    mensaje.From = new MailAddress("alejd066@gmail.com", "Notificaciones");
                     SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
                     smtpClient.Port = 587;
                     smtpClient.UseDefaultCredentials = false;
