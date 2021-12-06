@@ -36,12 +36,6 @@
                         <thead class="bg-dark text-white">
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.InmuebleId)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ServicioInmuebleId)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.Identificacion)
                                 </th>
                                 <th>
@@ -51,19 +45,10 @@
                                     @Html.DisplayNameFor(model => model.Apellido)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Telefono)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.Correo)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Direccion)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.FechaHora)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EstadoCitaId)
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -75,12 +60,6 @@
                             {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.inmuebles.InmuebleId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.serviciosInmueble.ServicioInmuebleId)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelx => x.Identificacion)
                                 </td>
                                 <td>
@@ -90,22 +69,16 @@
                                     @Html.DisplayFor(modelx => x.Apellido)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.Telefono)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelx => x.Correo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelx => x.FechaHora)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.estadoCita.EstadoCitaId)
+                                    <a asp-action="DetallesCita" asp-route-id="@x.CitaId" class="btn btn-success">Detalle</a>
                                 </td>
                                 <td>
-                                    <a asp-action="EditarCita" asp-route-id="@x.CitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a> |
+                                    <a asp-action="EditarCita" asp-route-id="@x.CitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a> 
                                 </td>
                                 <td>
                                     <form asp-action="EliminarCita" asp-route-id="@x.CitaId" class="d-inline">
