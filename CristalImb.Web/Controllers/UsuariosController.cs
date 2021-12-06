@@ -152,7 +152,7 @@ namespace CristalImb.Web.Controllers
                     return RedirectToAction("IndexUsuarios");
                 }
                 TempData["Accion"] = "Editar";
-                TempData["Mensaje"] = "Rol editado correctamente";
+                TempData["Mensaje"] = "Usuario editado correctamente";
                 return RedirectToAction("IndexUsuarios");
             }
             catch (Exception)
