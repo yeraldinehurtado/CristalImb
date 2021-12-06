@@ -21,6 +21,8 @@ namespace CristalImb.Web.Controllers
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
+        private readonly RoleManager<Rol> _roleManager;
+        private readonly IRolService _rolService;
         private readonly SignInManager<UsuarioIdentity> _signInManager;
         private readonly IUsuariosService _usuariosService;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -28,11 +30,13 @@ namespace CristalImb.Web.Controllers
 
 
 
-        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IUsuariosService usuariosService, IHttpContextAccessor httpContextAccessor)
+        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IUsuariosService usuariosService, IHttpContextAccessor httpContextAccessor, RoleManager<Rol> roleManager, IRolService rolService)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
             _usuariosService = usuariosService;
+            _rolService = rolService;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -115,11 +119,10 @@ namespace CristalImb.Web.Controllers
             }
             return View();
         }
-
         [HttpGet]
-        public async Task<IActionResult> EditarUsuario(string usuarioIdentity)
+        public async Task<IActionResult> EditarUsuario(string id)
         {
-            if (usuarioIdentity == null || usuarioIdentity == "")
+            if (id == null || id == "")
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Error";
@@ -127,7 +130,7 @@ namespace CristalImb.Web.Controllers
             }
             try
             {
-                return View(await _userManager.FindByNameAsync(usuarioIdentity));
+                return View(await _userManager.FindByIdAsync(id));
             }
             catch (Exception)
             {
@@ -138,23 +141,21 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditarUsuario(UsuarioIdentity usuarioIdentity)
+        public async Task<ActionResult> EditarUsuario(UsuarioViewModel usuarioViewModel, IdentityUser identityUser, string id)
         {
             try
             {
-                var usuario = await _userManager.FindByIdAsync(usuarioIdentity.Id);
-                usuario.Identificacion = usuarioIdentity.Identificacion;
-                usuario.UserName = usuarioIdentity.UserName;
-                usuario.Email = usuarioIdentity.Email;
-                var result = await _userManager.UpdateAsync(usuario);
-                if (!result.Succeeded)
+                var user = await _usuariosService.ObtenerUsuarioId(Guid.Parse(id));
+                
+                UsuarioIdentity usuarioIdentity = new()
                 {
-                    TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Error";
-                    return RedirectToAction("IndexUsuarios");
-                }
+                    Identificacion = usuarioViewModel.Identificacion,
+                    UserName = usuarioViewModel.UserName,
+                    Email = usuarioViewModel.Email
+                };
+                await _usuariosService.EditarUsuario(usuarioIdentity);
                 TempData["Accion"] = "Editar";
-                TempData["Mensaje"] = "usuario editado correctamente";
+                TempData["Mensaje"] = "Usuario editado correctamente";
                 return RedirectToAction("IndexUsuarios");
             }
             catch (Exception)
@@ -170,7 +171,7 @@ namespace CristalImb.Web.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return RedirectToAction("IndexUsuarios");
             }
             UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(Guid.Parse(id));
             if (usuarioIdentity == null)
