@@ -16,7 +16,6 @@ namespace CristalImb.Model.DAL
         {
 
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

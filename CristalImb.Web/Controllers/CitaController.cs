@@ -106,6 +106,10 @@ namespace CristalImb.Web.Controllers
 
         public async Task<IActionResult> DetallesCita(int? id)
         {
+            var listCita = await _citaService.ObtenerCita();
+
+            var listaservice = await _serviciosInmuebleService.ObtenerServicios();
+
             if (id != null)
             {
                 return View(await _citaService.ObtenerCitaId(id.Value));

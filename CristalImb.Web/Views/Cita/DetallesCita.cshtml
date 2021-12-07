@@ -50,10 +50,10 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="CitaId" />
                     <div class="form-group">
-                        <label class="control-label">Código Inmueble: @Model.InmuebleId</label>
+                        <label class="control-label">Código Inmueble: @Model.inmuebles.Codigo</label>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Servicio inmueble: @Model.ServicioInmuebleId</label>
+                        <label class="control-label">Servicio inmueble: @Model.serviciosInmueble.Nombre</label>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Identificacion: @Model.Identificacion</label>
@@ -77,7 +77,7 @@
                         <label class="control-label">Fecha: @Model.FechaHora</label>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Estado Cita: @Model.EstadoCitaId</label>
+                        <label class="control-label">Estado Cita: @Model.estadoCita.Nombre</label>
                     </div>
                     <a asp-action="IndexCita">Volver</a>
                 </form>

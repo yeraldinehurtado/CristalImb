@@ -19,7 +19,7 @@ namespace CristalImb.Business.Business
 
         public async Task<IEnumerable<Cita>> ObtenerCita()
         {
-            return await _context.citas.ToListAsync();
+            return await _context.citas.Include(p => p.inmuebles).Include(c => c.serviciosInmueble).Include(f => f.estadoCita).ToListAsync();
         }
 
         public async Task GuardarCita(Cita cita)
@@ -31,6 +31,7 @@ namespace CristalImb.Business.Business
         public async Task<Cita> ObtenerCitaId(int id)
         {
             return await _context.citas.FirstOrDefaultAsync(x => x.CitaId == id);
+
         }
 
         public async Task EditarCita(Cita cita)
