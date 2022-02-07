@@ -236,6 +236,7 @@ namespace CristalImb.Web.Controllers
                     {
                         return RedirectToAction("RegistrarCita", "Cita");
                     }
+                    
 
 
                 }
