@@ -4780,7 +4780,7 @@ textarea.form-control-lg {
         z-index: 1000;
         flex-grow: 1;
         visibility: visible !important;
-        background-color: transparent;
+        background-color: #198754;
         border-right: 0;
         border-left: 0;
         transition: none;
@@ -11994,6 +11994,8 @@ p {
     #mainNav {
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
+        border: none;
+        background-color: #221E1D;
         transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
     }
 
@@ -12010,7 +12012,7 @@ p {
         #mainNav.navbar-shrink {
             padding-top: 1rem;
             padding-bottom: 1rem;
-            background-color: #212529;
+            background-color: #221E1D;
         }
 
             #mainNav.navbar-shrink .navbar-brand {
