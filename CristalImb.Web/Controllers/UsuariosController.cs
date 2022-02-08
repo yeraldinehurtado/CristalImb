@@ -236,7 +236,8 @@ namespace CristalImb.Web.Controllers
                     {
                         return RedirectToAction("RegistrarCita", "Cita");
                     }
-                    
+                    return RedirectToAction("Dashboard", "Admin");
+
 
 
                 }

@@ -601,7 +601,7 @@ namespace CristalImb.Model.Migrations
                         .IsRequired();
 
                     b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "serviciosInmueble")
-                        .WithMany("citas")
+                        .WithMany()
                         .HasForeignKey("serviciosInmuebleServicioInmuebleId");
 
                     b.Navigation("estadoCita");
@@ -734,8 +734,6 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.ServiciosInmueble", b =>
                 {
-                    b.Navigation("citas");
-
                     b.Navigation("Inmuebles");
                 });
 

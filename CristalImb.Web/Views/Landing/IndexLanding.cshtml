@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<CristalImb.Model.Entities.Inmueble>
+
+@{
     ViewData["Title"] = "Pagina inicio";
     Layout = "_Landing";
 }
@@ -18,45 +20,34 @@
         </div>
     </div>
 </header>
-<!-- Services-->
+
 <section class="page-section" id="services">
     <div class="card-header">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Inmuebles en oferta</h2>
-            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
 
+        @foreach (var x in Model){
+        <div asp-action="IndexLanding">
         <div class="row text-center">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="fa-stack fa-10x">
                     <img src="~/landing/img/1.jpg" width="300" height="250"></img>
                 </div>
-                <h4 class="my-3">Código: 0800</h4>
-                <p class="text-muted">Tipo: arriendo</p>
-                <p class="text-muted">Ahora: $1.000.000</p>
-                <p class="text-muted">Antes: $1.500.000</p>
-                <a href="#">Ver más información</a>
+                <div class="product__description">
+                <h3 class="product__title">@Html.DisplayFor(modelx => x.Codigo)</h3>
+                <span class="product__price">@Html.DisplayFor(modelx => x.Valor)</span>
             </div>
-            <div class="col-md-4">
-                <div class="fa-stack fa-10x">
-                    <img src="~/landing/img/2.jpg" width="300" height="250"></img>
-                </div>
-                <h4 class="my-3">Código: 1010</h4>
-                <p class="text-muted">Tipo: Venta</p>
-                <p class="text-muted">Ahora: $400.000.000</p>
-                <p class="text-muted">Antes: $700.000.000</p>
-                <a href="#">Ver más información</a>
             </div>
-            <div class="col-md-4">
-                <div class="fa-stack fa-10x">
-                    <img src="~/landing/img/3.jpg" width="300" height="250"></img>
-                </div>
-                <h4 class="my-3">Código 1120</h4>
-                <p class="text-muted">Tipo: Venta</p>
-                <p class="text-muted">Ahora: $100.000.000</p>
-                <p class="text-muted">Antes: $500.000.000</p>
-                <a href="#">Ver más información</a>
-            </div>
+           </div>
         </div>
+        }
     </div>
 </section>
+<!-- Services-->
+
+
+    
+    
+
+}
