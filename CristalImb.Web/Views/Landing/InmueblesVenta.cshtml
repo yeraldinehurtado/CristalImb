@@ -143,10 +143,11 @@
 
     </style>
 }
-
 @foreach (var x in Model)
 {
-    <section class="container-products">
+    if(x.ServicioInmuebleId == 1)
+    {
+        <section class="container-products">
         <div class="product">
             <img src="" alt="" class="product__img">
             <div class="product__description">
@@ -155,5 +156,7 @@
             </div>
         </div>
     </section>
+    }
+    
 
 }

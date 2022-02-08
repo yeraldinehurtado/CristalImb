@@ -23,9 +23,9 @@ namespace CristalImb.Web.Controllers
         }
 
         //landing inicio
-        public IActionResult IndexLanding()
+        public async Task<IActionResult> IndexLanding()
         {
-            return View();
+            return View(await _inmuebleService.ObtenerListaInmueblesOferta());
         }
 
         //landing inmuebles en venta
