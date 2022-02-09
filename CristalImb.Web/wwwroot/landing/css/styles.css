@@ -12482,3 +12482,7 @@ section#contact {
     justify-content: center;
     border-radius: 50px;
 }
+
+#contenedor{
+    display:inline-block!important;
+}
