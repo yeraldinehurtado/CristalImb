@@ -12486,3 +12486,13 @@ section#contact {
 #contenedor{
     display:inline-block!important;
 }
+
+.slick-dots {
+    position: absolute !important;
+    bottom: -25px !important;
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    list-style: none !important;
+    text-align: center !important;
+}
