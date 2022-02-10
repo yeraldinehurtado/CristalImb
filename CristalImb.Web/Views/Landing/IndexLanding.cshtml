@@ -20,6 +20,7 @@
                 <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" href="#">Tipo de inmueble</a></li>
                 <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" href="#">Zonas</a></li>
                 <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" href="#">Precios</a></li>
+
             </ul>
         </div>
     </div>
@@ -33,13 +34,13 @@
         <div class="row" id="oferta" asp-action="IndexLanding">
             @foreach (var x in Model)
             {
-                <div class="card box" style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
+                <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
                     <img class="card-img-top" src="~/landing/img/1.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - @Html.DisplayFor(modelx => x.Valor)</h5>
                         <p class="card-text text-center">@Html.DisplayFor(modelx => x.Descripcion)</p>
                     </div>
-                    </div>
+                </div>
             }
         </div>
        
