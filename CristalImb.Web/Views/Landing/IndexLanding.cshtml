@@ -30,23 +30,19 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
         </div>
-        <div class="row justify-content-center text-center" asp-action="IndexLanding">
-        @foreach (var x in Model){
-               <div class="col-lg-4 col-xl-4 col-md-4 col-sm-6 pb-2">
-                    <div class="col-md-12">
-                        <div class="fa-stack fa-10x">
-                            <img src="~/landing/img/1.jpg" width="300" height="250"></img>
-                        </div>
-                        <div class="product__description">
-                            <h3 class="product__title">@Html.DisplayFor(modelx => x.Codigo)</h3>
-                            <span class="product__price">@Html.DisplayFor(modelx => x.Valor)</span>
-                        </div>
+        <div class="row" id="oferta" asp-action="IndexLanding">
+            @foreach (var x in Model)
+            {
+                <div class="card box" style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #f8f9fa; border-bottom-width: 20px;">
+                    <img class="card-img-top" src="~/landing/img/1.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelx => x.Codigo) - @Html.DisplayFor(modelx => x.Valor)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelx => x.Descripcion)</p>
                     </div>
                 </div>
-        
-        <div class="gallery-controls"></div>
-        }
+            }
         </div>
+       
     </div>
 </section>
 <!-- Services-->
