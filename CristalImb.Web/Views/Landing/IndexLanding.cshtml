@@ -34,13 +34,13 @@
         <div class="row" id="oferta" asp-action="IndexLanding">
             @foreach (var x in Model)
             {
-                <div class="card box" style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #f8f9fa; border-bottom-width: 20px;">
+                <div class="card box" style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
                     <img class="card-img-top" src="~/landing/img/1.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelx => x.Codigo) - @Html.DisplayFor(modelx => x.Valor)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelx => x.Descripcion)</p>
+                        <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - @Html.DisplayFor(modelx => x.Valor)</h5>
+                        <p class="card-text text-center">@Html.DisplayFor(modelx => x.Descripcion)</p>
                     </div>
-                </div>
+                    </div>
             }
         </div>
     </div>
