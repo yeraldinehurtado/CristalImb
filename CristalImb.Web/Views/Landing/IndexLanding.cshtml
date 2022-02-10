@@ -27,11 +27,12 @@
 
 <section class="page-section" id="services">
     <div class="gallery">
-        <div class="card-header">
-        <div class="text-center">
-            <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
-        </div>
-        <div class="row" id="oferta" asp-action="IndexLanding">
+        <div class="gallery-container">
+            <div class="card-header">
+                <div class="text-center">
+                <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
+                </div>
+             <div class="row" id="oferta" asp-action="IndexLanding">
             @foreach (var x in Model)
             {
                 <div class="card box" style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
@@ -40,9 +41,11 @@
                         <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - @Html.DisplayFor(modelx => x.Valor)</h5>
                         <p class="card-text text-center">@Html.DisplayFor(modelx => x.Descripcion)</p>
                     </div>
-                    </div>
+                </div>
             }
+            </div>
         </div>
+        
     </div>
     
        
