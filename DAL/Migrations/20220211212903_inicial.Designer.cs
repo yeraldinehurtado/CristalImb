@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CristalImb.Model.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220207181742_inicial")]
+    [Migration("20220211212903_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,9 +277,6 @@ namespace CristalImb.Model.Migrations
 
                     b.Property<int>("Identificacion")
                         .HasColumnType("int");
-
-                    b.Property<string>("Inmuebles")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -603,7 +600,7 @@ namespace CristalImb.Model.Migrations
                         .IsRequired();
 
                     b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "serviciosInmueble")
-                        .WithMany("citas")
+                        .WithMany()
                         .HasForeignKey("serviciosInmuebleServicioInmuebleId");
 
                     b.Navigation("estadoCita");
@@ -736,8 +733,6 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.ServiciosInmueble", b =>
                 {
-                    b.Navigation("citas");
-
                     b.Navigation("Inmuebles");
                 });
 

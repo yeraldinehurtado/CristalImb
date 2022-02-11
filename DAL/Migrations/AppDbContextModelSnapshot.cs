@@ -276,9 +276,6 @@ namespace CristalImb.Model.Migrations
                     b.Property<int>("Identificacion")
                         .HasColumnType("int");
 
-                    b.Property<string>("Inmuebles")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
