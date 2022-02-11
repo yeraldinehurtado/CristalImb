@@ -32,6 +32,8 @@
             <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
         </div>
         <div class="row" id="oferta" asp-action="IndexLanding">
+                    <div class="gallery">
+    <div class="gallery-container">
             @foreach (var x in Model)
             {
                     <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
@@ -49,7 +51,10 @@
 
             <div class="gallery-controls"></div>
         </div>
+         </div>
+          </div>
 
+  <script src="carousel.js"></script>
 
     </div>
 </section>

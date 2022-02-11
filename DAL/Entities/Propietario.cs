@@ -34,6 +34,7 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "La dirección es obligatoria")]
         public string Direccion { get; set; }
 
+
         public bool Estado { get; set; }
 
         public virtual List<InmPropietarios> InmPropietario { get; set; }
