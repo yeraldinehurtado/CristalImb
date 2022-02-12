@@ -32,27 +32,24 @@
             <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
         </div>
         <div class="row" id="oferta" asp-action="IndexLanding">
-                    <div class="gallery">
-    <div class="gallery-container">
             @foreach (var x in Model)
             {
-                    <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
-                        <img class="card-img-top" src="~/landing/img/1.jpg" alt="Card image cap">
+
+                <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
+                    <img class="card-img-top" src="~/landing/img/1.jpg" alt="Card image cap">
                     <div class="card-body">
-                       <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - @Html.DisplayFor(modelx => x.Valor)</h5>
+                        <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - $ @Html.DisplayFor(modelx => x.Valor)</h5>
                         <p class="card-text text-center">@Html.DisplayFor(modelx => x.Descripcion)</p>
                     </div>
+                </div>
 
-                    </div>
-               
-                
-                
+
+
             }
 
-            <div class="gallery-controls"></div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-         </div>
-          </div>
 
   <script src="carousel.js"></script>
 
