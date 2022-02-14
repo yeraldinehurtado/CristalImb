@@ -1,65 +1,158 @@
 ﻿<!-- Main Sidebar Container -->
 
-<aside class="main-sidebar sidebar-dark-primary elevation-4" class="sideb">
+<aside class="main-sidebar sidebar-bg-primary elevation-4" class="sideb">
     <!-- Brand Logo -->
     <a asp-action="Dashboard" asp-controller="Admin" class="brand-link">
         <img src="~/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Cristal inmobiliaria</span>
     </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar Menu -->
-            <div class="sidebarfondo">
-            <div class="contenedor-menu">
-                <ul class="menu" class="c-sidebar-nav">
-                    <li>
-                        <a href="#"><i class="icono izquierda fas fa-cog fa-fw"></i>Configuración<i class="icono derecha fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a asp-action="IndexRol" asp-controller="Rol">Gestión de roles</a></li>
-                            <li><a asp-action="IndexServiciosInmueble" asp-controller="ServiciosInmueble">Gestión de servicios</a></li><!--class="nav-link"-->
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icono izquierda fas fa-user fa-fw"></i>Usuarios<i class="icono derecha fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a asp-action="IndexUsuarios" asp-controller="Usuarios">Gestión de usuarios</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icono izquierda fas fa-house-user fa-fw"></i>Propiedades<i class="icono derecha fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a asp-action="IndexPropietario" asp-controller="Propietario">Gestión de propietarios</a></li>
-                            <li><a asp-action="IndexInmueble" asp-controller="Inmueble">Gestión de inmuebles</a></li>
-                            <li><a asp-action="IndexTipoInmuebles" asp-controller="TipoInmuebles">Gestión tipo de inmueble</a></li>
-                            <li><a asp-action="IndexZona" asp-controller="Zona">Gestión de zonas</a></li>
-                            <li><a asp-action="IndexEstadosInm" asp-controller="EstadosInmueble">Estado inmueble</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icono izquierda fas fa-users fa-fw"></i>Empleados<i class="icono derecha fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a asp-action="IndexEmpleado" asp-controller="Empleado">Gestión de empleados</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icono izquierda fas fa-calendar-week fa-fw"></i>Citas<i class="icono derecha fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a asp-action="IndexCita" asp-controller="Cita">Gestión de citas</a></li>
-                            <li><a asp-action="IndexEstadoCita" asp-controller="EstadoCita">Gestión de estados de cita</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><i class="icono izquierda fas fa-chart-bar fa-fw"></i>Reportes<i class="icono derecha fa fa-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="/Reportes">Gestión de reportes</a></li>
-                        </ul>
-                    </li>
+    <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-cog fa-fw"></i>
+                        <p>
+                            Configuración
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a asp-action="IndexRol" asp-controller="Rol" class="nav-link">
+                                <p>Gestión de roles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a asp-action="IndexServiciosInmueble" asp-controller="ServiciosInmueble" class="nav-link">
+                                <p>Gestión de servicios</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+          
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-user fa-fw"></i>
+                        <p>
+                            Usuarios
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a asp-action="IndexUsuarios" asp-controller="Usuarios" class="nav-link">
+                                <p>Gestión de usuarios</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-                </ul>
-            </div>
-            </div>
-        <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-house-user fa-fw"></i>
+                        <p>
+                            Propiedades
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexPropietario" asp-controller="Propietario" class="nav-link">
+                                <p>Gestión de propietarios</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexInmueble" asp-controller="Inmueble" class="nav-link">
+                                <p>Gestión de inmuebles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexTipoInmuebles" asp-controller="TipoInmuebles" class="nav-link">
+                                <p>Gestión de tipo de inmuebles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexZona" asp-controller="Zona" class="nav-link">
+                                <p>Gestión de zonas</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexEstadosInm" asp-controller="EstadosInmueble" class="nav-link">
+                                <p>Gestión de estados de inmuebles</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                 <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-users fa-fw"></i>
+                        <p>
+                            Empleados
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a asp-action="IndexEmpleado" asp-controller="Empleado" class="nav-link">
+                                <p>Gestión de empleados</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-calendar-week fa-fw"></i>
+                        <p>
+                            Citas
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a asp-action="IndexCita" asp-controller="Cita" class="nav-link">
+                                <p>Gestión de citas</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a asp-action="IndexEstadoCita" asp-controller="EstadoCita" class="nav-link">
+                                <p>Gestión de estados de cita</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+               <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-chart-bar fa-fw"></i>
+                        <p>
+                            Reportes
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                             <a href="/Reportes" class="nav-link">
+                                <p>Gestión de reportes</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    
 </aside>

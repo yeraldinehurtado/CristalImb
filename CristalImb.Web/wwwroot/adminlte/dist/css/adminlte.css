@@ -4519,7 +4519,7 @@ input[type="button"].btn-block {
 }
 
 .nav-link.disabled {
-  color: #6c757d;
+  color: ffffff;
   pointer-events: none;
   cursor: default;
 }
@@ -4562,11 +4562,11 @@ input[type="button"].btn-block {
   border-radius: 0.25rem;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #007bff;
-}
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: D8D8D8;
+    }
 
 .nav-fill > .nav-link,
 .nav-fill .nav-item {

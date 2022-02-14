@@ -29,6 +29,8 @@ namespace CristalImb.Model.Entities
         public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
+        [UIHint("Currency")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public long Valor { get; set; }
 
         [DisplayName("Área")]
