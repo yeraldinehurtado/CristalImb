@@ -19,13 +19,13 @@ namespace CristalImb.Web.ViewModels.Propietarios
 
         [DisplayName("Nombre")]
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1]+$", ErrorMessage = "Ingrese caracteres")]
+        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
         [StringLength(35, ErrorMessage = "Máximo 35 caracteres")]
         public string Nombre { get; set; }
 
         [DisplayName("Apellido")]
         [Required(ErrorMessage = "El apellido es obligatorio")]
-        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1]+$", ErrorMessage = "Ingrese caracteres")]
+        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
         [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
         public string Apellido { get; set; }
 
