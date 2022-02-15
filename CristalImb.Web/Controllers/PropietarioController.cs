@@ -51,6 +51,13 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarPropietario(Propietario propietario)
         {
+            var identificacionExiste = await _propietarioService.identificacionPropExiste(propietario.Identificacion);
+            if (identificacionExiste != null)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "El número de identificación ya se encuentra registrado";
+                return RedirectToAction("IndexPropietario");
+            }
             await _propietarioService.GuardarPropietario(propietario);
             TempData["Accion"] = "GuardarPropietario";
             TempData["Mensaje"] = "Propietario guardado con éxito.";
@@ -122,7 +129,7 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarPropietario(PropietariosViewModel propietariosViewModel)
+        public async Task<IActionResult> EditarPropietarios(PropietariosViewModel propietariosViewModel)
         {
             if (ModelState.IsValid)
             {

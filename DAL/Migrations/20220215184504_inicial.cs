@@ -293,6 +293,7 @@ namespace CristalImb.Model.Migrations
                     ServicioInmuebleId = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<long>(type: "bigint", nullable: false),
                     Area = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     oferta = table.Column<bool>(type: "bit", nullable: false),
                     Estado = table.Column<bool>(type: "bit", nullable: false),
                     EstadosInmuebleIdEstadoInm = table.Column<int>(type: "int", nullable: true),
