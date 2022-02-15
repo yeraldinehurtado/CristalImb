@@ -266,10 +266,6 @@ namespace CristalImb.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 

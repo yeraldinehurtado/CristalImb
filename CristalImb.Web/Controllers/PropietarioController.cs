@@ -2,11 +2,13 @@
 using CristalImb.Business.Business;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.InmPropietarios;
+using CristalImb.Web.ViewModels.Propietarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,6 +27,7 @@ namespace CristalImb.Web.Controllers
             _inmPropietariosService = inmPropietariosService;
         }
 
+        [DisplayName("Lista de propietarios")]
         [HttpGet]
         public async Task<IActionResult> IndexPropietario()
         {
@@ -55,49 +58,103 @@ namespace CristalImb.Web.Controllers
             return RedirectToAction("IndexPropietario");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditarPropietario(int id = 0)
-        {
-            return View(await _propietarioService.ObtenerPropietarioId(id));
-        }
-
         [HttpPost]
-        public async Task<IActionResult> EditarPropietario(int? id, Propietario propietario)
+        public async Task<IActionResult> RegistrarPropietarios(PropietariosViewModel propietariosViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (id == 0)
+                Propietario propietario = new()
                 {
+                    Identificacion = propietariosViewModel.Identificacion,
+                    Nombre = propietariosViewModel.Nombre,
+                    Apellido = propietariosViewModel.Apellido,
+                    Telefono = propietariosViewModel.Telefono,
+                    Correo = propietariosViewModel.Correo,
+                    Estado = true
+                };
+                try
+                {
+                    var identificacionExiste = await _propietarioService.identificacionPropExiste(propietario.Identificacion);
+                    if (identificacionExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "El número de identificación ya se encuentra registrado";
+                        return RedirectToAction("IndexPropietario");
+                    }
                     await _propietarioService.GuardarPropietario(propietario);
+                    TempData["Accion"] = "Crear";
+                    TempData["Mensaje"] = "Propietario guardado correctamente";
                     return RedirectToAction("IndexPropietario");
                 }
-                else
+                catch (Exception)
                 {
-                    if (id != propietario.PropietarioId)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "Hubo un error realizando la operación";
-                        return RedirectToAction("IndexPropietario");
-                    }
-                    try
-                    {
-                        await _propietarioService.EditarPropietario(propietario);
-                        TempData["Accion"] = "EditarPropietario";
-                        TempData["Mensaje"] = "Propietario editado con éxito.";
-                        return RedirectToAction("IndexPropietario");
-                    }
-                    catch (Exception)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "Hubo un error realizando la operación";
-                        return RedirectToAction("IndexPropietario");
-                    }
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexPropietario");
                 }
             }
-            else
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
+            return RedirectToAction("IndexPropietario");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditarPropietario(int? id)
+        {
+            if (id == null || id == 0)
             {
-                return View(propietario);
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexPropietario");
             }
+            Propietario propietario = await _propietarioService.ObtenerPropietarioId(id.Value);
+            PropietariosViewModel propietariosViewModel = new()
+            {
+                PropietarioId = propietario.PropietarioId,
+                Identificacion = propietario.Identificacion,
+                Nombre = propietario.Nombre,
+                Apellido = propietario.Apellido,
+                Telefono = propietario.Telefono,
+                Correo = propietario.Correo,
+                Estado = propietario.Estado
+            };
+            return View(propietariosViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarPropietario(PropietariosViewModel propietariosViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Propietario prop = new()
+                {
+                    PropietarioId = propietariosViewModel.PropietarioId,
+                    Identificacion = propietariosViewModel.Identificacion,
+                    Nombre = propietariosViewModel.Nombre,
+                    Apellido = propietariosViewModel.Apellido,
+                    Telefono = propietariosViewModel.Telefono,
+                    Correo = propietariosViewModel.Correo,
+                    Estado = propietariosViewModel.Estado
+                };
+
+                try
+                {
+                    await _propietarioService.EditarPropietario(prop);
+                    TempData["Accion"] = "Editar";
+                    TempData["Mensaje"] = "Propietario editado correctamente";
+                    return RedirectToAction("IndexPropietario");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexPropietario");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
+            return RedirectToAction("IndexPropietario");
+
 
         }
 

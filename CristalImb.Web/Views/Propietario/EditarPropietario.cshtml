@@ -1,4 +1,4 @@
-﻿@model CristalImb.Model.Entities.Propietario
+﻿@model CristalImb.Web.ViewModels.Propietarios.PropietariosViewModel
 
 @{
     ViewData["Title"] = "EditarPropietario";
@@ -47,13 +47,8 @@
                         <input asp-for="Correo" class="form-control" />
                         <span asp-validation-for="Correo" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Direccion" class="control-label"></label>
-                        <input asp-for="Direccion" class="form-control" />
-                        <span asp-validation-for="Direccion" class="text-danger"></span>
-                    </div>
 
-                    
+
 
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-primary" />
@@ -66,8 +61,16 @@
         </div>
     </div>
 </div>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 @section Scripts {
-    
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+            @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+                      alertify.alert('Error', '@TempData["Mensaje"]', function(){ alertify.alert('Error'); });
+                     </text>
+            }
+    </script>
 }

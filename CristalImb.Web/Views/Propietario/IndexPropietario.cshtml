@@ -51,9 +51,6 @@
                                     @Html.DisplayNameFor(model => model.Correo)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Direccion)
-                                </th>
-                                <th>
                                     Agregar Inmuebles
                                 </th>
                                 <th>
@@ -82,9 +79,6 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelx => x.Correo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
                                     <a onclick="mostrarModal('@Url.Action("VerInmuebles","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Ver Inmuebles')"> Ver inmuebles.</a>

@@ -30,9 +30,6 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "El correo es obligatorio")]
         public string Correo { get; set; }
 
-        [DisplayName("Dirección")]
-        [Required(ErrorMessage = "La dirección es obligatoria")]
-        public string Direccion { get; set; }
 
 
         public bool Estado { get; set; }
