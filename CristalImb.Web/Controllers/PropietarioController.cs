@@ -112,7 +112,7 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarPropietario(PropietariosViewModel propietariosViewModel)
+        public async Task<IActionResult> EditarPropietarios(PropietariosViewModel propietariosViewModel)
         {
             if (ModelState.IsValid)
             {
