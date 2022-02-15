@@ -49,17 +49,7 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarPropietario(Propietario propietario)
-        {
-            await _propietarioService.GuardarPropietario(propietario);
-            TempData["Accion"] = "GuardarPropietario";
-            TempData["Mensaje"] = "Propietario guardado con éxito.";
-
-            return RedirectToAction("IndexPropietario");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> RegistrarPropietarios(PropietariosViewModel propietariosViewModel)
+        public async Task<IActionResult> RegistrarPropietario(PropietariosViewModel propietariosViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -82,8 +72,8 @@ namespace CristalImb.Web.Controllers
                         return RedirectToAction("IndexPropietario");
                     }
                     await _propietarioService.GuardarPropietario(propietario);
-                    TempData["Accion"] = "Crear";
-                    TempData["Mensaje"] = "Propietario guardado correctamente";
+                    TempData["Accion"] = "GuardarPropietario";
+                    TempData["Mensaje"] = "Propietario guardado con éxito.";
                     return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
@@ -140,7 +130,7 @@ namespace CristalImb.Web.Controllers
                 try
                 {
                     await _propietarioService.EditarPropietario(prop);
-                    TempData["Accion"] = "Editar";
+                    TempData["Accion"] = "EditarPropietario";
                     TempData["Mensaje"] = "Propietario editado correctamente";
                     return RedirectToAction("IndexPropietario");
                 }
