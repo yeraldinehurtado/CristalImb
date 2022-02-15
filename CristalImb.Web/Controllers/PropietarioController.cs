@@ -128,13 +128,13 @@ namespace CristalImb.Web.Controllers
             {
                 Propietario prop = new()
                 {
-                    PropietarioId = propietariosViewModel.PropietarioId,
                     Identificacion = propietariosViewModel.Identificacion,
                     Nombre = propietariosViewModel.Nombre,
                     Apellido = propietariosViewModel.Apellido,
                     Telefono = propietariosViewModel.Telefono,
                     Correo = propietariosViewModel.Correo,
-                    Estado = propietariosViewModel.Estado
+                    Estado = propietariosViewModel.Estado,
+                    PropietarioId = propietariosViewModel.PropietarioId
                 };
 
                 try
