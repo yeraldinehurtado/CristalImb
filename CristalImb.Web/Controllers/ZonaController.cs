@@ -1,5 +1,6 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Model.Entities;
+using CristalImb.Web.ViewModels.Zonas;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,58 +35,89 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarZona(Zona zona)
+        public async Task<IActionResult> RegistrarZona(ZonasViewModel zonasViewModel)
         {
-            await _zonaService.GuardarZona(zona);
-            TempData["Accion"] = "GuardarZona";
-            TempData["Mensaje"] = "Zona guardada con éxito.";
-
+            if (ModelState.IsValid)
+            {
+                Zona zona = new()
+                {
+                    NombreZona = zonasViewModel.NombreZona,
+                    Estado = true
+                };
+                try
+                {
+                    var nombreExiste = await _zonaService.nombreZonaExiste(zona.NombreZona);
+                    if (nombreExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Este nombre de zona ya se encuentra registrado";
+                        return RedirectToAction("IndexZona");
+                    }
+                    await _zonaService.GuardarZona(zona);
+                    TempData["Accion"] = "GuardarZona";
+                    TempData["Mensaje"] = "Zona guardada con éxito.";
+                    return RedirectToAction("IndexZona");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexZona");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
             return RedirectToAction("IndexZona");
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditarZona(int id = 0)
+        public async Task<IActionResult> EditarZona(int? id)
         {
-            return View(await _zonaService.ObtenerZonaId(id));
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexZona");
+            }
+            Zona zona = await _zonaService.ObtenerZonaId(id.Value);
+            ZonasViewModel zonasViewModel = new()
+            {
+                ZonaId = zona.ZonaId,
+                NombreZona = zona.NombreZona,
+                Estado = zona.Estado
+            };
+            return View(zonasViewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarZona(int? id, Zona zona)
+        public async Task<IActionResult> EditarZona(ZonasViewModel zonasViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (id == 0)
+                Zona zona = new()
                 {
-                    await _zonaService.GuardarZona(zona);
+                    ZonaId = zonasViewModel.ZonaId,
+                    NombreZona = zonasViewModel.NombreZona,
+                    Estado = true
+                };
+
+                try
+                {
+                    await _zonaService.EditarZona(zona);
+                    TempData["Accion"] = "EditarZona";
+                    TempData["Mensaje"] = "Zona editada correctamente";
                     return RedirectToAction("IndexZona");
                 }
-                else
+                catch (Exception)
                 {
-                    if (id != zona.ZonaId)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "Hubo un error realizando la operación";
-                        return RedirectToAction("IndexZona");
-                    }
-                    try
-                    {
-                        await _zonaService.EditarZona(zona);
-                        TempData["Accion"] = "EditarZona";
-                        TempData["Mensaje"] = "Zona editada con éxito.";
-                        return RedirectToAction("IndexZona");
-                    }
-                    catch (Exception)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "Hubo un error realizando la operación";
-                        return RedirectToAction("IndexZona");
-                    }
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexZona");
                 }
             }
-            else
-            {
-                return View(zona);
-            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
+            return RedirectToAction("IndexZona");
 
         }
 
