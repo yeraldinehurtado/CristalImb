@@ -14,7 +14,6 @@ namespace CristalImb.Model.Entities
 
         [DisplayName("Identificación")]
         [Required(ErrorMessage = "La identificación es obligatoria")]
-        [Range(1, 9999999999999, ErrorMessage = "El documento es requerido")]
         public int Identificacion { get; set; }
 
         [Required(ErrorMessage = "El nombre es obligatorio")]

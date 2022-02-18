@@ -51,5 +51,13 @@ namespace CristalImb.Business.Business
             _context.Remove(zona);
             await _context.SaveChangesAsync();
         }
+        public async Task<Zona> nombreZonaExiste(string nombre)
+        {
+            return await _context.zonas.FirstOrDefaultAsync(x => x.NombreZona == nombre);
+        }
+        public async Task<IEnumerable<Zona>> nombreZonaExisteEditar(string nombre)
+        {
+            return await _context.zonas.Where(c => c.NombreZona == nombre).ToListAsync();
+        }
     }
 }

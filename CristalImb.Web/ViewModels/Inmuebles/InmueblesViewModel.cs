@@ -4,15 +4,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace CristalImb.Model.Entities
+namespace CristalImb.Web.ViewModels.Inmuebles
 {
-    public class Inmueble
+    public class InmueblesViewModel
     {
-        [Key]
+
         public int InmuebleId { get; set; }
         [Required(ErrorMessage = "El código es obligatorio")]
         [DisplayName("Código")]
+        [StringLength(15, ErrorMessage = "Máximo 15 caracteres")]
         public string Codigo { get; set; }
 
         [DisplayName("Descripción")]
@@ -23,6 +23,7 @@ namespace CristalImb.Model.Entities
 
         [Required(ErrorMessage = "El estado de inmueble es obligatorio")]
         public int IdEstadoInm { get; set; }
+        [Required(ErrorMessage = "La zona del inmueble es obligatoria")]
         public int ZonaId { get; set; }
 
         [Required(ErrorMessage = "El servicio es obligatorio")]
@@ -31,6 +32,7 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "El valor es obligatorio")]
         [UIHint("Currency")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
         public long Valor { get; set; }
 
         [DisplayName("Área")]
@@ -46,12 +48,5 @@ namespace CristalImb.Model.Entities
 
         [Required(ErrorMessage = "El estado es obligatorio")]
         public bool Estado { get; set; }
-
-        public virtual EstadosInmueble EstadosInmueble { get; set; }
-        public virtual TipoInmuebles TipoInmuebles { get; set; }
-        public virtual Zona Zona { get; set; }
-        public virtual ServiciosInmueble ServiciosInmueble { get; set; }
-        public virtual List<InmPropietarios> InmPropietario { get; set; }
-        public virtual List<Cita> citas { get; set; }
     }
 }

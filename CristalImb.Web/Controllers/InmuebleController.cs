@@ -1,5 +1,6 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Business.Business;
+using CristalImb.Web.ViewModels.Inmuebles;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.InmPropietarios;
 using Microsoft.AspNetCore.Authorization;
@@ -53,10 +54,60 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarInmueble(Inmueble inmueble)
         {
+            var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+            if (CodigoExiste != null)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
+                return RedirectToAction("IndexInmueble");
+            }
             await _inmuebleService.GuardarInmueble(inmueble);
             TempData["Accion"] = "GuardarInmueble";
             TempData["Mensaje"] = "Inmueble guardado con éxito.";
 
+            return RedirectToAction("IndexInmueble");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RegistrarInmuebles(InmueblesViewModel inmueblesViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Inmueble inmueble = new()
+                {
+                    Codigo = inmueblesViewModel.Codigo,
+                    Descripcion = inmueblesViewModel.Descripcion,
+                    TipoId = inmueblesViewModel.TipoId,
+                    IdEstadoInm = inmueblesViewModel.IdEstadoInm,
+                    ZonaId = inmueblesViewModel.ServicioInmuebleId,
+                    Valor = inmueblesViewModel.Valor,
+                    Area = inmueblesViewModel.Area,
+                    oferta = inmueblesViewModel.oferta,
+                    Estado = true
+                };
+                try
+                {
+                    var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                    if (CodigoExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
+                        return RedirectToAction("IndexInmueble");
+                    }
+                    await _inmuebleService.GuardarInmueble(inmueble);
+                    TempData["Accion"] = "Crear";
+                    TempData["Mensaje"] = "Inmueble guardado correctamente";
+                    return RedirectToAction("IndexInmueble");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexInmueble");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
             return RedirectToAction("IndexInmueble");
         }
 
@@ -75,6 +126,7 @@ namespace CristalImb.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 if (id == 0)
                 {
                     await _inmuebleService.GuardarInmueble(inmueble);

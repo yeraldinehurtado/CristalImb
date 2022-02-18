@@ -1,4 +1,4 @@
-﻿@model CristalImb.Model.Entities.Inmueble
+﻿@model CristalImb.Web.ViewModels.Inmuebles.InmueblesViewModel
 
 @{
     ViewData["Title"] = "RegistrarInmueble";
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Valor" class="control-label"></label>
-                    <input asp-for="Valor" class="form-control" />
+                    <input asp-for="Valor" class="form-control" id="number"/>
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -51,6 +51,11 @@
                     <span asp-validation-for="IdEstadoInm" class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Direccion" class="control-label"></label>
+                    <input asp-for="Direccion" class="form-control" />
+                    <span asp-validation-for="Direccion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="oferta" class="control-label"></label>
                     <input asp-for="oferta" class="form-control" />
                     <span asp-validation-for="oferta" class="text-danger"></span>
@@ -65,8 +70,12 @@
         </div>
     </div>
 </div>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+    </script>
 }
