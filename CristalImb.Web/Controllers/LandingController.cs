@@ -1,5 +1,7 @@
 ﻿using CristalImb.Business.Abstract;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using CristalImb.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +15,15 @@ namespace CristalImb.Web.Controllers
         private readonly ITipoInmuebleService _tipoInmuebleService;
         private readonly IZonaService _zonaService;
         private readonly IServiciosInmuebleService _serviciosInmuebleService;
+        private readonly IEstadosInmuebleService _estadosInmuebleService;
 
-        public LandingController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IServiciosInmuebleService serviciosInmuebleService)
+        public LandingController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IServiciosInmuebleService serviciosInmuebleService, IEstadosInmuebleService estadosInmuebleService)
         {
             _inmuebleService = inmuebleService;
             _tipoInmuebleService = tipoInmuebleService;
             _zonaService = zonaService;
             _serviciosInmuebleService = serviciosInmuebleService;
+            _estadosInmuebleService = estadosInmuebleService;
         }
 
         //landing inicio
@@ -43,5 +47,22 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerListaInmueblesEstado());
 
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> BuscarInmuebles()
+        {
+            ViewData["ListaCodigos"] = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Codigo");
+            ViewData["ListaCodigos"] = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Valor");
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerListaTiposEstado(), "TipoInmuebleId", "NombreTipoInm");
+            ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObteneEstadosInmueblesEstado(), "IdEstadoInm", "NombreEstado");
+            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
+
+            return View();
+
+        }
+
+
     }
 }
