@@ -39,9 +39,9 @@ namespace CristalImb.Web.ViewModels.Inmuebles
         public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
+        [RegularExpression("^\\d+$", ErrorMessage = "Valor incorrecto")]
         [UIHint("Currency")]
         [DisplayFormat(DataFormatString ="{0:C0}")]
-        [RegularExpression("^\\d+$", ErrorMessage = "Valor incorrecto")]
         [Range(1, 9999999999)]
         public long Valor { get; set; }
 
