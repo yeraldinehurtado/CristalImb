@@ -23,14 +23,13 @@ namespace CristalImb.Model.Entities
 
         [Required(ErrorMessage = "El estado de inmueble es obligatorio")]
         public int IdEstadoInm { get; set; }
+        [Required(ErrorMessage = "La zona del inmueble es obligatoria")]
         public int ZonaId { get; set; }
 
         [Required(ErrorMessage = "El servicio es obligatorio")]
         public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
-        [UIHint("Currency")]
-        [DisplayFormat(DataFormatString = "{0:C0}")]
         public long Valor { get; set; }
 
         [DisplayName("Área")]

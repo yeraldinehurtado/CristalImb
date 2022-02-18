@@ -48,31 +48,18 @@ namespace CristalImb.Web.Controllers
             ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObteneEstadosInmueblesEstado(), "IdEstadoInm", "NombreEstado");
             ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
+
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> RegistrarInmueble(Inmueble inmueble)
-        {
-            var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
-            if (CodigoExiste != null)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
-                return RedirectToAction("IndexInmueble");
-            }
-            await _inmuebleService.GuardarInmueble(inmueble);
-            TempData["Accion"] = "GuardarInmueble";
-            TempData["Mensaje"] = "Inmueble guardado con éxito.";
-
-            return RedirectToAction("IndexInmueble");
-        }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarInmuebles(InmueblesViewModel inmueblesViewModel)
+        public async Task<IActionResult> RegistrarInmueble(InmueblesViewModel inmueblesViewModel)
         {
             if (ModelState.IsValid)
             {
+
+                
                 Inmueble inmueble = new()
                 {
                     Codigo = inmueblesViewModel.Codigo,
@@ -95,8 +82,8 @@ namespace CristalImb.Web.Controllers
                         return RedirectToAction("IndexInmueble");
                     }
                     await _inmuebleService.GuardarInmueble(inmueble);
-                    TempData["Accion"] = "Crear";
-                    TempData["Mensaje"] = "Inmueble guardado correctamente";
+                    TempData["Accion"] = "GuardarInmueble";
+                    TempData["Mensaje"] = "Inmueble guardado con éxito.";
                     return RedirectToAction("IndexInmueble");
                 }
                 catch (Exception)
