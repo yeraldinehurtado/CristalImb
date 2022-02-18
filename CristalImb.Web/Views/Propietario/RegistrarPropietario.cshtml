@@ -1,65 +1,66 @@
 ﻿@model CristalImb.Web.ViewModels.Propietarios.PropietariosViewModel
 
-
-
-
-
 @{
     ViewData["Title"] = "RegistrarPropietario";
     Layout = null;
 }
 
 <div class="row">
-    <div class="col-md-10">
-        <div class="registrar">
-            <form asp-action="RegistrarPropietario">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
+    <div class="registrar col-md-12">
+        <form asp-action="RegistrarPropietario">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-12 row">
+                <div class="form-group col-md-4">
                     <label asp-for="Identificacion" class="control-label"></label>
                     <input asp-for="Identificacion" class="form-control" />
                     <span asp-validation-for="Identificacion" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4">
                     <label asp-for="Nombre" class="control-label"></label>
                     <input asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4">
                     <label asp-for="Apellido" class="control-label"></label>
                     <input asp-for="Apellido" class="form-control" />
                     <span asp-validation-for="Apellido" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Telefono" class="control-label"></label>
-                    <input asp-for="Telefono" class="form-control" />
-                    <span asp-validation-for="Telefono" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Correo" class="control-label"></label>
-                    <input asp-for="Correo" type="email" class="form-control" />
-                    <span asp-validation-for="Correo" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Registrar" class="btn btn-primary" />
-                </div>
-            </form>
-            <div>
-                <a asp-action="IndexPropietario">Volver</a>
             </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label"></label>
+                <input asp-for="Correo" type="email" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn btn-primary" />
+            </div>
+        </form>
+        <div>
+            <a asp-action="IndexPropietario">Volver</a>
         </div>
     </div>
 </div>
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 
-    <script>
-            @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
-                      alertify.alert('Error', '@TempData["Mensaje"]', function(){ alertify.alert('Error'); });
-                     </text>
-            }
-    </script>
+<script>
+    @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+    <text>
+              alertify.alert('Error', '@TempData["Mensaje"]', function(){ alertify.alert('Error'); });
+             </text>
+    }
+</script>
 }
