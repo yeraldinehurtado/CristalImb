@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Valor" class="control-label"></label>
-                    <input asp-for="Valor" class="form-control" />
+                    <input asp-for="Valor" class="form-control" id="number"/>
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -78,9 +78,5 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-            @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
-                      alertify.alert('Error', '@TempData["Mensaje"]', function(){ alertify.alert('Error'); });
-                     </text>
-            }
     </script>
 }

@@ -8,17 +8,70 @@
 
 <header class="masthead">
     <div class="container">
-        <ul class="botones text-uppercase ms-auto py-4 py-lg-0">
-            <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" asp-action="InmueblesArriendo" asp-controller="Landing">Arrendar</a></li>
-            <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" asp-action="InmueblesVenta" asp-controller="Landing">Comprar</a></li>
-        </ul>
-        <div class="card-header row">
-            <ul class="botones text-uppercase ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" href="#">Tipo de inmueble</a></li>
-                <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" href="#">Zonas</a></li>
-                <li class="nav-item"><a class="btn btn-primary btn-xl text-uppercase" href="#">Precios</a></li>
+        <div class="Col-sc-14ninbu-0 lfGZKA Search__SearchForm-bi9w2-0 jvpgQl center-search d-flex align-items-center p-0 col">
+            <div class="w-100 d-block">
+                <div class="Row-sc-2hg243-0 iUVxfs row">
+                    <div class="Col-sc-14ninbu-0 lfGZKA mb-1 col">
+                        <h1 class="H1-xsrgru-0 jdfXCo text-white bold-text upper-text mb-3" id="formSearchSection" style="z-index: 1; text-shadow: 1px 2px #000">
+                            Encuentra inmuebles en venta o arriendo
+                        </h1>
+                    </div>
+                </div>
+                <form class="Form-sc-15bnz0c-0 iVCnGK Form-xv2apj-0 eskisQ" id="formSearch" method="POST" novalidate>
+                    <div class="modulecontent" style="z-index: 1; text-shadow: 1px 2px #000">
+                        <div class="Row-sc-2hg243-0 iUVxfs row">
+                            <div class="Col-sc-14ninbu-0 lfGZKA mb-1 col">
+                                <div class="col-12">
+                                    <label class="form-label">Buscar por código</label>
+                                    <input type="text" class="form-control" id="buscar" name="buscar" value="">
+                                </div>
+                                <div class="col-12 row" style="margin-top:20px">
+                                    <label class="form-label">Buscar por filtros</label>
+                                    <div class="col-11">
+                                        <table class="table">
+                                            <thead>
+                                                <tr class="filters">
+                                                    <th>
+                                                        <label class="form-label" style="color:aliceblue">Tipo de inmueble</label>
+                                                        <select id="assigned-tutor-filter" id="buscaTipo" name="buscaTipo" class="form-control mt-2" style="">
+                                                            <option value="">Todos</option>
+                                                        </select>
+                                                    </th>
+                                                    <th>
+                                                        <label class="form-label" style="color:aliceblue">Servicio</label>
+                                                        <select id="assigned-tutor-filter" id="buscaTipo" name="buscaTipo" class="form-control mt-2" style="">
+                                                            <option value="">Todos</option>
+                                                        </select>
+                                                    </th>
+                                                    <th>
+                                                        <label class="form-label" style="color:aliceblue">Zona</label>
+                                                        <select id="assigned-tutor-filter" id="buscaTipo" name="buscaTipo" class="form-control mt-2" style="">
+                                                            <option value="">Todos</option>
+                                                        </select>
+                                                    </th>
+                                                    <th>
+                                                        <label class="form-label" style="color:aliceblue">Precio desde</label>
+                                                        <input type="number" id="preciodesde" name="preciodesde" class="form-control mt-2" value="" />
+                                                    </th>
+                                                    <th>
+                                                        <label class="form-label" style="color:aliceblue">Precio hasta</label>
+                                                        <input type="number" id="preciohasta" name="preciohasta" class="form-control mt-2" value="" />
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                    <div class="col-1">
+                                        <input type="submit" class="btn btn-primary" value="Buscar" style="margin-top: 30px;">
+                                    </div>
+                                </div>
+                            </div>
 
-            </ul>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 </header>
