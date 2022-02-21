@@ -34,65 +34,6 @@ namespace CristalImb.Web.Controllers
             return View(listRoles);
         }
 
-        public IActionResult CrearRol()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CrearRol(string rol)
-        {
-            await _roleManager.CreateAsync(new Rol(rol));
-            return RedirectToAction(nameof(IndexRol));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> EditarRol(string rol)
-        {
-            if (rol == null || rol == "")
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
-                return RedirectToAction("IndexRol");
-            }
-            try
-            {
-                return View(await _roleManager.FindByNameAsync(rol));
-            }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Ingresaste un valor inválido";
-                return RedirectToAction("IndexRol");
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> EditarRol(IdentityRole identityRole)
-        {
-            try
-            {
-                var role = await _roleManager.FindByIdAsync(identityRole.Id);
-                role.Name = identityRole.Name;
-                var result = await _roleManager.UpdateAsync(role);
-                if (!result.Succeeded)
-                {
-                    TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Error";
-                    return RedirectToAction("IndexRol");
-                }
-                TempData["Accion"] = "Editar";
-                TempData["Mensaje"] = "Rol editado correctamente";
-                return RedirectToAction("IndexRol");
-            }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Ingresaste un valor inválido";
-                return RedirectToAction("IndexRol");
-            }
-        }
-
         [HttpPost]
         public async Task<IActionResult> ActualizarEstado(string id)
         {

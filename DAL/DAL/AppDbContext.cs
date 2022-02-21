@@ -19,7 +19,7 @@ namespace CristalImb.Model.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.seed();
+            modelBuilder.Seed();
         }
 
         public DbSet<Rol> roles { get; set; }

@@ -559,13 +559,23 @@ namespace CristalImb.Model.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Modulo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Permisos")
-                        .HasColumnType("int");
-
                     b.HasDiscriminator().HasValue("Rol");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "700e1d44-15bc-400f-8fcd-18afa9f75020",
+                            Name = "Administrador",
+                            Estado = true
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "31fabe78-d757-4f91-848e-0dc123643752",
+                            Name = "Empleado",
+                            Estado = true
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.UsuarioIdentity", b =>
