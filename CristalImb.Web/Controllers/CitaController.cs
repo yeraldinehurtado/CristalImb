@@ -35,7 +35,7 @@ namespace CristalImb.Web.Controllers
         
         
         [HttpGet]
-        public async Task<IActionResult> RegistrarCitaAsync()
+        public async Task<IActionResult> RegistrarCita()
         {
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
             ViewData["ListaInmuebles"] = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Codigo");
