@@ -1,5 +1,6 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Model.Entities;
+using CristalImb.Web.ViewModels.EstadoCita;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,12 +35,31 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarEstadoCita(EstadoCita estadoCita)
+        public async Task<IActionResult> RegistrarEstadoCita(EstadoCitaViewModel estadoCitaViewModel)
         {
-            await _estadoCitaService.GuardarEstadoCita(estadoCita);
-            TempData["Accion"] = "GuardarEstadoCita";
-            TempData["Mensaje"] = "Estado de cita guardado con éxito.";
-
+            if (ModelState.IsValid)
+            {
+                EstadoCita estadoCita = new()
+                {
+                    Nombre = estadoCitaViewModel.Nombre,
+                    Estado = true
+                };
+                try
+                {
+                    await _estadoCitaService.GuardarEstadoCita(estadoCita);
+                    TempData["Accion"] = "GuardarEstadoCita";
+                    TempData["Mensaje"] = "Estado de cita guardada con éxito.";
+                    return RedirectToAction("IndexEstadoCita");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexEstadoCita");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
             return RedirectToAction("IndexEstadoCita");
         }
 
