@@ -45,8 +45,6 @@ namespace CristalImb.Model.Entities
 
         public bool oferta { get; set; }
 
-
-        [Required(ErrorMessage = "El estado es obligatorio")]
         public bool Estado { get; set; }
 
         public virtual EstadosInmueble EstadosInmueble { get; set; }

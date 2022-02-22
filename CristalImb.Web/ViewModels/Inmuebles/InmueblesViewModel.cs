@@ -41,7 +41,7 @@ namespace CristalImb.Web.ViewModels.Inmuebles
         [Required(ErrorMessage = "El valor es obligatorio")]
         [UIHint("Currency")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
+        [RegularExpression("^[0-9]*$*.*,", ErrorMessage = "Ingrese valores numéricos")]
         public long Valor { get; set; }
 
         [DisplayName("Área")]
