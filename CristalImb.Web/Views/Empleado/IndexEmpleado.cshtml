@@ -125,19 +125,19 @@
     <script src="~/js/modal.js"></script>
 
     <script>
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarPropietario")) {
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarEmpleado")) {
         <text>
         Swal.fire({
-        title: "Guardar propietario",
+        title: "Guardar empleado",
             icon: 'success',
             html: "@TempData["Mensaje"]"
             })
         </text>
         }
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarPropietario")) {
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarEmpleado")) {
         <text>
         Swal.fire({
-        title: "Editar propietario",
+        title: "Editar empleado",
             icon: 'success',
             html: "@TempData["Mensaje"]"
             })
