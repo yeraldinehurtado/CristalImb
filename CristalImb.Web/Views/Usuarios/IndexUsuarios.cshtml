@@ -3,92 +3,97 @@
 
 }
 
+<div class="content">
+    <div class="container-fluid">
+        <div class="m-0 row justify-content-center align-items-baseline">
+            <div class="col-6">
+                <h3 class="text-center"> Gestión de usuarios</h3>
+                <hr />
+                <div class="col-md-12 row">
+                    <div class="botonCrear col-md-6 p-3 text-center accent-teal">
+                        <br />
+                        <p>
+                            <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
+                        </p>
+                        <br />
+                    </div>
+                    <div class="botonAsignar col-md-6 p-3 text-center accent-teal">
+                        <br />
+                        <a asp-action="AsignarRolesUsuario" asp-controller="Rol" class="btn btn-outline-success"><i class="fas fa-plus"></i> Asignar rol</a>
+                        <br />
+                    </div>
+                </div>
+            </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="botonCrear col-12 p-3 text-center accent-teal">
-            <br />
-            <p>
-                <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
-            </p>
-            <br />
-        </div>
-        <div class="botonAsignar col-12 p-3 text-center accent-teal">
-            <br />
-            <a asp-action="AsignarRolesUsuario" asp-controller="Rol" class="btn btn-outline-success">
-                <i class="fas fa-plus"></i>
-                <p> Asignar roles</p>
-            </a>
-            <br />
         </div>
     </div>
-</div>
 
-<div class="content">
+    <div class="content">
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-11 align-self-center text-center">
-                <table id="tabla" class="table">
-                    <thead class="bg-dark text-white">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Identificacion)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Email)
-                            </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var usuario in Model)
-                        {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => usuario.Identificacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => usuario.Email)
-                            </td>
-                            <td>
-                                <a class="btn btn-success" asp-route-usuarioId="@usuario.Id" asp-action="Detalle" asp-controller="Rol">Detalle</a>
-                            </td>
-                            <td>
-                                @if (usuario.Estado == true)
-                                {
-                                    <p>Activo</p>
-                                }
-                                else
-                                {
-                                    <p>Desactivo</p>
-                                }
-                            </td>
-                            <td>
-                                @if (usuario.Estado == true)
-                                {
-                                    <form asp-action="ActualizarEstado" asp-route-id="@usuario.Id">
-                                        <button type="submit"><i class="fas fa-toggle-on"></i></button>
-                                    </form>
-                                }
-                                else if (usuario.Estado == false)
-                                {
-                                    <form asp-action="ActualizarEstado" asp-route-id="@usuario.Id">
-                                        <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                    </form>
-                                }
-                            </td>
-                            <td>
-                                <a asp-action="EditarUsuario" asp-route-rol="@usuario.Id" class="btn alert-primary">Editar</a>
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-11 align-self-center text-center">
+                    <table id="tabla" class="table">
+                        <thead class="bg-dark text-white">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Identificacion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => usuario.Identificacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => usuario.Email)
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" asp-route-usuarioId="@usuario.Id" asp-action="Detalle" asp-controller="Rol">Detalle</a>
+                                    </td>
+                                    <td>
+                                        @if (usuario.Estado == true)
+                                        {
+                                            <p>Activo</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Desactivo</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (usuario.Estado == true)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@usuario.Id">
+                                                <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                            </form>
+                                        }
+                                        else if (usuario.Estado == false)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@usuario.Id">
+                                                <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                            </form>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarUsuario" asp-route-rol="@usuario.Id" class="btn alert-primary">Editar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
         </div>
     </div>

@@ -7,7 +7,6 @@
 @section Styles{
     <style>
         .contenido {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             text-align: center;
             margin-bottom: 5%;
         }
@@ -24,6 +23,8 @@
     <div class="container-fluid">
         <div class="m-0 row justify-content-center align-items-baseline">
             <div class="contenido">
+                <h3 class="text-center"> Gestión de empleados</h3>
+                <hr />
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
@@ -64,53 +65,53 @@
                         <tbody>
                             @foreach (var x in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Identificacion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Apellido)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Telefono)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Direccion)
-                                </td>
-                                <td>
-                                    @if (x.Estado == true)
-                                    {
-                                        <p>Activo</p>
-                                    }
-                                    else
-                                    {
-                                        <p>Desactivo</p>
-                                    }
-                                </td>
-                                <td>
-                                    @if (x.Estado == true)
-                                    {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@x.EmpleadoId">
-                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
-                                        </form>
-                                    }
-                                    else if (x.Estado == false)
-                                    {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@x.EmpleadoId">
-                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                        </form>
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-action="EditarEmpleado" asp-route-id="@x.EmpleadoId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Identificacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Apellido)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Telefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Direccion)
+                                    </td>
+                                    <td>
+                                        @if (x.Estado == true)
+                                        {
+                                            <p>Activo</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Desactivo</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (x.Estado == true)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@x.EmpleadoId">
+                                                <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                            </form>
+                                        }
+                                        else if (x.Estado == false)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@x.EmpleadoId">
+                                                <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                            </form>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarEmpleado" asp-route-id="@x.EmpleadoId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>

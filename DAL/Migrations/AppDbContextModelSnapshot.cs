@@ -565,14 +565,14 @@ namespace CristalImb.Model.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "700e1d44-15bc-400f-8fcd-18afa9f75020",
+                            ConcurrencyStamp = "a4ffc43d-b9b2-40ad-9ffd-6051de4d88ab",
                             Name = "Administrador",
                             Estado = true
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "31fabe78-d757-4f91-848e-0dc123643752",
+                            ConcurrencyStamp = "bb32014f-6450-4ab9-8d2b-36e5139e884a",
                             Name = "Empleado",
                             Estado = true
                         });

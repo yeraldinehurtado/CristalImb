@@ -7,7 +7,6 @@
 @section Styles{
     <style>
         .contenido {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
             text-align: center;
             margin-bottom: 5%;
         }
@@ -24,6 +23,8 @@
     <div class="container-fluid">
         <div class="m-0 row justify-content-center align-items-baseline">
             <div class="contenido">
+                <h3 class="text-center"> Gestión de inmuebles</h3>
+                <hr />
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
@@ -89,7 +90,7 @@
                                         @Html.DisplayFor(modelx => x.Valor)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelx => x.Area)
+                                        @Html.DisplayFor(modelx => x.Area) 
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelx => x.ZonaId)
@@ -166,8 +167,9 @@
         title: "Error",
             icon: 'error',
             html: "@TempData["Mensaje"]"
-            })
+        })
         </text>
         }
+        
     </script>
 }

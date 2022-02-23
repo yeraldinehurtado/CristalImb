@@ -23,7 +23,9 @@
 <section class="content">
     <div class="container-fluid">
         <div class="m-0 row justify-content-center align-items-baseline">
-            <div class="contenido">
+            <div class="col-6">
+                <h3 class="text-center"> Gestión de servicios de inmueble</h3>
+                <hr />
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
@@ -48,38 +50,38 @@
                         <tbody>
                             @foreach (var x in Model)
                             {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelx => x.Nombre)
-                                </td>
-                                <td>
-                                    @if (x.Estado == true)
-                                    {
-                                        <p>Activo</p>
-                                    }
-                                    else
-                                    {
-                                        <p>Desactivo</p>
-                                    }
-                                </td>
-                                <td>
-                                    @if (x.Estado == true)
-                                    {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@x.ServicioInmuebleId">
-                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
-                                        </form>
-                                    }
-                                    else if (x.Estado == false)
-                                    {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@x.ServicioInmuebleId">
-                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                        </form>
-                                    }
-                                </td>
-                                <td>
-                                    <a asp-action="EditarServiciosInmueble" asp-route-id="@x.ServicioInmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Nombre)
+                                    </td>
+                                    <td>
+                                        @if (x.Estado == true)
+                                        {
+                                            <p>Activo</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Desactivo</p>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (x.Estado == true)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@x.ServicioInmuebleId">
+                                                <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                            </form>
+                                        }
+                                        else if (x.Estado == false)
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@x.ServicioInmuebleId">
+                                                <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                            </form>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-action="EditarServiciosInmueble" asp-route-id="@x.ServicioInmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
