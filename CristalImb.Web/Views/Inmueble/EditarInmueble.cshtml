@@ -95,6 +95,13 @@
     </div>
 </div>
 
+<script src="~/js/menu.js"></script>
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+    </script>
 }
