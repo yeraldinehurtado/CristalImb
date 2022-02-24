@@ -54,49 +54,33 @@ namespace CristalImb.Web.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarInmueble(InmueblesViewModel inmueblesViewModel)
+        public async Task<IActionResult> RegistrarInmueble(Inmueble inmueble)
         {
-            if (ModelState.IsValid)
+            try
             {
-
-                
-                Inmueble inmueble = new()
-                {
-                    Codigo = inmueblesViewModel.Codigo,
-                    Descripcion = inmueblesViewModel.Descripcion,
-                    TipoId = inmueblesViewModel.TipoId,
-                    IdEstadoInm = inmueblesViewModel.IdEstadoInm,
-                    ZonaId = inmueblesViewModel.ServicioInmuebleId,
-                    Valor = inmueblesViewModel.Valor,
-                    Area = inmueblesViewModel.Area,
-                    oferta = inmueblesViewModel.oferta,
-                    Estado = true
-                };
-                try
-                {
-                    var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
-                    if (CodigoExiste != null)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
-                        return RedirectToAction("IndexInmueble");
-                    }
-                    await _inmuebleService.GuardarInmueble(inmueble);
-                    TempData["Accion"] = "GuardarInmueble";
-                    TempData["Mensaje"] = "Inmueble guardado con éxito.";
-                    return RedirectToAction("IndexInmueble");
-                }
-                catch (Exception)
+                var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                if (CodigoExiste != null)
                 {
                     TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
                     return RedirectToAction("IndexInmueble");
                 }
+                await _inmuebleService.GuardarInmueble(inmueble);
+                TempData["Accion"] = "GuardarInmueble";
+                TempData["Mensaje"] = "Inmueble guardado con éxito.";
+                return RedirectToAction("IndexInmueble");
             }
-            TempData["Accion"] = "Error";
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ingresaste un valor inválido";
+                return RedirectToAction("IndexInmueble");
+            }
+        
+        TempData["Accion"] = "Error";
             TempData["Mensaje"] = "Ingresaste un valor inválido";
             return RedirectToAction("IndexInmueble");
-        }
+    }
 
         [HttpGet]
         public async Task<IActionResult> EditarInmueble(int id = 0)
