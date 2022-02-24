@@ -565,16 +565,23 @@ namespace CristalImb.Model.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            ConcurrencyStamp = "b331e295-b993-4a45-90a4-fb77fc2d9019",
+                            Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
+                            ConcurrencyStamp = "1e4259c5-e7cb-42e8-a151-66d263ea7e35",
                             Name = "Administrador",
                             Estado = true
                         },
                         new
                         {
-                            Id = "2",
-                            ConcurrencyStamp = "ce131288-f8fb-4c3f-80d3-a9d492c0d57e",
+                            Id = "64B512E7-46AE-4989-A049-A446118099C4",
+                            ConcurrencyStamp = "0d5f0006-9037-4e9e-8604-00eb69d18015",
                             Name = "Empleado",
+                            Estado = true
+                        },
+                        new
+                        {
+                            Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
+                            ConcurrencyStamp = "e26ad55e-1a22-4390-b78b-24c62867c70c",
+                            Name = "Cliente",
                             Estado = true
                         });
                 });
