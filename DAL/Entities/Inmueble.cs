@@ -35,7 +35,6 @@ namespace CristalImb.Model.Entities
         public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
-        [RegularExpression("^[0-9]*$*.*,", ErrorMessage = "Ingrese valores numéricos")]
         [UIHint("Currency")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
         public string Valor { get; set; }

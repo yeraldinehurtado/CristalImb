@@ -14,57 +14,75 @@
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <div class="editar">
             <h1>Editar inmueble</h1>
             <hr />
             <form asp-action="EditarInmueble">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="InmuebleId" />
-                <div class="form-group">
-                    <label asp-for="Codigo" class="control-label"></label>
+                <div class="col-md-12 row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Codigo" class="control-label">Código</label>
                     <input asp-for="Codigo" class="form-control" />
                     <span asp-validation-for="Codigo" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Descripcion" class="control-label"></label>
+                <div class="form-group col-md-6">
+                    <label asp-for="Descripcion" class="control-label">Descripción</label>
                     <textarea asp-for="Descripcion" class="form-control"></textarea>
                     <span asp-validation-for="Descripcion" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="TipoId" class="control-label"></label>
+                </div>
+                <div class="col-md-12 row">
+                <div class="form-group col-md-6">
+                    <label asp-for="TipoId" class="control-label">Tipo de inmueble</label>
                     <select asp-items="ViewBag.ListaTipos" asp-for="TipoId" class="form-control"></select>
                     <span asp-validation-for="TipoId" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ServicioInmuebleId" class="control-label"></label>
+                <div class="form-group col-md-6">
+                    <label asp-for="ServicioInmuebleId" class="control-label">Servicio</label>
                     <select asp-items="ViewBag.ListaServicios" asp-for="ServicioInmuebleId" class="form-control"></select>
                     <span asp-validation-for="ServicioInmuebleId" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Valor" class="control-label"></label>
-                    <input asp-for="Valor" class="form-control" />
+                </div>
+                <div class="col-md-12 row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Valor" class="control-label">Precio</label>
+                    <input type="text" asp-for="Valor" class="form-control" id="number"/>
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Area" class="control-label"></label>
-                    <input asp-for="Area" class="form-control" />
-                    <span asp-validation-for="Area" class="text-danger"></span>
+                <div class="form-group col-md-6">
+                    <div class="col-3">
+                        <label asp-for="Area" class="control-label">Área</label>
+                        <input asp-for="Area" placeholder="Ej: 95m²" class="form-control" />
+                        <span asp-validation-for="Area" class="text-danger"></span>
+                    </div>
+                    
                 </div>
-                <div class="form-group">
-                    <label asp-for="ZonaId" class="control-label"></label>
+                </div>
+                <div class="col-md-12 row">
+                <div class="form-group col-md-6">
+                    <label asp-for="ZonaId" class="control-label">Zona</label>
                     <select asp-items="ViewBag.listaZona" asp-for="ZonaId" class="form-control"></select>
                     <span asp-validation-for="ZonaId" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Direccion" class="control-label"></label>
+                <div class="form-group col-md-6">
+                    <label asp-for="IdEstadoInm" class="control-label">Estado del inmueble</label>
+                    <select asp-items="ViewBag.ListaEstadosInm" asp-for="IdEstadoInm" class="form-control"></select>
+                    <span asp-validation-for="IdEstadoInm" class="text-danger"></span>
+                </div>
+                </div>
+                <div class="col-md-12 row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Direccion" class="control-label">Dirección</label>
                     <input asp-for="Direccion" class="form-control" />
                     <span asp-validation-for="Direccion" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="oferta" class="control-label"></label>
+                <div class="form-group col-md-6">
+                    <label asp-for="oferta" class="control-label">Oferta</label>
                     <input asp-for="oferta" class="form-control" />
                     <span asp-validation-for="oferta" class="text-danger"></span>
+                </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Guardar" class="btn btn-primary" />

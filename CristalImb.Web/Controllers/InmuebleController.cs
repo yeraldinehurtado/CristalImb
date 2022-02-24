@@ -44,10 +44,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RegistrarInmuebleAsync()
         {
-            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerListaTiposEstado(), "TipoInmuebleId", "NombreTipoInm");
-            ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObteneEstadosInmueblesEstado(), "IdEstadoInm", "NombreEstado");
-            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
-            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
+            
 
             return View();
         }
@@ -85,9 +82,9 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarInmueble(int id = 0)
         {
-            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoInmuebleId", "NombreTipoInm");
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerListaTiposEstado(), "TipoInmuebleId", "NombreTipoInm");
             ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObteneEstadosInmueblesEstado(), "IdEstadoInm", "NombreEstado");
-            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerZonas(), "ZonaId", "NombreZona");
+            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }
