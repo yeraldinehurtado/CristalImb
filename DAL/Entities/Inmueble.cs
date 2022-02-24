@@ -18,22 +18,26 @@ namespace CristalImb.Model.Entities
         [DisplayName("Descripción")]
         public string Descripcion { get; set; }
 
+        [DisplayName("Tipo de inmueble")]
         [Required(ErrorMessage = "El tipo es obligatorio")]
         public int TipoId { get; set; }
 
+        [DisplayName("Estado inmueble")]
         [Required(ErrorMessage = "El estado de inmueble es obligatorio")]
         public int IdEstadoInm { get; set; }
+
+        [DisplayName("Zona inmueble")]
         [Required(ErrorMessage = "La zona del inmueble es obligatoria")]
         public int ZonaId { get; set; }
 
+        [DisplayName("Servicio inmueble")]
         [Required(ErrorMessage = "El servicio es obligatorio")]
         public int ServicioInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
-        [RegularExpression("^\\d+$", ErrorMessage = "Valor incorrecto")]
         [UIHint("Currency")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public long Valor { get; set; }
+        public string Valor { get; set; }
 
         [DisplayName("Área")]
         [Required(ErrorMessage = "El area es obligatorio")]
