@@ -33,7 +33,7 @@ namespace CristalImb.Model.Entities
         [RegularExpression("^\\d+$", ErrorMessage = "Valor incorrecto")]
         [UIHint("Currency")]
         [DisplayFormat(DataFormatString = "{0:C0}")]
-        public long Valor { get; set; }
+        public string Valor { get; set; }
 
         [DisplayName("Área")]
         [Required(ErrorMessage = "El area es obligatorio")]

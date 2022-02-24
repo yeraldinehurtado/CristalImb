@@ -233,8 +233,9 @@ namespace CristalImb.Model.Migrations
                     b.Property<int?>("TipoInmueblesTipoInmuebleId")
                         .HasColumnType("int");
 
-                    b.Property<long>("Valor")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Valor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ZonaId")
                         .HasColumnType("int");
@@ -564,16 +565,23 @@ namespace CristalImb.Model.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
-                            ConcurrencyStamp = "a4ffc43d-b9b2-40ad-9ffd-6051de4d88ab",
+                            Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
+                            ConcurrencyStamp = "1e4259c5-e7cb-42e8-a151-66d263ea7e35",
                             Name = "Administrador",
                             Estado = true
                         },
                         new
                         {
-                            Id = "2",
-                            ConcurrencyStamp = "bb32014f-6450-4ab9-8d2b-36e5139e884a",
+                            Id = "64B512E7-46AE-4989-A049-A446118099C4",
+                            ConcurrencyStamp = "0d5f0006-9037-4e9e-8604-00eb69d18015",
                             Name = "Empleado",
+                            Estado = true
+                        },
+                        new
+                        {
+                            Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
+                            ConcurrencyStamp = "e26ad55e-1a22-4390-b78b-24c62867c70c",
+                            Name = "Cliente",
                             Estado = true
                         });
                 });
