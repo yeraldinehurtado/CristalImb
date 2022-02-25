@@ -44,66 +44,50 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> RegistrarInmuebleAsync()
         {
+
             ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerListaTiposEstado(), "TipoInmuebleId", "NombreTipoInm");
             ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObteneEstadosInmueblesEstado(), "IdEstadoInm", "NombreEstado");
             ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
-
             return View();
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarInmueble(InmueblesViewModel inmueblesViewModel)
+        public async Task<IActionResult> RegistrarInmueble(Inmueble inmueble)
         {
-            if (ModelState.IsValid)
+            try
             {
-
-                
-                Inmueble inmueble = new()
-                {
-                    Codigo = inmueblesViewModel.Codigo,
-                    Descripcion = inmueblesViewModel.Descripcion,
-                    TipoId = inmueblesViewModel.TipoId,
-                    IdEstadoInm = inmueblesViewModel.IdEstadoInm,
-                    ZonaId = inmueblesViewModel.ServicioInmuebleId,
-                    Valor = inmueblesViewModel.Valor,
-                    Area = inmueblesViewModel.Area,
-                    oferta = inmueblesViewModel.oferta,
-                    Estado = true
-                };
-                try
-                {
-                    var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
-                    if (CodigoExiste != null)
-                    {
-                        TempData["Accion"] = "Error";
-                        TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
-                        return RedirectToAction("IndexInmueble");
-                    }
-                    await _inmuebleService.GuardarInmueble(inmueble);
-                    TempData["Accion"] = "GuardarInmueble";
-                    TempData["Mensaje"] = "Inmueble guardado con éxito.";
-                    return RedirectToAction("IndexInmueble");
-                }
-                catch (Exception)
+                var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                if (CodigoExiste != null)
                 {
                     TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
                     return RedirectToAction("IndexInmueble");
                 }
+                await _inmuebleService.GuardarInmueble(inmueble);
+                TempData["Accion"] = "GuardarInmueble";
+                TempData["Mensaje"] = "Inmueble guardado con éxito.";
+                return RedirectToAction("IndexInmueble");
             }
-            TempData["Accion"] = "Error";
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ingresaste un valor inválido";
+                return RedirectToAction("IndexInmueble");
+            }
+        
+        TempData["Accion"] = "Error";
             TempData["Mensaje"] = "Ingresaste un valor inválido";
             return RedirectToAction("IndexInmueble");
-        }
+    }
 
         [HttpGet]
         public async Task<IActionResult> EditarInmueble(int id = 0)
         {
-            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerTipos(), "TipoInmuebleId", "NombreTipoInm");
+            ViewData["ListaTipos"] = new SelectList(await _tipoInmuebleService.ObtenerListaTiposEstado(), "TipoInmuebleId", "NombreTipoInm");
             ViewData["ListaEstadosInm"] = new SelectList(await _estadosInmuebleService.ObteneEstadosInmueblesEstado(), "IdEstadoInm", "NombreEstado");
-            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerZonas(), "ZonaId", "NombreZona");
+            ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }
