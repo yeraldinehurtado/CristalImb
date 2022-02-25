@@ -55,7 +55,7 @@ namespace CristalImb.Web.Controllers
                     }
                     await _tipoInmuebleService.GuardarTipoInmueble(tipoInmuebles);
                     TempData["Accion"] = "GuardarTipoInmueble";
-                    TempData["Mensaje"] = "Propietario guardado con éxito.";
+                    TempData["Mensaje"] = "Tipo de inmueble guardado con éxito.";
                     return RedirectToAction("IndexTipoInmuebles");
                 }
                 catch (Exception)
