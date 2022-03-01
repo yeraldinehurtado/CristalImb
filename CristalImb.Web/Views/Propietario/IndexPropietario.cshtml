@@ -136,6 +136,15 @@
         title: "Guardar propietario",
             icon: 'success',
             html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+         @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarPropInmueble")) {
+        <text>
+        Swal.fire({
+        title: "Guardar inmueble",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
             })
         </text>
         }

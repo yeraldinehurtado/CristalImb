@@ -214,14 +214,14 @@ namespace CristalImb.Web.Controllers
                         };
                         await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
                     }
-                    TempData["Accion"] = "Crear";
-                    TempData["Mensaje"] = "inmueble añadido con éxito";
+                    TempData["Accion"] = "GuardarPropInmueble";
+                    TempData["Mensaje"] = "inmueble(s) añadido con éxito";
                     return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
                 {
-                    TempData["Accion"] = "No se pudo registrar el inmueble";
-                    TempData["Mensaje"] = "Error";
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "No se pudo registrar el inmueble";
                     return RedirectToAction("IndexPropietario");
                 }
             }
