@@ -74,7 +74,7 @@
 
         if (codigoText != '' && codigoText != 'Seleccione') {
             $("#tablacodigo").append(`
-            <tr id="${contador}">
+            <tr id="tr-${contador}">
                 <td>
                     <input type="hidden" name="inmProp[${contador}].InmuebleId" value="${codigoId}" />
                     ${codigoText}
@@ -94,9 +94,6 @@
         
     }
     function eliminarInmueble(contador) {
-        let codigosIndex = [];
-        codigosIndex.push(contador);
-        $("#listacodigo").attr("asp-route-codigoIndex", codigosIndex)
-        $("#" + contador).remove();
+        $("#tr-" + contador).remove();
     }
 </script>

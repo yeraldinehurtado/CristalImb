@@ -213,9 +213,10 @@ namespace CristalImb.Web.Controllers
 
                         };
                         await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
+                        TempData["Accion"] = "GuardarPropInmueble";
+                        TempData["Mensaje"] = "inmueble(s) añadido con éxito";
                     }
-                    TempData["Accion"] = "GuardarPropInmueble";
-                    TempData["Mensaje"] = "inmueble(s) añadido con éxito";
+                    
                     return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
