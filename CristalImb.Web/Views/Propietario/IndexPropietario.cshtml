@@ -56,9 +56,11 @@
                                     Agregar Inmuebles
                                 </th>
                                 <th>
+                                    Ver inmuebles
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
-                                <th> </th>
                                 <th> </th>
                                 <th> </th>
                             </tr>
@@ -81,12 +83,12 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelx => x.Correo)
+                                    </td>                                   
+                                    <td>
+                                        <a onclick="mostrarModal('@Url.Action("CrearInmPropietarios","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Crear inmpropietarios')"> Agregar inmuebles.</a>
                                     </td>
                                     <td>
                                         <a onclick="mostrarModal('@Url.Action("VerInmuebles","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Ver Inmuebles')"> Ver inmuebles.</a>
-                                    </td>
-                                    <td>
-                                        <a onclick="mostrarModal('@Url.Action("CrearInmPropietarios","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Crear inmpropietarios')"> Agregar inmuebles.</a>
                                     </td>
                                     <td>
                                         @if (x.Estado == true)

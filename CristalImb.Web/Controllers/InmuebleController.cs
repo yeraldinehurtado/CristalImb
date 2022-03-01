@@ -23,14 +23,16 @@ namespace CristalImb.Web.Controllers
         private readonly IZonaService _zonaService;
         private readonly IEstadosInmuebleService _estadosInmuebleService;
         private readonly IServiciosInmuebleService _serviciosInmuebleService;
+        private readonly IInmPropietariosService _inmPropietariosService;
 
-        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IEstadosInmuebleService estadosInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService)
+        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IEstadosInmuebleService estadosInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService, IInmPropietariosService inmPropietariosService)
         {
             _inmuebleService = inmuebleService;
             _tipoInmuebleService = tipoInmuebleService;
             _zonaService = zonaService;
             _estadosInmuebleService = estadosInmuebleService;
             _serviciosInmuebleService = serviciosInmuebleService;
+            _inmPropietariosService = inmPropietariosService;
             _propietarioService = propietarioService;
         }
 
@@ -193,7 +195,13 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        
+        public async Task<IActionResult> VerPropietarios(int id)
+        {
+            ViewBag.PropietarioId = id;
+            return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId2(id));
+        }
+
+
 
     }
 }

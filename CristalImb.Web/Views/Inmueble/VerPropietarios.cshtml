@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CristalImb.Model.Entities.InmPropietarios>
+
+@{
+    ViewData["Title"] = "VerPropietaros";
+    Layout = null;
+}
+
+<section class="content">
+    <table class="table" id="tabla">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario.Identificacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario.Apellido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Propietario.Correo)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Propietario.Identificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Propietario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Propietario.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Propietario.Correo)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</section>
+@section Scripts{
+
+    <script src="~/js/tabla.js"></script>
+    <script src="~/js/modals.js"></script>
+}
