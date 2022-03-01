@@ -33,6 +33,17 @@ namespace CristalImb.Model.DAL
                     Estado = true
                 }
             );
+            modelBuilder.Entity<UsuarioIdentity>().HasData(
+
+                new UsuarioIdentity
+                {
+                    Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
+                    Identificacion = "1000438288",
+                    UserName = "admin",
+                    Email = "admin@mail.com"
+                }
+                
+            );
         }
     }
 }
