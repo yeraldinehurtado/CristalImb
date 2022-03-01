@@ -67,6 +67,7 @@ namespace CristalImb.Web.Controllers
                     TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
                     return RedirectToAction("IndexInmueble");
                 }
+                inmueble.Estado = true;
                 await _inmuebleService.GuardarInmueble(inmueble);
                 TempData["Accion"] = "GuardarInmueble";
                 TempData["Mensaje"] = "Inmueble guardado con éxito.";
