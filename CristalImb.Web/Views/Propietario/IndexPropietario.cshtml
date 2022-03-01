@@ -18,7 +18,6 @@
         }
     </style>
 }
-
 <section class="content">
     <div class="container-fluid">
         <div class="m-0 row justify-content-center align-items-baseline">
@@ -85,10 +84,11 @@
                                         @Html.DisplayFor(modelx => x.Correo)
                                     </td>                                   
                                     <td>
-                                        <a onclick="mostrarModal('@Url.Action("CrearInmPropietarios","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Crear inmpropietarios')"> Agregar inmuebles.</a>
+                                        <a onclick="mostrarModal('@Url.Action("CrearInmPropietarios","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Crear inmpropietarios')" class="btn alert-primary"> <i class="fa-solid fa-plus"></i></a>
+                                        
                                     </td>
                                     <td>
-                                        <a onclick="mostrarModal('@Url.Action("VerInmuebles","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Ver Inmuebles')"> Ver inmuebles.</a>
+                                        <a onclick="mostrarModal('@Url.Action("VerInmuebles","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Ver Inmuebles')" class="btn alert-primary"><i class="fa-solid fa-eye"></i></a>
                                     </td>
                                     <td>
                                         @if (x.Estado == true)
