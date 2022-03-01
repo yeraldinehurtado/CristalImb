@@ -197,16 +197,16 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Area")
+                        .HasColumnType("int");
 
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -573,14 +573,14 @@ namespace CristalImb.Model.Migrations
                         new
                         {
                             Id = "64B512E7-46AE-4989-A049-A446118099C4",
-                            ConcurrencyStamp = "b69c5afb-938c-48cf-8c01-a859a2c2946d",
+                            ConcurrencyStamp = "d009f526-4d9d-49c0-8dfd-d3187546859d",
                             Name = "Empleado",
                             Estado = true
                         },
                         new
                         {
                             Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
-                            ConcurrencyStamp = "663848f8-6866-4c6b-878a-167508ff9707",
+                            ConcurrencyStamp = "72930b50-e2a1-438c-b068-8707e0ce191a",
                             Name = "Cliente",
                             Estado = true
                         });

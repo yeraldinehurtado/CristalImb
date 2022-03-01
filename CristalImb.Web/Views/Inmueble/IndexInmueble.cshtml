@@ -110,7 +110,7 @@
                                         @Html.DisplayFor(modelx => x.oferta)
                                     </td>
                                     <td>
-                                        <a onclick="mostrarModal('@Url.Action("VerPropietarios","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Ver Propietarios')"> Ver propietarios.</a>
+                                        <a onclick="mostrarModal('@Url.Action("VerPropietarios","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Ver Propietarios')" class="btn alert-primary"><i class="fa fa-eye"></i></a>
                                     </td>
                                     <td>
                                         @if (x.Estado == true)
