@@ -566,21 +566,21 @@ namespace CristalImb.Model.Migrations
                         new
                         {
                             Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
-                            ConcurrencyStamp = "4a5cf6a4-ac21-4e9e-bf71-4a790b9e3702",
+                            ConcurrencyStamp = "2b684453-d6ba-4387-9010-89ace170e54c",
                             Name = "Administrador",
                             Estado = true
                         },
                         new
                         {
                             Id = "64B512E7-46AE-4989-A049-A446118099C4",
-                            ConcurrencyStamp = "4e73c675-ec8f-42fa-97c1-0587c88cea96",
+                            ConcurrencyStamp = "d009f526-4d9d-49c0-8dfd-d3187546859d",
                             Name = "Empleado",
                             Estado = true
                         },
                         new
                         {
                             Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
-                            ConcurrencyStamp = "f9edd9c2-897a-42a2-8882-8b56694ff6b2",
+                            ConcurrencyStamp = "72930b50-e2a1-438c-b068-8707e0ce191a",
                             Name = "Cliente",
                             Estado = true
                         });

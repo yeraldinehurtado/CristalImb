@@ -38,7 +38,7 @@ namespace CristalImb.Web.Controllers
 
         public async Task<IActionResult> VerInmuebles(int id)
         {
-            ViewBag.PropietarioId = id;
+            ViewBag.InmuebleId = id;
             return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId(id));
         }
 
