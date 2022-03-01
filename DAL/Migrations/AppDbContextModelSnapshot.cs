@@ -566,21 +566,21 @@ namespace CristalImb.Model.Migrations
                         new
                         {
                             Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
-                            ConcurrencyStamp = "2b684453-d6ba-4387-9010-89ace170e54c",
+                            ConcurrencyStamp = "7965124a-61f9-4cb1-b091-13010de3297c",
                             Name = "Administrador",
                             Estado = true
                         },
                         new
                         {
                             Id = "64B512E7-46AE-4989-A049-A446118099C4",
-                            ConcurrencyStamp = "d009f526-4d9d-49c0-8dfd-d3187546859d",
+                            ConcurrencyStamp = "b69c5afb-938c-48cf-8c01-a859a2c2946d",
                             Name = "Empleado",
                             Estado = true
                         },
                         new
                         {
                             Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
-                            ConcurrencyStamp = "72930b50-e2a1-438c-b068-8707e0ce191a",
+                            ConcurrencyStamp = "663848f8-6866-4c6b-878a-167508ff9707",
                             Name = "Cliente",
                             Estado = true
                         });
@@ -599,6 +599,23 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.HasDiscriminator().HasValue("UsuarioIdentity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b1c24bf7-b95a-45a0-9315-776de10f5b39",
+                            Email = "admin@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6f4e8272-0368-42a7-b4ee-2f1612107d1e",
+                            TwoFactorEnabled = false,
+                            UserName = "admin",
+                            Estado = false,
+                            Identificacion = "1000438288"
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Cita", b =>
