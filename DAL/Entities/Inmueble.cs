@@ -16,6 +16,8 @@ namespace CristalImb.Model.Entities
         public string Codigo { get; set; }
 
         [DisplayName("Descripción")]
+        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
+        [StringLength(70, ErrorMessage = "Máximo 70 caracteres")]
         public string Descripcion { get; set; }
 
         [DisplayName("Tipo de inmueble")]
@@ -41,7 +43,9 @@ namespace CristalImb.Model.Entities
 
         [DisplayName("Área")]
         [Required(ErrorMessage = "El area es obligatorio")]
-        public string Area { get; set; }
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
+        [Range(1, 9999999999, ErrorMessage = "Máximo 10 números")]
+        public int Area { get; set; }
 
         [DisplayName("Dirección")]
         [Required(ErrorMessage = "La dirección es obligatorio")]

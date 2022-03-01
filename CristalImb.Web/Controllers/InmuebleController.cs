@@ -80,9 +80,6 @@ namespace CristalImb.Web.Controllers
                 return RedirectToAction("IndexInmueble");
             }
         
-        TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Ingresaste un valor inválido";
-            return RedirectToAction("IndexInmueble");
     }
 
         [HttpGet]

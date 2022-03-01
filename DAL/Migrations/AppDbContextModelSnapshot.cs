@@ -197,16 +197,16 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Area")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Area")
+                        .HasColumnType("int");
 
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
@@ -566,21 +566,21 @@ namespace CristalImb.Model.Migrations
                         new
                         {
                             Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
-                            ConcurrencyStamp = "2b684453-d6ba-4387-9010-89ace170e54c",
+                            ConcurrencyStamp = "295a4f12-f286-4c45-b843-d4610394cbba",
                             Name = "Administrador",
                             Estado = true
                         },
                         new
                         {
                             Id = "64B512E7-46AE-4989-A049-A446118099C4",
-                            ConcurrencyStamp = "d009f526-4d9d-49c0-8dfd-d3187546859d",
+                            ConcurrencyStamp = "7ef7d034-eb76-4fa9-a14f-5f2ab941197f",
                             Name = "Empleado",
                             Estado = true
                         },
                         new
                         {
                             Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
-                            ConcurrencyStamp = "72930b50-e2a1-438c-b068-8707e0ce191a",
+                            ConcurrencyStamp = "5fa23ba3-4be2-423b-888b-795a2363028d",
                             Name = "Cliente",
                             Estado = true
                         });
