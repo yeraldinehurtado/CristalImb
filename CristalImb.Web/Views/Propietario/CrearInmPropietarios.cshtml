@@ -67,12 +67,12 @@
 
 }
 <script>
+    let contador = 0;
     function agregarInmueble() {
         let codigoId = $("#codigos option:selected").val();
         let codigoText = $("#codigos option:selected").text();
-        let contador = 0;
 
-        
+        if (codigoText != '' && codigoText != 'Seleccione') {
             $("#tablacodigo").append(`
             <tr id="${contador}">
                 <td>
@@ -85,6 +85,11 @@
             </tr>
             `);
             contador++;
+        } 
+
+        $("#codigos option[value='" + codigoId + "']").hide();
+                
+            
         
         
     }
