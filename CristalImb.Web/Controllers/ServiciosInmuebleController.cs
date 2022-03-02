@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class ServiciosInmuebleController : Controller
     {
         private readonly IServiciosInmuebleService _serviciosInmuebleService;

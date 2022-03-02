@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-   
+    [Authorize(Roles = "Admin, Empleado")]
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;
@@ -32,8 +32,8 @@ namespace CristalImb.Web.Controllers
             var listCita = await _citaService.ObtenerCita();
             return View(await _citaService.ObtenerCita());
         }
-        
-        
+
+        [Authorize(Roles = "Admin, Empleado, Client")]
         [HttpGet]
         public async Task<IActionResult> RegistrarCitaAsync()
         {
@@ -44,7 +44,7 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
-        
+        [Authorize(Roles = "Admin, Empleado, Client")]
         [HttpPost]
         public async Task<IActionResult> RegistrarCita(Cita cita)
         {

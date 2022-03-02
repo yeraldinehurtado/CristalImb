@@ -141,6 +141,32 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("EstadoCitaId");
 
                     b.ToTable("estadoCitas");
+
+                    b.HasData(
+                        new
+                        {
+                            EstadoCitaId = 1,
+                            Estado = true,
+                            Nombre = "Confirmada"
+                        },
+                        new
+                        {
+                            EstadoCitaId = 2,
+                            Estado = true,
+                            Nombre = "Por confirmar"
+                        },
+                        new
+                        {
+                            EstadoCitaId = 3,
+                            Estado = true,
+                            Nombre = "En curso"
+                        },
+                        new
+                        {
+                            EstadoCitaId = 4,
+                            Estado = true,
+                            Nombre = "Finalizada"
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
@@ -160,6 +186,32 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("IdEstadoInm");
 
                     b.ToTable("estadosInmueble");
+
+                    b.HasData(
+                        new
+                        {
+                            IdEstadoInm = 1,
+                            Estado = true,
+                            NombreEstado = "Sobre planos"
+                        },
+                        new
+                        {
+                            IdEstadoInm = 2,
+                            Estado = true,
+                            NombreEstado = "En reparación"
+                        },
+                        new
+                        {
+                            IdEstadoInm = 3,
+                            Estado = true,
+                            NombreEstado = "Libre"
+                        },
+                        new
+                        {
+                            IdEstadoInm = 4,
+                            Estado = true,
+                            NombreEstado = "Ocupado"
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.InmPropietarios", b =>
@@ -305,6 +357,26 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("ServicioInmuebleId");
 
                     b.ToTable("serviciosInmueble");
+
+                    b.HasData(
+                        new
+                        {
+                            ServicioInmuebleId = 1,
+                            Estado = true,
+                            Nombre = "Venta"
+                        },
+                        new
+                        {
+                            ServicioInmuebleId = 2,
+                            Estado = true,
+                            Nombre = "Arriendo"
+                        },
+                        new
+                        {
+                            ServicioInmuebleId = 3,
+                            Estado = true,
+                            Nombre = "Avalúo"
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.TipoInmuebles", b =>
@@ -324,6 +396,20 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("TipoInmuebleId");
 
                     b.ToTable("tipoInmuebles");
+
+                    b.HasData(
+                        new
+                        {
+                            TipoInmuebleId = 1,
+                            Estado = true,
+                            NombreTipoInm = "Casa"
+                        },
+                        new
+                        {
+                            TipoInmuebleId = 2,
+                            Estado = true,
+                            NombreTipoInm = "Apartamento"
+                        });
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Zona", b =>
@@ -343,6 +429,86 @@ namespace CristalImb.Model.Migrations
                     b.HasKey("ZonaId");
 
                     b.ToTable("zonas");
+
+                    b.HasData(
+                        new
+                        {
+                            ZonaId = 1,
+                            Estado = true,
+                            NombreZona = "El poblado"
+                        },
+                        new
+                        {
+                            ZonaId = 2,
+                            Estado = true,
+                            NombreZona = "Belén"
+                        },
+                        new
+                        {
+                            ZonaId = 3,
+                            Estado = true,
+                            NombreZona = "Boston"
+                        },
+                        new
+                        {
+                            ZonaId = 4,
+                            Estado = true,
+                            NombreZona = "Boston"
+                        },
+                        new
+                        {
+                            ZonaId = 5,
+                            Estado = true,
+                            NombreZona = "Laureles"
+                        },
+                        new
+                        {
+                            ZonaId = 6,
+                            Estado = true,
+                            NombreZona = "Estadio"
+                        },
+                        new
+                        {
+                            ZonaId = 7,
+                            Estado = true,
+                            NombreZona = "Manrique"
+                        },
+                        new
+                        {
+                            ZonaId = 8,
+                            Estado = true,
+                            NombreZona = "Aranjuez"
+                        },
+                        new
+                        {
+                            ZonaId = 9,
+                            Estado = true,
+                            NombreZona = "Villa Hermosa"
+                        },
+                        new
+                        {
+                            ZonaId = 10,
+                            Estado = true,
+                            NombreZona = "Campo Valdés"
+                        },
+                        new
+                        {
+                            ZonaId = 11,
+                            Estado = true,
+                            NombreZona = "Las palmas"
+                        },
+                        new
+                        {
+                            ZonaId = 12,
+                            Estado = true,
+                            NombreZona = "Ciudad del Rio"
+                        },
+                        new
+                        {
+                            ZonaId = 13,
+                            Estado = true,
+                            NombreZona = "Prado"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -532,6 +698,13 @@ namespace CristalImb.Model.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
+                            RoleId = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -566,22 +739,25 @@ namespace CristalImb.Model.Migrations
                         new
                         {
                             Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
-                            ConcurrencyStamp = "7965124a-61f9-4cb1-b091-13010de3297c",
+                            ConcurrencyStamp = "1",
                             Name = "Administrador",
+                            NormalizedName = "Admin",
                             Estado = true
                         },
                         new
                         {
                             Id = "64B512E7-46AE-4989-A049-A446118099C4",
-                            ConcurrencyStamp = "d009f526-4d9d-49c0-8dfd-d3187546859d",
+                            ConcurrencyStamp = "2",
                             Name = "Empleado",
+                            NormalizedName = "Empleado",
                             Estado = true
                         },
                         new
                         {
                             Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
-                            ConcurrencyStamp = "72930b50-e2a1-438c-b068-8707e0ce191a",
+                            ConcurrencyStamp = "3",
                             Name = "Cliente",
+                            NormalizedName = "Client",
                             Estado = true
                         });
                 });
@@ -605,15 +781,19 @@ namespace CristalImb.Model.Migrations
                         {
                             Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b1c24bf7-b95a-45a0-9315-776de10f5b39",
-                            Email = "admin@mail.com",
+                            ConcurrencyStamp = "d243e5e8-e78c-4cd4-948f-adcd306cce33",
+                            Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDw3572WWx3HbphorK+DBi3PPOTuOdcljPbJo689dfHLwz5TAQpUZu+FrB8w7SKqcA==",
+                            PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6f4e8272-0368-42a7-b4ee-2f1612107d1e",
+                            SecurityStamp = "ad613450-c8f5-4558-8313-a164c4c65157",
                             TwoFactorEnabled = false,
-                            UserName = "admin",
-                            Estado = false,
+                            UserName = "admin@gmail.com",
+                            Estado = true,
                             Identificacion = "1000438288"
                         });
                 });

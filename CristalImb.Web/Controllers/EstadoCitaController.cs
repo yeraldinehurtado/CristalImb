@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    
+    [Authorize(Roles = "Admin, Empleado")]
     public class EstadoCitaController : Controller
     {
         private readonly IEstadoCitaService _estadoCitaService;

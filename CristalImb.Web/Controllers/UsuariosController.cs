@@ -14,10 +14,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using RestSharp;
 
 namespace CristalImb.Web.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class UsuariosController : Controller
     {
         private readonly UserManager<UsuarioIdentity> _userManager;
@@ -84,12 +85,14 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Registrar()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Registrar(UsuarioViewModel usuarioViewModel)
         {
@@ -208,16 +211,16 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View(); 
         }
 
-        
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid)
@@ -236,8 +239,7 @@ namespace CristalImb.Web.Controllers
                     {
                         return RedirectToAction("RegistrarCita", "Cita");
                     }
-                    return RedirectToAction("Dashboard", "Admin");
-
+                    return RedirectToAction("Login", "Usuarios");
 
 
                 }
@@ -339,13 +341,12 @@ namespace CristalImb.Web.Controllers
             }
             return View(resetearPasswordDto);
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> CerrarSesion()
         {
             await _signInManager.SignOutAsync();
-            _httpContextAccessor.HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Landing");
+            return RedirectToAction("IndexLanding", "Landing");
         }
     }
 }
