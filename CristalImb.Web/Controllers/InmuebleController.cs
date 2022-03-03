@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Admin, Empleado")]
+    [Authorize(Roles = "Administrador, Empleado")]
     public class InmuebleController : Controller
     {
         private readonly IPropietarioService _propietarioService;
