@@ -1,4 +1,4 @@
-﻿@model CristalImb.Model.Entities.Inmueble
+﻿@model CristalImb.Business.Dtos.Inmuebles.InmuebleDto
 @{
     ViewData["Title"] = "RegistrarInmueble";
     Layout = null;
@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="registrar">
-            <form asp-action="RegistrarInmueble">
+            <form asp-action="RegistrarInmueble" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-md-12 row">
                 <div class="form-group col-md-6">
@@ -71,6 +71,17 @@
                     <input asp-for="oferta" class="form-control" />
                     <span asp-validation-for="oferta" class="text-danger"></span>
                 </div>
+                <div class="card">
+                            <div class="card-body">
+                                <div class=""><h2><strong>Imagenes:</strong></h2></div>
+                                <br />
+                                <div class="form-group">
+                                   @* <label asp-for="File"></label>*@
+                                    <input asp-for="Files" class="form-control" multiple/>
+                                </div>
+                                <small>EL archivo debe tener un máximo de 20 mb. Formato permitidos: PDF.</small>
+                            </div>
+                        </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Registrar" class="btn btn-primary" />

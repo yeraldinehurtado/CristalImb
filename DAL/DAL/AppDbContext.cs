@@ -19,6 +19,14 @@ namespace CristalImb.Model.DAL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            /*
+            modelBuilder.Entity<Seguimiento>()
+           .HasOne(p => p.Entrada)
+           .WithMany(b => b.Seguimientos).
+            HasForeignKey(e => e.EntradasId);
+            */
+
+
             base.OnModelCreating(modelBuilder);
             this.SeedUsers(modelBuilder);
             this.SeedRoles(modelBuilder);
@@ -309,5 +317,7 @@ namespace CristalImb.Model.DAL
         public DbSet<EstadoCita> estadoCitas { get; set; }
         public DbSet<EstadosInmueble> estadosInmueble { get; set; }
         public DbSet<UsuarioIdentity> usuarioIdentity { get; set; }
+
+        public DbSet<InmuebleDetalleArchivos> inmuebleDetalleArchivos { get; set; }
     }
 }

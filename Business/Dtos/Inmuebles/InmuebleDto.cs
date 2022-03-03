@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,11 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CristalImb.Model.Entities
+namespace CristalImb.Business.Dtos.Inmuebles
 {
-    public class Inmueble
+    public class InmuebleDto
     {
-        [Key]
         public int InmuebleId { get; set; }
         [Required(ErrorMessage = "El código es obligatorio")]
         [DisplayName("Código")]
@@ -42,41 +42,26 @@ namespace CristalImb.Model.Entities
 
         [DisplayName("Servicio inmueble")]
         [Required(ErrorMessage = "El servicio es obligatorio")]
-        [ForeignKey("ServiciosInmueble")]
         public int ServicioInmuebleId { get; set; }
 
 
 
         [DisplayName("Zona inmueble")]
         [Required(ErrorMessage = "La zona del inmueble es obligatoria")]
-        [ForeignKey("Zona")]
         public int ZonaId { get; set; }
 
 
         [DisplayName("Tipo de inmueble")]
         [Required(ErrorMessage = "El tipo es obligatorio")]
-        [ForeignKey("TipoInmuebles")]
         public int TipoId { get; set; }
 
 
         [DisplayName("Estado inmueble")]
         [Required(ErrorMessage = "El estado de inmueble es obligatorio")]
 
-        [ForeignKey("EstadosInmueble")]
         public int IdEstadoInm { get; set; }
-
-        public virtual EstadosInmueble EstadosInmueble { get; set; }
-
-        public virtual TipoInmuebles TipoInmuebles { get; set; }
-        
-        public virtual Zona Zona { get; set; }
-        
-        public virtual ServiciosInmueble ServiciosInmueble { get; set; }
-        public virtual List<InmPropietarios> InmPropietario { get; set; }
-        public virtual List<Cita> citas { get; set; }
-
-
-        public virtual List<InmuebleDetalleArchivos> InmuebleDetalleArchivos { get; set; }
+        //public List<IFormFile> Files { get; set; }
+        public List<IFormFile> Files { get; set; }
 
 
     }

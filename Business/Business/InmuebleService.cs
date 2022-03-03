@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CristalImb.Business.Dtos.Inmuebles;
 
 namespace CristalImb. Business.Business
 {
@@ -31,11 +32,56 @@ namespace CristalImb. Business.Business
             return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm==1).ToListAsync();
         }
 
-        public async Task GuardarInmueble(Inmueble inmueble)
+        public async Task<int?> GuardarInmueble(InmuebleDto inmuebleDto)
         {
+            Inmueble inmueble = new()
+            {
+
+                Area = inmuebleDto.Area,
+                Codigo = inmuebleDto.Codigo,
+                Descripcion = inmuebleDto.Descripcion,
+                Direccion = inmuebleDto.Direccion,
+                Estado = true,
+                IdEstadoInm = inmuebleDto.IdEstadoInm,
+                InmuebleId = inmuebleDto.InmuebleId,
+                oferta = inmuebleDto.oferta,
+                ServicioInmuebleId = inmuebleDto.ServicioInmuebleId,
+                TipoId = inmuebleDto.TipoId,
+                Valor = inmuebleDto.Valor,
+                ZonaId = inmuebleDto.ZonaId,
+
+
+
+
+            };
             _context.Add(inmueble);
-            await _context.SaveChangesAsync();
+            if (await GuardarCambios())
+                return inmueble.InmuebleId;
+            else
+            {
+                return null;
+            }
         }
+
+        public void CrearInmuebleDetalleArchivos(int inmuebleId, string nombreArchivo)
+        {
+
+            InmuebleDetalleArchivos inmuebleDetalleArchivos = new()
+            {
+                InmuebleId = inmuebleId,
+                NombreArchivo = nombreArchivo
+            };
+            _context.Add(inmuebleDetalleArchivos);
+
+        }
+
+        public async Task<bool> GuardarCambios()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+
+
 
         public async Task<Inmueble> ObtenerInmuebleId(int id)
         {

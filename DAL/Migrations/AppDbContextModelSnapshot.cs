@@ -267,22 +267,13 @@ namespace CristalImb.Model.Migrations
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("EstadosInmuebleIdEstadoInm")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdEstadoInm")
                         .HasColumnType("int");
 
                     b.Property<int>("ServicioInmuebleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ServiciosInmuebleServicioInmuebleId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TipoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoInmueblesTipoInmuebleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Valor")
@@ -297,15 +288,36 @@ namespace CristalImb.Model.Migrations
 
                     b.HasKey("InmuebleId");
 
-                    b.HasIndex("EstadosInmuebleIdEstadoInm");
+                    b.HasIndex("IdEstadoInm");
 
-                    b.HasIndex("ServiciosInmuebleServicioInmuebleId");
+                    b.HasIndex("ServicioInmuebleId");
 
-                    b.HasIndex("TipoInmueblesTipoInmuebleId");
+                    b.HasIndex("TipoId");
 
                     b.HasIndex("ZonaId");
 
                     b.ToTable("inmuebles");
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.InmuebleDetalleArchivos", b =>
+                {
+                    b.Property<int>("InmuebleDetalleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("InmuebleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreArchivo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("InmuebleDetalleId");
+
+                    b.HasIndex("InmuebleId");
+
+                    b.ToTable("inmuebleDetalleArchivos");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Propietario", b =>
@@ -781,16 +793,16 @@ namespace CristalImb.Model.Migrations
                         {
                             Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d243e5e8-e78c-4cd4-948f-adcd306cce33",
+                            ConcurrencyStamp = "6ef4df81-c720-486e-b343-0598f4ff31e6",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDw3572WWx3HbphorK+DBi3PPOTuOdcljPbJo689dfHLwz5TAQpUZu+FrB8w7SKqcA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJQe7j2cwt1jFOKGGq4EQB0vwvvhv46rojnA/VWnKMq+TrIJetKOXcwQysy9zrMMuQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad613450-c8f5-4558-8313-a164c4c65157",
+                            SecurityStamp = "69fc8a07-99cc-4142-9e55-4123c7fdedc6",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             Estado = true,
@@ -845,19 +857,25 @@ namespace CristalImb.Model.Migrations
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
                 {
                     b.HasOne("CristalImb.Model.Entities.EstadosInmueble", "EstadosInmueble")
-                        .WithMany("Inmuebles")
-                        .HasForeignKey("EstadosInmuebleIdEstadoInm");
+                        .WithMany("Inmueble")
+                        .HasForeignKey("IdEstadoInm")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "ServiciosInmueble")
-                        .WithMany("Inmuebles")
-                        .HasForeignKey("ServiciosInmuebleServicioInmuebleId");
+                        .WithMany()
+                        .HasForeignKey("ServicioInmuebleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CristalImb.Model.Entities.TipoInmuebles", "TipoInmuebles")
-                        .WithMany("Inmuebles")
-                        .HasForeignKey("TipoInmueblesTipoInmuebleId");
+                        .WithMany()
+                        .HasForeignKey("TipoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CristalImb.Model.Entities.Zona", "Zona")
-                        .WithMany("Inmuebles")
+                        .WithMany()
                         .HasForeignKey("ZonaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -869,6 +887,17 @@ namespace CristalImb.Model.Migrations
                     b.Navigation("TipoInmuebles");
 
                     b.Navigation("Zona");
+                });
+
+            modelBuilder.Entity("CristalImb.Model.Entities.InmuebleDetalleArchivos", b =>
+                {
+                    b.HasOne("CristalImb.Model.Entities.Inmueble", "Inmueble")
+                        .WithMany("InmuebleDetalleArchivos")
+                        .HasForeignKey("InmuebleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Inmueble");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -929,7 +958,7 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
                 {
-                    b.Navigation("Inmuebles");
+                    b.Navigation("Inmueble");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
@@ -937,26 +966,13 @@ namespace CristalImb.Model.Migrations
                     b.Navigation("citas");
 
                     b.Navigation("InmPropietario");
+
+                    b.Navigation("InmuebleDetalleArchivos");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.Propietario", b =>
                 {
                     b.Navigation("InmPropietario");
-                });
-
-            modelBuilder.Entity("CristalImb.Model.Entities.ServiciosInmueble", b =>
-                {
-                    b.Navigation("Inmuebles");
-                });
-
-            modelBuilder.Entity("CristalImb.Model.Entities.TipoInmuebles", b =>
-                {
-                    b.Navigation("Inmuebles");
-                });
-
-            modelBuilder.Entity("CristalImb.Model.Entities.Zona", b =>
-                {
-                    b.Navigation("Inmuebles");
                 });
 #pragma warning restore 612, 618
         }

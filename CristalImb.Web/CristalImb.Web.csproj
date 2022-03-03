@@ -24,4 +24,8 @@
     <ProjectReference Include="..\DAL\CristalImb.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imagenesInmueble\" />
+  </ItemGroup>
+
 </Project>

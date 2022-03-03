@@ -1,5 +1,6 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Business.Business;
+using CristalImb.Business.Dtos.Inmuebles;
 using CristalImb.Web.ViewModels.Inmuebles;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.InmPropietarios;
@@ -10,7 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace CristalImb.Web.Controllers
 {
@@ -18,6 +21,7 @@ namespace CristalImb.Web.Controllers
     public class InmuebleController : Controller
     {
         private readonly IPropietarioService _propietarioService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IInmuebleService _inmuebleService;
         private readonly ITipoInmuebleService _tipoInmuebleService;
         private readonly IZonaService _zonaService;
@@ -25,8 +29,9 @@ namespace CristalImb.Web.Controllers
         private readonly IServiciosInmuebleService _serviciosInmuebleService;
         private readonly IInmPropietariosService _inmPropietariosService;
 
-        public InmuebleController(IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IEstadosInmuebleService estadosInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService, IInmPropietariosService inmPropietariosService)
+        public InmuebleController(IWebHostEnvironment webHostEnvironment, IInmuebleService inmuebleService, ITipoInmuebleService tipoInmuebleService, IZonaService zonaService, IEstadosInmuebleService estadosInmuebleService, IPropietarioService propietarioService, IServiciosInmuebleService serviciosInmuebleService, IInmPropietariosService inmPropietariosService)
         {
+            _webHostEnvironment = webHostEnvironment;
             _inmuebleService = inmuebleService;
             _tipoInmuebleService = tipoInmuebleService;
             _zonaService = zonaService;
@@ -56,22 +61,58 @@ namespace CristalImb.Web.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> RegistrarInmueble(Inmueble inmueble)
+        public async Task<IActionResult> RegistrarInmueble(InmuebleDto inmuebleDto)
         {
             try
             {
-                var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                var CodigoExiste = await _inmuebleService.CodigoExiste(inmuebleDto.Codigo);
                 if (CodigoExiste != null)
                 {
                     TempData["Accion"] = "Error";
                     TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
                     return RedirectToAction("IndexInmueble");
                 }
-                inmueble.Estado = true;
-                await _inmuebleService.GuardarInmueble(inmueble);
-                TempData["Accion"] = "GuardarInmueble";
-                TempData["Mensaje"] = "Inmueble guardado con éxito.";
-                return RedirectToAction("IndexInmueble");
+
+                if (inmuebleDto.Files != null)
+                {
+                    inmuebleDto.Estado = true;
+                    var idInmueble = await _inmuebleService.GuardarInmueble(inmuebleDto);
+
+                    if (idInmueble != null)
+                    {
+                        string uniqueFileName;
+                        foreach (var archivo in inmuebleDto.Files)
+                        {
+                            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imagenesInmueble");
+                            //uniqueFileName = Guid.NewGuid().ToString() + "_" + archivo.FileName;
+                            uniqueFileName = DateTime.Now.ToString("yyyymmssfff") + "_" + (archivo.FileName).Trim(); //otra opción
+                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                            // Use CopyTo() method provided by IFormFile interface to
+                            // copy the file to wwwroot/images folder
+                            // archivo.CopyTo(new FileStream(filePath, FileMode.Create));
+                            using (var fileStream = new FileStream(filePath, FileMode.Create))//Guardar imagen
+                            {
+                                await archivo.CopyToAsync(fileStream);
+                            }
+                            _inmuebleService.CrearInmuebleDetalleArchivos(idInmueble.Value, uniqueFileName);
+                        }
+                        if (await _inmuebleService.GuardarCambios())
+                        {
+                            TempData["Accion"] = "GuardarInmueble";
+                            TempData["Mensaje"] = "Inmueble guardado con éxito.";
+                            return RedirectToAction("IndexInmueble");
+
+                        }
+
+
+                    }
+                    return View(inmuebleDto);
+
+
+                }
+                return View(inmuebleDto);
+
+
             }
             catch (Exception)
             {
@@ -91,7 +132,7 @@ namespace CristalImb.Web.Controllers
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }
-
+        /*
         [HttpPost]
         public async Task<IActionResult> EditarInmueble(int? id, Inmueble inmueble)
         {
@@ -132,6 +173,7 @@ namespace CristalImb.Web.Controllers
             }
 
         }
+        */
 
         [HttpPost]
         public async Task<IActionResult> ActualizarEstado(int? id)
