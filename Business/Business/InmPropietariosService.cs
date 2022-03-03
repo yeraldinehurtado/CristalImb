@@ -25,9 +25,24 @@ namespace CristalImb.Business.Business
 
 
         }
+        public async Task GuardarInmPropietario(InmPropietarios inmpropietario)
+        {
+            _context.Add(inmpropietario);
+            await _context.SaveChangesAsync();
+        }
+        public async Task EditarInmPropietario(InmPropietarios inmPropietarios)
+        {
+            _context.Update(inmPropietarios);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropEstado()
+        {
+            return await _context.InmPropietarios.Where(s => s.Estado == true).ToListAsync();
+        }
+       
         public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId(int id)
         {
-            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.PropietarioId == id).ToListAsync();
+            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.PropietarioId == id).Where(s => s.Estado == true).ToListAsync();
         }
 
         public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId2(int id)

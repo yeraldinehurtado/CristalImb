@@ -221,6 +221,9 @@ namespace CristalImb.Model.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("FechaFin")
                         .HasColumnType("datetime2");
 
@@ -781,16 +784,16 @@ namespace CristalImb.Model.Migrations
                         {
                             Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d243e5e8-e78c-4cd4-948f-adcd306cce33",
+                            ConcurrencyStamp = "0002c6af-7262-447f-b4ab-ecd1c2ce752f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDw3572WWx3HbphorK+DBi3PPOTuOdcljPbJo689dfHLwz5TAQpUZu+FrB8w7SKqcA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELKWrUTcWpu7kQC6Ti2AbcJ4jg0GkjtwXOSIErLALcYNiZgMmuqb9KdeW9OELjekrA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad613450-c8f5-4558-8313-a164c4c65157",
+                            SecurityStamp = "00be00df-31a4-4563-bc0f-978918615092",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             Estado = true,

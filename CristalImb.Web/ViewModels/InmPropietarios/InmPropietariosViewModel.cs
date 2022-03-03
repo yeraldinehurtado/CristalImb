@@ -28,5 +28,6 @@ namespace CristalImb.Web.ViewModels.InmPropietarios
 
         [DisplayName("Fecha final")]
         public DateTime FechaFin { get; set; }
+        public bool Estado { get; set; }
     }
 }
