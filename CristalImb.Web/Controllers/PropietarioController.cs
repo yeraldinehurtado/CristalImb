@@ -37,9 +37,12 @@ namespace CristalImb.Web.Controllers
 
         }
 
-        public async Task<IActionResult> VerInmuebles(int id)
+        [HttpGet]
+        public async Task<IActionResult> VerInmuebles(int id, InmPropietarios inmPropietarios)
         {
             ViewBag.InmuebleId = id;
+            
+            
             return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId(id));
         }
 
@@ -209,8 +212,9 @@ namespace CristalImb.Web.Controllers
                         {
                             PropietarioId = propietario,
                             InmuebleId = x.InmuebleId,
-                            FechaInicio = x.FechaInicio,
-                            FechaFin = x.FechaFin
+                            FechaInicio = DateTime.Now,
+                            Estado = true
+
 
                         };
                         await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
@@ -233,7 +237,7 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EliminarInmPropietario(int id)
+        public async Task<IActionResult> EliminarInmPropietario(int id, InmPropietariosViewModel inmPropietariosViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -241,7 +245,11 @@ namespace CristalImb.Web.Controllers
                 {
                     TempData["Accion"] = "Confirmación";
                     InmPropietarios inmPropietarios = await _inmPropietariosService.ObtenerInmPropietariosId(id);
-                    await _inmPropietariosService.EliminarInmPropietarios(id);
+                    inmPropietarios.FechaFin = DateTime.Now;
+                    inmPropietarios.Estado = false;
+
+                    await _inmPropietariosService.EditarInmPropietario(inmPropietarios);
+                    
                     TempData["Accion"] = "EliminarInmPropietario";
                     TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
                     return RedirectToAction("IndexPropietario");

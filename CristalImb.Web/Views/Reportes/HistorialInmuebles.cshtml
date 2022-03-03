@@ -1,0 +1,104 @@
+﻿@model IEnumerable<CristalImb.Model.Entities.InmPropietarios>
+
+@{
+    ViewData["Title"] = "Historial inmuebles";
+}
+
+@section Styles{
+    <style>
+        .contenido {
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        tr td {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #08006f;
+        }
+    </style>
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="m-0 row justify-content-center align-items-baseline">
+
+            <div class="contenido">
+                <h3 class="text-center"> Historial de inmuebles</h3>
+                <hr />
+                <div class="botonCrear col-12 p-3 text-center accent-teal">
+                    <br />
+                    <br />
+                </div>
+                <div>
+                    <table class="table table-striped table-bordered col-12" id="tabla">
+                        <thead class="bg-dark text-white">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inmueble.Codigo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inmueble.TipoId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inmueble.ServicioInmuebleId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inmueble.Valor)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaInicio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaFin)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Propietario.Identificacion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Inmueble.IdEstadoInm)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var x in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Inmueble.Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Inmueble.TipoId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Inmueble.ServicioInmuebleId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Inmueble.Valor)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.FechaInicio)
+                                    </td>                                   
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.FechaFin)
+                                        
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Propietario.Identificacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelx => x.Inmueble.IdEstadoInm)
+                                    </td>
+                                   
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="~/js/Tabla.js"></script>
+}

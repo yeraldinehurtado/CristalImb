@@ -26,6 +26,8 @@ namespace CristalImb.Model.Entities
         [DisplayName("Fecha final")]
         public DateTime FechaFin { get; set; }
 
+        public bool Estado { get; set; }
+
         public virtual Inmueble Inmueble { get; set; }
 
         public virtual Propietario Propietario { get; set; }
