@@ -233,13 +233,15 @@ namespace CristalImb.Web.Controllers
 
                     if (rol.Contains("Administrador") || rol.Contains("Empleado"))
                     {
-                        return RedirectToAction("Dashboard", "Admin");
+                        return LocalRedirect("/Admin/Dashboard");
                     }
                     else if (rol.Contains("Cliente"))
                     {
-                        return RedirectToAction("RegistrarCita", "Cita");
+                        return LocalRedirect("/Cita/RegistrarCita");
                     }
                     return RedirectToAction("Login", "Usuarios");
+
+
 
 
                 }

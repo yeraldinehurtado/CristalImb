@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Administrador")]
+    [Authorize(Roles = "Administrador, Empleado")]
     public class AdminController : Controller
     {
         public IActionResult Index()

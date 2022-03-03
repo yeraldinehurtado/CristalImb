@@ -61,19 +61,18 @@ namespace CristalImb.Web
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 4;
+                options.Password.RequiredLength = 5;
                 options.User.RequireUniqueEmail = true;
             });
 
             services.AddIdentity<UsuarioIdentity, Rol>(options => options.SignIn.RequireConfirmedAccount = false)
-               .AddDefaultUI()
                .AddDefaultTokenProviders()
                .AddEntityFrameworkStores<AppDbContext>();
 
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.AccessDeniedPath = new PathString("/Admin/NoAutorizado");
+                options.AccessDeniedPath = new PathString("/Usuarios/Login");
                 options.Cookie.Name = "Cookie";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
@@ -104,6 +103,7 @@ namespace CristalImb.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
