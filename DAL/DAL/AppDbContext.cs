@@ -153,7 +153,7 @@ namespace CristalImb.Model.DAL
                 new Zona
                 {
                     ZonaId = 4,
-                    NombreZona = "Boston",
+                    NombreZona = "San Diego",
                     Estado = true
                 },
                 new Zona
