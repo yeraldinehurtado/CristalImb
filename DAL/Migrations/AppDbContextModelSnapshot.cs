@@ -72,10 +72,10 @@ namespace CristalImb.Model.Migrations
                     b.Property<int>("ServicioInmuebleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Telefono")
+                    b.Property<int?>("ServiciosInmuebleServicioInmuebleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("serviciosInmuebleServicioInmuebleId")
+                    b.Property<int>("Telefono")
                         .HasColumnType("int");
 
                     b.HasKey("CitaId");
@@ -84,7 +84,7 @@ namespace CristalImb.Model.Migrations
 
                     b.HasIndex("InmuebleId");
 
-                    b.HasIndex("serviciosInmuebleServicioInmuebleId");
+                    b.HasIndex("ServiciosInmuebleServicioInmuebleId");
 
                     b.ToTable("citas");
                 });
@@ -796,16 +796,16 @@ namespace CristalImb.Model.Migrations
                         {
                             Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0002c6af-7262-447f-b4ab-ecd1c2ce752f",
+                            ConcurrencyStamp = "dfe31c7a-8e73-4f46-8ce5-3a718389b858",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELKWrUTcWpu7kQC6Ti2AbcJ4jg0GkjtwXOSIErLALcYNiZgMmuqb9KdeW9OELjekrA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOLuHUSD8VeeWjbzYGVjwMTozbHkBgZL5VyVGHdKu7OeHC6FSn7n2vaJWvfS30mv0w==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "00be00df-31a4-4563-bc0f-978918615092",
+                            SecurityStamp = "b9b2c39a-4f79-4bbb-b739-19fae347f385",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             Estado = true,
@@ -815,27 +815,27 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.Cita", b =>
                 {
-                    b.HasOne("CristalImb.Model.Entities.EstadoCita", "estadoCita")
-                        .WithMany("citas")
+                    b.HasOne("CristalImb.Model.Entities.EstadoCita", "EstadoCita")
+                        .WithMany()
                         .HasForeignKey("EstadoCitaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CristalImb.Model.Entities.Inmueble", "inmuebles")
-                        .WithMany("citas")
+                    b.HasOne("CristalImb.Model.Entities.Inmueble", "Inmuebles")
+                        .WithMany()
                         .HasForeignKey("InmuebleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "serviciosInmueble")
+                    b.HasOne("CristalImb.Model.Entities.ServiciosInmueble", "ServiciosInmueble")
                         .WithMany()
-                        .HasForeignKey("serviciosInmuebleServicioInmuebleId");
+                        .HasForeignKey("ServiciosInmuebleServicioInmuebleId");
 
-                    b.Navigation("estadoCita");
+                    b.Navigation("EstadoCita");
 
-                    b.Navigation("inmuebles");
+                    b.Navigation("Inmuebles");
 
-                    b.Navigation("serviciosInmueble");
+                    b.Navigation("ServiciosInmueble");
                 });
 
             modelBuilder.Entity("CristalImb.Model.Entities.InmPropietarios", b =>
@@ -954,11 +954,6 @@ namespace CristalImb.Model.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CristalImb.Model.Entities.EstadoCita", b =>
-                {
-                    b.Navigation("citas");
-                });
-
             modelBuilder.Entity("CristalImb.Model.Entities.EstadosInmueble", b =>
                 {
                     b.Navigation("Inmueble");
@@ -966,8 +961,6 @@ namespace CristalImb.Model.Migrations
 
             modelBuilder.Entity("CristalImb.Model.Entities.Inmueble", b =>
                 {
-                    b.Navigation("citas");
-
                     b.Navigation("InmPropietario");
 
                     b.Navigation("InmuebleDetalleArchivos");

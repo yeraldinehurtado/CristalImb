@@ -73,7 +73,6 @@ namespace CristalImb.Model.Entities
         
         public virtual ServiciosInmueble ServiciosInmueble { get; set; }
         public virtual List<InmPropietarios> InmPropietario { get; set; }
-        public virtual List<Cita> citas { get; set; }
 
 
         public virtual List<InmuebleDetalleArchivos> InmuebleDetalleArchivos { get; set; }

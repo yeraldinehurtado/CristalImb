@@ -14,7 +14,7 @@ namespace CristalImb.Model.Entities
         public int IdEstadoInm { get; set; }
 
         [Required(ErrorMessage = "El estado de inmueble es requerido.")]
-        [DisplayName("Nombre de estado de inmueble")]
+        [DisplayName("Estado de inmueble")]
         public string NombreEstado { get; set; }
         public bool Estado { get; set; }
         public virtual List<Inmueble> Inmueble { get; set; }

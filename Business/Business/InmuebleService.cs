@@ -20,7 +20,7 @@ namespace CristalImb. Business.Business
 
         public async Task<IEnumerable<Inmueble>> ObtenerInmueble()
         {
-            return await _context.inmuebles.ToListAsync();
+            return await _context.inmuebles.Include(p => p.TipoInmuebles).Include(c => c.Zona).Include(c => c.ServiciosInmueble).Include(f => f.EstadosInmueble).ToListAsync();
         }
 
         public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesEstado()

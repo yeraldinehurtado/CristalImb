@@ -13,6 +13,8 @@ namespace CristalImb.Model.Entities
         [Key]
         [DisplayName("ServicioId")]
         public int ServicioInmuebleId { get; set; }
+
+        [DisplayName("Servicio de inmueble")]
         public string Nombre { get; set; }
         public bool Estado { get; set; }
         

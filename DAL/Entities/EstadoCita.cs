@@ -13,6 +13,5 @@ namespace CristalImb.Model.Entities
         public int EstadoCitaId { get; set; }
         public string Nombre { get; set; }
         public bool Estado { get; set; }
-        public virtual List<Cita> citas { get; set; }
     }
 }

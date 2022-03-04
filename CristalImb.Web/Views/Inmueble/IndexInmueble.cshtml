@@ -43,11 +43,11 @@
                                     @Html.DisplayNameFor(model => model.Descripcion)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TipoId)
+                                    @Html.DisplayNameFor(model => model.TipoInmuebles.NombreTipoInm)
 
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.ServicioInmuebleId)
+                                    @Html.DisplayNameFor(model => model.ServiciosInmueble.Nombre)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Valor)
@@ -56,10 +56,10 @@
                                     @Html.DisplayNameFor(model => model.Area)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.ZonaId)
+                                    @Html.DisplayNameFor(model => model.Zona.NombreZona)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.IdEstadoInm)
+                                    @Html.DisplayNameFor(model => model.EstadosInmueble.NombreEstado)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Direccion)
@@ -86,10 +86,10 @@
                                         @Html.DisplayFor(modelx => x.Descripcion)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelx => x.TipoId)
+                                        @Html.DisplayFor(modelx => x.TipoInmuebles.NombreTipoInm)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelx => x.ServicioInmuebleId)
+                                        @Html.DisplayFor(modelx => x.ServiciosInmueble.Nombre)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelx => x.Valor) 
@@ -98,10 +98,10 @@
                                         @Html.DisplayFor(modelx => x.Area)<p>m²</p>
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelx => x.ZonaId)
+                                        @Html.DisplayFor(modelx => x.Zona.NombreZona)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelx => x.IdEstadoInm)
+                                        @Html.DisplayFor(modelx => x.EstadosInmueble.NombreEstado)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelx => x.Direccion)

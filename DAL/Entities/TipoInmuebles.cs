@@ -14,7 +14,7 @@ namespace CristalImb.Model.Entities
         public int TipoInmuebleId { get; set; }
 
         [Required(ErrorMessage = "El tipo de inmuebles es requerido.")]
-        [DisplayName("Nombre de tipo de inmueble")]
+        [DisplayName("Tipo de inmueble")]
         public string NombreTipoInm { get; set; }
         public bool Estado { get; set; }
         
