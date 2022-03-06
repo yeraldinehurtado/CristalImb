@@ -29,7 +29,7 @@ namespace CristalImb. Business.Business
         }
         public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesOferta()
         {
-            return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm==1).ToListAsync();
+            return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm==3 && s.Estado == true).ToListAsync();
         }
 
         public async Task<int?> GuardarInmueble(InmuebleDto inmuebleDto)

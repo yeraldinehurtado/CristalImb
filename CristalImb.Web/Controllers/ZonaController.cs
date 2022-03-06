@@ -138,6 +138,7 @@ namespace CristalImb.Web.Controllers
                 else if (zona.Estado == false)
                     zona.Estado = true;
 
+
                 await _zonaService.EditarZona(zona);
                 TempData["Accion"] = "EditarEstado";
                 TempData["Mensaje"] = "Estado editardo correctamente";
