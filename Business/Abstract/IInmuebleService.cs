@@ -22,6 +22,8 @@ namespace CristalImb.Business.Abstract
         Task<IEnumerable<Inmueble>> CodigoExisteEditar(string codigo);
         Task<bool> GuardarCambios();
         void CrearInmuebleDetalleArchivos(int inmuebleId, string nombreArchivo);
+        Task<Inmueble> TipoDeInmuebleExiste(int tipo);
+        Task<Inmueble> ZonaExiste(int zona);
 
     }
 }

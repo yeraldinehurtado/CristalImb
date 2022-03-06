@@ -47,7 +47,7 @@ namespace CristalImb.Business.Business
 
         public async Task<IEnumerable<InmPropietarios>> ObtenerListaInmPropietariosPorId2(int id)
         {
-            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.InmuebleId == id).ToListAsync();
+            return await _context.InmPropietarios.Include(p => p.Inmueble).Include(c => c.Propietario).Where(s => s.InmuebleId == id).Where(s => s.Estado == true).ToListAsync();
         }
         public async Task RegistrarInmPropietarios(InmPropietarios inmPropietarios)
         {

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CristalImb.Business.Dtos.Inmuebles;
 
 namespace CristalImb.Web.Controllers
 {
@@ -38,6 +39,37 @@ namespace CristalImb.Web.Controllers
 
             return View(await _inmuebleService.ObtenerListaInmueblesOferta());
         }
+
+        public async Task<IActionResult> InmueblesFiltro(InmuebleDto inmueble)
+        {
+            try
+            {
+                var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                var TipoExiste = await _inmuebleService.TipoDeInmuebleExiste(inmueble.TipoId);
+                var ZonaExiste = await _inmuebleService.ZonaExiste(inmueble.ZonaId);
+                if (CodigoExiste != null || TipoExiste != null || ZonaExiste != null)
+                {
+                    return View(await _inmuebleService.ObtenerInmueble());
+                }
+                else
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "No hay ningún dato de búsqueda.";
+                    return RedirectToAction("IndexLanding");
+                }
+
+                return View(inmueble);
+
+            }
+            catch (Exception)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "No hay ningún dato de búsqueda.";
+                return RedirectToAction("IndexLanding");
+            }
+            
+        }
+
 
         //landing inmuebles en venta
         [HttpGet]

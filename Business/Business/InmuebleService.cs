@@ -117,6 +117,13 @@ namespace CristalImb. Business.Business
         {
             return await _context.inmuebles.Where(c => c.Codigo == codigo).ToListAsync();
         }
-
+        public async Task<Inmueble> TipoDeInmuebleExiste(int tipo)
+        {
+            return await _context.inmuebles.FirstOrDefaultAsync(x => x.TipoId == tipo);
+        }
+        public async Task<Inmueble> ZonaExiste(int zona)
+        {
+            return await _context.inmuebles.FirstOrDefaultAsync(x => x.ZonaId == zona);
+        }
     }
 }
