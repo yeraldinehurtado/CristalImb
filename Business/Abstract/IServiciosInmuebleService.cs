@@ -14,5 +14,6 @@ namespace CristalImb.Business.Abstract
         Task GuardarServiciosInmueble(ServiciosInmueble serviciosInmueble);
         Task<ServiciosInmueble> ObtenerServiciosInmuebleId(int id);
         Task EditarServiciosInmueble(ServiciosInmueble serviciosInmueble);
+        Task<ServiciosInmueble> nombreTipoExiste(string nombre);
     }
 }

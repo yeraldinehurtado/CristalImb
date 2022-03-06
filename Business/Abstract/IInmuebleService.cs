@@ -13,6 +13,7 @@ namespace CristalImb.Business.Abstract
         Task<IEnumerable<Inmueble>> ObtenerInmueble();
         Task<IEnumerable<Inmueble>> ObtenerListaInmueblesEstado();
         Task<IEnumerable<Inmueble>> ObtenerListaInmueblesOferta();
+        Task GuardarInmueble1(Inmueble inmueble);
         Task<int?> GuardarInmueble(InmuebleDto inmuebleDto);
         Task<Inmueble> ObtenerInmuebleId(int id);
         Task EditarInmueble(Inmueble inmueble);

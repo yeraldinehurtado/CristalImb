@@ -38,18 +38,17 @@ namespace CristalImb.Model.Entities
         [Required(ErrorMessage = "La fecha de la cita es obligatoria")]
         public DateTime FechaHora { get; set; }
 
-        
-        public int ServicioInmuebleId { get; set; }
-
-
         [ForeignKey("Inmuebles")]
         public int InmuebleId { get; set; }
+
+        public int ServicioInmuebleId { get; set; }
 
         [ForeignKey("EstadoCita")]
         public int EstadoCitaId { get; set; }
 
 
         public virtual Inmueble Inmuebles { get; set; }
+
         public virtual ServiciosInmueble ServiciosInmueble { get; set; }
         public virtual EstadoCita EstadoCita { get; set; }
 

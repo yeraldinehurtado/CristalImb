@@ -132,7 +132,7 @@ namespace CristalImb.Web.Controllers
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
             return View(await _inmuebleService.ObtenerInmuebleId(id));
         }
-        /*
+        
         [HttpPost]
         public async Task<IActionResult> EditarInmueble(int? id, Inmueble inmueble)
         {
@@ -141,7 +141,7 @@ namespace CristalImb.Web.Controllers
                 
                 if (id == 0)
                 {
-                    await _inmuebleService.GuardarInmueble(inmueble);
+                    await _inmuebleService.GuardarInmueble1(inmueble);
                     return RedirectToAction("IndexInmueble");
                 }
                 else
@@ -173,7 +173,7 @@ namespace CristalImb.Web.Controllers
             }
 
         }
-        */
+        
 
         [HttpPost]
         public async Task<IActionResult> ActualizarEstado(int? id)

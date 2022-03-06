@@ -26,6 +26,8 @@ namespace CristalImb.Model.DAL
             HasForeignKey(e => e.EntradasId);
             */
 
+            
+
 
             base.OnModelCreating(modelBuilder);
             this.SeedUsers(modelBuilder);

@@ -11,7 +11,6 @@ namespace CristalImb.Model.Entities
     public class ServiciosInmueble
     {
         [Key]
-        [DisplayName("ServicioId")]
         public int ServicioInmuebleId { get; set; }
 
         [DisplayName("Servicio de inmueble")]

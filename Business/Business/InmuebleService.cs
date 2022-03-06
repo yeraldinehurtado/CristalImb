@@ -32,6 +32,12 @@ namespace CristalImb. Business.Business
             return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm==3 && s.Estado == true).ToListAsync();
         }
 
+        public async Task GuardarInmueble1(Inmueble inmueble)
+        {
+            _context.Add(inmueble);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<int?> GuardarInmueble(InmuebleDto inmuebleDto)
         {
             Inmueble inmueble = new()
