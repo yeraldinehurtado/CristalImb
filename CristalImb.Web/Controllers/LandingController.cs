@@ -7,11 +7,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CristalImb.Business.Dtos.Inmuebles;
+using CristalImb.Model.DAL;
+using CristalImb.Web.ViewModels.PaginadorGenerico;
+
 
 namespace CristalImb.Web.Controllers
 {
     public class LandingController : Controller
     {
+        private readonly int _RegistrosPorPagina = 10;
+
+        private AppDbContext _DbContext;
+        private List<Inmueble> inmuebles;
+        private PaginadorGenerico<Inmueble> _PaginadorInmuebles;
         private readonly IInmuebleService _inmuebleService;
         private readonly ITipoInmuebleService _tipoInmuebleService;
         private readonly IZonaService _zonaService;
@@ -40,42 +48,38 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerListaInmueblesOferta());
         }
 
-        public async Task<IActionResult> InmueblesFiltro(InmuebleDto inmueble)
+        public async Task<IActionResult> InmueblesFiltro(InmuebleDto inmuebleDto, string buscar, int pagina = 1)
         {
-            try
+            int _TotalRegistros = 0;
+            int _TotalPaginas = 0;
+
+            // Recuperamos el 'DbSet' completo
+            inmuebles = _DbContext.inmuebles.ToList();
+
+            // Filtramos el resultado por el 'texto de búqueda'
+            if (!string.IsNullOrEmpty(buscar))
             {
-                var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
-                var TipoExiste = await _inmuebleService.TipoDeInmuebleExiste(inmueble.TipoId);
-                var ZonaExiste = await _inmuebleService.ZonaExiste(inmueble.ZonaId);
-                if (CodigoExiste != null || TipoExiste != null || ZonaExiste != null)
+                foreach (var item in buscar.Split(new char[] { ' ' },
+                         StringSplitOptions.RemoveEmptyEntries))
                 {
+                    inmuebles = inmuebles.Where(x => x.Codigo.Contains(item) ||
+                                                  x.Zona.NombreZona.Contains(item) ||
+                                                  x.ServiciosInmueble.Nombre.Contains(item) ||
+                                                  x.TipoInmuebles.NombreTipoInm.Contains(item) ||
+                                                  x.Valor.Contains(item))
+                                                  .ToList();
                     return View(await _inmuebleService.ObtenerInmueble());
                 }
-                else
-                {
-                    TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "No hay ningún dato de búsqueda.";
-                    return RedirectToAction("IndexLanding");
-                }
-
-                return View(inmueble);
-
+                return View(inmuebleDto);
             }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "No hay ningún dato de búsqueda.";
-                return RedirectToAction("IndexLanding");
-            }
-            
+            return View(inmuebleDto);
         }
-
 
         //landing inmuebles en venta
         [HttpGet]
         public async Task<IActionResult> InmueblesVenta()
         {
-             return View(await _inmuebleService.ObtenerListaInmueblesEstado());
+            return View(await _inmuebleService.ObtenerListaInmueblesEstado());
 
         }
 
