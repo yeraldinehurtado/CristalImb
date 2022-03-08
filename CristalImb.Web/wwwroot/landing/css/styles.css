@@ -4235,11 +4235,11 @@ textarea.form-control-lg {
 }
 
 .nav-link:hover, .nav-link:focus {
-    color: #6e7277;
+    color: #10b3e3;
 }
 
 .nav-link.disabled {
-    color: #6c757d;
+    color: #10b3e3;
     pointer-events: none;
     cursor: default;
 }
@@ -4257,7 +4257,7 @@ textarea.form-control-lg {
     }
 
         .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
-            border-color: #e9ecef #e9ecef #dee2e6;
+            border-color: #10b3e3 #10b3e3 #10b3e3;
             isolation: isolate;
         }
 

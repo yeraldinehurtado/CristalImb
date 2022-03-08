@@ -68,7 +68,7 @@ namespace CristalImb.Web.Controllers
                                                   x.TipoInmuebles.NombreTipoInm.Contains(item) ||
                                                   x.Valor.Contains(item))
                                                   .ToList();
-                    return View(await _inmuebleService.ObtenerInmueble());
+                    return View(inmuebles.ToList());
                 }
                 return View(inmuebleDto);
             }
