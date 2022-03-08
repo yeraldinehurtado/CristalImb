@@ -131,5 +131,10 @@ namespace CristalImb. Business.Business
         {
             return await _context.inmuebles.FirstOrDefaultAsync(x => x.ZonaId == zona);
         }
+
+        public async Task<InmuebleDetalleArchivos> ObtenerInmuebleImgId(int id)
+        {
+            return await _context.inmuebleDetalleArchivos.FirstOrDefaultAsync(x => x.InmuebleDetalleId == id);
+        }
     }
 }

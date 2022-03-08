@@ -25,6 +25,7 @@ namespace CristalImb.Business.Abstract
         void CrearInmuebleDetalleArchivos(int inmuebleId, string nombreArchivo);
         Task<Inmueble> TipoDeInmuebleExiste(int tipo);
         Task<Inmueble> ZonaExiste(int zona);
+        Task<Inmueble> ObtenerInmuebleImgId(int id);
 
     }
 }

@@ -241,6 +241,13 @@ namespace CristalImb.Web.Controllers
             return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId2(id));
         }
 
+        //------------------------------
+
+        public async Task<IActionResult> VerImagenes(int id)
+        {
+            ViewBag.InmuebleDetalleId = id;
+            return View(await _inmuebleService.ObtenerInmuebleImgId(id));
+        }
 
 
     }

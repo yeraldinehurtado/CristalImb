@@ -73,6 +73,7 @@
                                 </th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,6 +112,9 @@
                                     </td>
                                     <td>
                                         <a onclick="mostrarModal('@Url.Action("VerPropietarios","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Ver Propietarios')" class="btn alert-primary"><i class="fa fa-eye"></i></a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="VerImagenes" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fa fa-image"></i></a>
                                     </td>
                                     <td>
                                         @if (x.Estado == true)
