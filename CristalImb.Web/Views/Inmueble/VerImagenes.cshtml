@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CristalImb.Model.Entities.InmuebleDetalleArchivos>
+﻿@model CristalImb.Model.Entities.InmuebleDetalleArchivos
 
 @{
     ViewData["Title"] = "IndexInmueble";
@@ -23,39 +23,42 @@
     <div class="container-fluid">
         <div class="m-0 row justify-content-center align-items-baseline">
             <div class="contenido">
-                <h3 class="text-center"> Gestión de imágenes</h3>
                 <hr />
-                <div class="botonCrear col-12 p-3 text-center accent-teal">
-                    
-                </div>
-                <div>
-                    <table class="table table-striped table-bordered col-12" id="tabla">
-                        <thead class="bg-dark text-white">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.NombreArchivo)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var x in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <img src="@Html.DisplayFor(modelx => x.NombreArchivo)"/>
-                                    </td>
-                                    <td>
-                                         @*<form asp-action="EliminarInmPropietario" asp-route-id="@x.InmProId" class="d-inline">
-                                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                                        </form>*@
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
             </div>
+            
+            <br />
+            <br />
+            <div>
+                <table class="table table-striped table-bordered col-12" id="tabla">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>
+                                Imagen
+                            </th>
+                            <th>
+                                Acción
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @if (@Model.NombreArchivo != null)
+                                {
+                                    <img src="@("~/imagenesInmueble/" + @Model.NombreArchivo)" asp-append-version="true" class="img-brand w-25 h-10" />
+                                }
+                            </td>
+                            <td>
+                                @*<form asp-action="EliminarInmPropietario" asp-route-id="@x.InmProId" class="d-inline">
+                                <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                            </form>*@
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         </div>
     </div>
 </section>

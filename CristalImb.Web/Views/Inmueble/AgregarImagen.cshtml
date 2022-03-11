@@ -1,0 +1,106 @@
+﻿@model CristalImb.Business.Dtos.Inmuebles.InmuebleDto
+
+@{
+    ViewData["Title"] = "Agregar imagenes";
+    Layout = null;
+}
+
+@section Styles{
+    <style>
+        .contenido {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin-bottom: 5%;
+        }
+
+        tr td {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            color: #08006f;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class=""><h2><strong>Imagenes:</strong></h2></div>
+                            <br />
+                            <div class="form-group">
+                                @* <label asp-for="File"></label>*@
+                                <input asp-for="Files" class="form-control" id="img" multiple />
+                            </div>
+                            @*<small>EL archivo debe tener un máximo de 20 mb. Formato permitidos: PDF.</small>*@
+                        </div>
+                    </div>
+                </div>
+            </div><br />
+            <div class="form-group">
+                <input onclick="agregarImg()" type="submit" value="Agregar imagen" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+    <br /><hr /><br />
+    <div class="row">
+        <div class="col-12">
+            <h2>Lista de imagenes</h2>
+            <form asp-action="AgregarImagen" asp-controller="Inmueble" method="post">
+                <input type="hidden" asp-for="InmuebleId" />
+                <input type="hidden" asp-route-imagenIndex="" id="listaimagen" />
+                <table id="tablaimagen" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Imagen</td>
+                            <td>Acciones</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <input id="agregar" type="submit" value="Guardar imágenes" class="btn btn-primary" /> 
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+}
+<script>
+    let contador = 0;
+    function agregarImg() {
+        let imgId = $("#img").val();
+        let imgText = $("#img").text();
+
+        if (imgText != '') {
+            $("#tablaimagen").append(`
+            <tr id="tr-${contador}">
+                <td>
+                    <input type="hidden" name="inmImg[${contador}].InmuebleId" value="${imgId}" />
+                    ${imgText}
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt" onclick="eliminarImg(${contador})"></i></button>
+                </td>
+            </tr>
+            `);
+            contador++;
+        }
+
+        $("#img [value='" + imgId + "']").hide();
+
+
+
+
+    }
+    function eliminarImg(contador) {
+        $("#tr-" + contador).remove();
+    }
+</script>
