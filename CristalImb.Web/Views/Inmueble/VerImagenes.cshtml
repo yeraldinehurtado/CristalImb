@@ -32,31 +32,26 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    @if (@Model.NombreArchivo != null)
-                    {
-                        <img src="@("~/imagenesInmueble/" + @Model.NombreArchivo)" asp-append-version="true" class="img-brand w-25 h-10" />
-                    }
-                </td>
-                <td>
-                    @*<form asp-action="EliminarInmPropietario" asp-route-id="@x.InmProId" class="d-inline">
+                <tr>
+                    <td>
+                        @if (@Model.NombreArchivo != null)
+                        {
+                            <img src="@("~/imagenesInmueble/" + @Model.NombreArchivo)" asp-append-version="true" class="img-brand w-25 h-10" />
+                        }
+                    </td>
+                    <td>
+                        <form asp-action="EliminarImagen" asp-route-id="@Model.InmuebleDetalleId" class="d-inline">
                             <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                        </form>*@
-                </td>
-            </tr>
+                        </form>
+                    </td>
+                </tr>
+
 
         </tbody>
     </table>
-    </div>
-    </div>
-    </div>
 </section>
-</div>
-</div>
 
 @section Scripts{
-    <script src="~/js/Tabla.js"></script>
     <script src="~/js/modal.js"></script>
 
     <script>

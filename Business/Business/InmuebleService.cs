@@ -80,7 +80,12 @@ namespace CristalImb. Business.Business
             _context.Add(inmuebleDetalleArchivos);
 
         }
-
+        public async Task EliminarInmuebleDetalleArchivo(int id)
+        {
+            var inmImagen = await ObtenerInmuebleImgId(id);
+            _context.Remove(inmImagen);
+            await _context.SaveChangesAsync();
+        }
         public async Task<bool> GuardarCambios()
         {
             return await _context.SaveChangesAsync() > 0;

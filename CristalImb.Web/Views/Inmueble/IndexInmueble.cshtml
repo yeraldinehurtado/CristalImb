@@ -122,7 +122,7 @@
                                     <a asp-action="AgregarImagen" asp-route-id="@x.InmuebleId" class="btn alert-primary"> <i class="fa fa-plus"></i></a>
                                 </td>
                                 <td>
-                                    <a onclick="mostrarModal('@Url.Action("VerImagenes","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Ver imagenes')" class="btn btn-outline-success"><i class="fa fa-image"></i></a>
+                                    <a onclick="mostrarModal('@Url.Action("VerImagenes","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Ver imagenes')" class="btn alert-primary"><i class="fa fa-image"></i></a>
                                 </td>
                                 <td>
                                     @if (x.Estado == true)

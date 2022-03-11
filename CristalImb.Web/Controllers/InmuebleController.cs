@@ -249,6 +249,34 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerInmuebleImgId(id));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EliminarImagen(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    TempData["Accion"] = "Confirmación";
+                    InmuebleDetalleArchivos inmuebleDetalleArch = await _inmuebleService.ObtenerInmuebleImgId(id);
+                    await _inmuebleService.EliminarInmuebleDetalleArchivo(id);
+                    TempData["Accion"] = "EliminarInmueble";
+                    TempData["Mensaje"] = "Imagen eliminada exitosamente";
+                    return RedirectToAction("IndexInmueble");
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("IndexInmueble");
+                }
+            }
+            else
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error.";
+                return RedirectToAction("IndexInmueble");
+            }
+
+        }
+
         [HttpGet]
         public IActionResult AgregarImagen(int id)
         {
