@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Agregar imagenes";
-    Layout = null;
 }
 
 @section Styles{
@@ -25,46 +24,48 @@
     <div class="row">
         <div class="col-12">
             <div asp-validation-summary="ModelOnly"></div>
-            <div class="row">
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class=""><h2><strong>Imagenes:</strong></h2></div>
-                            <br />
-                            <div class="form-group">
-                                @* <label asp-for="File"></label>*@
-                                <input asp-for="Files" class="form-control" id="img" multiple />
-                            </div>
-                            @*<small>EL archivo debe tener un máximo de 20 mb. Formato permitidos: PDF.</small>*@
+            <div class="col-4">
+                <br />
+                <br />
+                <div class="card">
+                    <div class="card-body">
+                        <div class=""><h2><strong>Imagenes:</strong></h2></div>
+                        <br />
+                        <div class="form-group">
+                            @* <label asp-for="File"></label>*@
+                            <input asp-for="Files" class="form-control" id="img" multiple />
                         </div>
+                        @*<small>EL archivo debe tener un máximo de 20 mb. Formato permitidos: PDF.</small>*@
                     </div>
                 </div>
-            </div><br />
-            <div class="form-group">
-                <input onclick="agregarImg()" type="submit" value="Agregar imagen" class="btn btn-primary" />
             </div>
+        </div><br />
+        <div class="form-group">
+            <input onclick="agregarImg()" type="submit" value="Agregar imagen" class="btn btn-primary" />
         </div>
     </div>
-    <br /><hr /><br />
-    <div class="row">
-        <div class="col-12">
-            <h2>Lista de imagenes</h2>
-            <form asp-action="AgregarImagen" asp-controller="Inmueble" method="post">
-                <input type="hidden" asp-for="InmuebleId" />
-                <input type="hidden" asp-route-imagenIndex="" id="listaimagen" />
-                <table id="tablaimagen" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td>Imagen</td>
-                            <td>Acciones</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <input id="agregar" type="submit" value="Guardar imágenes" class="btn btn-primary" /> 
-            </form>
-        </div>
+</div>
+<br />
+<hr />
+<br />
+<div class="row">
+    <div class="col-12">
+        <h2>Lista de imagenes</h2>
+        <form asp-action="AgregarImagen" asp-controller="Inmueble" method="post">
+            <input type="hidden" asp-for="InmuebleId" />
+            <input type="hidden" asp-route-imagenIndex="" id="listaimagen" />
+            <table id="tablaimagen" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Imagen</td>
+                        <td>Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <input id="agregar" type="submit" value="Guardar imágenes" class="btn btn-primary" />
+        </form>
     </div>
 </div>
 
@@ -83,8 +84,8 @@
             $("#tablaimagen").append(`
             <tr id="tr-${contador}">
                 <td>
-                    <input type="hidden" name="inmImg[${contador}].InmuebleId" value="${imgId}" />
-                    ${imgText}
+                    <img src="@("~/imagenesInmueble/" + Model.Files)" name="imgId[${contador}].InmuebleId" value="${imgId}" asp-append-version="true" class="img-brand w-25 h-10" />
+                    ${imgId}
                 </td>
                 <td>
                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt" onclick="eliminarImg(${contador})"></i></button>
@@ -93,8 +94,7 @@
             `);
             contador++;
         }
-
-        $("#img [value='" + imgId + "']").hide();
+        $("#img option[value='" + imgId + "']").hide();
 
 
 

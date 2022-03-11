@@ -249,6 +249,53 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerInmuebleImgId(id));
         }
 
+        [HttpGet]
+        public IActionResult AgregarImagen(int id)
+        {
+            InmuebleDto inmuebleDto = new()
+            {
+                InmuebleId = id
+            };
+            return View(inmuebleDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AgregarImagen(InmuebleDto inmuebleDto)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    string uniqueFileName;
+                    foreach(var archivo in inmuebleDto.Files)
+                    {
+                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imagenesInmueble");
+                        uniqueFileName = DateTime.Now.ToString("yyyymmssfff") + "_" + (archivo.FileName).Trim();
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using(var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await archivo.CopyToAsync(fileStream);
+                        }
+                        _inmuebleService.CrearInmuebleDetalleArchivos(inmuebleDto.InmuebleId, uniqueFileName);
+                    }
+                    if(await _inmuebleService.GuardarCambios())
+                    {
+                        TempData["Accion"] = "GuardarInmueble";
+                        TempData["Mensaje"] = "Imagen guardada con éxito";
+                        return RedirectToAction("IndexInmueble");
+                    }
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "No se pudo registrar la imagen";
+                    return RedirectToAction("IndexInmueble");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Se encontró un error";
+            return RedirectToAction("IndexInmueble");
+        }
 
     }
 }
