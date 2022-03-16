@@ -19,12 +19,12 @@ namespace CristalImb.Business.Business
         }
         public async Task<IEnumerable<UsuarioIdentity>> ObtenerListaUsuarios()
         {
-            return await _context.usuarioIdentity.Include(u => u.IdentityUser).ToListAsync();
+            return await _context.usuarioIdentity.Include(x => x.IdentityUser).ToListAsync();
         }
 
         public async Task<UsuarioIdentity> ObtenerUsuarioId(string id)
         {
-            return await _context.usuarioIdentity.Include(x => x.IdentityUser).FirstOrDefaultAsync(u => u.UsuarioId == id);
+            return await _context.usuarioIdentity.Include(x => x.IdentityUser).FirstOrDefaultAsync(y => y.UsuarioId == id);
         }
 
         public async Task EditarUsuario(UsuarioIdentity usuarioIdentity)

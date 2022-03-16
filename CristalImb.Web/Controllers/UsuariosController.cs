@@ -30,7 +30,7 @@ namespace CristalImb.Web.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AppDbContext _context;
         const string SesionNombre = "_Nombre";
-        
+
 
 
 
@@ -47,11 +47,11 @@ namespace CristalImb.Web.Controllers
 
 
 
-            public async Task<IActionResult> IndexUsuarios()
-            {
-                var listaUsers = await _usuariosService.ObtenerListaUsuarios();
-                return View(listaUsers);
-            }
+        public async Task<IActionResult> IndexUsuarios()
+        {
+            var listaUsers = await _usuariosService.ObtenerListaUsuarios();
+            return View(listaUsers);
+        }
 
         [HttpGet]
         public async Task<IActionResult> CrearUsuarios()
@@ -92,7 +92,7 @@ namespace CristalImb.Web.Controllers
                         smtpClient.Send(mensaje);
                         return RedirectToAction("IndexUsuarios"); //guardar usuario
                     }
-                        
+
                     else
                         return RedirectToAction("IndexUsuarios");
                 }
@@ -146,7 +146,7 @@ namespace CristalImb.Web.Controllers
 
                         //Opcion 1 en la que usamos smpt
 
-                        
+
                         await _usuariosService.GuardarUsuario(usuarioIdentity);
                         MailMessage mensaje = new();
                         mensaje.To.Add(usuarioViewModel.Email);//destinatario
@@ -192,7 +192,7 @@ namespace CristalImb.Web.Controllers
             TempData["Accion"] = "Error";
             TempData["Mensaje"] = "Error";
             return RedirectToAction("IndexUsuarios");
-            
+
         }
 
         [HttpPost]
@@ -266,7 +266,7 @@ namespace CristalImb.Web.Controllers
         }
 
 
-            [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> Eliminar(string id)
         {
             //buscamos el usuario
@@ -280,7 +280,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View(); 
+            return View();
         }
 
         [ValidateAntiForgeryToken]
@@ -342,7 +342,7 @@ namespace CristalImb.Web.Controllers
                     //creamos link para resetear password
 
                     var passwordResetLink = Url.Action("ResetearPassword", "Usuarios",
-                        new {email = olvidePasswordDto.Email, token = token}, Request.Scheme);
+                        new { email = olvidePasswordDto.Email, token = token }, Request.Scheme);
 
                     //Opcion 1 en la que usamos smpt
 
@@ -373,7 +373,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public IActionResult ResetearPassword(string token, string email)
         {
-            if(token == null || email == null)
+            if (token == null || email == null)
             {
                 ModelState.AddModelError("", "Error token");
             }
@@ -396,13 +396,13 @@ namespace CristalImb.Web.Controllers
                         return RedirectToAction("Login");
                     else
                     {
-                        foreach(var errores in result.Errors)
+                        foreach (var errores in result.Errors)
                         {
                             ModelState.AddModelError("", errores.Description);
                         }
                         return View(resetearPasswordDto);
                     }
-                    
+
                 }
                 return View(resetearPasswordDto);
             }

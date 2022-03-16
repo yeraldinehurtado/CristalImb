@@ -275,7 +275,24 @@ namespace CristalImb.Model.DAL
                     NormalizedName = "Client"
                 }
             );
+            modelBuilder.Entity<Rol>().HasData(
 
+               new Rol
+               {
+                   RolId = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
+                   Estado = true
+               },
+               new Rol
+               {
+                   RolId = "64B512E7-46AE-4989-A049-A446118099C4",
+                   Estado = true
+               },
+               new Rol
+               {
+                   RolId = "376D45C8-659D-4ACE-B249-CFBF4F231915",
+                   Estado = true
+               }
+           );
 
         }
 
@@ -292,10 +309,19 @@ namespace CristalImb.Model.DAL
                 PhoneNumber = "1234567890"
             };
 
+            UsuarioIdentity usuario = new UsuarioIdentity()
+            {
+                UsuarioId = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
+                Identificacion = "1036649665",
+                Rol = "Administrador",
+                Estado = true
+            };
+
             PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
             user.PasswordHash = passwordHasher.HashPassword(user, "admin12345");
 
             modelBuilder.Entity<IdentityUser>().HasData(user);
+            modelBuilder.Entity<UsuarioIdentity>().HasData(usuario);
 
         }
 
