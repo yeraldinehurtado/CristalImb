@@ -6,6 +6,8 @@
 }
 
 <section class="content">
+    <input class="form-control" type="text" id="search" placeholder="Buscar">
+    <br />
     <table class="table" id="tabla">
         <thead>
             <tr>
@@ -14,6 +16,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Inmueble.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Inmueble.Direccion)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Inmueble.Valor)
@@ -26,22 +31,25 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Inmueble.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Inmueble.Valor)
-                </td>
-                <td>
-                    <form asp-action="EliminarInmPropietario" asp-route-id="@item.InmProId" class="d-inline">
-                        <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Direccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Valor)
+                    </td>
+                    <td>
+                        <form asp-action="EliminarInmPropietario" asp-route-id="@item.InmProId" class="d-inline">
+                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -51,4 +59,20 @@
 
     <script src="~/js/tabla.js"></script>
     <script src="~/js/modals.js"></script>
+
+    <script type="text/javascript">
+
+        var $rows = $('#tabla tr');
+        $('#search').keyup(function () {
+
+            var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+                reg = RegExp(val, 'i'),
+                text;
+
+            $rows.show().filter(function () {
+                text = $(this).text().replace(/\s+/g, ' ');
+                return !reg.test(text);
+            }).hide();
+        });
+    </script>
 }

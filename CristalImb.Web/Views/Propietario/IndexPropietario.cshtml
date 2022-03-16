@@ -21,10 +21,10 @@
 <section class="content">
     <div class="container-fluid">
         <div class="m-0 row justify-content-center align-items-baseline">
-
             <div class="contenido">
                 <h3 class="text-center"> Gestión de propietarios</h3>
                 <hr />
+
                 <div class="botonCrear col-12 p-3 text-center accent-teal">
                     <br />
                     <p>
@@ -47,6 +47,9 @@
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Telefono)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Celular)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Correo)
@@ -80,6 +83,9 @@
                                     <td>
                                         @Html.DisplayFor(modelx => x.Telefono)
                                     </td>
+                                    <th>
+                                        @Html.DisplayFor(modelx => x.Celular)
+                                    </th>
                                     <td>
                                         @Html.DisplayFor(modelx => x.Correo)
                                     </td>                                   
@@ -115,7 +121,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        <a onclick="mostrarModal('@Url.Action("EditarPropietario","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Editar propietario')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarPropietario" asp-route-id="@x.PropietarioId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>
                             }

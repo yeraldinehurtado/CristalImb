@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "EditarPropietario";
+    Layout = null;
 }
 
 @section Styles{
@@ -13,50 +14,58 @@
     </style>
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="editar">
-                <h1>Editar propietario</h1>
-                <hr />
-                <form asp-action="EditarPropietario">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="PropietarioId" />
-                    <div class="form-group">
-                        <label asp-for="Identificacion" class="control-label"></label>
+<div class="row">
+    <div class="registrar col-md-12">
+        <div class="editar">
+            <h1>Editar propietario</h1>
+            <hr />
+            <form asp-action="EditarPropietario">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="PropietarioId" />
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-12">
+                        <label asp-for="Identificacion" class="control-label">Identificación <b class="text-danger">*</b></label>
                         <input asp-for="Identificacion" class="form-control" />
                         <span asp-validation-for="Identificacion" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Nombre" class="control-label"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Nombre" class="control-label">Nombre <b class="text-danger">*</b></label>
                         <input asp-for="Nombre" class="form-control" />
                         <span asp-validation-for="Nombre" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Apellido" class="control-label"></label>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Apellido" class="control-label">Apellido <b class="text-danger">*</b></label>
                         <input asp-for="Apellido" class="form-control" />
                         <span asp-validation-for="Apellido" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Telefono" class="control-label"></label>
+                </div>
+                <div class="col-md-12 row">
+                    <div class="form-group col-md-3">
+                        <label asp-for="Telefono" class="control-label">Teléfono <b class="text-danger">*</b></label>
                         <input asp-for="Telefono" class="form-control" />
                         <span asp-validation-for="Telefono" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Correo" class="control-label"></label>
-                        <input asp-for="Correo" class="form-control" />
+                    <div class="form-group col-md-3">
+                        <label asp-for="Celular" class="control-label">Celular</label>
+                        <input asp-for="Celular" class="form-control" />
+                        <span asp-validation-for="Celular" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Correo" class="control-label">Correo <b class="text-danger">*</b></label>
+                        <input asp-for="Correo" type="email" class="form-control" />
                         <span asp-validation-for="Correo" class="text-danger"></span>
                     </div>
-
-
-
-                    <div class="form-group">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                    </div>
-                </form>
-                <div>
-                    <a asp-action="IndexPropietario">Volver</a>
                 </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a asp-action="IndexPropietario">Volver</a>
             </div>
         </div>
     </div>

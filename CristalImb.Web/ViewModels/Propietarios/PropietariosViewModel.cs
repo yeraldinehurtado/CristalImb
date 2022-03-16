@@ -35,6 +35,11 @@ namespace CristalImb.Web.ViewModels.Propietarios
         [Range(1, 9999999999, ErrorMessage = "Máximo 10 números")]
         public int Telefono { get; set; }
 
+        [DisplayName("Celular")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
+        [Range(1, 9999999999, ErrorMessage = "Máximo 10 números")]
+        public int Celular { get; set; }
+
         [DisplayName("Correo")]
         [Required(ErrorMessage = "El correo es obligatorio")]
         [RegularExpression(@"^[a-zA-Z]+.+$", ErrorMessage = "Ingrese caracteres")]
