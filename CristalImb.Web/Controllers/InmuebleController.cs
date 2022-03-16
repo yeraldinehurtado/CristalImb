@@ -257,7 +257,7 @@ namespace CristalImb.Web.Controllers
                 try
                 {
                     TempData["Accion"] = "Confirmación";
-                    InmuebleDetalleArchivos inmuebleDetalleArch = await _inmuebleService.ObtenerInmuebleImgId(id);
+                    InmuebleDetalleArchivos inmuebleDetalleArch = (InmuebleDetalleArchivos)await _inmuebleService.ObtenerInmuebleImgId(id);
                     await _inmuebleService.EliminarInmuebleDetalleArchivo(id);
                     TempData["Accion"] = "EliminarInmueble";
                     TempData["Mensaje"] = "Imagen eliminada exitosamente";

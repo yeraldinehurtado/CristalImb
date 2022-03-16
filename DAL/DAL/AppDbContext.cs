@@ -272,7 +272,7 @@ namespace CristalImb.Model.DAL
                     Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
                     Name = "Cliente",
                     ConcurrencyStamp = "3",
-                    NormalizedName = "Client"
+                    NormalizedName = "Cliente"
                 }
             );
             modelBuilder.Entity<Rol>().HasData(

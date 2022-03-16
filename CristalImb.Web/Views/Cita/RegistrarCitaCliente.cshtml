@@ -1,16 +1,20 @@
 ﻿@model CristalImb.Model.Entities.Cita
 
 @{
-    ViewData["Title"] = "RegistrarCita";
-    Layout = "~/Views/Shared/_Navbar.cshtml";
+    ViewData["Title"] = "RegistrarCitaCliente";
+    Layout = "_LayoutCliente";
 }
 
 
 <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-5">
         <div class="registrar">
-            <form asp-action="RegistrarCita">
+            <form asp-action="RegistrarCitaCliente">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <br />
+
+                <h2>Registre su cita</h2>
+                <hr />
                 <div class="form-group">
                     <label asp-for="InmuebleId" class="control-label">Inmueble</label>
                     <select asp-items="ViewBag.ListaInmuebles" asp-for="InmuebleId" class="form-control"></select>
@@ -63,6 +67,7 @@
             <div>
                 <a asp-action="IndexLanding" asp-controller="Landing">Volver</a>
             </div>
+            <br />
         </div>
     </div>
 </div>

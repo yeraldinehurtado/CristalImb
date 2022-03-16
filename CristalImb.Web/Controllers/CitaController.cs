@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.Controllers
 {
-    [Authorize(Roles = "Administrador, Empleado")]
     public class CitaController : Controller
     {
         private readonly ICitaService _citaService;
@@ -25,7 +24,7 @@ namespace CristalImb.Web.Controllers
             _estadoCitaService = estadoCitaService;
             _inmuebleService = inmuebleService;
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         [HttpGet]
         public async Task<IActionResult> IndexCita()
         {
@@ -55,7 +54,7 @@ namespace CristalImb.Web.Controllers
             return RedirectToAction("IndexCita");
         }
 
-        [Authorize(Roles = "Client")]
+        [Authorize(Roles = "Cliente")]
         [HttpGet]
         public async Task<IActionResult> RegistrarCitaCliente()
         {
@@ -65,7 +64,7 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Client")]
+        [Authorize(Roles = "Cliente")]
         [HttpPost]
         public async Task<IActionResult> RegistrarCitaCliente(Cita cita)
         {
@@ -75,7 +74,7 @@ namespace CristalImb.Web.Controllers
 
             return RedirectToAction("RegistrarCitaCliente");
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         [HttpGet]
         public async Task<IActionResult> EditarCita(int id = 0)
         {
@@ -84,7 +83,7 @@ namespace CristalImb.Web.Controllers
             ViewData["ListaEstados"] = new SelectList(await _estadoCitaService.ObtenerEstadosCitaEstado(), "EstadoCitaId", "Nombre");
             return View(await _citaService.ObtenerCitaId(id));
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         [HttpPost]
         public async Task<IActionResult> EditarCita(int? id, Cita cita)
         {
@@ -124,7 +123,7 @@ namespace CristalImb.Web.Controllers
             }
 
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         public async Task<IActionResult> DetallesCita(int? id)
         {
             var listCita = await _citaService.ObtenerCita();
@@ -140,7 +139,7 @@ namespace CristalImb.Web.Controllers
             TempData["Mensaje"] = "Hubo un error realizando la operación";
             return RedirectToAction("IndexCita");
         }
-
+        [Authorize(Roles = "Administrador, Empleado")]
         [HttpPost]
         public async Task<IActionResult> EliminarCita(int id)
         {

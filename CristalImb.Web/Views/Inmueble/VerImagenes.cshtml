@@ -1,4 +1,4 @@
-﻿@model CristalImb.Model.Entities.InmuebleDetalleArchivos
+﻿@model IEnumerable<CristalImb.Model.Entities.InmuebleDetalleArchivos>
 
 @{
     ViewData["Title"] = "IndexInmueble";
@@ -32,21 +32,24 @@
             </tr>
         </thead>
         <tbody>
+            @foreach (var x in Model)
+            {
+
                 <tr>
                     <td>
-                        @if (@Model.NombreArchivo != null)
+                        @if (x.NombreArchivo != null)
                         {
-                            <img src="@("~/imagenesInmueble/" + @Model.NombreArchivo)" asp-append-version="true" class="img-brand w-25 h-10" />
+                            <img src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" class="img-brand w-25 h-10" />
                         }
                     </td>
                     <td>
-                        <form asp-action="EliminarImagen" asp-route-id="@Model.InmuebleDetalleId" class="d-inline">
+                        <form asp-action="EliminarImagen" asp-route-id="x.InmuebleDetalleId" class="d-inline">
                             <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn alert-danger"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>
 
-
+            }
         </tbody>
     </table>
 </section>

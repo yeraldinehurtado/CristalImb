@@ -1,6 +1,8 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top"><img src="~/landing/img/logocristal.jpg" width="110" height="120" class="rounded" alt="..." /></a>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a><img src="~/landing/img/logocristal.jpg" width="120" height="65" class="rounded"/></a>
+        </li>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ms-1"></i>
@@ -10,7 +12,7 @@
                 <li class="nav-item"><a class="nav-link" asp-action="IndexLanding" asp-controller="Landing">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Quiénes somos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>
-                <li class="nav-item"><a class="nav-link"  asp-action="RegistrarCita" asp-controller="Cita">Agendar una cita</a></li>
+                <li class="nav-item"><a class="nav-link" asp-action="RegistrarCita" asp-controller="Cita">Agendar una cita</a></li>
                 <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Usuarios">Iniciar sesión</a></li>
                 <li class="nav-item"><a class="nav-link" asp-action="Registrar" asp-controller="Usuarios">Registrarse</a></li>
             </ul>

@@ -99,6 +99,11 @@ namespace CristalImb. Business.Business
             return await _context.inmuebles.FirstOrDefaultAsync(x => x.InmuebleId == id);
         }
 
+        public async Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerInmuebleImgId(int id)
+        {
+            return await _context.inmuebleDetalleArchivos.Include(i => i.Inmueble).Where(s => s.InmuebleId == id).ToListAsync();
+        }
+
         public async Task EditarInmueble(Inmueble inmueble)
         {
             _context.Update(inmueble);
@@ -137,9 +142,6 @@ namespace CristalImb. Business.Business
             return await _context.inmuebles.FirstOrDefaultAsync(x => x.ZonaId == zona);
         }
 
-        public async Task<InmuebleDetalleArchivos> ObtenerInmuebleImgId(int id)
-        {
-            return await _context.inmuebleDetalleArchivos.FirstOrDefaultAsync(x => x.InmuebleDetalleId == id);
-        }
+        
     }
 }

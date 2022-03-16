@@ -26,7 +26,7 @@ namespace CristalImb.Business.Abstract
         Task EliminarInmuebleDetalleArchivo(int id);
         Task<Inmueble> TipoDeInmuebleExiste(int tipo);
         Task<Inmueble> ZonaExiste(int zona);
-        Task<InmuebleDetalleArchivos> ObtenerInmuebleImgId(int id);
+        Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerInmuebleImgId(int id);
 
     }
 }
