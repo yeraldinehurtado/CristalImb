@@ -10,7 +10,7 @@
 
 <div class="content">
     <div class="container-fluid">
-        
+
         <div class="m-0 row justify-content-center align-items-baseline">
             <div class="botonCrear col-12 p-3 text-center accent-teal">
                 <br />
@@ -44,16 +44,32 @@
                                 <td>
                                     @if (r.Estado == true)
                                     {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@r.Id">
-                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
-                                        </form>
+                                        @if (r.Name == "Administrador")
+                                        {
+                                            <p>-</p>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@r.Id">
+                                                <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                            </form>
+                                        }
+
                                     }
                                     else if (r.Estado == false)
                                     {
-                                        <form asp-action="ActualizarEstado" asp-route-id="@r.Id">
-                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                        </form>
-                                    }
+                                        @if (r.Name == "Administrador")
+                                        {
+                                            <p>-</p>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="ActualizarEstado" asp-route-id="@r.Id">
+                                                <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                            </form>
+                                        }
+                                    
+                                }
                                 </td>
                             </tr>
                         }
