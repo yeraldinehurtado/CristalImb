@@ -63,6 +63,7 @@ namespace CristalImb.Web.Controllers
                     Nombre = propietariosViewModel.Nombre,
                     Apellido = propietariosViewModel.Apellido,
                     Telefono = propietariosViewModel.Telefono,
+                    Celular = propietariosViewModel.Celular,
                     Correo = propietariosViewModel.Correo,
                     Estado = true
                 };
@@ -109,6 +110,7 @@ namespace CristalImb.Web.Controllers
                 Nombre = propietario.Nombre,
                 Apellido = propietario.Apellido,
                 Telefono = propietario.Telefono,
+                Celular = propietario.Celular,
                 Correo = propietario.Correo,
                 Estado = propietario.Estado
             };
@@ -126,6 +128,7 @@ namespace CristalImb.Web.Controllers
                     Nombre = propietariosViewModel.Nombre,
                     Apellido = propietariosViewModel.Apellido,
                     Telefono = propietariosViewModel.Telefono,
+                    Celular = propietariosViewModel.Celular,
                     Correo = propietariosViewModel.Correo,
                     Estado = true,
                     PropietarioId = propietariosViewModel.PropietarioId

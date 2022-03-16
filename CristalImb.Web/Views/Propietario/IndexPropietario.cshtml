@@ -84,14 +84,21 @@
                                         @Html.DisplayFor(modelx => x.Telefono)
                                     </td>
                                     <th>
-                                        @Html.DisplayFor(modelx => x.Celular)
+                                        @if (x.Celular != null)
+                                        {
+                                            @Html.DisplayFor(modelx => x.Celular)
+                                        }
+                                        else
+                                        {
+                                            <p>N/A</p>
+                                        }
                                     </th>
                                     <td>
                                         @Html.DisplayFor(modelx => x.Correo)
-                                    </td>                                   
+                                    </td>
                                     <td>
                                         <a onclick="mostrarModal('@Url.Action("CrearInmPropietarios","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Crear inmpropietarios')" class="btn alert-primary"> <i class="fa fa-plus"></i></a>
-                                        
+
                                     </td>
                                     <td>
                                         <a onclick="mostrarModal('@Url.Action("VerInmuebles","Propietario", new { id = x.PropietarioId }, Context.Request.Scheme)', 'Ver Inmuebles')" class="btn alert-primary"><i class="fa fa-eye"></i></a>
