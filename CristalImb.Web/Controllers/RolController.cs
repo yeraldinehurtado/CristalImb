@@ -17,21 +17,22 @@ namespace CristalImb.Web.Controllers
     [Authorize(Roles = "Administrador")]
     public class RolController : Controller
     {
-        private readonly UserManager<UsuarioIdentity> _userManager;
-        private readonly SignInManager<UsuarioIdentity> _signInManager;
-        private readonly RoleManager<Rol> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IRolService _rolService;
 
-        public RolController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, RoleManager<Rol> roleManager, IRolService rolService)
+        public RolController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, IRolService rolService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _rolService = rolService;
         }
+
         public async Task<IActionResult> IndexRol()
         {
-            var listRoles = await _roleManager.Roles.ToListAsync();
+            var listRoles = await _rolService.ObtenerListaRoles();
             return View(listRoles);
         }
 
@@ -42,7 +43,7 @@ namespace CristalImb.Web.Controllers
             {
                 return NotFound();
             }
-            Rol rol = await _rolService.ObtenerRolId(Guid.Parse(id));
+            Rol rol = await _rolService.ObtenerRolId(id);
             if (rol == null)
             {
                 return NotFound();
@@ -72,7 +73,7 @@ namespace CristalImb.Web.Controllers
             var listaRoles = await _roleManager.Roles.ToListAsync();
 
             ViewBag.Usuarios = new SelectList(listausuario, "Id", "Identificacion");
-            ViewBag.Roles = new SelectList(listaRoles, "Name", "Name");
+            ViewBag.Roles = new SelectList(listaRoles, "NormalizedName", "Name");
 
             return View();
         }

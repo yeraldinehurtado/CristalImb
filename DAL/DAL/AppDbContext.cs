@@ -251,31 +251,28 @@ namespace CristalImb.Model.DAL
 
         private void SeedRoles(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Rol>().HasData(
+            modelBuilder.Entity<IdentityRole>().HasData(
 
-                new Rol
+                new IdentityRole
                 {
                     Id = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
                     Name = "Administrador",
                     ConcurrencyStamp = "1",
-                    NormalizedName = "Admin",
-                    Estado = true
+                    NormalizedName = "Admin"
                 },
-                new Rol
+                new IdentityRole
                 {
                     Id = "64B512E7-46AE-4989-A049-A446118099C4",
                     Name = "Empleado",
                     ConcurrencyStamp = "2",
-                    NormalizedName = "Empleado",
-                    Estado = true
+                    NormalizedName = "Empleado"
                 },
-                new Rol
+                new IdentityRole
                 {
                     Id = "376D45C8-659D-4ACE-B249-CFBF4F231915",
                     Name = "Cliente",
                     ConcurrencyStamp = "3",
-                    NormalizedName = "Client",
-                    Estado = true
+                    NormalizedName = "Client"
                 }
             );
 
@@ -284,23 +281,21 @@ namespace CristalImb.Model.DAL
 
         private void SeedUsers(ModelBuilder modelBuilder)
         {
-            UsuarioIdentity user = new UsuarioIdentity()
+            IdentityUser user = new IdentityUser()
             {
                 Id = "FD713799-B5AE-49FF-8B2C-F311B9CB0CC4",
-                Identificacion = "1000438288",
                 UserName = "admin@gmail.com",
                 Email = "admin@gmail.com",
                 NormalizedEmail = "ADMIN@GMAIL.COM",
                 NormalizedUserName = "ADMIN@GMAIL.COM",
                 LockoutEnabled = false,
-                PhoneNumber = "1234567890",
-                Estado = true
+                PhoneNumber = "1234567890"
             };
 
-            PasswordHasher<UsuarioIdentity> passwordHasher = new PasswordHasher<UsuarioIdentity>();
+            PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
             user.PasswordHash = passwordHasher.HashPassword(user, "admin12345");
 
-            modelBuilder.Entity<UsuarioIdentity>().HasData(user);
+            modelBuilder.Entity<IdentityUser>().HasData(user);
 
         }
 

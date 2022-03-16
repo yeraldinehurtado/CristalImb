@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.ViewModels.Usuarios
 {
-    public class UsuarioViewModel
+    public class CrearViewModel
     {
+
         [DisplayName("Identificación")]
         [Required(ErrorMessage = "La identificación es requerida")]
         [StringLength(10, ErrorMessage = "Máximo 10 caracteres")]
@@ -23,7 +24,6 @@ namespace CristalImb.Web.ViewModels.Usuarios
         [Required(ErrorMessage = "El email es requerido")]
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "Email inválido")]
         public string Email { get; set; }
-        public bool Estado { get; set; }
 
         [Required(ErrorMessage = "La contraseña es requerida")]
         [Display(Name = "Contraseña", Order = -9,
@@ -40,7 +40,8 @@ namespace CristalImb.Web.ViewModels.Usuarios
             ErrorMessage = "La contraseña debe coincidir")]
         public string ConfirmarPassword { get; set; }
 
-
-
+        [Required(ErrorMessage = "El rol es obligatorio")]
+        public string Rol { get; set; }
+        public bool Estado { get; set; }
     }
 }

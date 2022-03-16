@@ -1,4 +1,4 @@
-﻿@model CristalImb.Web.ViewModels.Usuarios.UsuarioViewModel
+﻿@model CristalImb.Web.ViewModels.Usuarios.CrearViewModel
 
 
 
@@ -57,6 +57,11 @@
                             <span asp-validation-for="ConfirmarPassword" class="text-danger"></span>
                         </div>
                         <div class="form-group">
+                            <label asp-for="Rol" class="control-label"></label>
+                            <select id="ListaRoles" asp-items="ViewBag.Roles" asp-for="Rol" class="form-control"></select>
+                            <span asp-validation-for="Rol" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
                             <input type="submit" value="Guardar" class="btn btn-primary" />
                         </div>
                     </form>
@@ -73,7 +78,9 @@
 </div>
 <!-- /.content-wrapper -->
 
-
+<script>
+    document.getElementById("ListaRoles").selectedIndex = -1;
+</script>
 
 @section Scripts {
 }

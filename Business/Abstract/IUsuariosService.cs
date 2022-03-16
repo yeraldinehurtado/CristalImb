@@ -9,7 +9,8 @@ namespace CristalImb.Business.Abstract
 {
     public interface IUsuariosService
     {
-        Task<UsuarioIdentity> ObtenerUsuarioId(Guid id);
+        Task<IEnumerable<UsuarioIdentity>> ObtenerListaUsuarios();
+        Task<UsuarioIdentity> ObtenerUsuarioId(string id);
         Task EditarUsuario(UsuarioIdentity usuarioIdentity);
         Task GuardarUsuario(UsuarioIdentity usuarioIdentity);
     }

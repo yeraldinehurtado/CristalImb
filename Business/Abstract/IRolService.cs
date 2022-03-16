@@ -9,7 +9,8 @@ namespace CristalImb.Business.Abstract
 {
     public interface IRolService
     {
-        Task<Rol> ObtenerRolId(Guid id);
+        Task<IEnumerable<Rol>> ObtenerListaRoles();
+        Task<Rol> ObtenerRolId(string id);
         Task EditarRol(Rol rol);
         Task GuardarUsuario(Rol rol);
     }

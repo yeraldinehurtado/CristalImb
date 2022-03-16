@@ -17,10 +17,13 @@ namespace CristalImb.Business.Business
         {
             _context = context;
         }
-
-        public async Task<Rol> ObtenerRolId(Guid id)
+        public async Task<IEnumerable<Rol>> ObtenerListaRoles()
         {
-            return await _context.roles.FirstOrDefaultAsync(x => x.Id == id.ToString());
+            return await _context.roles.Include(u => u.IdentityRole).ToListAsync();
+        }
+        public async Task<Rol> ObtenerRolId(string id)
+        {
+            return await _context.roles.Include(x => x.IdentityRole).FirstOrDefaultAsync(r => r.RolId == id);
         }
 
         public async Task EditarRol(Rol rol)

@@ -15,23 +15,26 @@ using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using RestSharp;
+using CristalImb.Model.DAL;
 
 namespace CristalImb.Web.Controllers
 {
     [Authorize(Roles = "Administrador")]
     public class UsuariosController : Controller
     {
-        private readonly UserManager<UsuarioIdentity> _userManager;
-        private readonly RoleManager<Rol> _roleManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IRolService _rolService;
-        private readonly SignInManager<UsuarioIdentity> _signInManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IUsuariosService _usuariosService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly AppDbContext _context;
         const string SesionNombre = "_Nombre";
+        
 
 
 
-        public UsuariosController(UserManager<UsuarioIdentity> userManager, SignInManager<UsuarioIdentity> signInManager, IUsuariosService usuariosService, IHttpContextAccessor httpContextAccessor, RoleManager<Rol> roleManager, IRolService rolService)
+        public UsuariosController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IUsuariosService usuariosService, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, IRolService rolService, AppDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -39,19 +42,23 @@ namespace CristalImb.Web.Controllers
             _usuariosService = usuariosService;
             _rolService = rolService;
             _httpContextAccessor = httpContextAccessor;
+            _context = context;
         }
 
 
 
             public async Task<IActionResult> IndexUsuarios()
             {
-                var listaUsers = await _userManager.Users.ToListAsync();
+                var listaUsers = await _usuariosService.ObtenerListaUsuarios();
                 return View(listaUsers);
             }
 
         [HttpGet]
-        public IActionResult CrearUsuarios()
+        public async Task<IActionResult> CrearUsuarios()
         {
+            var usuario = await _context.usuarios.Include(x => x.IdentityUser).ToListAsync();
+            var listaRoles = await _roleManager.Roles.Where(r => r.Name != "Administrador").ToListAsync();
+            ViewBag.Roles = new SelectList(listaRoles, "Name", "Name");
             return View();
         }
 
@@ -60,18 +67,32 @@ namespace CristalImb.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UsuarioIdentity usuarioIdentity = new()
+                IdentityUser identityUser = new()
                 {
-                    Identificacion = usuarioViewModel.Identificacion,
                     UserName = usuarioViewModel.Email,
                     Email = usuarioViewModel.Email
                 };
 
                 try
                 {
-                    var resultado = await _userManager.CreateAsync(usuarioIdentity, usuarioViewModel.Password); //objeto usermanager para crear el usuario
+                    var resultado = await _userManager.CreateAsync(identityUser, usuarioViewModel.Password); //objeto usermanager para crear el usuario
                     if (resultado.Succeeded)
+                    {
+                        MailMessage mensaje = new();
+                        mensaje.To.Add(usuarioViewModel.Email);//destinatario
+                        mensaje.Subject = "Cristalimb - registro en el sistema";
+                        mensaje.Body = "Hola." + usuarioViewModel.UserName + " <br><br> Gracias por unirte al sistema de CristalImb. <br><br>"; /*+ confirm + "<br><br> Si no solicitó confirmar, puede ignorar este correo electrónico."*/
+                        mensaje.IsBodyHtml = true;
+                        mensaje.From = new MailAddress("alejd066@gmail.com", "Cristal Inmobiliaria");
+                        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                        smtpClient.Port = 587;
+                        smtpClient.UseDefaultCredentials = false;
+                        smtpClient.EnableSsl = true;
+                        smtpClient.Credentials = new System.Net.NetworkCredential("alejd066@gmail.com", "tomalejowar4056");
+                        smtpClient.Send(mensaje);
                         return RedirectToAction("IndexUsuarios"); //guardar usuario
+                    }
+                        
                     else
                         return RedirectToAction("IndexUsuarios");
                 }
@@ -98,18 +119,49 @@ namespace CristalImb.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                UsuarioIdentity usuarioIdentity = new()
+                IdentityUser identityUser = new()
                 {
-                    Identificacion = usuarioViewModel.Identificacion,
                     UserName = usuarioViewModel.Email,
                     Email = usuarioViewModel.Email
                 };
 
                 try
                 {
-                    var resultado = await _userManager.CreateAsync(usuarioIdentity, usuarioViewModel.Password); //objeto usermanager para crear el usuario
+                    var resultado = await _userManager.CreateAsync(identityUser, usuarioViewModel.Password); //objeto usermanager para crear el usuario
                     if (resultado.Succeeded)
-                        return RedirectToAction("Login"); //guardar usuario
+                    {
+                        var user = await _userManager.FindByEmailAsync(usuarioViewModel.Email);
+                        await _userManager.AddToRoleAsync(user, "Client");
+                        UsuarioIdentity usuarioIdentity = new()
+                        {
+                            UsuarioId = user.Id,
+                            Identificacion = usuarioViewModel.Identificacion,
+                            Rol = "Client",
+                            Estado = true
+
+                        };
+                        //var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        //var confirm = Url.Action("ConfirmarEmail", "Usuarios",
+                        //    new { email = usuarioViewModel.Email, token = token }, Request.Scheme);
+
+                        //Opcion 1 en la que usamos smpt
+
+                        
+                        await _usuariosService.GuardarUsuario(usuarioIdentity);
+                        MailMessage mensaje = new();
+                        mensaje.To.Add(usuarioViewModel.Email);//destinatario
+                        mensaje.Subject = "Cristalimb - registro en el sistema";
+                        mensaje.Body = "Hola." + usuarioViewModel.UserName + " <br><br> Gracias por unirte al sistema de CristalImb. <br><br>"; /*+ confirm + "<br><br> Si no solicitó confirmar, puede ignorar este correo electrónico."*/
+                        mensaje.IsBodyHtml = true;
+                        mensaje.From = new MailAddress("alejd066@gmail.com", "Cristal Inmobiliaria");
+                        SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                        smtpClient.Port = 587;
+                        smtpClient.UseDefaultCredentials = false;
+                        smtpClient.EnableSsl = true;
+                        smtpClient.Credentials = new System.Net.NetworkCredential("alejd066@gmail.com", "tomalejowar4056");
+                        smtpClient.Send(mensaje);
+                        return RedirectToAction("Login", "Usuarios");
+                    }
                     else
                         return View(usuarioViewModel);
                 }
@@ -123,50 +175,63 @@ namespace CristalImb.Web.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> EditarUsuario(string id)
+        public async Task<IActionResult> EditarUsuario(string id, IdentityUser identityUser)
         {
             if (id == null || id == "")
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Error";
-                return RedirectToAction("IndexUsuarios");
+                UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(id);
+                UsuarioDto usuarioDto = new()
+                {
+                    UsuarioId = usuarioIdentity.UsuarioId,
+                    Identificacion = usuarioIdentity.Identificacion,
+                    Estado = usuarioIdentity.Estado,
+                    Rol = usuarioIdentity.Rol
+                };
+                return View(usuarioDto);
             }
-            try
-            {
-                return View(await _userManager.FindByIdAsync(id));
-            }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Ingresaste un valor inválido";
-                return RedirectToAction("IndexUsuarios");
-            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Error";
+            return RedirectToAction("IndexUsuarios");
+            
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditarUsuario(UsuarioViewModel usuarioViewModel, IdentityUser identityUser, string id)
+        public async Task<ActionResult> EditarUsuario(UsuarioDto usuarioDto, IdentityUser identityUser, string id)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var user = await _usuariosService.ObtenerUsuarioId(Guid.Parse(id));
-                
-                UsuarioIdentity usuarioIdentity = new()
+                UsuarioIdentity usuario = new()
                 {
-                    Identificacion = usuarioViewModel.Identificacion,
-                    UserName = usuarioViewModel.UserName,
-                    Email = usuarioViewModel.Email
+                    UsuarioId = usuarioDto.UsuarioId,
+                    Identificacion = usuarioDto.Identificacion,
+                    Estado = usuarioDto.Estado,
+                    Rol = usuarioDto.Rol
                 };
-                await _usuariosService.EditarUsuario(usuarioIdentity);
-                TempData["Accion"] = "Editar";
-                TempData["Mensaje"] = "Usuario editado correctamente";
-                return RedirectToAction("IndexUsuarios");
+                try
+                {
+                    usuario = new()
+                    {
+                        UsuarioId = usuario.UsuarioId,
+                        Identificacion = usuarioDto.Identificacion,
+                        Estado = true
+                    };
+                    await _usuariosService.EditarUsuario(usuario);
+                    TempData["Accion"] = "Editar";
+                    TempData["Mensaje"] = "Usuario editado correctamente";
+                    return RedirectToAction("IndexUsuarios");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexUsuarios");
+                }
             }
-            catch (Exception)
-            {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Ingresaste un valor inválido";
-                return RedirectToAction("IndexUsuarios");
-            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
+            return RedirectToAction("IndexUsuarios");
+
+
         }
 
         [HttpPost]
@@ -176,7 +241,7 @@ namespace CristalImb.Web.Controllers
             {
                 return RedirectToAction("IndexUsuarios");
             }
-            UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(Guid.Parse(id));
+            UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(id);
             if (usuarioIdentity == null)
             {
                 return NotFound();
@@ -235,9 +300,9 @@ namespace CristalImb.Web.Controllers
                     {
                         return LocalRedirect("/Admin/Dashboard");
                     }
-                    else if (rol.Contains("Cliente"))
+                    else if (rol.Contains("Client"))
                     {
-                        return LocalRedirect("/Cita/RegistrarCita");
+                        return LocalRedirect("/Cita/RegistrarCitaCliente");
                     }
                     return RedirectToAction("Login", "Usuarios");
 

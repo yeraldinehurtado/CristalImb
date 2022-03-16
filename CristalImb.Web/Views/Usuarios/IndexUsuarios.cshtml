@@ -40,7 +40,7 @@
                                     @Html.DisplayNameFor(model => model.Identificacion)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Email)
+                                    @Html.DisplayNameFor(model => model.IdentityUser.Email)
                                 </th>
                                 <th></th>
                                 <th></th>
@@ -56,10 +56,10 @@
                                         @Html.DisplayFor(modelItem => usuario.Identificacion)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => usuario.Email)
+                                        @Html.DisplayFor(modelItem => usuario.IdentityUser.Email)
                                     </td>
                                     <td>
-                                        <a class="btn btn-success" asp-route-usuarioId="@usuario.Id" asp-action="Detalle" asp-controller="Rol">Detalle</a>
+                                        <a class="btn btn-success" asp-route-usuarioId="@usuario.UsuarioId" asp-action="Detalle" asp-controller="Rol">Detalle</a>
                                     </td>
                                     <td>
                                         @if (usuario.Estado == true)
@@ -74,19 +74,19 @@
                                     <td>
                                         @if (usuario.Estado == true)
                                         {
-                                            <form asp-action="ActualizarEstado" asp-route-id="@usuario.Id">
+                                            <form asp-action="ActualizarEstado" asp-route-id="@usuario.UsuarioId">
                                                 <button type="submit"><i class="fas fa-toggle-on"></i></button>
                                             </form>
                                         }
                                         else if (usuario.Estado == false)
                                         {
-                                            <form asp-action="ActualizarEstado" asp-route-id="@usuario.Id">
+                                            <form asp-action="ActualizarEstado" asp-route-id="@usuario.UsuarioId">
                                                 <button type="submit"><i class="fas fa-toggle-off"></i></button>
                                             </form>
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarUsuario" asp-route-rol="@usuario.Id" class="btn alert-primary">Editar</a>
+                                        <a asp-action="EditarUsuario" asp-route-rol="@usuario.UsuarioId" class="btn alert-primary">Editar</a>
                                     </td>
                                 </tr>
                             }
@@ -102,4 +102,5 @@
 @section Scripts{
     <script src="~/js/tabla.js"></script>
     <script src="~/js/modal.js"></script>
+
 }

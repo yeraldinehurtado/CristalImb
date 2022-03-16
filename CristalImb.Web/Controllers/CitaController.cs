@@ -33,7 +33,7 @@ namespace CristalImb.Web.Controllers
             return View(await _citaService.ObtenerCita());
         }
 
-        [Authorize(Roles = "Administrador, Empleado, Client")]
+        [Authorize(Roles = "Administrador, Empleado")]
         [HttpGet]
         public async Task<IActionResult> RegistrarCitaAsync()
         {
@@ -44,7 +44,7 @@ namespace CristalImb.Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Administrador, Empleado, Client")]
+        [Authorize(Roles = "Administrador, Empleado")]
         [HttpPost]
         public async Task<IActionResult> RegistrarCita(Cita cita)
         {
@@ -53,6 +53,27 @@ namespace CristalImb.Web.Controllers
             TempData["Mensaje"] = "Cita guardada con éxito.";
 
             return RedirectToAction("IndexCita");
+        }
+
+        [Authorize(Roles = "Client")]
+        [HttpGet]
+        public async Task<IActionResult> RegistrarCitaCliente()
+        {
+            ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
+            ViewData["ListaInmuebles"] = new SelectList(await _inmuebleService.ObtenerListaInmueblesEstado(), "InmuebleId", "Codigo");
+
+            return View();
+        }
+
+        [Authorize(Roles = "Client")]
+        [HttpPost]
+        public async Task<IActionResult> RegistrarCitaCliente(Cita cita)
+        {
+            await _citaService.GuardarCita(cita);
+            TempData["Accion"] = "GuardarCita";
+            TempData["Mensaje"] = "Cita guardada con éxito.";
+
+            return RedirectToAction("RegistrarCitaCliente");
         }
 
         [HttpGet]

@@ -11,20 +11,15 @@ namespace CristalImb.Business.Dtos.Usuarios
 {
     public class UsuarioDto
     {
+        public string UsuarioId { get; set; }
         [DisplayName("Identificación")]
         [Required(ErrorMessage = "La identificación es requerida")]
         [StringLength(10, ErrorMessage = "Máximo 10 caracteres")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
 
         public string Identificacion { get; set; }
+        public string Rol { get; set; }
+        public bool Estado { get; set; }
 
-        [DisplayName("Nombre de usuario")]
-        [Required(ErrorMessage = "El nombre de usuario es requerido")]
-        public string UserName { get; set; }
-
-        [Required(ErrorMessage = "El email es requerido")]
-        [EmailAddress(ErrorMessage = "Email invalido")]
-        public string Email { get; set; }
-       
     }
 }
