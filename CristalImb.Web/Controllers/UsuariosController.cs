@@ -317,7 +317,7 @@ namespace CristalImb.Web.Controllers
                     var usuario = await _userManager.FindByEmailAsync(loginViewModel.Email);
                     var rol = await _userManager.GetRolesAsync(usuario);
 
-                    if (rol.Contains("Administrador") || rol.Contains("Empleado"))
+                    if (rol.Contains("Administrador") || rol.Contains("Empleado")) 
                     {
                         return LocalRedirect("/Admin/Dashboard");
                     }
