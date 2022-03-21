@@ -47,6 +47,7 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarCita(Cita cita)
         {
+            cita.EstadoCitaId = 2;
             await _citaService.GuardarCita(cita);
             TempData["Accion"] = "GuardarCita";
             TempData["Mensaje"] = "Cita guardada con éxito.";
