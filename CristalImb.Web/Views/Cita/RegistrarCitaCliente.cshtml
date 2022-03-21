@@ -76,3 +76,15 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarCita")) {
+        <text>
+        Swal.fire({
+            title: "Guardar cita",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+</script>
