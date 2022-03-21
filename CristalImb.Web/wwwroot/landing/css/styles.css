@@ -12043,6 +12043,7 @@ header.masthead {
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
+    background-color: rgba(0,0,0,0.8);
 }
 
     header.masthead .masthead-subheading {

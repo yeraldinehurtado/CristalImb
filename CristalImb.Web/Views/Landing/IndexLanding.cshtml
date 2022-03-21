@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CristalImb.Model.Entities.Inmueble>
+﻿@model IEnumerable<CristalImb.Model.Entities.InmuebleDetalleArchivos>
 
 @{
     ViewData["Title"] = "Pagina inicio";
@@ -10,22 +10,24 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
         </div>
-        <div class="row" id="oferta" asp-action="IndexLanding">
+        <div class="row slider" id="oferta" asp-action="IndexLanding">
             @foreach (var x in Model)
             {
 
-                    <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
-                        <img class="card-img-top" src="~/landing/img/1.jpg" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - $ @Html.DisplayFor(modelx => x.Valor)</h5>
-                            <p class="card-text text-center">@Html.DisplayFor(modelx => x.Descripcion)</p>
-                        </div>
+                <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
+                    <img src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" class="img-brand w-25 h-10" />
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Inmueble.Codigo) - $ @Html.DisplayFor(modelx => x.Inmueble.Valor)</h5>
+                        <p class="card-text text-center">@Html.DisplayFor(modelx => x.Inmueble.Direccion) - @Html.DisplayFor(modelx => x.Inmueble.Zona.NombreZona)</p>
+                        <p class="card-text text-center">@Html.DisplayFor(modelx => x.Inmueble.Descripcion)</p>
                     </div>
-               
-                
-                
+                </div>
+
+
+
             }
-          </div>
+
+        </div>
 
     </div>
 </section>
