@@ -27,6 +27,7 @@ namespace CristalImb.Business.Abstract
         Task<Inmueble> TipoDeInmuebleExiste(int tipo);
         Task<Inmueble> ZonaExiste(int zona);
         Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerInmuebleImgId(int id);
+        Task<IEnumerable<InmuebleDetalleArchivos>> BuscarInmuebles(int tipo);
 
     }
 }

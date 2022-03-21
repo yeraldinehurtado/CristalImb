@@ -142,6 +142,9 @@ namespace CristalImb. Business.Business
             return await _context.inmuebles.FirstOrDefaultAsync(x => x.ZonaId == zona);
         }
 
-        
+        public async Task<IEnumerable<InmuebleDetalleArchivos>> BuscarInmuebles(int tipo)
+        {
+            return await _context.inmuebleDetalleArchivos.Where(s => s.Inmueble.TipoId== tipo).ToListAsync();
+        }
     }
 }

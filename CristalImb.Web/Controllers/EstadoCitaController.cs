@@ -46,6 +46,16 @@ namespace CristalImb.Web.Controllers
                 };
                 try
                 {
+                    var nombreExiste = await _estadoCitaService.nombreEstadoCitaExiste(estadoCita.Nombre);
+                    if (nombreExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Este nombre de estado de cita ya se encuentra registrado";
+                        return RedirectToAction("IndexEstadoCita");
+                    }
+
+                    estadoCita.Estado = true;
+
                     await _estadoCitaService.GuardarEstadoCita(estadoCita);
                     TempData["Accion"] = "GuardarEstadoCita";
                     TempData["Mensaje"] = "Estado de cita guardada con éxito.";

@@ -15,6 +15,8 @@ namespace CristalImb.Model.Entities
 
         [Required(ErrorMessage = "El estado de inmueble es requerido.")]
         [DisplayName("Estado de inmueble")]
+        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
+        [StringLength(70, ErrorMessage = "Máximo 70 caracteres")]
         public string NombreEstado { get; set; }
         public bool Estado { get; set; }
         public virtual List<Inmueble> Inmueble { get; set; }

@@ -15,5 +15,6 @@ namespace CristalImb.Business.Abstract
         Task<EstadosInmueble> ObtenerEstadosInmId(int id);
         Task EditarEstadoInm(EstadosInmueble estadosInmueble);
         Task EliminarEstadoInm(int id);
+        Task<EstadosInmueble> nombreEstadoInmuebleExiste(string nombre);
     }
 }

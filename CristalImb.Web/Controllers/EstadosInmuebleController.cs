@@ -38,6 +38,16 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarEstadoInm(EstadosInmueble estadosInmueble)
         {
+            var nombreExiste = await _estadosInmuebleService.nombreEstadoInmuebleExiste(estadosInmueble.NombreEstado);
+            if (nombreExiste != null)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Este nombre de estado de inmueble ya se encuentra registrado";
+                return RedirectToAction("IndexEstadosInm");
+            }
+
+            estadosInmueble.Estado = true;
+
             await _estadosInmuebleService.GuardarEstadoInm(estadosInmueble);
             TempData["Accion"] = "GuardarEstadoInm";
             TempData["Mensaje"] = "Estado de inmueble guardado con éxito.";

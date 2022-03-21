@@ -48,31 +48,9 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerListaInmueblesOferta());
         }
 
-        public async Task<IActionResult> InmueblesFiltro(InmuebleDto inmuebleDto, string buscar, int pagina = 1)
+        public async Task<IActionResult> InmueblesFiltro(InmuebleDetalleArchivos inmuebleDetalleArchivos)
         {
-            int _TotalRegistros = 0;
-            int _TotalPaginas = 0;
-
-            // Recuperamos el 'DbSet' completo
-            inmuebles = _DbContext.inmuebles.ToList();
-
-            // Filtramos el resultado por el 'texto de búqueda'
-            if (!string.IsNullOrEmpty(buscar))
-            {
-                foreach (var item in buscar.Split(new char[] { ' ' },
-                         StringSplitOptions.RemoveEmptyEntries))
-                {
-                    inmuebles = inmuebles.Where(x => x.Codigo.Contains(item) ||
-                                                  x.Zona.NombreZona.Contains(item) ||
-                                                  x.ServiciosInmueble.Nombre.Contains(item) ||
-                                                  x.TipoInmuebles.NombreTipoInm.Contains(item) ||
-                                                  x.Valor.Contains(item))
-                                                  .ToList();
-                    return View(inmuebles.ToList());
-                }
-                return View(inmuebleDto);
-            }
-            return View(inmuebleDto);
+            return View(await _inmuebleService.BuscarInmuebles(inmuebleDetalleArchivos.Inmueble.TipoId));
         }
 
         //landing inmuebles en venta
