@@ -10,18 +10,18 @@
                 <h3 class="text-center"> Gestión de usuarios</h3>
                 <hr />
                 <div class="col-md-12 row">
-                    <div class="botonCrear col-md-6 p-3 text-center accent-teal">
+                    <div class="botonCrear col-md-12 p-3 text-center accent-teal">
                         <br />
                         <p>
                             <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
                         </p>
                         <br />
                     </div>
-                    <div class="botonAsignar col-md-6 p-3 text-center accent-teal">
+                    @*<div class="botonAsignar col-md-6 p-3 text-center accent-teal">
                         <br />
                         <a asp-action="AsignarRolesUsuario" asp-controller="Rol" class="btn btn-outline-success"><i class="fas fa-plus"></i> Asignar rol</a>
                         <br />
-                    </div>
+                    </div>*@
                 </div>
             </div>
 
