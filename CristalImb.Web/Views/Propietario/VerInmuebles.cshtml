@@ -62,12 +62,12 @@
 
     <script type="text/javascript">
 
-        document.querySelector(".search").addEventListener("keyup", searchFunction);
+        document.querySelector("#search").addEventListener("keyup", searchFunction);
         function searchFunction() {
             var input, filter, table, tr, td, i, txtValue;
-            input = document.querySelector(".search");
+            input = document.querySelector("#search");
             filter = input.value.toUpperCase();
-            table = document.querySelector(".table");
+            table = document.querySelector("#table");
             tr = table.getElementsByTagName("tr");
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[1];

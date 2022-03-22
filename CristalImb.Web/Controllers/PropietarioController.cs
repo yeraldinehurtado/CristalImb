@@ -1,7 +1,9 @@
 ﻿using CristalImb.Business.Abstract;
 using CristalImb.Business.Business;
+using CristalImb.Model.DAL;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.InmPropietarios;
+using CristalImb.Web.ViewModels.PaginadorGenerico;
 using CristalImb.Web.ViewModels.Propietarios;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +19,13 @@ namespace CristalImb.Web.Controllers
     [Authorize(Roles = "Administrador, Empleado")]
     public class PropietarioController : Controller
     {
+        private AppDbContext _DbContext;
+        private List<Inmueble> inmuebles;
+        private PaginadorGenerico<Inmueble> _PaginadorInmuebles;
         private readonly IPropietarioService _propietarioService;
         private readonly IInmuebleService _inmuebleService;
         private readonly IInmPropietariosService _inmPropietariosService;
+        
 
         public PropietarioController(IPropietarioService propietarioService, IInmuebleService inmuebleService, IInmPropietariosService inmPropietariosService)
         {
@@ -38,12 +44,27 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> VerInmuebles(int id, InmPropietarios inmPropietarios)
+        public async Task<IActionResult> VerInmuebles(int id)
         {
+            //inmuebles = _DbContext.inmuebles.ToList();
+
             ViewBag.InmuebleId = id;
-            
-            
-            return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId(id));
+            //if (!string.IsNullOrEmpty(search))
+            //{
+            //    foreach (var item in search.Split(new char[] { ' ' },
+            //             StringSplitOptions.RemoveEmptyEntries))
+            //    {
+            //        inmuebles = inmuebles.Where(x => x.Codigo.Contains(item) ||
+            //                                      x.Descripcion.Contains(item) ||
+            //                                      x.Direccion.Contains(item) ||
+            //                                      x.Valor.Contains(item))
+            //                                      .ToList();
+            //        return View(inmuebles.ToList());
+            //    }
+            //    return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId(id));
+            //}
+
+                return View(await _inmPropietariosService.ObtenerListaInmPropietariosPorId(id));
         }
 
         [HttpGet]
