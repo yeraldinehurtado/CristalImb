@@ -2,75 +2,101 @@
 
 @{
     ViewData["Title"] = "RegistrarCitaCliente";
-    Layout = "_LayoutCliente";
+    Layout = null;
 }
 
 
-<div class="row">
-    <div class="col-md-5">
-        <div class="registrar">
-            <form asp-action="RegistrarCitaCliente">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <br />
 
-                <h2>Registre su cita</h2>
-                <hr />
-                <div class="form-group">
-                    <label asp-for="InmuebleId" class="control-label">Inmueble</label>
-                    <select asp-items="ViewBag.ListaInmuebles" asp-for="InmuebleId" class="form-control"></select>
-                    <span asp-validation-for="InmuebleId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ServicioInmuebleId" class="control-label">Servicio</label>
-                    <select asp-items="ViewBag.ListaServicios" asp-for="ServicioInmuebleId" class="form-control"></select>
-                    <span asp-validation-for="ServicioInmuebleId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Identificacion" class="control-label">Identificación <b class="text-danger">*</b></label>
-                    <input asp-for="Identificacion" class="form-control" />
-                    <span asp-validation-for="Identificacion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Nombre" class="control-label">Nombre <b class="text-danger">*</b></label>
-                    <input asp-for="Nombre" class="form-control" />
-                    <span asp-validation-for="Nombre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Apellido" class="control-label">Apellido <b class="text-danger">*</b></label>
-                    <input asp-for="Apellido" class="form-control" />
-                    <span asp-validation-for="Apellido" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Telefono" class="control-label">Teléfono <b class="text-danger">*</b></label>
-                    <input asp-for="Telefono" class="form-control" />
-                    <span asp-validation-for="Telefono" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Correo" class="control-label">Correo <b class="text-danger">*</b></label>
-                    <input asp-for="Correo" class="form-control" />
-                    <span asp-validation-for="Correo" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Direccion" class="control-label">Dirección <b class="text-danger">*</b></label>
-                    <input asp-for="Direccion" class="form-control" />
-                    <span asp-validation-for="Direccion" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FechaHora" class="control-label">Fecha y hora <b class="text-danger">*</b></label>
-                    <input type="datetime-local" asp-for="FechaHora" class="form-control" />
-                    <span asp-validation-for="FechaHora" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Registrar" class="btn btn-primary" />
-                </div>
-            </form>
-            <div>
-                <a asp-action="IndexLanding" asp-controller="Landing">Volver</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Log in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
+</head>
+<body style="background-color: #B3FCFD " class="hold-transition register-page">
+    <div class="register-box">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a class="h1"><b>Crital Inmobiliaria</b></a>
             </div>
-            <br />
-        </div>
+            <div class="card-body">
+                <p class="login-box-msg">Registro de citas</p>
+
+                <form asp-action="RegistrarCitaCliente">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <br />
+
+                    <h2>Registre su cita</h2>
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="InmuebleId" class="control-label">Inmueble</label>
+                        <select asp-items="ViewBag.ListaInmuebles" asp-for="InmuebleId" class="form-control"></select>
+                        <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ServicioInmuebleId" class="control-label">Servicio</label>
+                        <select asp-items="ViewBag.ListaServicios" asp-for="ServicioInmuebleId" class="form-control"></select>
+                        <span asp-validation-for="ServicioInmuebleId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Identificacion" class="control-label">Identificación <b class="text-danger">*</b></label>
+                        <input asp-for="Identificacion" class="form-control" />
+                        <span asp-validation-for="Identificacion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label">Nombre <b class="text-danger">*</b></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Apellido" class="control-label">Apellido <b class="text-danger">*</b></label>
+                        <input asp-for="Apellido" class="form-control" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Telefono" class="control-label">Teléfono <b class="text-danger">*</b></label>
+                        <input asp-for="Telefono" class="form-control" />
+                        <span asp-validation-for="Telefono" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Correo" class="control-label">Correo <b class="text-danger">*</b></label>
+                        <input asp-for="Correo" class="form-control" />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Direccion" class="control-label">Dirección <b class="text-danger">*</b></label>
+                        <input asp-for="Direccion" class="form-control" />
+                        <span asp-validation-for="Direccion" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FechaHora" class="control-label">Fecha y hora <b class="text-danger">*</b></label>
+                        <input type="datetime-local" asp-for="FechaHora" class="form-control" />
+                        <span asp-validation-for="FechaHora" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Registrar" class="btn btn-primary" />
+                    </div>
+                </form>
+                <div>
+                    <a asp-action="IndexLanding" asp-controller="Landing">Volver</a>
+                </div>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
-</div>
+</body>
+</html>
+
 
 
 @section Scripts {

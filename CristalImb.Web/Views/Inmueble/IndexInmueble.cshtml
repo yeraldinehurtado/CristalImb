@@ -181,6 +181,15 @@
             title: "Editar Inmueble",
             icon: 'success',
             html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarImagenesInm")) {
+        <text>
+        Swal.fire({
+            title: "Eliminar Imagen",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
             })
         </text>
         }
@@ -193,6 +202,6 @@
         })
         </text>
         }
-        
+
     </script>
 }
