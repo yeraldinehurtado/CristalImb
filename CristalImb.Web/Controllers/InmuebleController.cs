@@ -249,31 +249,59 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerInmuebleImgId(id));
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> EliminarImagen(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            TempData["Accion"] = "Confirmación";
+        //            InmuebleDetalleArchivos inmuebleDetalleArch = (InmuebleDetalleArchivos)await _inmuebleService.ObtenerInmuebleImgId(id);
+        //            await _inmuebleService.EliminarInmuebleDetalleArchivo(id);
+        //            TempData["Accion"] = "EliminarInmueble";
+        //            TempData["Mensaje"] = "Imagen eliminada exitosamente";
+        //            return RedirectToAction("IndexInmueble");
+        //        }
+        //        catch (Exception)
+        //        {
+        //            return RedirectToAction("IndexInmueble");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        TempData["Accion"] = "Error";
+        //        TempData["Mensaje"] = "Error.";
+        //        return RedirectToAction("IndexInmueble");
+        //    }
+
+        //}
+
+
+
         [HttpPost]
         public async Task<IActionResult> EliminarImagen(int id)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    TempData["Accion"] = "Confirmación";
-                    InmuebleDetalleArchivos inmuebleDetalleArch = (InmuebleDetalleArchivos)await _inmuebleService.ObtenerInmuebleImgId(id);
-                    await _inmuebleService.EliminarInmuebleDetalleArchivo(id);
-                    TempData["Accion"] = "EliminarInmueble";
-                    TempData["Mensaje"] = "Imagen eliminada exitosamente";
-                    return RedirectToAction("IndexInmueble");
-                }
-                catch (Exception)
-                {
-                    return RedirectToAction("IndexInmueble");
-                }
-            }
-            else
+
+            if (id == 0)
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Error.";
                 return RedirectToAction("IndexInmueble");
             }
+            else
+            {
+
+                await _inmuebleService.EliminarImagenesInm(id);
+
+                TempData["Accion"] = "EliminarImagenesInm";
+                TempData["Mensaje"] = "Imagen eliminada con éxito.";
+                return RedirectToAction("IndexInmueble");
+            }
+
+            
+
+            
 
         }
 

@@ -99,11 +99,27 @@ namespace CristalImb. Business.Business
             return await _context.inmuebles.FirstOrDefaultAsync(x => x.InmuebleId == id);
         }
 
+        public async Task<InmuebleDetalleArchivos> ObtenerImagenesId(int id)
+        {
+            return await _context.inmuebleDetalleArchivos.FirstOrDefaultAsync(e => e.InmuebleDetalleId == id);
+        }
         public async Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerInmuebleImgId(int id)
         {
             return await _context.inmuebleDetalleArchivos.Include(i => i.Inmueble).Where(s => s.InmuebleId == id).ToListAsync();
         }
 
+        public async Task EditarImagenesInm(InmuebleDetalleArchivos inmuebleDetalleArchivos)
+        {
+            _context.Update(inmuebleDetalleArchivos);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EliminarImagenesInm(int id)
+        {
+            var inmuebleDetalleArchivos = await ObtenerImagenesId(id);
+            _context.Remove(inmuebleDetalleArchivos);
+            await _context.SaveChangesAsync();
+        }
         public async Task EditarInmueble(Inmueble inmueble)
         {
             _context.Update(inmueble);
