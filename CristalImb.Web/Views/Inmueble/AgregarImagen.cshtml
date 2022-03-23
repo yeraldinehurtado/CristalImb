@@ -1,4 +1,4 @@
-﻿@model CristalImb.Business.Dtos.Inmuebles.InmuebleDto
+﻿@model CristalImb.Business.Dtos.Inmuebles.InmuebleDetalleDto
 
 @{
     ViewData["Title"] = "Agregar imagenes";
@@ -19,8 +19,10 @@
         }
     </style>
 }
-
-<div class="container-fluid">
+ <div class="registrar">
+            <form asp-action="AgregarImagen" enctype="multipart/form-data">
+                <input type="hidden" asp-for="InmuebleId" />
+                <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div asp-validation-summary="ModelOnly"></div>
@@ -41,66 +43,11 @@
             </div>
         </div><br />
         <div class="form-group">
-            <input onclick="agregarImg()" type="submit" value="Agregar imagen" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
-<br />
-<hr />
-<br />
-<div class="row">
-    <div class="col-12">
-        <h2>Lista de imagenes</h2>
-        <form asp-action="AgregarImagen" asp-controller="Inmueble" method="post">
-            <input type="hidden" asp-for="InmuebleId" />
-            <input type="hidden" asp-route-imagenIndex="" id="listaimagen" />
-            <table id="tablaimagen" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <td>Imagen</td>
-                        <td>Acciones</td>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <input id="agregar" type="submit" value="Guardar imágenes" class="btn btn-primary" />
-        </form>
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                    </div>
     </div>
 </div>
 
+</form>
+</div>
 
-
-@section Scripts {
-
-}
-<script>
-    let contador = 0;
-    function agregarImg() {
-        let imgId = $("#img").val();
-        let imgText = $("#img").text();
-
-        if (imgText != '') {
-            $("#tablaimagen").append(`
-            <tr id="tr-${contador}">
-                <td>
-                    <img src="@("~/imagenesInmueble/" + Model.Files)" name="imgId[${contador}].InmuebleId" value="${imgId}" asp-append-version="true" class="img-brand w-25 h-10" />
-                    ${imgId}
-                </td>
-                <td>
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt" onclick="eliminarImg(${contador})"></i></button>
-                </td>
-            </tr>
-            `);
-            contador++;
-        }
-        $("#img option[value='" + imgId + "']").hide();
-
-
-
-
-    }
-    function eliminarImg(contador) {
-        $("#tr-" + contador).remove();
-    }
-</script>

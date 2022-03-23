@@ -193,6 +193,15 @@
             })
         </text>
         }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("CrearInmuebleDetalleArchivos")) {
+        <text>
+        Swal.fire({
+            title: "Eliminar Imagen",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
         @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
         <text>
         Swal.fire({
