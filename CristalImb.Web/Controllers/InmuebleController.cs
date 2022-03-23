@@ -308,22 +308,24 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public IActionResult AgregarImagen(int id)
         {
-            InmuebleDto inmuebleDto = new()
+            InmuebleDetalleDto inmu = new()
             {
                 InmuebleId = id
             };
-            return View(inmuebleDto);
+            return View(inmu);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AgregarImagen(InmuebleDto inmuebleDto)
+        public async Task<IActionResult> AgregarImagen(InmuebleDetalleDto inmuebleDetalleDto)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    int InmuebleId = inmuebleDetalleDto.InmuebleId;
+
                     string uniqueFileName;
-                    foreach(var archivo in inmuebleDto.Files)
+                    foreach(var archivo in inmuebleDetalleDto.Files)
                     {
                         string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imagenesInmueble");
                         uniqueFileName = DateTime.Now.ToString("yyyymmssfff") + "_" + (archivo.FileName).Trim();
@@ -332,14 +334,24 @@ namespace CristalImb.Web.Controllers
                         {
                             await archivo.CopyToAsync(fileStream);
                         }
-                        _inmuebleService.CrearInmuebleDetalleArchivos(inmuebleDto.InmuebleId, uniqueFileName);
+
+                        if (InmuebleId == 0)
+                        {
+                            TempData["Accion"] = "Error";
+                            TempData["Mensaje"] = "Error.";
+                            return RedirectToAction("IndexInmueble");
+                        }
+                        else
+                        {
+
+                            _inmuebleService.CrearInmuebleDetalleArchivos(InmuebleId, uniqueFileName);
+
+                            TempData["Accion"] = "CrearInmuebleDetalleArchivos";
+                            TempData["Mensaje"] = "Imagen guardada con éxito.";
+                            return RedirectToAction("IndexInmueble");
+                        }
                     }
-                    if(await _inmuebleService.GuardarCambios())
-                    {
-                        TempData["Accion"] = "GuardarInmueble";
-                        TempData["Mensaje"] = "Imagen guardada con éxito";
-                        return RedirectToAction("IndexInmueble");
-                    }
+                    
                 }
                 catch (Exception)
                 {
