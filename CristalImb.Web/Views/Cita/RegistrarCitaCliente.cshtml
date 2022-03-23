@@ -23,7 +23,22 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
 </head>
-<body style="background-color: #B3FCFD " class="hold-transition register-page">
+
+    <!-- Left navbar links -->
+   
+
+<body style="background-color: #B3FCFD " class="hold-transition register-page col-md-12">
+    <nav class="text-center">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav ml-auto text-center">
+            <li class="nav-item">
+                <div class="form-group">
+                    <a asp-action="CerrarSesion" asp-controller="Usuarios" class="btn btn-danger">Cerrar sesión</a>
+                </div>
+            </li>
+        </ul>
+
+    </nav>
     <div class="register-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
@@ -38,50 +53,60 @@
 
                     <h2>Registre su cita</h2>
                     <hr />
-                    <div class="form-group">
-                        <label asp-for="InmuebleId" class="control-label">Inmueble</label>
-                        <select asp-items="ViewBag.ListaInmuebles" asp-for="InmuebleId" class="form-control"></select>
-                        <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                    <div class="col-md-12 row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="InmuebleId" class="control-label">Inmueble</label>
+                            <select asp-items="ViewBag.ListaInmuebles" asp-for="InmuebleId" class="form-control"></select>
+                            <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="ServicioInmuebleId" class="control-label">Servicio</label>
+                            <select asp-items="ViewBag.ListaServicios" asp-for="ServicioInmuebleId" class="form-control"></select>
+                            <span asp-validation-for="ServicioInmuebleId" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="ServicioInmuebleId" class="control-label">Servicio</label>
-                        <select asp-items="ViewBag.ListaServicios" asp-for="ServicioInmuebleId" class="form-control"></select>
-                        <span asp-validation-for="ServicioInmuebleId" class="text-danger"></span>
+                    <div class="col-md-12 row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Identificacion" class="control-label">Identificación <b class="text-danger">*</b></label>
+                            <input asp-for="Identificacion" class="form-control" />
+                            <span asp-validation-for="Identificacion" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Nombre" class="control-label">Nombre <b class="text-danger">*</b></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Identificacion" class="control-label">Identificación <b class="text-danger">*</b></label>
-                        <input asp-for="Identificacion" class="form-control" />
-                        <span asp-validation-for="Identificacion" class="text-danger"></span>
+                    <div class="col-md-12 row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Apellido" class="control-label">Apellido <b class="text-danger">*</b></label>
+                            <input asp-for="Apellido" class="form-control" />
+                            <span asp-validation-for="Apellido" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Telefono" class="control-label">Teléfono <b class="text-danger">*</b></label>
+                            <input asp-for="Telefono" class="form-control" />
+                            <span asp-validation-for="Telefono" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Nombre" class="control-label">Nombre <b class="text-danger">*</b></label>
-                        <input asp-for="Nombre" class="form-control" />
-                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    <div class="col-md-12 row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="Correo" class="control-label">Correo <b class="text-danger">*</b></label>
+                            <input asp-for="Correo" class="form-control" />
+                            <span asp-validation-for="Correo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="Direccion" class="control-label">Dirección <b class="text-danger">*</b></label>
+                            <input asp-for="Direccion" class="form-control" />
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Apellido" class="control-label">Apellido <b class="text-danger">*</b></label>
-                        <input asp-for="Apellido" class="form-control" />
-                        <span asp-validation-for="Apellido" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Telefono" class="control-label">Teléfono <b class="text-danger">*</b></label>
-                        <input asp-for="Telefono" class="form-control" />
-                        <span asp-validation-for="Telefono" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Correo" class="control-label">Correo <b class="text-danger">*</b></label>
-                        <input asp-for="Correo" class="form-control" />
-                        <span asp-validation-for="Correo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Direccion" class="control-label">Dirección <b class="text-danger">*</b></label>
-                        <input asp-for="Direccion" class="form-control" />
-                        <span asp-validation-for="Direccion" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FechaHora" class="control-label">Fecha y hora <b class="text-danger">*</b></label>
-                        <input type="datetime-local" asp-for="FechaHora" class="form-control" />
-                        <span asp-validation-for="FechaHora" class="text-danger"></span>
+                    <div class="col-md-12 row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="FechaHora" class="control-label">Fecha y hora <b class="text-danger">*</b></label>
+                            <input type="datetime-local" asp-for="FechaHora" class="form-control" />
+                            <span asp-validation-for="FechaHora" class="text-danger"></span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Registrar" class="btn btn-primary" />
