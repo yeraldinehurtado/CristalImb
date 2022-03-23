@@ -45,6 +45,7 @@ namespace CristalImb.Web.Controllers
             ViewData["listaZona"] = new SelectList(await _zonaService.ObtenerListaZonaEstado(), "ZonaId", "NombreZona");
             ViewData["ListaServicios"] = new SelectList(await _serviciosInmuebleService.ObtenerListaServiciosEstado(), "ServicioInmuebleId", "Nombre");
 
+
             return View(await _inmuebleService.ObtenerListaInmueblesOferta());
         }
 
