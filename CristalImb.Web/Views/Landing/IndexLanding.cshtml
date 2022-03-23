@@ -17,64 +17,27 @@
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Inmuebles en oferta.</h2>
         </div>
+
         <div class="row" id="oferta" asp-action="IndexLanding">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    @{int i = 0;}
-                    @if (i == 0)
-                    {
-                        <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
-                    }
-                    else
-                    {
-                        <li data-target="#myCarousel" data-slide-to="@i"></li>
-                    }
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    
-                    @foreach (var x in Model)
-                    {
-                        i++;
-                        var active = i <=1 ? "active" : "";
 
-                        <div class="carousel-item @active" style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px;">
-                            <div class="card shadow-lg" style="width: 100%; overflow: hidden; position: relative; height: 430px; border: groove; margin: 0 auto;">
-                                <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 250px; width: 390px; margin-left:auto; margin-right:auto;" />
-                                <div class="card-body">
-                                    <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Inmueble.Codigo) - $ @Html.DisplayFor(modelx => x.Inmueble.Valor)</h5>
-                                    <p class="card-text text-center">@Html.DisplayFor(modelx => x.Inmueble.Direccion) - @Html.DisplayFor(modelx => x.Inmueble.Zona.NombreZona)</p>
-                                    <p class="card-text text-center">@Html.DisplayFor(modelx => x.Inmueble.Descripcion)</p>
-                                </div>
-                            </div>
 
+            @foreach (var x in Model)
+            {
+                <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px; margin:10px;">
+                    <div class="card shadow-lg" style="width: 110%; overflow: hidden; position: relative; height: 430px; border: groove; margin: 0 auto;">
+                        <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 250px; width: 390px; margin-left:auto; margin-right:auto;" />
+                        <div class="card-body">
+                            <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Inmueble.Codigo) - $ @Html.DisplayFor(modelx => x.Inmueble.Valor)</h5>
+                            <p class="card-text text-center">@Html.DisplayFor(modelx => x.Inmueble.Direccion) - @Html.DisplayFor(modelx => x.Inmueble.Zona.NombreZona)</p>
+                            <p class="card-text text-center">@Html.DisplayFor(modelx => x.Inmueble.Descripcion)</p>
                         </div>
-
-                    }
+                    </div>
 
                 </div>
-                <div class="bx-controls bx-has-controls-direction">
-                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev" role="button">
-                        <span class="carousel-control-prev-icon"></span>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" data-slide="next" role="button">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
-                </div>
 
-            </div>
+            }
+
         </div>
 
     </div>
 </section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $('#myCarousel').carousel({
-            interval: 1000
-        })
-    });
-
-</script>
