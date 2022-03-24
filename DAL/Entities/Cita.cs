@@ -39,11 +39,14 @@ namespace CristalImb.Model.Entities
         public DateTime FechaHora { get; set; }
 
         [ForeignKey("Inmuebles")]
+        [DisplayName("Código Inmueble")]
         public int InmuebleId { get; set; }
 
+        [DisplayName("Servicio")]
         public int ServicioInmuebleId { get; set; }
 
         [ForeignKey("EstadoCita")]
+        [DisplayName("Estado de la cita")]
         public int EstadoCitaId { get; set; }
 
 
