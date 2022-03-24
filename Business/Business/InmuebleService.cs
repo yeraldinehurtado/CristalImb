@@ -27,9 +27,27 @@ namespace CristalImb. Business.Business
         {
             return await _context.inmuebles.Where(s => s.Estado == true).ToListAsync();
         }
+        //public async Task<IEnumerable<InmueblesLandingDto>> ObtenerListaInmueblesOferta()
+        //{
+        //    //return await _context.inmuebleDetalleArchivos.Where(s => s.Inmueble.oferta == true && s.Inmueble.IdEstadoInm==3 && s.Inmueble.Estado == true).ToListAsync();
+        //    var listaInmuebleDto = new List<InmueblesLandingDto>();
+        //    var listaInmuebleOferta = await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm == 3 && s.Estado == true).ToListAsync();
+        //    listaInmuebleOferta.ForEach(x => {
+
+        //        var inmuebleDto = new InmueblesLandingDto();
+        //        inmuebleDto.NombreArchivo = _context.inmuebleDetalleArchivos.Where(inmueble=> inmueble.InmuebleId==x.InmuebleId).Select(y=>y.NombreArchivo).FirstOrDefault();
+        //    });
+
+        //    return listaInmuebleDto;
+
+
+        //}
+
+       
+
         public async Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerListaInmueblesOferta()
         {
-            return await _context.inmuebleDetalleArchivos.Where(s => s.Inmueble.oferta == true && s.Inmueble.IdEstadoInm==3 && s.Inmueble.Estado == true).ToListAsync();
+           return await _context.inmuebleDetalleArchivos.Where(s => s.Inmueble.oferta == true && s.Inmueble.IdEstadoInm == 3 && s.Inmueble.Estado == true).ToListAsync();
         }
 
         public async Task GuardarInmueble1(Inmueble inmueble)
