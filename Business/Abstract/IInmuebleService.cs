@@ -31,6 +31,7 @@ namespace CristalImb.Business.Abstract
         Task<InmuebleDetalleArchivos> ObtenerImagenesId(int id);
         Task EditarImagenesInm(InmuebleDetalleArchivos inmuebleDetalleArchivos);
         Task EliminarImagenesInm(int id);
+        Task GuardarImagenes(InmuebleDetalleArchivos inmuebleDetalleArchivos);
 
     }
 }

@@ -322,35 +322,42 @@ namespace CristalImb.Web.Controllers
             {
                 try
                 {
-                    int InmuebleId = inmuebleDetalleDto.InmuebleId;
 
-                    string uniqueFileName;
-                    foreach(var archivo in inmuebleDetalleDto.Files)
+                    if (inmuebleDetalleDto.InmuebleId != 0)
                     {
-                        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imagenesInmueble");
-                        uniqueFileName = DateTime.Now.ToString("yyyymmssfff") + "_" + (archivo.FileName).Trim();
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        using(var fileStream = new FileStream(filePath, FileMode.Create))
+                        string uniqueFileName;
+                        foreach (var archivo in inmuebleDetalleDto.Files)
                         {
-                            await archivo.CopyToAsync(fileStream);
-                        }
+                            string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "imagenesInmueble");
+                            //uniqueFileName = Guid.NewGuid().ToString() + "_" + archivo.FileName;
+                            uniqueFileName = DateTime.Now.ToString("yyyymmssfff") + "_" + (archivo.FileName).Trim(); //otra opción
+                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                            // Use CopyTo() method provided by IFormFile interface to
+                            // copy the file to wwwroot/images folder
+                            // archivo.CopyTo(new FileStream(filePath, FileMode.Create));
+                            using (var fileStream = new FileStream(filePath, FileMode.Create))//Guardar imagen
+                            {
+                                await archivo.CopyToAsync(fileStream);
+                            }
 
-                        if (InmuebleId == 0)
-                        {
-                            TempData["Accion"] = "Error";
-                            TempData["Mensaje"] = "Error.";
-                            return RedirectToAction("IndexInmueble");
-                        }
-                        else
-                        {
+                            InmuebleDetalleArchivos inmuebleDetalleArchivos = new()
+                            {
+                                InmuebleId = inmuebleDetalleDto.InmuebleId,
+                                NombreArchivo = uniqueFileName
+                            };
+                            await _inmuebleService.GuardarImagenes(inmuebleDetalleArchivos);
 
-                            _inmuebleService.CrearInmuebleDetalleArchivos(InmuebleId, uniqueFileName);
 
-                            TempData["Accion"] = "CrearInmuebleDetalleArchivos";
-                            TempData["Mensaje"] = "Imagen guardada con éxito.";
-                            return RedirectToAction("IndexInmueble");
                         }
+                        TempData["Accion"] = "CrearInmuebleDetalleArchivos";
+                        TempData["Mensaje"] = "Imagen guardada con éxito.";
+                        return RedirectToAction("IndexInmueble");
+
+
                     }
+                    return View(inmuebleDetalleDto);
+
+
                     
                 }
                 catch (Exception)
