@@ -79,7 +79,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarServiciosInmueble" asp-route-id="@x.ServicioInmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                         <a onclick="mostrarModal('@Url.Action("EditarServiciosInmueble","ServiciosInmueble", new { id = x.ServicioInmuebleId }, Context.Request.Scheme)', 'Editar servicio de inmueble')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarServiciosInmueble" asp-route-id="@x.ServicioInmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>
                             }

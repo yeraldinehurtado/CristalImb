@@ -108,7 +108,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarEmpleado" asp-route-id="@x.EmpleadoId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                         <a onclick="mostrarModal('@Url.Action("EditarEmpleado","Empleado", new { id = x.EmpleadoId }, Context.Request.Scheme)', 'Editar empleado')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarEmpleado" asp-route-id="@x.EmpleadoId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>
                             }
