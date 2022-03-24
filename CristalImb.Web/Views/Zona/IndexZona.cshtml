@@ -76,7 +76,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarZona" asp-route-id="@x.ZonaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarZona" asp-route-id="@x.ZonaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
+                                         <a onclick="mostrarModal('@Url.Action("EditarZona","Zona", new { id = x.ZonaId }, Context.Request.Scheme)', 'Editar zona')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                             }

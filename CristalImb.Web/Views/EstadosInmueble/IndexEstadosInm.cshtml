@@ -78,7 +78,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarEstadoInm" asp-route-id="@x.IdEstadoInm" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                         <a onclick="mostrarModal('@Url.Action("EditarEstadoInm","EstadoInm", new { id = x.IdEstadoInm }, Context.Request.Scheme)', 'Editar estado de inmueble')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarEstadoInm" asp-route-id="@x.IdEstadoInm" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>
                             }

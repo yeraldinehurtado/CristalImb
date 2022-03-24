@@ -78,7 +78,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarEstadoCita" asp-route-id="@x.EstadoCitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                         <a onclick="mostrarModal('@Url.Action("EditarEstadoCita","EstadoCita", new { id = x.EstadoCitaId }, Context.Request.Scheme)', 'Editar estado de cita')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarEstadoCita" asp-route-id="@x.EstadoCitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>
                             }

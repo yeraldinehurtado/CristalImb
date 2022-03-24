@@ -76,10 +76,12 @@
                                         @Html.DisplayFor(modelx => x.FechaHora)
                                     </td>
                                     <td>
-                                        <a asp-action="DetallesCita" asp-route-id="@x.CitaId" class="btn btn-success">Detalle</a>
+                                        @*<a asp-action="DetallesCita" asp-route-id="@x.CitaId" class="btn btn-success">Detalle</a>*@
+                                         <a onclick="mostrarModal('@Url.Action("DetallesCita","Cita", new { id = x.CitaId }, Context.Request.Scheme)', 'Detalle cita')" class="btn btn-success">Detalle</a>
                                     </td>
                                     <td>
-                                        <a asp-action="EditarCita" asp-route-id="@x.CitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                         <a onclick="mostrarModal('@Url.Action("EditarCita","Cita", new { id = x.CitaId }, Context.Request.Scheme)', 'Editar cita')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarCita" asp-route-id="@x.CitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                     <td>
                                         <form asp-action="EliminarCita" asp-route-id="@x.CitaId" class="d-inline">
