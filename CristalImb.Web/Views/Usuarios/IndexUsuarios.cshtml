@@ -42,7 +42,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.IdentityUser.Email)
                                 </th>
-                                <th> Detalle </th>
+                                <th> Rol </th>
                                 <th> Estado </th>
                                 <th> Estado </th>
                                 <th> Editar </th>
@@ -59,8 +59,7 @@
                                         @Html.DisplayFor(modelItem => usuario.IdentityUser.Email)
                                     </td>
                                     <td>
-                                        @*<a onclick="mostrarModal('@Url.Action("Detalle","Rol", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'detalle')" class="btn btn-success">Detalle</a>*@
-                                        <a class="btn btn-success" asp-route-usuarioId="@usuario.UsuarioId" asp-action="Detalle" asp-controller="Rol">Detalle</a>
+                                        @Html.DisplayFor(modelItem => usuario.Rol)
                                     </td>
                                     <td>
                                         @if (usuario.Estado == true)
