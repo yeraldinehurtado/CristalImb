@@ -18,10 +18,10 @@
                         <br />
                     </div>
                     @*<div class="botonAsignar col-md-6 p-3 text-center accent-teal">
-                        <br />
-                        <a asp-action="AsignarRolesUsuario" asp-controller="Rol" class="btn btn-outline-success"><i class="fas fa-plus"></i> Asignar rol</a>
-                        <br />
-                    </div>*@
+                            <br />
+                            <a asp-action="AsignarRolesUsuario" asp-controller="Rol" class="btn btn-outline-success"><i class="fas fa-plus"></i> Asignar rol</a>
+                            <br />
+                        </div>*@
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                                         }
                                     </td>
                                     <td>
-                                        <a onclick="mostrarModal('@Url.Action("EditarUsuario","Usuarios", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'Editar usuario')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        <a onclick="mostrarModal('@Url.Action("EditarUsuarios","Usuarios", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'Editar usuario')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                         @*<a asp-action="EditarUsuario" asp-route-rol="@usuario.UsuarioId" class="btn alert-primary">Editar</a>*@
                                     </td>
                                 </tr>
@@ -101,7 +101,38 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/tabla.js"></script>
+    <script src="~/js/Tabla.js"></script>
     <script src="~/js/modal.js"></script>
 
+    <script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarUsuario")) {
+        <text>
+        Swal.fire({
+        title: "Guardar Usuario",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarUsuario")) {
+        <text>
+        Swal.fire({
+        title: "Editar Usuario",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+        <text>
+        Swal.fire({
+        title: "Error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+    </script>
 }
+
+

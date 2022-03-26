@@ -56,9 +56,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CrearUsuarios()
         {
-            var usuario = await _context.usuarios.Include(x => x.IdentityUser).ToListAsync();
-            var listaRoles = await _roleManager.Roles.ToListAsync();
-            ViewBag.Roles = new SelectList(listaRoles, "Name", "Name");
+            ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name");
             return View();
         }
 
@@ -88,6 +86,8 @@ namespace CristalImb.Web.Controllers
                             Estado = true
                         };
                         await _usuariosService.GuardarUsuario(usuarioIdentity);
+                        TempData["Accion"] = "GuardarUsuario";
+                        TempData["Mensaje"] = "Usuario guardado correctamente";
                         MailMessage mensaje = new();
                         mensaje.To.Add(crearViewModel.Email);//destinatario
                         mensaje.Subject = "Cristalimb - registro en el sistema";
@@ -185,12 +185,11 @@ namespace CristalImb.Web.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> EditarUsuario(string id, IdentityUser identityUser)
+        public async Task<IActionResult> EditarUsuarios(string id, IdentityUser identityUser)
         {
             if (id != null)
             {
-                var listaRoles = await _roleManager.Roles.ToListAsync();
-                ViewBag.Roles = new SelectList(listaRoles, "Name", "Name");
+                ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name");
 
                 UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(id);
 
@@ -210,7 +209,7 @@ namespace CristalImb.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EditarUsuario(UsuarioDto usuarioDto, IdentityUser identityUser, string id)
+        public async Task<ActionResult> EditarUsuarios(UsuarioDto usuarioDto, IdentityUser identityUser, string id)
         {
             if (ModelState.IsValid)
             {
@@ -237,7 +236,7 @@ namespace CristalImb.Web.Controllers
                     await _userManager.AddToRoleAsync(usuario2, usuarioDto.Rol);
 
                     await _usuariosService.EditarUsuario(usuario);
-                    TempData["Accion"] = "Editar";
+                    TempData["Accion"] = "EditarUsuario";
                     TempData["Mensaje"] = "Usuario editado correctamente";
                     return RedirectToAction("IndexUsuarios");
                 }
