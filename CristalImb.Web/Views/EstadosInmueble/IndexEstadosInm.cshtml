@@ -42,8 +42,8 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
-                                <th></th>
-                                <th></th>
+                                <th> Estado </th>
+                                <th>Editar </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,7 +78,7 @@
                                         }
                                     </td>
                                     <td>
-                                         <a onclick="mostrarModal('@Url.Action("EditarEstadoInm","EstadoInm", new { id = x.IdEstadoInm }, Context.Request.Scheme)', 'Editar estado de inmueble')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                         <a onclick="mostrarModal('@Url.Action("EditarEstadoInm","EstadosInmueble", new { id = x.IdEstadoInm }, Context.Request.Scheme)', 'Editar estado de inmueble')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                         @*<a asp-action="EditarEstadoInm" asp-route-id="@x.IdEstadoInm" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>

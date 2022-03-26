@@ -8,7 +8,7 @@
 <section class="content">
     <input class="form-control" type="search" id="search" placeholder="Buscar">
     <br />
-    <table class="table" id="tabla">
+    <table class="table" id="tablita">
         <thead>
             <tr>
                 <th>
@@ -55,31 +55,32 @@
     </table>
 
 </section>
+<script type="text/javascript">
+
+    function filterTable(event) {
+        var filter = event.target.value.toUpperCase();
+        var rows = document.querySelector("#tablita tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var primero = rows[i].cells[0].textContent.toUpperCase();
+            var segundo = rows[i].cells[1].textContent.toUpperCase();
+            var tercero = rows[i].cells[2].textContent.toUpperCase();
+            var cuarto = rows[i].cells[3].textContent.toUpperCase();
+            var quinto = rows[i].cells[4].textContent.toUpperCase();
+            if (primero.indexOf(filter) > -1 || segundo.indexOf(filter) > -1 || tercero.indexOf(filter) > -1 || cuarto.indexOf(filter) > -1 || quinto.indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+
+    document.querySelector('#search').addEventListener('keyup', filterTable, false);
+</script>
 @section Scripts{
 
     <script src="~/js/tabla.js"></script>
     <script src="~/js/modals.js"></script>
 
-    <script type="text/javascript">
-
-        document.querySelector("#search").addEventListener("keyup", searchFunction);
-        function searchFunction() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.querySelector("#search");
-            filter = input.value.toUpperCase();
-            table = document.querySelector("#table");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
-    </script>
+    
 }

@@ -42,10 +42,10 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.IdentityUser.Email)
                                 </th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th> Detalle </th>
+                                <th> Estado </th>
+                                <th> Estado </th>
+                                <th> Editar </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,6 +59,7 @@
                                         @Html.DisplayFor(modelItem => usuario.IdentityUser.Email)
                                     </td>
                                     <td>
+                                        @*<a onclick="mostrarModal('@Url.Action("Detalle","Rol", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'detalle')" class="btn btn-success">Detalle</a>*@
                                         <a class="btn btn-success" asp-route-usuarioId="@usuario.UsuarioId" asp-action="Detalle" asp-controller="Rol">Detalle</a>
                                     </td>
                                     <td>
@@ -86,7 +87,8 @@
                                         }
                                     </td>
                                     <td>
-                                        <a asp-action="EditarUsuario" asp-route-rol="@usuario.UsuarioId" class="btn alert-primary">Editar</a>
+                                        <a onclick="mostrarModal('@Url.Action("EditarUsuario","Usuarios", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'Editar usuario')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        @*<a asp-action="EditarUsuario" asp-route-rol="@usuario.UsuarioId" class="btn alert-primary">Editar</a>*@
                                     </td>
                                 </tr>
                             }

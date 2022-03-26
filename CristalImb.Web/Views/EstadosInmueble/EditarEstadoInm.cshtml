@@ -14,27 +14,25 @@
     </style>
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="editar">
-                <h1>Editar Estado inmueble</h1>
-                <hr />
-                <form asp-action="EditarEstadoInm">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="IdEstadoInm" />
-                    <div class="form-group">
-                        <label asp-for="NombreEstado" class="control-label"></label>
-                        <input asp-for="NombreEstado" class="form-control" />
-                        <span asp-validation-for="NombreEstado" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Guardar" class="btn btn-primary" />
-                    </div>
-                </form>
-                <div>
-                    <a asp-action="IndexEstadosInm">Volver</a>
+<div class="row">
+    <div class="registrar col-md-12">
+        <div class="editar">
+            <h1>Editar Estado inmueble</h1>
+            <hr />
+            <form asp-action="EditarEstadoInm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdEstadoInm" />
+                <div class="form-group">
+                    <label asp-for="NombreEstado" class="control-label"></label>
+                    <input asp-for="NombreEstado" class="form-control" />
+                    <span asp-validation-for="NombreEstado" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+            <div>
+                <a asp-action="IndexEstadosInm">Volver</a>
             </div>
         </div>
     </div>
