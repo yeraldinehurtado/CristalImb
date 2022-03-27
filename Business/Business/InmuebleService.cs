@@ -47,11 +47,53 @@ namespace CristalImb. Business.Business
         {
             Inmueble inmueble = await ObtenerInmuebleId(id);
             inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == id).Select(y => y.NombreArchivo).FirstOrDefault();
+            inmueble.AlertaPropietario = "No";
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
 
 
         }
+
+        public async Task AlertaPropietario(int id)
+        {
+            Inmueble inmueble = await ObtenerInmuebleId(id);
+            inmueble.AlertaPropietario = "Si";
+            _context.Update(inmueble);
+            await _context.SaveChangesAsync();
+
+
+        }
+        public async Task<InmPropietarios> ObtenerInmPropId(int id)
+        {
+            return await _context.InmPropietarios.FirstOrDefaultAsync(x => x.InmuebleId == id && x.asociado == "Si");
+        }
+
+        public async Task EliminarAlertaPropietario(int id)
+        {
+            Inmueble inmueble = await ObtenerInmuebleId(id);
+
+            //var idExiste = _context.InmPropietarios.FirstOrDefaultAsync(x => x.InmuebleId == id);
+
+            InmPropietarios inmPropietarios = await ObtenerInmPropId(id);
+
+            if (inmPropietarios != null)
+            {
+                inmueble.AlertaPropietario = "Si";
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                inmueble.AlertaPropietario = "No";
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
+           
+
+
+        }
+
+
 
 
 

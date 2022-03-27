@@ -66,6 +66,11 @@ namespace CristalImb.Model.Entities
         public int IdEstadoInm { get; set; }
         public string NombreArchivo { get; set; }
 
+        [DisplayName("¿Tiene propietario(s)?")]
+        public string AlertaPropietario { get; set; }
+
+
+
         public virtual EstadosInmueble EstadosInmueble { get; set; }
 
         public virtual TipoInmuebles TipoInmuebles { get; set; }
