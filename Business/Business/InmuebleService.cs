@@ -195,8 +195,16 @@ namespace CristalImb. Business.Business
         public async Task EliminarImagenesInm(int id)
         {
             var inmuebleDetalleArchivos = await ObtenerImagenesId(id);
+            var inmuebleId = inmuebleDetalleArchivos.InmuebleId;
             _context.Remove(inmuebleDetalleArchivos);
             await _context.SaveChangesAsync();
+
+
+            Inmueble inmueble = await ObtenerInmuebleId(inmuebleId);
+            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+            _context.Update(inmueble);
+            await _context.SaveChangesAsync();
+
         }
         public async Task EditarInmueble(Inmueble inmueble)
         {
