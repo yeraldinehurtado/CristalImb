@@ -200,7 +200,22 @@ namespace CristalImb. Business.Business
         }
         public async Task EditarInmueble(Inmueble inmueble)
         {
-            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+            InmPropietarios inmPropietarios = await ObtenerInmPropId(inmueble.InmuebleId);
+
+            if (inmPropietarios != null)
+            {
+                inmueble.AlertaPropietario = "Si";
+                inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                inmueble.AlertaPropietario = "No";
+                inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
         }
