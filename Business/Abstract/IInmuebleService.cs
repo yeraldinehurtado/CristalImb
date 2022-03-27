@@ -36,6 +36,7 @@ namespace CristalImb.Business.Abstract
         Task AlertaPropietario(int id);
         Task EliminarAlertaPropietario(int id);
         Task<InmPropietarios> ObtenerInmPropId(int id);
+        Task PrimerImagenAgregar(int id);
 
 
 
