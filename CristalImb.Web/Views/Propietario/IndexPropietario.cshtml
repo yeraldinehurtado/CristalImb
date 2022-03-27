@@ -171,6 +171,15 @@
         title: "Editar propietario",
             icon: 'success',
             html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarInmPropietario")) {
+        <text>
+        Swal.fire({
+        title: "Eliminar inmueble a propietario",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
             })
         </text>
         }

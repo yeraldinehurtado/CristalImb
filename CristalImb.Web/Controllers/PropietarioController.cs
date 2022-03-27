@@ -237,11 +237,13 @@ namespace CristalImb.Web.Controllers
                             PropietarioId = propietario,
                             InmuebleId = x.InmuebleId,
                             FechaInicio = DateTime.Now,
-                            Estado = true
+                            Estado = true,
+                            asociado = "Si"
 
 
-                        };
+                    };
                         await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
+                        await _inmuebleService.AlertaPropietario(inmPropietarios.InmuebleId);
                         TempData["Accion"] = "GuardarPropInmueble";
                         TempData["Mensaje"] = "inmueble(s) añadido con éxito";
                     }
@@ -271,11 +273,14 @@ namespace CristalImb.Web.Controllers
                     InmPropietarios inmPropietarios = await _inmPropietariosService.ObtenerInmPropietariosId(id);
                     inmPropietarios.FechaFin = DateTime.Now;
                     inmPropietarios.Estado = false;
+                    inmPropietarios.asociado = "No";
+
+                    var guardaInmuebleId = inmPropietarios.InmuebleId;
 
                     await _inmPropietariosService.EditarInmPropietario(inmPropietarios);
-                    
+                    await _inmuebleService.EliminarAlertaPropietario(guardaInmuebleId);
                     TempData["Accion"] = "EliminarInmPropietario";
-                    TempData["Mensaje"] = "Inmuebles eliminado con éxito.";
+                    TempData["Mensaje"] = "Inmueble eliminado con éxito.";
                     return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)

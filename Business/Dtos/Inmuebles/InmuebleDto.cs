@@ -62,6 +62,7 @@ namespace CristalImb.Business.Dtos.Inmuebles
         public int IdEstadoInm { get; set; }
         //public List<IFormFile> Files { get; set; }
         public List<IFormFile> Files { get; set; }
+        public string AlertaPropietario { get; set; }
 
 
     }

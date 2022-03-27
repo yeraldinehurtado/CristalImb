@@ -40,9 +40,6 @@
                                     @Html.DisplayNameFor(model => model.Codigo)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Descripcion)
-                                </th>
-                                <th>
                                     @Html.DisplayNameFor(model => model.TipoInmuebles.NombreTipoInm)
 
                                 </th>
@@ -63,6 +60,9 @@
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Direccion)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.AlertaPropietario)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.oferta)
@@ -89,9 +89,6 @@
                                     @Html.DisplayFor(modelx => x.Codigo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelx => x.Descripcion)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelx => x.TipoInmuebles.NombreTipoInm)
                                 </td>
                                 <td>
@@ -113,13 +110,16 @@
                                     @Html.DisplayFor(modelx => x.Direccion)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelx => x.AlertaPropietario)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelx => x.oferta)
                                 </td>
                                 <td>
                                     <a onclick="mostrarModal('@Url.Action("VerPropietarios","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Ver Propietarios')" class="btn alert-primary"><i class="fa fa-eye"></i></a>
                                 </td>
                                 <td>
-                                     <a onclick="mostrarModal('@Url.Action("AgregarImagen","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Agregar Imagen')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                    <a onclick="mostrarModal('@Url.Action("AgregarImagen","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Agregar Imagen')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                     @*<a asp-action="AgregarImagen" asp-route-id="@x.InmuebleId" class="btn alert-primary"> <i class="fa fa-plus"></i></a>*@
                                 </td>
                                 <td>
@@ -150,7 +150,7 @@
                                     }
                                 </td>
                                 <td>
-                                     <a onclick="mostrarModal('@Url.Action("EditarInmueble","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Editar inmueble')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                    <a onclick="mostrarModal('@Url.Action("EditarInmueble","Inmueble", new { id = x.InmuebleId }, Context.Request.Scheme)', 'Editar inmueble')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                     @*<a asp-action="EditarInmueble" asp-route-id="@x.InmuebleId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                 </td>
                             </tr>

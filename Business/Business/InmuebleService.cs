@@ -47,11 +47,53 @@ namespace CristalImb. Business.Business
         {
             Inmueble inmueble = await ObtenerInmuebleId(id);
             inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == id).Select(y => y.NombreArchivo).FirstOrDefault();
+            inmueble.AlertaPropietario = "No";
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
 
 
         }
+
+        public async Task AlertaPropietario(int id)
+        {
+            Inmueble inmueble = await ObtenerInmuebleId(id);
+            inmueble.AlertaPropietario = "Si";
+            _context.Update(inmueble);
+            await _context.SaveChangesAsync();
+
+
+        }
+        public async Task<InmPropietarios> ObtenerInmPropId(int id)
+        {
+            return await _context.InmPropietarios.FirstOrDefaultAsync(x => x.InmuebleId == id && x.asociado == "Si");
+        }
+
+        public async Task EliminarAlertaPropietario(int id)
+        {
+            Inmueble inmueble = await ObtenerInmuebleId(id);
+
+            //var idExiste = _context.InmPropietarios.FirstOrDefaultAsync(x => x.InmuebleId == id);
+
+            InmPropietarios inmPropietarios = await ObtenerInmPropId(id);
+
+            if (inmPropietarios != null)
+            {
+                inmueble.AlertaPropietario = "Si";
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                inmueble.AlertaPropietario = "No";
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
+           
+
+
+        }
+
+
 
 
 
@@ -153,12 +195,35 @@ namespace CristalImb. Business.Business
         public async Task EliminarImagenesInm(int id)
         {
             var inmuebleDetalleArchivos = await ObtenerImagenesId(id);
+            var inmuebleId = inmuebleDetalleArchivos.InmuebleId;
             _context.Remove(inmuebleDetalleArchivos);
             await _context.SaveChangesAsync();
+
+
+            Inmueble inmueble = await ObtenerInmuebleId(inmuebleId);
+            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+            _context.Update(inmueble);
+            await _context.SaveChangesAsync();
+
         }
         public async Task EditarInmueble(Inmueble inmueble)
         {
-            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+            InmPropietarios inmPropietarios = await ObtenerInmPropId(inmueble.InmuebleId);
+
+            if (inmPropietarios != null)
+            {
+                inmueble.AlertaPropietario = "Si";
+                inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                inmueble.AlertaPropietario = "No";
+                inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
+                _context.Update(inmueble);
+                await _context.SaveChangesAsync();
+            }
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
         }
