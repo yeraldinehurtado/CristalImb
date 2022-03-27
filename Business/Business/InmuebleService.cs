@@ -158,6 +158,7 @@ namespace CristalImb. Business.Business
         }
         public async Task EditarInmueble(Inmueble inmueble)
         {
+            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
         }
