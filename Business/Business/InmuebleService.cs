@@ -47,7 +47,9 @@ namespace CristalImb. Business.Business
         {
             Inmueble inmueble = await ObtenerInmuebleId(id);
             inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == id).Select(y => y.NombreArchivo).FirstOrDefault();
-            await EditarInmueble(inmueble);
+            _context.Update(inmueble);
+            await _context.SaveChangesAsync();
+
 
         }
 

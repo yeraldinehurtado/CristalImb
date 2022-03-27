@@ -156,6 +156,7 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
+                        inmueble.Estado = true;
                         await _inmuebleService.EditarInmueble(inmueble);
                         TempData["Accion"] = "EditarInmueble";
                         TempData["Mensaje"] = "Inmueble editado con éxito.";
