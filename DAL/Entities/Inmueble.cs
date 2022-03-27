@@ -64,6 +64,7 @@ namespace CristalImb.Model.Entities
 
         [ForeignKey("EstadosInmueble")]
         public int IdEstadoInm { get; set; }
+        public string NombreArchivo { get; set; }
 
         public virtual EstadosInmueble EstadosInmueble { get; set; }
 

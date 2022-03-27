@@ -12,7 +12,7 @@ namespace CristalImb.Business.Abstract
     {
         Task<IEnumerable<Inmueble>> ObtenerInmueble();
         Task<IEnumerable<Inmueble>> ObtenerListaInmueblesEstado();
-        Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerListaInmueblesOferta();
+        Task<IEnumerable<Inmueble>> ObtenerListaInmueblesOferta();
         Task GuardarInmueble1(Inmueble inmueble);
         Task<int?> GuardarInmueble(InmuebleDto inmuebleDto);
         Task<Inmueble> ObtenerInmuebleId(int id);
@@ -32,6 +32,7 @@ namespace CristalImb.Business.Abstract
         Task EditarImagenesInm(InmuebleDetalleArchivos inmuebleDetalleArchivos);
         Task EliminarImagenesInm(int id);
         Task GuardarImagenes(InmuebleDetalleArchivos inmuebleDetalleArchivos);
+        Task PrimerImagen(int id);
 
     }
 }

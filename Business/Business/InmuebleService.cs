@@ -43,11 +43,20 @@ namespace CristalImb. Business.Business
 
         //}
 
-       
-
-        public async Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerListaInmueblesOferta()
+        public async Task PrimerImagen(int id)
         {
-           return await _context.inmuebleDetalleArchivos.Where(s => s.Inmueble.oferta == true && s.Inmueble.IdEstadoInm == 3 && s.Inmueble.Estado == true).ToListAsync();
+            Inmueble inmueble = await ObtenerInmuebleId(id);
+            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == id).Select(y => y.NombreArchivo).FirstOrDefault();
+            await EditarInmueble(inmueble);
+
+        }
+
+
+
+
+        public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesOferta()
+        {
+           return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm == 3 && s.Estado == true).ToListAsync();
         }
 
         public async Task GuardarInmueble1(Inmueble inmueble)
@@ -73,6 +82,7 @@ namespace CristalImb. Business.Business
                 TipoId = inmuebleDto.TipoId,
                 Valor = inmuebleDto.Valor,
                 ZonaId = inmuebleDto.ZonaId,
+                
 
 
 

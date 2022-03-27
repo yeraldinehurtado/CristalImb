@@ -77,7 +77,6 @@ namespace CristalImb.Web.Controllers
                 {
                     inmuebleDto.Estado = true;
                     var idInmueble = await _inmuebleService.GuardarInmueble(inmuebleDto);
-
                     if (idInmueble != null)
                     {
                         string uniqueFileName;
@@ -96,8 +95,11 @@ namespace CristalImb.Web.Controllers
                             }
                             _inmuebleService.CrearInmuebleDetalleArchivos(idInmueble.Value, uniqueFileName);
                         }
+
+                        
                         if (await _inmuebleService.GuardarCambios())
                         {
+                            await _inmuebleService.PrimerImagen(idInmueble.Value);
                             TempData["Accion"] = "GuardarInmueble";
                             TempData["Mensaje"] = "Inmueble guardado con éxito.";
                             return RedirectToAction("IndexInmueble");
