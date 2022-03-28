@@ -17,8 +17,7 @@ namespace CristalImb.Model.Entities
         public string Codigo { get; set; }
 
         [DisplayName("Descripción")]
-        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
-        [StringLength(70, ErrorMessage = "Máximo 70 caracteres")]
+        [StringLength(500, ErrorMessage = "Máximo 500 caracteres")]
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio")]
