@@ -325,7 +325,7 @@ namespace CristalImb.Web.Controllers
             {
                 try
                 {
-
+                    var idInmueble = inmuebleDetalleDto.InmuebleId;
                     if (inmuebleDetalleDto.InmuebleId != 0)
                     {
                         string uniqueFileName;
@@ -352,7 +352,8 @@ namespace CristalImb.Web.Controllers
 
 
                         }
-                        TempData["Accion"] = "CrearInmuebleDetalleArchivos";
+                        await _inmuebleService.PrimerImagenAgregar(idInmueble);
+                        TempData["Accion"] = "PrimerImagenAgregar";
                         TempData["Mensaje"] = "Imagen guardada con éxito.";
                         return RedirectToAction("IndexInmueble");
 

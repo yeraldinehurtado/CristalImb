@@ -201,6 +201,15 @@
             title: "Agregar Imágenes",
             icon: 'success',
             html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("PrimerImagenAgregar")) {
+        <text>
+        Swal.fire({
+            title: "Agregar Imágenes",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
             })
         </text>
         }

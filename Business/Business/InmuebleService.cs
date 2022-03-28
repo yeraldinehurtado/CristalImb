@@ -54,6 +54,16 @@ namespace CristalImb. Business.Business
 
         }
 
+        public async Task PrimerImagenAgregar(int id)
+        {
+            Inmueble inmueble = await ObtenerInmuebleId(id);
+            inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == id).Select(y => y.NombreArchivo).FirstOrDefault();
+            _context.Update(inmueble);
+            await _context.SaveChangesAsync();
+
+
+        }
+
         public async Task AlertaPropietario(int id)
         {
             Inmueble inmueble = await ObtenerInmuebleId(id);
@@ -100,7 +110,7 @@ namespace CristalImb. Business.Business
 
         public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesOferta()
         {
-           return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm == 3 && s.Estado == true).ToListAsync();
+           return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm == 3 && s.Estado == true && s.NombreArchivo != null).ToListAsync();
         }
 
         public async Task GuardarInmueble1(Inmueble inmueble)
