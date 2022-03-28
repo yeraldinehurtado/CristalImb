@@ -218,6 +218,7 @@ namespace CristalImb. Business.Business
         }
         public async Task EditarInmueble(Inmueble inmueble)
         {
+            var inmuebleId = inmueble.InmuebleId;
             InmPropietarios inmPropietarios = await ObtenerInmPropId(inmueble.InmuebleId);
 
             if (inmPropietarios != null)
@@ -236,6 +237,36 @@ namespace CristalImb. Business.Business
             }
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
+
+            var Inmueble = await ObtenerInmuebleId(inmuebleId);
+
+            if(inmueble.IdEstadoInm == 4)
+            {
+                CantidadVenta cantidadVenta = new()
+                {
+                    Cantidad = 1,
+                    Fecha = DateTime.Now
+                };
+
+                _context.Add(cantidadVenta);
+                await _context.SaveChangesAsync();
+            }
+
+            else if (inmueble.IdEstadoInm == 5)
+            {
+                CantidadArriendo cantidadArriendo = new()
+                {
+                    Cantidad = 1,
+                    Fecha = DateTime.Now
+                };
+
+                _context.Add(cantidadArriendo);
+                await _context.SaveChangesAsync();
+            }
+
+
+
+
         }
 
         public async Task EliminarInmueble(int id)

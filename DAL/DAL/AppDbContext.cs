@@ -66,7 +66,13 @@ namespace CristalImb.Model.DAL
                 new EstadosInmueble
                 {
                     IdEstadoInm = 4,
-                    NombreEstado = "Ocupado",
+                    NombreEstado = "Vendido",
+                    Estado = true
+                },
+                new EstadosInmueble
+                {
+                    IdEstadoInm = 5,
+                    NombreEstado = "Arrendado",
                     Estado = true
                 }
 
@@ -341,7 +347,8 @@ namespace CristalImb.Model.DAL
         public DbSet<EstadoCita> estadoCitas { get; set; }
         public DbSet<EstadosInmueble> estadosInmueble { get; set; }
         public DbSet<UsuarioIdentity> usuarioIdentity { get; set; }
-
+        public DbSet<CantidadVenta> cantidadVenta { get; set; }
+        public DbSet<CantidadArriendo> cantidadArriendo{ get; set; }
         public DbSet<InmuebleDetalleArchivos> inmuebleDetalleArchivos { get; set; }
     }
 }
