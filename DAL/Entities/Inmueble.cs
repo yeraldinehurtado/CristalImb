@@ -17,6 +17,7 @@ namespace CristalImb.Model.Entities
         public string Codigo { get; set; }
 
         [DisplayName("Descripción")]
+        [Column(TypeName = "nvarchar(500)")]
         [StringLength(500, ErrorMessage = "Máximo 500 caracteres")]
         public string Descripcion { get; set; }
 
