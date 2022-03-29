@@ -10,6 +10,6 @@ namespace CristalImb.Business.Abstract
     public interface IReporteService
     {
         Task<IEnumerable<CantidadVenta>> ObtenerCantidadVentas();
-        Task<IEnumerable<CantidadArriendo>> ObtenerCantidadArriendos()
+        Task<IEnumerable<CantidadArriendo>> ObtenerCantidadArriendos();
     }
 }
