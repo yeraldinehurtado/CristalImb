@@ -184,7 +184,7 @@
     <link rel="stylesheet" href="main.css">
     <!-- GOOGLE FONTs -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-    
+
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- ANIMATE CSS -->
@@ -203,50 +203,58 @@
             <h3 class="h3 text-center">Información del inmueble</h3>
         </div>
         <div>
+            <div class="col-md-4">
+                <div class="card-body">
 
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        @{int i = 0;}
-                        @if (i == 0)
-                        {
-                            <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
-                        }
-                        else
-                        {
-                            <li data-target="#myCarousel" data-slide-to="@i"></li>
-                        }
-                    </ol>
-                    <div class="carousel-inner">
-                        @foreach (var x in Model)
-                        {
-                            i++;
-                            var active = i <= 1 ? "active" : "";
-                            <div class="carousel-item @active">
-                                <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 250px; width: 390px; margin-left:auto; margin-right:auto;" />
-                            </div>
-                        }
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @{int i = 0;}
+                            @if (i == 0)
+                            {
+                                <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                            }
+                            else
+                            {
+                                <li data-target="#myCarousel" data-slide-to="@i"></li>
+                            }
+                        </ol>
+                        <div class="carousel-inner">
+                            @foreach (var x in Model)
+                            {
+                                i++;
+                                var active = i <= 1 ? "active" : "";
+                                <div class="carousel-item @active">
+                                    <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 350px; width: 490px; margin-left:auto; margin-right:auto;" />
+                                </div>
+                            }
+                        </div>
+                        <div class="bx-controls bx-has-controls-direction">
+                            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
-                    <div class="bx-controls bx-has-controls-direction">
-                        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
+
                 </div>
 
-                @foreach (var y in Model.Take(1))
-                {
+            </div>
+
+            @foreach (var y in Model.Take(1))
+            {
+                <div class="card-body">
                     <div class="contact-wrapper animated bounceInUp">
+
                         <div class="contact-form">
                             <form asp-action="InfoInmueble">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="@y.InmuebleId" />
                                 <div class="form-group">
-                                    <label class="control-label">Código Inmueble: @Html.DisplayFor(modely => y.Inmueble.Codigo)</label>
+                                    <label class="control-label">Código: @Html.DisplayFor(modely => y.Inmueble.Codigo)</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Tipo de inmueble: @Html.DisplayFor(modely => y.Inmueble.TipoInmuebles.NombreTipoInm)</label>
@@ -255,7 +263,7 @@
                                     <label class="control-label">Servicio: @Html.DisplayFor(modely => y.Inmueble.ServiciosInmueble.Nombre)</label>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Valor: @Html.DisplayFor(modely => y.Inmueble.Valor)</label>
+                                    <label class="control-label">Valor: $ @Html.DisplayFor(modely => y.Inmueble.Valor)</label>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Área: @Html.DisplayFor(modely => y.Inmueble.Area)</label>
@@ -268,17 +276,19 @@
                                 </div>
                             </form>
                         </div>
-
                         <div class="contact-info">
                             <div class="form-group">
                                 <label class="control-label text-center">Descripción: @Html.DisplayFor(modely => y.Inmueble.Descripcion)</label>
                             </div>
                         </div>
-                    </div>
-                }
-            </div>
 
+                    </div>
+                </div>
+
+            }
         </div>
+
+    </div>
 </body>
 </html>
 
@@ -286,11 +296,6 @@
 <script>
     // Activate Carousel
     $("#myCarousel").carousel();
-
-    // Enable Carousel Indicators
-    $(".item").click(function () {
-        $("#myCarousel").carousel(1);
-    });
 
     // Enable Carousel Controls
     $(".left").click(function () {
