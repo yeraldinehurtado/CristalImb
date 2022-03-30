@@ -48,6 +48,9 @@ namespace CristalImb. Business.Business
             Inmueble inmueble = await ObtenerInmuebleId(id);
             inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == id).Select(y => y.NombreArchivo).FirstOrDefault();
             inmueble.AlertaPropietario = "No";
+            inmueble.Tipo = _context.tipoInmuebles.Where(x => x.TipoInmuebleId == inmueble.TipoId).Select(y => y.NombreTipoInm).FirstOrDefault();
+            inmueble.Barrio = _context.zonas.Where(x => x.ZonaId == inmueble.ZonaId).Select(y => y.NombreZona).FirstOrDefault();
+            inmueble.Servicio = _context.serviciosInmueble.Where(x => x.ServicioInmuebleId == inmueble.ServicioInmuebleId).Select(y => y.Nombre).FirstOrDefault();
             _context.Update(inmueble);
             await _context.SaveChangesAsync();
 
@@ -228,6 +231,9 @@ namespace CristalImb. Business.Business
 
             if (inmPropietarios != null)
             {
+                inmueble.Tipo = _context.tipoInmuebles.Where(x => x.TipoInmuebleId == inmueble.TipoId).Select(y => y.NombreTipoInm).FirstOrDefault();
+                inmueble.Barrio = _context.zonas.Where(x => x.ZonaId == inmueble.ZonaId).Select(y => y.NombreZona).FirstOrDefault();
+                inmueble.Servicio = _context.serviciosInmueble.Where(x => x.ServicioInmuebleId == inmueble.ServicioInmuebleId).Select(y => y.Nombre).FirstOrDefault();
                 inmueble.AlertaPropietario = "Si";
                 inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
                 _context.Update(inmueble);
@@ -235,6 +241,9 @@ namespace CristalImb. Business.Business
             }
             else
             {
+                inmueble.Tipo = _context.tipoInmuebles.Where(x => x.TipoInmuebleId == inmueble.TipoId).Select(y => y.NombreTipoInm).FirstOrDefault();
+                inmueble.Barrio = _context.zonas.Where(x => x.ZonaId == inmueble.ZonaId).Select(y => y.NombreZona).FirstOrDefault();
+                inmueble.Servicio = _context.serviciosInmueble.Where(x => x.ServicioInmuebleId == inmueble.ServicioInmuebleId).Select(y => y.Nombre).FirstOrDefault();
                 inmueble.AlertaPropietario = "No";
                 inmueble.NombreArchivo = _context.inmuebleDetalleArchivos.Where(x => x.InmuebleId == inmueble.InmuebleId).Select(y => y.NombreArchivo).FirstOrDefault();
                 _context.Update(inmueble);
