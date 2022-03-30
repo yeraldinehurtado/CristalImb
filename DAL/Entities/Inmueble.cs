@@ -70,6 +70,11 @@ namespace CristalImb.Model.Entities
         public string AlertaPropietario { get; set; }
 
 
+        public string Tipo { get; set; }
+        public string Servicio { get; set; }
+
+        public string Barrio { get; set; }
+
 
         public virtual EstadosInmueble EstadosInmueble { get; set; }
 
