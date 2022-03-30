@@ -86,7 +86,7 @@ namespace CristalImb.Web.Controllers
                     Telefono = propietariosViewModel.Telefono,
                     Celular = propietariosViewModel.Celular,
                     Correo = propietariosViewModel.Correo,
-                    Estado = true
+                    Estado = false
                 };
                 try
                 {
@@ -244,6 +244,7 @@ namespace CristalImb.Web.Controllers
                     };
                         await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
                         await _inmuebleService.AlertaPropietario(inmPropietarios.InmuebleId);
+                        await _propietarioService.ActivarEstadoPropierario(inmPropietarios.PropietarioId);
                         TempData["Accion"] = "GuardarPropInmueble";
                         TempData["Mensaje"] = "inmueble(s) añadido con éxito";
                     }
@@ -275,10 +276,13 @@ namespace CristalImb.Web.Controllers
                     inmPropietarios.Estado = false;
                     inmPropietarios.asociado = "No";
 
+                    var idPropietario = inmPropietarios.PropietarioId;
+
                     var guardaInmuebleId = inmPropietarios.InmuebleId;
 
                     await _inmPropietariosService.EditarInmPropietario(inmPropietarios);
                     await _inmuebleService.EliminarAlertaPropietario(guardaInmuebleId);
+                    await _propietarioService.DesactivarEstadoPropierario(idPropietario);
                     TempData["Accion"] = "EliminarInmPropietario";
                     TempData["Mensaje"] = "Inmueble eliminado con éxito.";
                     return RedirectToAction("IndexPropietario");

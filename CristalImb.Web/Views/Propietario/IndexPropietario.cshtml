@@ -63,7 +63,6 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Estado)
                                 </th>
-                                <th> Estado </th>
                                 <th> Editar </th>
                             </tr>
                         </thead>
@@ -111,21 +110,7 @@
                                         }
                                         else
                                         {
-                                            <p>Desactivo</p>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (x.Estado == true)
-                                        {
-                                            <form asp-action="ActualizarEstado" asp-route-id="@x.PropietarioId">
-                                                <button type="submit"><i class="fas fa-toggle-on"></i></button>
-                                            </form>
-                                        }
-                                        else if (x.Estado == false)
-                                        {
-                                            <form asp-action="ActualizarEstado" asp-route-id="@x.PropietarioId">
-                                                <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                            </form>
+                                            <p>inactivo</p>
                                         }
                                     </td>
                                     <td>
