@@ -1,4 +1,4 @@
-﻿@model CristalImb.Model.Entities.Inmueble
+﻿@model IEnumerable<CristalImb.Model.Entities.InmuebleDetalleArchivos>
 
 @{
     ViewData["Title"] = "Info";
@@ -167,7 +167,6 @@
             height: 20%;
             border-right: solid #ACC0D8 1px;
         }
-
     </style>
 
 
@@ -195,53 +194,89 @@
     <br />
     <br />
     <br />
-    <br />
     <div class="content">
         <div class="form-group">
             <h3 class="h3 text-center">Información del inmueble</h3>
         </div>
-        
-        <div class="contact-wrapper animated bounceInUp">
-            <div class="contact-form">
-                <form asp-action="InfoInmueble">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="InmuebleId" />
+        <div>
 
-                    <div class="form-group">
-                        <label class="control-label">Código Inmueble: @Model.Codigo</label>
+            <div class="carousel slide media-carousel" id="media">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @{int i = 0;}
+                        @if (i == 0)
+                        {
+                            <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                        }
+                        else
+                        {
+                            <li data-target="#myCarousel" data-slide-to="@i"></li>
+                        }
+                    </ol>
+                    <div class="carousel-inner">
+                        @foreach (var x in Model)
+                        {
+                            i++;
+                            var active = i <= 1 ? "active" : "";
+                            <div class="item @active">
+                                <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 250px; width: 390px; margin-left:auto; margin-right:auto;" />
+                            </div>
+                        }
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Tipo de inmueble: @Model.TipoInmuebles.NombreTipoInm</label>
+                    <div class="bx-controls bx-has-controls-direction">
+                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev" role="button">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#myCarousel" data-slide="next" role="button">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Servicio: @Model.ServiciosInmueble.Nombre</label>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Valor: @Model.Valor</label>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Área: @Model.Area</label>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Barrio: @Model.Zona.NombreZona</label>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Dirección: @Model.Direccion</label>
-                    </div>
-                </form>
-            </div>
-
-            <div class="contact-info">
-                <div class="form-group">
-                    <label class="control-label text-center">Descripción: @Model.Descripcion</label>
                 </div>
+
+                @foreach (var y in Model.Take(1))
+                {
+                    <div class="contact-wrapper animated bounceInUp">
+                        <div class="contact-form">
+                            <form asp-action="InfoInmueble">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="@y.InmuebleId" />
+
+                                <div class="form-group">
+                                    <label class="control-label">Código Inmueble: @Html.DisplayFor(modely => y.Inmueble.Codigo)</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Tipo de inmueble: @Html.DisplayFor(modely => y.Inmueble.TipoInmuebles.NombreTipoInm)</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Servicio: @Html.DisplayFor(modely => y.Inmueble.ServiciosInmueble.Nombre)</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Valor: @Html.DisplayFor(modely => y.Inmueble.Valor)</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Área: @Html.DisplayFor(modely => y.Inmueble.Area)</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Barrio: @Html.DisplayFor(modely => y.Inmueble.Zona.NombreZona)</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Dirección: @Html.DisplayFor(modely => y.Inmueble.Direccion)</label>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="contact-info">
+                            <div class="form-group">
+                                <label class="control-label text-center">Descripción: @Html.DisplayFor(modely => y.Inmueble.Descripcion)</label>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
+
         </div>
-
-    </div>
-
 </body>
 </html>
 
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

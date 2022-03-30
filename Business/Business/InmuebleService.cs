@@ -113,6 +113,11 @@ namespace CristalImb. Business.Business
            return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm == 3 && s.Estado == true && s.NombreArchivo != null).ToListAsync();
         }
 
+        public async Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerInmuebleId2(int id)
+        {
+            return await _context.inmuebleDetalleArchivos.Include(i => i.Inmueble).Where(s => s.InmuebleId == id).ToListAsync();
+        }
+
         public async Task GuardarInmueble1(Inmueble inmueble)
         {
             _context.Add(inmueble);

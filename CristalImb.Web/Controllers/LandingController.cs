@@ -74,17 +74,20 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> InfoInmueble(int id)
         {
-            var listCita = await _inmuebleService.ObtenerInmueble();
 
-            Inmueble inmueble = await _inmuebleService.ObtenerInmuebleId(id);
+            await _inmuebleService.ObtenerInmuebleId(id);
             if (id != 0)
             {
-                return View(await _inmuebleService.ObtenerInmuebleId(id));
+                return View(await _inmuebleService.ObtenerInmuebleId2(id));
+            }
+            else
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Hubo un error realizando la operación";
+                return RedirectToAction("IndexLanding");
             }
 
-            TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Hubo un error realizando la operación";
-            return RedirectToAction("IndexLanding");
+            
         }
 
 
