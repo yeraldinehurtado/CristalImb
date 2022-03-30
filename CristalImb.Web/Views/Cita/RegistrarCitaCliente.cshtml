@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/adminlte/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
+    <link href="~/lib/limonte-sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 </head>
 
     <!-- Left navbar links -->
@@ -122,7 +123,7 @@
 </body>
 </html>
 
-
+<script src="~/lib/limonte-sweetalert2/sweetalert2.min.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
