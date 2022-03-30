@@ -200,7 +200,6 @@
         </div>
         <div>
 
-            <div class="carousel slide media-carousel" id="media">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         @{int i = 0;}
@@ -218,7 +217,7 @@
                         {
                             i++;
                             var active = i <= 1 ? "active" : "";
-                            <div class="item @active">
+                            <div class="carousel-item @active">
                                 <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 250px; width: 390px; margin-left:auto; margin-right:auto;" />
                             </div>
                         }
