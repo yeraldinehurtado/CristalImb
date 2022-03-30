@@ -1,18 +1,22 @@
 ﻿@section Styles{
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="~/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="~/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="~/adminlte/plugins/jqvmap/jqvmap.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="~/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="~/adminlte/plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="~/adminlte/plugins/summernote/summernote-bs4.min.css">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<script src="~/adminlte/css/mapa.css"></script>
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="~/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="~/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- JQVMap -->
+<link rel="stylesheet" href="~/adminlte/plugins/jqvmap/jqvmap.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="~/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="~/adminlte/plugins/daterangepicker/daterangepicker.css">
+<!-- summernote -->
+<link rel="stylesheet" href="~/adminlte/plugins/summernote/summernote-bs4.min.css">
+
 }
 
 <!-- Content Wrapper. Contains page content -->
@@ -24,7 +28,7 @@
                 <div class="col-sm-12">
                     <h1 class="text-center text-gray-dark m-0" style="font-family: 'Times New Roman', Times, serif; font-size: 30px;">Tablero</h1>
                 </div><!-- /.col -->
-                
+
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -33,7 +37,6 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            
             <!-- Main row -->
             <div class="row">
 
@@ -85,8 +88,8 @@
                             <div class="card-tools">
                                 <!-- button with a dropdown -->
                                 <!--<div class="btn-group">-->
-                                    @*<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                                        <i class="fas fa-bars"></i>
+                                @*<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
+                                    <i class="fas fa-bars"></i>
                                     </button>*@
                                 <!--</div>-->
                                 <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse">
@@ -114,13 +117,13 @@
 
                             @*<div class="card-tools">
                                 <ul class="pagination pagination-sm">
-                                    <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                    <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                                <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
+                                <li class="page-item"><a href="#" class="page-link">1</a></li>
+                                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                                <li class="page-item"><a href="#" class="page-link">3</a></li>
+                                <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
                                 </ul>
-                            </div>*@
+                                </div>*@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -202,6 +205,17 @@
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
                 <section class="col-lg-5 connectedSortable">
+                    <div id="demo-wrapper">
+                        <div id="map-box">
+                            <div id="up"></div>
+                            <div id="container">
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+                <section class="col-lg-5 connectedSortable">
 
                     <!-- Map card -->
                     <div class="card bg-gradient-primary">
@@ -268,11 +282,9 @@
                             <canvas class="chart" id="line-chart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                         </div>
                         <!-- /.card-body -->
-                        
                         <!-- /.card-footer -->
                     </div>
                     <!-- /.card -->
-                    
                     <!-- /.card -->
                 </section>
                 <!-- right col -->
@@ -284,30 +296,38 @@
 </div>
 <!-- /.content-wrapper -->
 @section Scripts{
-    <!-- jQuery UI 1.11.4 -->
-    <script src="~/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- ChartJS -->
-    <script src="~/adminlte/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="~/adminlte/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="~/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="~/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="~/adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="~/adminlte/plugins/moment/moment.min.js"></script>
-    <script src="~/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="~/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="~/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="~/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="~/adminlte/dist/js/pages/dashboard.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/mapdata/index.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script src="https://www.highcharts.com/samples/static/jquery.combobox.js"></script>
+
+<script src="~/adminlte/js/mapa.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="~/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- ChartJS -->
+<script src="~/adminlte/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="~/adminlte/plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="~/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="~/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="~/adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="~/adminlte/plugins/moment/moment.min.js"></script>
+<script src="~/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="~/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="~/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="~/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="~/adminlte/dist/js/pages/dashboard.js"></script>
 }
