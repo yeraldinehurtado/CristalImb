@@ -91,7 +91,7 @@ namespace CristalImb.Web.Controllers
                         MailMessage mensaje = new();
                         mensaje.To.Add(crearViewModel.Email);//destinatario
                         mensaje.Subject = "Cristalimb - registro en el sistema";
-                        mensaje.Body = "Hola," + crearViewModel.UserName + ". <br><br> Gracias por unirte al sistema de CristalImb. <br><br>"; /*+ confirm + "<br><br> Si no solicitó confirmar, puede ignorar este correo electrónico."*/
+                        mensaje.Body = "Hola, " + crearViewModel.UserName + ". <br><br> Gracias por unirte al sistema de CristalImb. <br><br>"; /*+ confirm + "<br><br> Si no solicitó confirmar, puede ignorar este correo electrónico."*/
                         mensaje.IsBodyHtml = true;
                         mensaje.From = new MailAddress("alejd066@gmail.com", "Cristal Inmobiliaria");
                         SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
@@ -161,7 +161,7 @@ namespace CristalImb.Web.Controllers
                         MailMessage mensaje = new();
                         mensaje.To.Add(usuarioViewModel.Email);//destinatario
                         mensaje.Subject = "Cristalimb - registro en el sistema";
-                        mensaje.Body = "Hola." + usuarioViewModel.UserName + " <br><br> Gracias por unirte al sistema de CristalImb. <br><br>"; /*+ confirm + "<br><br> Si no solicitó confirmar, puede ignorar este correo electrónico."*/
+                        mensaje.Body = "Hola, " + usuarioViewModel.UserName + " <br><br> Gracias por unirte al sistema de CristalImb. <br><br>"; /*+ confirm + "<br><br> Si no solicitó confirmar, puede ignorar este correo electrónico."*/
                         mensaje.IsBodyHtml = true;
                         mensaje.From = new MailAddress("alejd066@gmail.com", "Cristal Inmobiliaria");
                         SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");

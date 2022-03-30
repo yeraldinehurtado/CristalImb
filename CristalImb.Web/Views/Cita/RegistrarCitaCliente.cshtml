@@ -126,8 +126,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-
+    
 <script>
     @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarCita")) {
         <text>
@@ -139,3 +138,5 @@
         </text>
         }
 </script>
+}
+
