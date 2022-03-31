@@ -39,6 +39,7 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarEmpleado(Empleado empleado)
         {
+            empleado.Estado = true;
             await _empleadoService.GuardarEmpleado(empleado);
             TempData["Accion"] = "GuardarEmpleado";
             TempData["Mensaje"] = "Empleado guardado con éxito.";

@@ -81,6 +81,13 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
+                        var nombreExiste = await _estadosInmuebleService.nombreEstadoInmuebleExiste(estadosInmueble.NombreEstado);
+                        if (nombreExiste != null)
+                        {
+                            TempData["Accion"] = "Error";
+                            TempData["Mensaje"] = "Este nombre de estado de inmueble ya se encuentra registrado";
+                            return RedirectToAction("IndexEstadosInm");
+                        }
                         await _estadosInmuebleService.EditarEstadoInm(estadosInmueble);
                         TempData["Accion"] = "EditarEstadoInm";
                         TempData["Mensaje"] = "Estado inmueble editado con éxito.";
