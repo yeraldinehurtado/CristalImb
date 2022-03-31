@@ -18,6 +18,7 @@ namespace CristalImb.Business.Dtos.Usuarios
         [RegularExpression("^[0-9]*$", ErrorMessage = "Ingrese valores numéricos")]
 
         public string Identificacion { get; set; }
+
         public string Rol { get; set; }
         public bool Estado { get; set; }
 
