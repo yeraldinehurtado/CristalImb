@@ -273,7 +273,7 @@ namespace CristalImb.Web.Controllers
                 if(rol.Estado == false)
                 {
                     TempData["Accion"] = "ErrorEstadoRol";
-                    TempData["Mensaje"] = "Debe activar el estado del rol "+rol.Nombre + " en el modulo gestión de roles";
+                    TempData["Mensaje"] = "Debe activar el estado del rol "+rol.Nombre + " en el módulo gestión de roles";
                 }
                 else
                 {
