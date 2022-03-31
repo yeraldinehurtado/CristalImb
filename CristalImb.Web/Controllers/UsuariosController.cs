@@ -56,7 +56,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CrearUsuarios()
         {
-            ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name");
+            ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.Where(x => x.Name != "Administrador").ToListAsync(), "Name", "Name");
             return View();
         }
 
@@ -189,7 +189,7 @@ namespace CristalImb.Web.Controllers
         {
             if (id != null)
             {
-                ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.ToListAsync(), "Name", "Name");
+                ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.Where(x => x.Name != "Administrador").ToListAsync(), "Name", "Name");
 
                 UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(id);
 
