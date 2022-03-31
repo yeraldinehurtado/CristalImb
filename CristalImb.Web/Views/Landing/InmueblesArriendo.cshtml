@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CristalImb.Model.Entities.Inmueble>
+
+@{
+    ViewData["Title"] = "Pagina inicio";
+    Layout = "_Landing";
+}
+<section class="page-section" id="services">
+    <div class="card-header">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Inmuebles en arriendo</h2>
+        </div>
+
+        <div class="row" id="arriendo" asp-action="InmueblesArriendo">
+
+
+            @foreach (var x in Model)
+            {
+                <div style="width: 25rem; right: 1px; border-right-width: 30px; border-color: #FFFF; border-bottom-width: 20px; margin:10px;">
+                    <div class="card shadow-lg" style="width: 110%; overflow: hidden; position: relative; height: 430px; border: groove; margin: 0 auto;">
+                        <img class="card-img-top" src="@("~/imagenesInmueble/" + x.NombreArchivo)" asp-append-version="true" style="height: 250px; width: 390px; margin-left:auto; margin-right:auto;" />
+                        <div class="card-body">
+                            <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - $ @Html.DisplayFor(modelx => x.Valor)</h5>
+                            <p class="card-text text-center">@Html.DisplayFor(modelx => x.Direccion) - @Html.DisplayFor(modelx => x.Zona.NombreZona)</p>
+                            <div class="text-center">
+                                <a asp-action="InfoInmueble" asp-route-id="@x.InmuebleId" class="text-info text-center">Ver más información</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+
+    </div>
+</section>
