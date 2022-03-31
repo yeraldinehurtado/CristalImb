@@ -286,17 +286,19 @@ namespace CristalImb.Model.DAL
                new Rol
                {
                    RolId = "FD713788-B5AE-49FF-8B2C-F311B9CB0CC4",
-                   Estado = true
+                   Estado = true,
                },
                new Rol
                {
                    RolId = "64B512E7-46AE-4989-A049-A446118099C4",
-                   Estado = true
+                   Estado = true,
+                   Nombre = "Empleado"
                },
                new Rol
                {
                    RolId = "376D45C8-659D-4ACE-B249-CFBF4F231915",
-                   Estado = true
+                   Estado = true,
+                   Nombre = "Cliente"
                }
            );
 

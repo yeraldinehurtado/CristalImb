@@ -15,6 +15,9 @@ namespace CristalImb.Model.Entities
         public string RolId { get; set; }
         public bool Estado { get; set; }
         public virtual IdentityRole IdentityRole { get; set; }
+        public string Nombre { get; set; }
+
+
 
     }
 }

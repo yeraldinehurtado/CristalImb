@@ -21,13 +21,15 @@ namespace CristalImb.Web.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IRolService _rolService;
+        private readonly IUsuariosService _usuariosService;
 
-        public RolController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, IRolService rolService)
+        public RolController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, IRolService rolService, IUsuariosService usuariosService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _rolService = rolService;
+            _usuariosService = usuariosService;
         }
 
         public async Task<IActionResult> IndexRol()
@@ -50,12 +52,28 @@ namespace CristalImb.Web.Controllers
             }
             try
             {
+                
                 if (rol.Estado == true)
                     rol.Estado = false;
                 else if (rol.Estado == false)
                     rol.Estado = true;
 
                 await _rolService.EditarRol(rol);
+                var ListaUsuarios = await _usuariosService.ObtenerListaUsuarios();
+
+                foreach (var X in ListaUsuarios)
+                {
+                    UsuarioIdentity usuarioIdentity = await _usuariosService.ObtenerUsuarioId(X.UsuarioId);
+
+                    if (usuarioIdentity.Rol == rol.Nombre)
+                    {
+                        if(rol.Estado == false)
+                        {
+                            usuarioIdentity.Estado = rol.Estado;
+                            await _usuariosService.EditarUsuario(usuarioIdentity);
+                        }
+                    }
+                }
                 TempData["Accion"] = "EditarEstado";
                 TempData["Mensaje"] = "Estado editado correctamente";
                 return RedirectToAction("IndexRol");

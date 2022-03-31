@@ -13,5 +13,6 @@ namespace CristalImb.Business.Abstract
         Task<Rol> ObtenerRolId(string id);
         Task EditarRol(Rol rol);
         Task GuardarUsuario(Rol rol);
+        Task<Rol> ObtenerRolNombre(string nombreRol);
     }
 }

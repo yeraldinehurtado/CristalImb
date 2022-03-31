@@ -26,6 +26,11 @@ namespace CristalImb.Business.Business
             return await _context.roles.Include(x => x.IdentityRole).FirstOrDefaultAsync(r => r.RolId == id);
         }
 
+        public async Task<Rol> ObtenerRolNombre(string nombreRol)
+        {
+            return await _context.roles.Include(x => x.IdentityRole).FirstOrDefaultAsync(r => r.Nombre == nombreRol);
+        }
+
         public async Task EditarRol(Rol rol)
         {
             _context.Update(rol);

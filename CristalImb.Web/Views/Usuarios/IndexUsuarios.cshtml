@@ -135,6 +135,15 @@
         title: "Editar Usuario",
             icon: 'success',
             html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("ErrorEstadoRol")) {
+        <text>
+        Swal.fire({
+            title: "Error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
             })
         </text>
         }

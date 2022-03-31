@@ -268,14 +268,25 @@ namespace CristalImb.Web.Controllers
             }
             try
             {
-                if (usuarioIdentity.Estado == true)
-                    usuarioIdentity.Estado = false;
-                else if (usuarioIdentity.Estado == false)
-                    usuarioIdentity.Estado = true;
+                Rol rol = await _rolService.ObtenerRolNombre(usuarioIdentity.Rol);
 
-                await _usuariosService.EditarUsuario(usuarioIdentity);
-                TempData["Accion"] = "EditarEstado";
-                TempData["Mensaje"] = "Estado editado correctamente";
+                if(rol.Estado == false)
+                {
+                    TempData["Accion"] = "ErrorEstadoRol";
+                    TempData["Mensaje"] = "Debe activar el estado del rol asignado al usuario";
+                }
+                else
+                {
+                    if (usuarioIdentity.Estado == true)
+                        usuarioIdentity.Estado = false;
+                    else if (usuarioIdentity.Estado == false)
+                        usuarioIdentity.Estado = true;
+
+                    await _usuariosService.EditarUsuario(usuarioIdentity);
+                    TempData["Accion"] = "EditarEstado";
+                    TempData["Mensaje"] = "Estado editado correctamente";
+                }
+                
                 return RedirectToAction("IndexUsuarios");
             }
             catch (Exception)
