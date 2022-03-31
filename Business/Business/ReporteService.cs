@@ -17,9 +17,11 @@ namespace CristalImb.Business.Business
             _context = context;
         }
 
-        public async Task<IEnumerable<CantidadVenta>> ObtenerCantidadVentas()
+        public async Task<IEnumerable<CantidadVenta>> ObtenerCantidadVentas(/*DateTime fecha*/)
         {
             return await _context.cantidadVenta.ToListAsync();
+
+            //return await _context.cantidadVenta.Where(c => c.Fecha == fecha).Count();
         }
 
         public async Task<IEnumerable<CantidadArriendo>> ObtenerCantidadArriendos()

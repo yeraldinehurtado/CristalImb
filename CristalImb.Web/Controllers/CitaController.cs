@@ -47,10 +47,21 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarCita(Cita cita)
         {
-            cita.EstadoCitaId = 2;
-            await _citaService.GuardarCita(cita);
-            TempData["Accion"] = "GuardarCita";
-            TempData["Mensaje"] = "Cita guardada con éxito.";
+
+            Cita citas = await _citaService.ObtenerFechaExistente(cita.FechaHora);
+
+            if(citas == null)
+            {
+                cita.EstadoCitaId = 2;
+                await _citaService.GuardarCita(cita);
+                TempData["Accion"] = "GuardarCita";
+                TempData["Mensaje"] = "Cita guardada con éxito.";
+            }
+            else
+            {
+                TempData["Accion"] = "fechaHoraExiste";
+                TempData["Mensaje"] = "La fecha y hora ingresada ya se encuentra registrada dentro del sistema";
+            }
 
             return RedirectToAction("IndexCita");
         }
