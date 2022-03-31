@@ -58,7 +58,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> InmueblesVenta()
         {
-            return View(await _inmuebleService.ObtenerListaInmueblesEstado());
+            return View(await _inmuebleService.ObtenerListaInmueblesVenta());
 
         }
 
@@ -66,7 +66,7 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> InmueblesArriendo()
         {
-            return View(await _inmuebleService.ObtenerListaInmueblesEstado());
+            return View(await _inmuebleService.ObtenerListaInmueblesArriendo());
 
         }
 
