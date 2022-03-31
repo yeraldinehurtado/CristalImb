@@ -27,8 +27,11 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">@Html.DisplayFor(modelx => x.Codigo) - $ @Html.DisplayFor(modelx => x.Valor)</h5>
                             <p class="card-text text-center">@Html.DisplayFor(modelx => x.Direccion) - @Html.DisplayFor(modelx => x.Zona.NombreZona)</p>
+                            <div class="text-center">
+                                <a asp-action="InfoInmueble" asp-route-id="@x.InmuebleId" class="text-info text-center">Ver más información</a>
+                            </div>
                         </div>
-                        <a asp-action="InfoInmueble" asp-route-id="@x.InmuebleId" class="text-danger text-center">Ver más información</a>
+                        
                     </div>
 
                 </div>
