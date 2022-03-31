@@ -99,6 +99,13 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
+                        var nombreExiste = await _estadoCitaService.nombreEstadoCitaExiste(estadoCita.Nombre);
+                        if (nombreExiste != null)
+                        {
+                            TempData["Accion"] = "Error";
+                            TempData["Mensaje"] = "Este nombre de estado de cita ya se encuentra registrado";
+                            return RedirectToAction("IndexEstadoCita");
+                        }
                         await _estadoCitaService.EditarEstadoCita(estadoCita);
                         TempData["Accion"] = "EditarEstadoCita";
                         TempData["Mensaje"] = "Estado de cita editado con éxito.";

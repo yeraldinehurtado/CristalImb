@@ -157,6 +157,13 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
+                    var identificacionExiste = await _propietarioService.identificacionPropExiste(prop.Identificacion);
+                    if (identificacionExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "El número de identificación ya se encuentra registrado";
+                        return RedirectToAction("IndexPropietario");
+                    }
                     await _propietarioService.EditarPropietario(prop);
                     TempData["Accion"] = "EditarPropietario";
                     TempData["Mensaje"] = "Propietario editado correctamente";

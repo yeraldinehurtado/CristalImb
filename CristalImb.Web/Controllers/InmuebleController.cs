@@ -156,6 +156,13 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
+                        var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                        if (CodigoExiste != null)
+                        {
+                            TempData["Accion"] = "Error";
+                            TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
+                            return RedirectToAction("IndexInmueble");
+                        }
                         inmueble.Estado = true;
                         await _inmuebleService.EditarInmueble(inmueble);
                         TempData["Accion"] = "EditarInmueble";

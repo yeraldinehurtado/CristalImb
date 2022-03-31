@@ -88,68 +88,75 @@ namespace CristalImb.Web.Controllers
             };
             return View(tipoInmueblesViewModel);
         }
-    
 
-    [HttpPost]
-    public async Task<IActionResult> EditarTipoInmueble(TipoInmueblesViewModel tipoInmueblesViewModel)
-    {
-        if (ModelState.IsValid)
+
+        [HttpPost]
+        public async Task<IActionResult> EditarTipoInmueble(TipoInmueblesViewModel tipoInmueblesViewModel)
         {
-            TipoInmuebles tipoInmuebles = new()
+            if (ModelState.IsValid)
             {
-                TipoInmuebleId = tipoInmueblesViewModel.TipoInmuebleId,
-                NombreTipoInm = tipoInmueblesViewModel.NombreTipoInm,
-                Estado = true
-            };
+                TipoInmuebles tipoInmuebles = new()
+                {
+                    TipoInmuebleId = tipoInmueblesViewModel.TipoInmuebleId,
+                    NombreTipoInm = tipoInmueblesViewModel.NombreTipoInm,
+                    Estado = true
+                };
 
+                try
+                {
+                    var nombreExiste = await _tipoInmuebleService.nombreTipoExiste(tipoInmuebles.NombreTipoInm);
+                    if (nombreExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Este nombre de tipo de inmueble ya se encuentra registrado";
+                        return RedirectToAction("IndexTipoInmuebles");
+                    }
+                    await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
+                    TempData["Accion"] = "EditarTipoInmueble";
+                    TempData["Mensaje"] = "Tipo de inmueble editado correctamente";
+                    return RedirectToAction("IndexTipoInmuebles");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("IndexTipoInmuebles");
+                }
+            }
+            TempData["Accion"] = "Error";
+            TempData["Mensaje"] = "Ingresaste un valor inválido";
+            return RedirectToAction("IndexTipoInmuebles");
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ActualizarEstado(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Error";
+                return RedirectToAction("IndexTipoInmuebles");
+            }
+            TipoInmuebles tipoInmuebles = await _tipoInmuebleService.ObtenerTipoInmuebleId(id.Value);
             try
             {
+                if (tipoInmuebles.Estado == true)
+                    tipoInmuebles.Estado = false;
+                else if (tipoInmuebles.Estado == false)
+                    tipoInmuebles.Estado = true;
+
                 await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
-                TempData["Accion"] = "EditarTipoInmueble";
-                TempData["Mensaje"] = "Tipo de inmueble editado correctamente";
+                TempData["Accion"] = "EditarEstado";
+                TempData["Mensaje"] = "Estado editado correctamente";
                 return RedirectToAction("IndexTipoInmuebles");
             }
             catch (Exception)
             {
-                TempData["Accion"] = "Error";
-                TempData["Mensaje"] = "Ingresaste un valor inválido";
                 return RedirectToAction("IndexTipoInmuebles");
             }
         }
-        TempData["Accion"] = "Error";
-        TempData["Mensaje"] = "Ingresaste un valor inválido";
-        return RedirectToAction("IndexTipoInmuebles");
-
 
     }
-
-    [HttpPost]
-    public async Task<IActionResult> ActualizarEstado(int? id)
-    {
-        if (id == null || id == 0)
-        {
-            TempData["Accion"] = "Error";
-            TempData["Mensaje"] = "Error";
-            return RedirectToAction("IndexTipoInmuebles");
-        }
-        TipoInmuebles tipoInmuebles = await _tipoInmuebleService.ObtenerTipoInmuebleId(id.Value);
-        try
-        {
-            if (tipoInmuebles.Estado == true)
-                tipoInmuebles.Estado = false;
-            else if (tipoInmuebles.Estado == false)
-                tipoInmuebles.Estado = true;
-
-            await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
-            TempData["Accion"] = "EditarEstado";
-            TempData["Mensaje"] = "Estado editado correctamente";
-            return RedirectToAction("IndexTipoInmuebles");
-        }
-        catch (Exception)
-        {
-            return RedirectToAction("IndexTipoInmuebles");
-        }
-    }
-
-}
 }

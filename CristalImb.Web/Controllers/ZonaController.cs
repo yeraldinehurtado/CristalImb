@@ -103,6 +103,13 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
+                    var nombreExiste = await _zonaService.nombreZonaExiste(zona.NombreZona);
+                    if (nombreExiste != null)
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Este nombre de zona ya se encuentra registrado";
+                        return RedirectToAction("IndexZona");
+                    }
                     await _zonaService.EditarZona(zona);
                     TempData["Accion"] = "EditarZona";
                     TempData["Mensaje"] = "Zona editada correctamente";
