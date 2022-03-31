@@ -4,64 +4,75 @@
 <header class="masthead">
 
     <div class="container">
-        
+
         <div class="Col-sc-14ninbu-0 lfGZKA Search__SearchForm-bi9w2-0 jvpgQl center-search d-flex align-items-center p-0 col">
             <div class="w-100 d-block">
                 <div class="Row-sc-2hg243-0 iUVxfs row">
                     <div class="Col-sc-14ninbu-0 lfGZKA mb-1 col">
                         <h1 class="H1-xsrgru-0 jdfXCo text-white bold-text upper-text mb-3" id="formSearchSection" style="z-index: 1; text-shadow: 1px 2px #000">
-                            Encuentra inmuebles en venta o arriendo
+                            ¿Qué estás buscando?
                         </h1>
                     </div>
                 </div>
-                <form class="Form-sc-15bnz0c-0 iVCnGK Form-xv2apj-0 eskisQ" id="formSearch" method="POST" novalidate>
+
+                <div class="col-12 row">
+                    <div class="col-5">
+                    <input asp-action="InmueblesFiltro" type="submit" class="btn btn-primary" value="Comprar" style="margin-top: 30px; margin-left:520px;">
+                    </div>
+                    <div class="col-5">
+                    <input asp-action="InmueblesFiltro" type="submit" class="btn btn-primary" value="Arrendar" style="margin-top: 30px; margin-right: 150px;">
+                    </div>
+
+                </div>
+
+                <!--<!--<form class="Form-sc-15bnz0c-0 iVCnGK Form-xv2apj-0 eskisQ" id="formSearch" method="POST" novalidate>
                     <div class="modulecontent" style="z-index: 1; text-shadow: 1px 2px #000">
                         <div class="Row-sc-2hg243-0 iUVxfs row">
-                            <div class="Col-sc-14ninbu-0 lfGZKA mb-1 col">
-                                <div class="col-6" style="margin-right:auto; margin-left:auto;">
-                                    <label class="form-label">Buscar por código</label>
-                                    <input type="text" class="form-control" id="buscar" name="buscar" value="" placeholder="Ej: 3882">
-                                </div>
-                                <div class="col-12 row" style="margin-top:20px">
-                                    <label class="form-label">Buscar por filtros</label>
-                                    <div class="col-11">
-                                        <table class="table">
-                                            <thead>
-                                                <tr class="filters">
-                                                    <th>
-                                                        <label class="form-label" style="color:aliceblue">Tipo de inmueble</label>
-                                                        <select asp-items="ViewBag.ListaTipos" class="form-control"></select>
-                                                    </th>
-                                                    @*<th>
-                                                        <label class="form-label" style="color:aliceblue">Servicio</label>
-                                                        <select asp-items="ViewBag.ListaServicios" class="form-control"></select>
-                                                    </th>
-                                                    <th>
-                                                        <label class="form-label" style="color:aliceblue">Zona</label>
-                                                        <select asp-items="ViewBag.listaZona" class="form-control"></select>
-                                                    </th>
-                                                    <th>
-                                                        <label class="form-label" style="color:aliceblue">Precio desde</label>
-                                                        <input type="text" id="number" name="preciodesde" class="form-control mt-2" value="" placeholder="$ 0" />
-                                                    </th>
-                                                    <th>
-                                                        <label class="form-label" style="color:aliceblue">Precio hasta</label>
-                                                        <input type="text" id="number" name="preciohasta" class="form-control mt-2" value="" placeholder="$ 0" />
-                                                    </th>*@
-                                                </tr>
+                            <div class="Col-sc-14ninbu-0 lfGZKA mb-1 col">-->
+                                <!--@*<div class="col-6" style="margin-right:auto; margin-left:auto;">
+                                        <label class="form-label">Buscar por código</label>
+                                        <input type="text" class="form-control" id="buscar" name="buscar" value="" placeholder="Ej: 3882">
+                                    </div>*@-->
+                                <!--<!--<div class="col-12 row" style="margin-top:20px">
+                                    <!--<label class="form-label">Buscar por filtros</label>-->
+                                    <!--<div class="col-11">-->
+                                        <!--<table class="table">
+                                        <thead>
+                                            <tr class="filters">
+                                                <th>
+                                                    <label class="form-label" style="color:aliceblue">Tipo de inmueble</label>
+                                                    <select asp-items="ViewBag.ListaTipos" class="form-control"></select>
+                                                </th>--><!---->
+                                        <!---->@*<th>
+                                                <label class="form-label" style="color:aliceblue">Servicio</label>
+                                                <select asp-items="ViewBag.ListaServicios" class="form-control"></select>
+                                            </th>
+                                            <th>
+                                                <label class="form-label" style="color:aliceblue">Zona</label>
+                                                <select asp-items="ViewBag.listaZona" class="form-control"></select>
+                                            </th>
+                                            <th>
+                                                <label class="form-label" style="color:aliceblue">Precio desde</label>
+                                                <input type="text" id="number" name="preciodesde" class="form-control mt-2" value="" placeholder="$ 0" />
+                                            </th>
+                                            <th>
+                                                <label class="form-label" style="color:aliceblue">Precio hasta</label>
+                                                <input type="text" id="number" name="preciohasta" class="form-control mt-2" value="" placeholder="$ 0" />
+                                            </th>*@<!---->
+                                        <!--<!--</tr>
                                             </thead>
-                                        </table>
-                                    </div>
-                                    <div class="col-1">
+                                        </table>-->
+                                    <!--</div>-->
+                                    <!--@*<div class="col-1">
                                         <input asp-action="InmueblesFiltro" type="submit" class="btn btn-primary" value="Buscar" style="margin-top: 30px;">
-                                    </div>
+                                    </div>*@
                                 </div>
                             </div>
 
                         </div>
                     </div>
 
-                </form>
+                </form>-->
             </div>
         </div>
     </div>
