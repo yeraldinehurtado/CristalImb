@@ -113,7 +113,17 @@ namespace CristalImb. Business.Business
 
         public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesOferta()
         {
-           return await _context.inmuebles.Where(s => s.oferta == true && s.IdEstadoInm == 3 && s.Estado == true && s.NombreArchivo != null).ToListAsync();
+           return await _context.inmuebles.Where(s => s.oferta == true && (s.IdEstadoInm == 1 || s.IdEstadoInm == 3) && (s.IdEstadoInm != 2 || s.IdEstadoInm != 4 || s.IdEstadoInm != 5) && s.Estado == true && s.NombreArchivo != null).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesArriendo()
+        {
+            return await _context.inmuebles.Where(s => s.oferta == true || s.oferta == false && (s.IdEstadoInm == 1 || s.IdEstadoInm == 3) && (s.IdEstadoInm != 2 || s.IdEstadoInm != 4 || s.IdEstadoInm != 5) && s.Estado == true && s.NombreArchivo != null).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Inmueble>> ObtenerListaInmueblesVenta()
+        {
+            return await _context.inmuebles.Where(s => s.oferta == true || s.oferta == false && (s.IdEstadoInm == 1 || s.IdEstadoInm == 3) && (s.IdEstadoInm != 2 || s.IdEstadoInm != 4 || s.IdEstadoInm != 5) && s.Estado == true && s.NombreArchivo != null).ToListAsync();
         }
 
         public async Task<IEnumerable<InmuebleDetalleArchivos>> ObtenerInmuebleId2(int id)
