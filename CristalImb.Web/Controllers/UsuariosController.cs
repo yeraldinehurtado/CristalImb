@@ -336,17 +336,19 @@ namespace CristalImb.Web.Controllers
                     {
                         return LocalRedirect("/Cita/RegistrarCitaCliente");
                     }
+                    TempData["Accion"] = "ErrorLogin";
+                    TempData["Mensaje"] = "No puede ingresar al sistema, contacte con la empresa para que activen su rol o usuario.";
                     return RedirectToAction("Login", "Usuarios");
 
 
 
 
                 }
-                TempData["Accion"] = "Error";
+                TempData["Accion"] = "ErrorLogin";
                 TempData["Mensaje"] = "Correo o contraseña incorrecto";
                 return View();
             }
-            TempData["Accion"] = "Error";
+            TempData["Accion"] = "ErrorLogin";
             TempData["Mensaje"] = "Ingresaste un valor inválido";
             return View(loginViewModel);
 
