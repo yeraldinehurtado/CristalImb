@@ -19,7 +19,7 @@ namespace CristalImb.Web.Controllers
     [Authorize(Roles = "Administrador, Empleado")]
     public class PropietarioController : Controller
     {
-        private AppDbContext _DbContext;
+        private readonly AppDbContext _DbContext;
         private List<Inmueble> inmuebles;
         private PaginadorGenerico<Inmueble> _PaginadorInmuebles;
         private readonly IPropietarioService _propietarioService;
@@ -27,11 +27,12 @@ namespace CristalImb.Web.Controllers
         private readonly IInmPropietariosService _inmPropietariosService;
         
 
-        public PropietarioController(IPropietarioService propietarioService, IInmuebleService inmuebleService, IInmPropietariosService inmPropietariosService)
+        public PropietarioController(IPropietarioService propietarioService, IInmuebleService inmuebleService, IInmPropietariosService inmPropietariosService, AppDbContext context)
         {
             _propietarioService = propietarioService;
             _inmuebleService = inmuebleService;
             _inmPropietariosService = inmPropietariosService;
+            _DbContext = context;
         }
 
         [DisplayName("Lista de propietarios")]
@@ -145,6 +146,7 @@ namespace CristalImb.Web.Controllers
             {
                 Propietario prop = new()
                 {
+                    PropietarioId = propietariosViewModel.PropietarioId,
                     Identificacion = propietariosViewModel.Identificacion,
                     Nombre = propietariosViewModel.Nombre,
                     Apellido = propietariosViewModel.Apellido,
@@ -164,10 +166,10 @@ namespace CristalImb.Web.Controllers
                         TempData["Mensaje"] = "El número de identificación ya se encuentra registrado";
                         return RedirectToAction("IndexPropietario");
                     }
-                    await _propietarioService.EditarPropietario(prop);
-                    TempData["Accion"] = "EditarPropietario";
-                    TempData["Mensaje"] = "Propietario editado correctamente";
-                    return RedirectToAction("IndexPropietario");
+                        await _propietarioService.EditarPropietario(prop);
+                        TempData["Accion"] = "EditarPropietario";
+                        TempData["Mensaje"] = "Propietario editado correctamente";
+                        return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
                 {
@@ -306,6 +308,10 @@ namespace CristalImb.Web.Controllers
                 return RedirectToAction("IndexPropietario");
             }
 
+        }
+        private bool IdentificacionExiste(int identificacion, int id)
+        {
+            return _DbContext.propietarios.Where(c => c.PropietarioId != id).Any(p => p.Identificacion == identificacion);
         }
     }
 

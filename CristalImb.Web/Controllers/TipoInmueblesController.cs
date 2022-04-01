@@ -1,4 +1,5 @@
 ﻿using CristalImb.Business.Abstract;
+using CristalImb.Model.DAL;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.TipoInmuebles;
 using Microsoft.AspNetCore.Authorization;
@@ -13,11 +14,13 @@ namespace CristalImb.Web.Controllers
     [Authorize(Roles = "Administrador, Empleado")]
     public class TipoInmueblesController : Controller
     {
+        private readonly AppDbContext _DbContext;
         private readonly ITipoInmuebleService _tipoInmuebleService;
 
-        public TipoInmueblesController(ITipoInmuebleService tipoInmuebleService)
+        public TipoInmueblesController(ITipoInmuebleService tipoInmuebleService, AppDbContext context)
         {
             _tipoInmuebleService = tipoInmuebleService;
+            _DbContext = context;
         }
 
         [HttpGet]
@@ -111,10 +114,10 @@ namespace CristalImb.Web.Controllers
                         TempData["Mensaje"] = "Este nombre de tipo de inmueble ya se encuentra registrado";
                         return RedirectToAction("IndexTipoInmuebles");
                     }
-                    await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
-                    TempData["Accion"] = "EditarTipoInmueble";
-                    TempData["Mensaje"] = "Tipo de inmueble editado correctamente";
-                    return RedirectToAction("IndexTipoInmuebles");
+                        await _tipoInmuebleService.EditarTipoInmueble(tipoInmuebles);
+                        TempData["Accion"] = "EditarTipoInmueble";
+                        TempData["Mensaje"] = "Tipo de inmueble editado correctamente";
+                        return RedirectToAction("IndexTipoInmuebles");
                 }
                 catch (Exception)
                 {
@@ -156,6 +159,10 @@ namespace CristalImb.Web.Controllers
             {
                 return RedirectToAction("IndexTipoInmuebles");
             }
+        }
+        private bool nombreExiste(string nombre, int id)
+        {
+            return _DbContext.tipoInmuebles.Where(c => c.TipoInmuebleId != id).Any(p => p.NombreTipoInm == nombre);
         }
 
     }
