@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
 <!-- Main Sidebar Container -->
 
 <aside class="main-sidebar sidebar-bg-primary elevation-4" class="sideb">
@@ -12,164 +12,180 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
             data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="icono izquierda fas fa-cog fa-fw"></i>
-                    <p>
-                        Configuración
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexRol" asp-controller="Rol" class="nav-link">
-                            <p>Gestión de roles</p>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexServiciosInmueble" asp-controller="ServiciosInmueble" class="nav-link">
-                            <p>Gestión de servicios</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            with font-awesome or any other icon font library -->
+            @if (this.User.IsInRole("Administrador"))
+            {
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-cog fa-fw"></i>
+                        <p>
+                            Configuración
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexRol" asp-controller="Rol" class="nav-link">
+                                <p>Gestión de roles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexServiciosInmueble" asp-controller="ServiciosInmueble" class="nav-link">
+                                <p>Gestión de servicios</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="icono izquierda fas fa-user fa-fw"></i>
-                    <p>
-                        Usuarios
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexUsuarios" asp-controller="Usuarios" class="nav-link">
-                            <p>Gestión de usuarios</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-user fa-fw"></i>
+                        <p>
+                            Usuarios
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexUsuarios" asp-controller="Usuarios" class="nav-link">
+                                <p>Gestión de usuarios</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="icono izquierda fas fa-house-user fa-fw"></i>
-                    <p>
-                        Propiedades
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexPropietario" asp-controller="Propietario" class="nav-link">
-                            <p>Gestión de propietarios</p>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexInmueble" asp-controller="Inmueble" class="nav-link">
-                            <p>Gestión de inmuebles</p>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexTipoInmuebles" asp-controller="TipoInmuebles" class="nav-link">
-                            <p>Gestión de tipo de inmuebles</p>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexZona" asp-controller="Zona" class="nav-link">
-                            <p>Gestión de zonas</p>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexEstadosInm" asp-controller="EstadosInmueble" class="nav-link">
-                            <p>Gestión de estados de inmuebles</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="icono izquierda fas fa-users fa-fw"></i>
-                    <p>
-                        Empleados
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexEmpleado" asp-controller="Empleado" class="nav-link">
-                            <p>Gestión de empleados</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="icono izquierda fas fa-calendar-week fa-fw"></i>
-                    <p>
-                        Citas
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexCita" asp-controller="Cita" class="nav-link">
-                            <p>Gestión de citas</p>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="IndexEstadoCita" asp-controller="EstadoCita" class="nav-link">
-                            <p>Gestión de estados de cita</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="icono izquierda fas fa-chart-bar fa-fw"></i>
-                    <p>
-                        Reportes
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="HistorialPropietarios" asp-controller="Reportes" class="nav-link">
-                            <p>Historial de inmuebles - propietarios</p>
-                        </a>
-                    </li>
-                </ul>
-                @*<ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a asp-action="HistorialInmuebles" asp-controller="Reportes" class="nav-link">
-                            <p>Historial de inmuebles</p>
-                        </a>
-                    </li>
-                </ul>*@
-            </li>
-                 <li class="nav-item">
-                     <a href="#" class="nav-link">
-                         <i class="icono izquierda fa fa-circle-question"></i>
-                         <p>
-                             Ayuda
-                         </p>
-                     </a>
-                     
-                 </li>
+            }
 
+            @if (this.User.IsInRole("Administrador") || this.User.IsInRole("Empleado"))
+            {
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-house-user fa-fw"></i>
+                        <p>
+                            Propiedades
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexPropietario" asp-controller="Propietario" class="nav-link">
+                                <p>Gestión de propietarios</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexInmueble" asp-controller="Inmueble" class="nav-link">
+                                <p>Gestión de inmuebles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexTipoInmuebles" asp-controller="TipoInmuebles" class="nav-link">
+                                <p>Gestión de tipo de inmuebles</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexZona" asp-controller="Zona" class="nav-link">
+                                <p>Gestión de zonas</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                    @if (!this.User.IsInRole("Empleado"))
+                    {
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-action="IndexEstadosInm" asp-controller="EstadosInmueble" class="nav-link">
+                                    <p>Gestión de estados de inmuebles</p>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-users fa-fw"></i>
+                        <p>
+                            Empleados
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexEmpleado" asp-controller="Empleado" class="nav-link">
+                                <p>Gestión de empleados</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-calendar-week fa-fw"></i>
+                        <p>
+                            Citas
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="IndexCita" asp-controller="Cita" class="nav-link">
+                                <p>Gestión de citas</p>
+                            </a>
+                        </li>
+                    </ul>
+                    @if (!this.User.IsInRole("Empleado"))
+                    {
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-action="IndexEstadoCita" asp-controller="EstadoCita" class="nav-link">
+                                    <p>Gestión de estados de cita</p>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fas fa-chart-bar fa-fw"></i>
+                        <p>
+                            Reportes
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-action="HistorialPropietarios" asp-controller="Reportes" class="nav-link">
+                                <p>Historial de inmuebles - propietarios</p>
+                            </a>
+                        </li>
+                    </ul>
+                    @*<ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-action="HistorialInmuebles" asp-controller="Reportes" class="nav-link">
+                                    <p>Historial de inmuebles</p>
+                                </a>
+                            </li>
+                        </ul>*@
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="icono izquierda fa fa-circle-question"></i>
+                        <p>
+                            Ayuda
+                        </p>
+                    </a>
+
+                </li>
+            }
         </ul>
         </li>
         </ul>
