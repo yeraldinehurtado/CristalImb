@@ -33,19 +33,16 @@
 
 
 <body style="background-color: #B3FCFD " class="hold-transition register-page col-md-12">
-    <nav class="text-center">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav ml-auto text-center">
-            <li class="nav-item">
-                <div class="form-group">
-                    <a asp-action="CerrarSesion" asp-controller="Usuarios" class="btn btn-danger">Cerrar sesión</a>
-                </div>
-            </li>
-        </ul>
 
-    </nav>
-    <div class="register-box">
+    <div class="row vh-100">
         <div class="card card-outline card-primary">
+            <ul class="navbar-nav ml-auto text-center">
+                <li class="nav-item">
+                    <div class="form-group">
+                        <a asp-action="CerrarSesion" asp-controller="Usuarios" class="btn btn-danger">Cerrar sesión</a>
+                    </div>
+                </li>
+            </ul>
             <div class="card-header text-center">
                 <a class="h1"><b>Crital Inmobiliaria</b></a>
             </div>
@@ -102,12 +99,12 @@
                         </div>
                     </div>
                     @*<div class="col-md-12 row">
-                            <div class="form-group col-md-6">
-                                <label asp-for="FechaHora" class="control-label">Fecha y hora <b class="text-danger">*</b></label>
-                                <input type="datetime-local" asp-for="FechaHora" class="form-control" />
-                                <span asp-validation-for="FechaHora" class="text-danger"></span>
-                            </div>
-                        </div>*@
+                    <div class="form-group col-md-6">
+                        <label asp-for="FechaHora" class="control-label">Fecha y hora <b class="text-danger">*</b></label>
+                        <input type="datetime-local" asp-for="FechaHora" class="form-control" />
+                        <span asp-validation-for="FechaHora" class="text-danger"></span>
+                    </div>
+                </div>*@
                     <div class="form-group">
                         <label asp-for="FechaHora" class="control-label">Fecha y hora de la cita <b class="text-danger">*</b></label>
                         <input asp-for="FechaHora" id="fecha" class="fecha form-control" readonly />
