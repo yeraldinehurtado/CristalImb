@@ -118,6 +118,17 @@
             })
         </text>
         }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("fechaHoraExiste")) {
+        <text>
+        Swal.fire({
+            title: "error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+            })
+        </text>
+        }
+
+
         @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarCita")) {
         <text>
         Swal.fire({
