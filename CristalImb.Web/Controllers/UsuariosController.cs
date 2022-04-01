@@ -56,8 +56,12 @@ namespace CristalImb.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> CrearUsuarios()
         {
-            ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.Where(x => x.Name != "Administrador").ToListAsync(), "Name", "Name");
+
+            ViewData["ListaRoles"] = new SelectList(await _rolService.ObtenerListaRolesEstado(), "Nombre", "Nombre");
+
+            //ViewData["ListaRoles"] = new SelectList(await _roleManager.Roles.Where(x => x.Name != "Administrador").ToListAsync(), "Name", "Name");
             return View();
+
         }
 
         [HttpPost]
@@ -102,9 +106,13 @@ namespace CristalImb.Web.Controllers
                         smtpClient.Send(mensaje);
                         return RedirectToAction("IndexUsuarios"); //guardar usuario
                     }
-
                     else
+                    {
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "El email ingresado ya se encuentra registrado dentro del sistema";
                         return RedirectToAction("IndexUsuarios");
+                    }
+                        
                 }
                 catch (Exception)
                 {

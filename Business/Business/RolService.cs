@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace CristalImb.Business.Business
 {
@@ -21,6 +22,14 @@ namespace CristalImb.Business.Business
         {
             return await _context.roles.Include(u => u.IdentityRole).ToListAsync();
         }
+
+
+        public async Task<IEnumerable<Rol>> ObtenerListaRolesEstado()
+        {
+            return await _context.roles.Include(u => u.IdentityRole).Where(s => s.Estado == true && s.IdentityRole.Name != "Administrador").ToListAsync();
+        }
+
+
         public async Task<Rol> ObtenerRolId(string id)
         {
             return await _context.roles.Include(x => x.IdentityRole).FirstOrDefaultAsync(r => r.RolId == id);
