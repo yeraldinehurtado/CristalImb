@@ -47,7 +47,7 @@ namespace CristalImb.Web.Controllers
                 };
                 try
                 {
-                    var nombreExiste = await _serviciosInmuebleService.nombreTipoExiste(serviciosInmueble.Nombre);
+                    var nombreExiste = await _serviciosInmuebleService.nombreServicioExiste(serviciosInmueble.Nombre);
                     if (nombreExiste != null)
                     {
                         TempData["Accion"] = "Error";
@@ -104,7 +104,7 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
-                    var nombreExiste = await _serviciosInmuebleService.nombreTipoExiste(serviciosInmueble.Nombre);
+                    var nombreExiste = await _serviciosInmuebleService.nombreExisteEditar(serviciosInmueble.Nombre, serviciosInmueble.ServicioInmuebleId);
                     if (nombreExiste != null)
                     {
                         TempData["Accion"] = "Error";

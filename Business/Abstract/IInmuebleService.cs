@@ -23,7 +23,7 @@ namespace CristalImb.Business.Abstract
         Task EliminarInmueble(int id);
         Task AgregarInmProp(Propietario propietario, Inmueble inmueble);
         Task<Inmueble> CodigoExiste(string codigo);
-        Task<IEnumerable<Inmueble>> CodigoExisteEditar(string codigo);
+        Task<Inmueble> CodigoExisteEditar(string codigo, int inmuebleId);
         Task<bool> GuardarCambios();
         void CrearInmuebleDetalleArchivos(int inmuebleId, string nombreArchivo);
         Task EliminarInmuebleDetalleArchivo(int id);

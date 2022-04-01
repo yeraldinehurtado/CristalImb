@@ -15,5 +15,7 @@ namespace CristalImb.Business.Abstract
         Task<EstadoCita> ObtenerEstadoCitaId(int id);
         Task EditarEstadoCita(EstadoCita estadoCita);
         Task<EstadoCita> nombreEstadoCitaExiste(string nombre);
+
+        Task<EstadoCita> nombreEstadoCitaEditarExiste(string nombre, int id);
     }
 }

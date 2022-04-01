@@ -55,9 +55,9 @@ namespace CristalImb.Business.Business
         {
             return await _context.zonas.FirstOrDefaultAsync(x => x.NombreZona == nombre);
         }
-        public async Task<IEnumerable<Zona>> nombreZonaExisteEditar(string nombre)
+        public async Task<Zona> nombreZonaExisteEditar(string nombre, int id)
         {
-            return await _context.zonas.Where(c => c.NombreZona == nombre).ToListAsync();
+            return await _context.zonas.FirstOrDefaultAsync(x => x.NombreZona == nombre && x.ZonaId != id);
         }
     }
 }

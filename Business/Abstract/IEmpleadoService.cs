@@ -14,5 +14,7 @@ namespace CristalImb.Business.Abstract
         Task<Empleado> ObtenerEmpleadoId(int id);
         Task EditarEmpleado(Empleado empleado);
         Task EliminarEmpleado(int id);
+        Task<Empleado> IdentificacionExiste(int identificacion);
+        Task<Empleado> IdentificacionExisteEditar(int identificacion, int empleadoId);
     }
 }

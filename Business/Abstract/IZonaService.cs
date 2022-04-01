@@ -16,6 +16,6 @@ namespace CristalImb.Business.Abstract
         Task EditarZona(Zona zona);
         Task EliminarZona(int id);
         Task<Zona> nombreZonaExiste(string nombre);
-        Task<IEnumerable<Zona>> nombreZonaExisteEditar(string nombre);
+        Task<Zona> nombreZonaExisteEditar(string nombre, int id);
     }
 }

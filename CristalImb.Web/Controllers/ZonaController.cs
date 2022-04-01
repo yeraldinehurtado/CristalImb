@@ -49,7 +49,7 @@ namespace CristalImb.Web.Controllers
                 };
                 try
                 {
-                    var nombreExiste = await _zonaService.nombreZonaExiste(zona.NombreZona);
+                    var nombreExiste = await _zonaService.nombreZonaExisteEditar(zona.NombreZona, zona.ZonaId);
                     if (nombreExiste != null)
                     {
                         TempData["Accion"] = "Error";

@@ -107,7 +107,8 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
-                    if (nombreExiste(tipoInmueblesViewModel.NombreTipoInm, tipoInmueblesViewModel.TipoInmuebleId))
+                    var nombreExiste = await _tipoInmuebleService.nombreTipoExisteEditar(tipoInmuebles.NombreTipoInm, tipoInmuebles.TipoInmuebleId);
+                    if (nombreExiste != null)
                     {
                         TempData["Accion"] = "Error";
                         TempData["Mensaje"] = "Este nombre de tipo de inmueble ya se encuentra registrado";

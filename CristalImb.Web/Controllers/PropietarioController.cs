@@ -152,13 +152,15 @@ namespace CristalImb.Web.Controllers
                     Apellido = propietariosViewModel.Apellido,
                     Telefono = propietariosViewModel.Telefono,
                     Celular = propietariosViewModel.Celular,
-                    Correo = propietariosViewModel.Correo
-                    
+                    Correo = propietariosViewModel.Correo,
+                    Estado = propietariosViewModel.Estado,
+                    PropietarioId = propietariosViewModel.PropietarioId
                 };
 
                 try
                 {
-                    if (IdentificacionExiste(propietariosViewModel.Identificacion, propietariosViewModel.PropietarioId))
+                    var identificacionExiste = await _propietarioService.IdentificacionExisteEditar(prop.Identificacion, prop.PropietarioId);
+                    if (identificacionExiste != null)
                     {
                         TempData["Accion"] = "Error";
                         TempData["Mensaje"] = "El número de identificación ya se encuentra registrado";

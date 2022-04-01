@@ -54,9 +54,9 @@ namespace CristalImb.Business.Business
         {
             return await _context.tipoInmuebles.FirstOrDefaultAsync(x => x.NombreTipoInm == nombre);
         }
-        public async Task<IEnumerable<TipoInmuebles>> nombreTipoExisteEditar(string nombre)
+        public async Task<TipoInmuebles> nombreTipoExisteEditar(string nombre, int id)
         {
-            return await _context.tipoInmuebles.Where(c => c.NombreTipoInm == nombre).ToListAsync();
+            return await _context.tipoInmuebles.FirstOrDefaultAsync(x => x.NombreTipoInm == nombre && x.TipoInmuebleId != id);
         }
     }
 }
