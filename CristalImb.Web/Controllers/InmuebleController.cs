@@ -112,7 +112,12 @@ namespace CristalImb.Web.Controllers
 
 
                 }
-                return View(inmuebleDto);
+                else
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Debe ingresar imágenes";
+                    return RedirectToAction("IndexInmueble");
+                }
 
 
             }
