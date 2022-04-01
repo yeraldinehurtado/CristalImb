@@ -62,43 +62,43 @@
                         <div class="form-group col-md-12">
                             <label asp-for="InmuebleId" class="control-label">Inmueble</label>
                             <select asp-items="ViewBag.ListaInmuebles" asp-for="InmuebleId" class="form-control"></select>
-                            <span asp-validation-for="InmuebleId" class="text-danger"></span>
+                            <span asp-validation-for="InmuebleId" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col-md-12 row">
                         <div class="form-group col-md-6">
                             <label asp-for="Identificacion" class="control-label">Identificación <b class="text-danger">*</b></label>
                             <input asp-for="Identificacion" class="form-control" />
-                            <span asp-validation-for="Identificacion" class="text-danger"></span>
+                            <span asp-validation-for="Identificacion" class="text-danger small"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="Nombre" class="control-label">Nombre <b class="text-danger">*</b></label>
                             <input asp-for="Nombre" class="form-control" />
-                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                            <span asp-validation-for="Nombre" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col-md-12 row">
                         <div class="form-group col-md-6">
                             <label asp-for="Apellido" class="control-label">Apellido <b class="text-danger">*</b></label>
                             <input asp-for="Apellido" class="form-control" />
-                            <span asp-validation-for="Apellido" class="text-danger"></span>
+                            <span asp-validation-for="Apellido" class="text-danger small"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="Telefono" class="control-label">Teléfono <b class="text-danger">*</b></label>
                             <input asp-for="Telefono" class="form-control" />
-                            <span asp-validation-for="Telefono" class="text-danger"></span>
+                            <span asp-validation-for="Telefono" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="col-md-12 row">
                         <div class="form-group col-md-6">
                             <label asp-for="Correo" class="control-label">Correo <b class="text-danger">*</b></label>
                             <input asp-for="Correo" class="form-control" />
-                            <span asp-validation-for="Correo" class="text-danger"></span>
+                            <span asp-validation-for="Correo" class="text-danger small"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="Direccion" class="control-label">Dirección <b class="text-danger">*</b></label>
                             <input asp-for="Direccion" class="form-control" />
-                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                            <span asp-validation-for="Direccion" class="text-danger small"></span>
                         </div>
                     </div>
                     @*<div class="col-md-12 row">
@@ -111,7 +111,7 @@
                     <div class="form-group">
                         <label asp-for="FechaHora" class="control-label">Fecha y hora de la cita <b class="text-danger">*</b></label>
                         <input asp-for="FechaHora" id="fecha" class="fecha form-control" readonly />
-                        <span asp-validation-for="FechaHora" class="text-danger"></span>
+                        <span asp-validation-for="FechaHora" class="text-danger small"></span>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Registrar" class="btn btn-primary" />
@@ -131,7 +131,7 @@
             integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
 
     <script>
-        
+
 
         $("#fecha").datetimepicker({
             format: 'Y-m-d H:i:i',
@@ -140,6 +140,46 @@
             interval: 60
         });
     </script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+<script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarCitaCli")) {
+        <text>
+        Swal.fire({
+        title: "Se ha registrado su cita",
+            icon: 'success',
+            html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("fechaHoraExiste")) {
+        <text>
+        Swal.fire({
+        title: "Hora o fecha no disponible",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("ErrorCli")) {
+        <text>
+        Swal.fire({
+        title: "Error",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+        })
+        </text>
+        }
+</script>
 </body>
 
 </html>
+@section Scripts{ 
+    <partial name="_ValidationScriptsPartial" />
+}
+

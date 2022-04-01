@@ -12,7 +12,7 @@ namespace CristalImb.Web.ViewModels.Usuarios
         [Required(ErrorMessage = "El email es requerido")]
         [EmailAddress(ErrorMessage = "Email invalido")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "El password es requerido")]
+        [Required(ErrorMessage = "La contraseña es requerida")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Display(Name = "Recordarme")]

@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="~/adminlte/dist/css/adminlte.min.css">
     <link href="~/lib/limonte-sweetalert2/sweetalert2.min.css" rel="stylesheet" />
 </head>
-<body style="background-color: #B3FCFD " class="hold-transition login-page">>
+<body style="background-color: #B3FCFD " class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
@@ -30,12 +30,12 @@
                 <a class="h1"><b>Cristal Inmobiliaria</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Ingresa tus datos para iniciar sesión</p>
+                <p class="login-box-msg">Ingresa tus datos para iniciar sesión y agenda tu cita!</p>
 
                 <form method="post" asp-action="Login">
                     <span asp-validation-for="Email" class="text-danger small"></span>
                     <div class="input-group mb-3">
-                        <input asp-for="Email" class="form-control" placeholder="email" />
+                        <input asp-for="Email" class="form-control" placeholder="Correo" />
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -44,7 +44,7 @@
                     </div>
                     <span asp-validation-for="Password" class="text-danger small"></span>
                     <div class="input-group mb-3">
-                        <input asp-for="Password" class="form-control" placeholder="password" />
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Contraseña" />
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -73,41 +73,46 @@
                             <a asp-action="OlvidePassword">Olvidé mi contraseña</a>
                         </div>
                     </div>
-                    <div asp-validation-summary="All" class="text-danger small"></div>
                 </form>
             </div>
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
     </div>
-        <script src="~/plugins/jquery/jquery.min.js"></script>
-        <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/adminlte.min.js"></script>
-        @section Scripts {
-            <partial name="_ValidationScriptsPartial" />
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="~/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/adminlte/dist/js/adminlte.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+        <text>
+        Swal.fire({
+        title: "Acceso denegado",
+            icon: 'error',
+            html: "@TempData["Mensaje"]"
+        })
+        </text>
         }
-    </body>
+    </script>
+</body>
 </html>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="~/adminlte/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="~/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="~/adminlte/dist/js/adminlte.min.js"></script>
-<script src="~/lib/limonte-sweetalert2/sweetalert2.min.js"></script>
+@section Scripts{ 
+    <partial name="_ValidationScriptsPartial" />
+}
 
-<script>
-        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Registrar")) { <text>
-        alertify.success('Registrado correctamente.');
-                 </text>
-        }
-        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
-        alertify.alert('Error', '@TempData["Mensaje"]');
-                 </text>
-        }
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-</script>
+
+
+

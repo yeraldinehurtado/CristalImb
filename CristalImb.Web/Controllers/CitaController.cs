@@ -46,29 +46,31 @@ namespace CristalImb.Web.Controllers
 
         [Authorize(Roles = "Administrador, Empleado")]
         [HttpPost]
-        public async Task<IActionResult> RegistrarCita(CitaViewModel citaViewModel)
+        public async Task<IActionResult> RegistrarCita(CitasViewModel citaViewModel)
         {
             if (ModelState.IsValid)
             {
                 Cita cita = new()
                 {
+                    InmuebleId = citaViewModel.InmuebleId,
                     Identificacion = citaViewModel.Identificacion,
                     Nombre = citaViewModel.Nombre,
                     Apellido = citaViewModel.Apellido,
                     Telefono = citaViewModel.Telefono,
                     Correo = citaViewModel.Correo,
                     Direccion = citaViewModel.Direccion,
-                    FechaHora = citaViewModel.FechaHora
+                    FechaHora = citaViewModel.FechaHora,
+                    EstadoCitaId = 2
                 };
                 try
                 {
-                    Cita citas = await _citaService.ObtenerFechaExistente(citaViewModel.FechaHora);
+                    var citas = await _citaService.ObtenerFechaExistente(cita.FechaHora);
                     if (citas == null)
                     {
-                        cita.EstadoCitaId = 2;
                         await _citaService.GuardarCita(cita);
                         TempData["Accion"] = "GuardarCita";
                         TempData["Mensaje"] = "Cita guardada con éxito.";
+                        return RedirectToAction("IndexCita");
                     }
                     else
                     {
@@ -106,27 +108,51 @@ namespace CristalImb.Web.Controllers
 
         [Authorize(Roles = "Cliente")]
         [HttpPost]
-        public async Task<IActionResult> RegistrarCitaCliente(Cita cita)
+        public async Task<IActionResult> RegistrarCitaCliente(CitasViewModel citaViewModel)
         {
-            Cita citas = await _citaService.ObtenerFechaExistente(cita.FechaHora);
-
-            if (citas == null)
+            if (ModelState.IsValid)
             {
-                cita.EstadoCitaId = 2;
-                await _citaService.GuardarCita(cita);
-                TempData["Accion"] = "GuardarCita";
-                TempData["Mensaje"] = "Cita guardada con éxito.";
-            }
-            else
-            {
-                TempData["Accion"] = "fechaHoraExiste";
-                TempData["Mensaje"] = "La fecha y hora ingresada ya se encuentra registrada dentro del sistema";
-            }
+                Cita cita = new()
+                {
+                    InmuebleId = citaViewModel.InmuebleId,
+                    Identificacion = citaViewModel.Identificacion,
+                    Nombre = citaViewModel.Nombre,
+                    Apellido = citaViewModel.Apellido,
+                    Telefono = citaViewModel.Telefono,
+                    Correo = citaViewModel.Correo,
+                    Direccion = citaViewModel.Direccion,
+                    FechaHora = citaViewModel.FechaHora,
+                    EstadoCitaId = 2
+                };
+                try
+                {
+                    var citas = await _citaService.ObtenerFechaExistente(cita.FechaHora);
+                    if (citas == null)
+                    {
+                        await _citaService.GuardarCita(cita);
+                        TempData["Accion"] = "GuardarCitaCli";
+                        TempData["Mensaje"] = "Cita guardada con éxito.";
+                        return RedirectToAction("RegistrarCitaCliente");
+                    }
+                    else
+                    {
+                        TempData["Accion"] = "fechaHoraExiste";
+                        TempData["Mensaje"] = "La fecha y hora ingresada ya se encuentra registrada dentro del sistema";
+                        return RedirectToAction("RegistrarCitaCliente");
+                    }
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "ErrorCli";
+                    TempData["Mensaje"] = "Ingresaste un valor inválido";
+                    return RedirectToAction("RegistrarCitaCliente");
+                }
 
             }
-            TempData["Accion"] = "Error";
+            TempData["Accion"] = "ErrorCli";
             TempData["Mensaje"] = "Ingresaste un valor inválido";
             return RedirectToAction("RegistrarCitaCliente");
+
         }
         [Authorize(Roles = "Administrador, Empleado")]
         [HttpGet]

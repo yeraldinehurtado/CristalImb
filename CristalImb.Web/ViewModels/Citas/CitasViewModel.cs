@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace CristalImb.Web.ViewModels.Citas
 {
-    public class CitaViewModel
+    public class CitasViewModel
     {
-        public int CitaId { get; set; }
 
         [DisplayName("Identificación")]
         [Required(ErrorMessage = "El documento es obligatorio")]
@@ -48,7 +47,12 @@ namespace CristalImb.Web.ViewModels.Citas
 
         [Required(ErrorMessage = "La fecha y hora de la cita es obligatoria")]
         public string FechaHora { get; set; }
+        [DisplayName("Código Inmueble")]
+        public int InmuebleId { get; set; }
 
+
+        [DisplayName("Estado de la cita")]
+        public int EstadoCitaId { get; set; }
 
     }
 }
