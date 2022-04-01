@@ -49,6 +49,11 @@ namespace CristalImb.Web.Controllers
             return View(await _inmuebleService.ObtenerListaInmueblesOferta());
         }
 
+        public IActionResult AgendarCita()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> InmueblesFiltro(InmuebleDetalleArchivos inmuebleDetalleArchivos)
         {
             return View(await _inmuebleService.BuscarInmuebles(inmuebleDetalleArchivos.Inmueble.TipoId));
