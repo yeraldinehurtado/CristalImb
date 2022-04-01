@@ -15,7 +15,7 @@ namespace CristalImb.Business.Abstract
         Task EditarPropietario(Propietario propietario);
         Task EliminarPropietario(int id);
         Task<Propietario> identificacionPropExiste(int identificacion);
-        Task<IEnumerable<Propietario>> identificacionPropExisteEditar(int identificacion);
+        Task<Propietario> IdentificacionExisteEditar(int identificacion, int id);
         Task ActivarEstadoPropierario(int id);
         Task DesactivarEstadoPropierario(int id);
     }

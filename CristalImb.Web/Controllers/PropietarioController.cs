@@ -151,13 +151,13 @@ namespace CristalImb.Web.Controllers
                     Telefono = propietariosViewModel.Telefono,
                     Celular = propietariosViewModel.Celular,
                     Correo = propietariosViewModel.Correo,
-                    Estado = true,
+                    Estado = propietariosViewModel.Estado,
                     PropietarioId = propietariosViewModel.PropietarioId
                 };
 
                 try
                 {
-                    var identificacionExiste = await _propietarioService.identificacionPropExiste(prop.Identificacion);
+                    var identificacionExiste = await _propietarioService.IdentificacionExisteEditar(prop.Identificacion, prop.PropietarioId);
                     if (identificacionExiste != null)
                     {
                         TempData["Accion"] = "Error";

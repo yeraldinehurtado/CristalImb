@@ -47,5 +47,14 @@ namespace CristalImb.Business.Business
         }
 
 
+        public async Task<Empleado> IdentificacionExiste(int identificacion)
+        {
+            return await _context.empleados.FirstOrDefaultAsync(x => x.Identificacion == identificacion);
+        }
+        public async Task<Empleado> IdentificacionExisteEditar(int identificacion, int empleadoId)
+        {
+            return await _context.empleados.FirstOrDefaultAsync(x => x.Identificacion == identificacion && x.EmpleadoId != empleadoId);
+        }
+
     }
 }

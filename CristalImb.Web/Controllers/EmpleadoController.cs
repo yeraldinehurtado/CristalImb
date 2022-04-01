@@ -39,6 +39,15 @@ namespace CristalImb.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarEmpleado(Empleado empleado)
         {
+            var identificacionExiste = await _empleadoService.IdentificacionExiste(empleado.Identificacion);
+            if (identificacionExiste != null)
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "La identificación ya se encuentra registrado";
+                return RedirectToAction("IndexEmplead");
+            }
+
+
             empleado.Estado = true;
             await _empleadoService.GuardarEmpleado(empleado);
             TempData["Accion"] = "GuardarEmpleado";
@@ -73,6 +82,15 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
+                        var identificacionExiste = await _empleadoService.IdentificacionExisteEditar(empleado.Identificacion, empleado.EmpleadoId);
+                        if (identificacionExiste != null)
+                        {
+                            TempData["Accion"] = "Error";
+                            TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
+                            return RedirectToAction("IndexInmueble");
+                        }
+
+
                         await _empleadoService.EditarEmpleado(empleado);
                         TempData["Accion"] = "EditarEmpleado";
                         TempData["Mensaje"] = "Empleado editado con éxito.";

@@ -104,7 +104,7 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
-                    var nombreExiste = await _tipoInmuebleService.nombreTipoExiste(tipoInmuebles.NombreTipoInm);
+                    var nombreExiste = await _tipoInmuebleService.nombreTipoExisteEditar(tipoInmuebles.NombreTipoInm, tipoInmuebles.TipoInmuebleId);
                     if (nombreExiste != null)
                     {
                         TempData["Accion"] = "Error";

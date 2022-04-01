@@ -46,6 +46,11 @@ namespace CristalImb.Business.Business
         {
             return await _context.estadoCitas.FirstOrDefaultAsync(x => x.Nombre == nombre);
         }
+
+        public async Task<EstadoCita> nombreEstadoCitaEditarExiste(string nombre, int id)
+        {
+            return await _context.estadoCitas.FirstOrDefaultAsync(x => x.Nombre == nombre && x.EstadoCitaId != id);
+        }
     }
 }
     

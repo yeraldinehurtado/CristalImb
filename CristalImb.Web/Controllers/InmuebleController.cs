@@ -156,7 +156,7 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
-                        var CodigoExiste = await _inmuebleService.CodigoExiste(inmueble.Codigo);
+                        var CodigoExiste = await _inmuebleService.CodigoExisteEditar(inmueble.Codigo, inmueble.InmuebleId);
                         if (CodigoExiste != null)
                         {
                             TempData["Accion"] = "Error";

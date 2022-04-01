@@ -55,5 +55,10 @@ namespace CristalImb.Business.Business
             return await _context.estadosInmueble.FirstOrDefaultAsync(x => x.NombreEstado == nombre);
         }
 
+        public async Task<EstadosInmueble> nombreEstadoInmuebleEditarExiste(string nombre, int id)
+        {
+            return await _context.estadosInmueble.FirstOrDefaultAsync(x => x.NombreEstado == nombre && x.IdEstadoInm != id);
+        }
+
     }
 }

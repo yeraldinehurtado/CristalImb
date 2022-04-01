@@ -16,6 +16,6 @@ namespace CristalImb.Business.Abstract
         Task EditarTipoInmueble(TipoInmuebles tipoInmuebles);
         Task EliminarTipoInmueble(int id);
         Task<TipoInmuebles> nombreTipoExiste(string nombre);
-        Task<IEnumerable<TipoInmuebles>> nombreTipoExisteEditar(string nombre);
+        Task<TipoInmuebles> nombreTipoExisteEditar(string nombre, int id);
     }
 }
