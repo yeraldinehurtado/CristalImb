@@ -332,7 +332,7 @@ namespace CristalImb.Web.Controllers
                     {
                         return LocalRedirect("/Admin/Dashboard");
                     }
-                    else if (rol.Contains("Cliente"))
+                    else if (rol.Contains("Cliente") && usuarioIdentity.Estado == true)
                     {
                         return LocalRedirect("/Cita/RegistrarCitaCliente");
                     }
