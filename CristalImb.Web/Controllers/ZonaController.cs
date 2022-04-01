@@ -1,4 +1,5 @@
 ﻿using CristalImb.Business.Abstract;
+using CristalImb.Model.DAL;
 using CristalImb.Model.Entities;
 using CristalImb.Web.ViewModels.Zonas;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +15,12 @@ namespace CristalImb.Web.Controllers
     public class ZonaController : Controller
     {
         private readonly IZonaService _zonaService;
+        private readonly AppDbContext _DbContext;
 
-        public ZonaController(IZonaService zonaService)
+        public ZonaController(IZonaService zonaService, AppDbContext context)
         {
             _zonaService = zonaService;
+            _DbContext = context;
         }
 
         [HttpGet]
@@ -103,17 +106,16 @@ namespace CristalImb.Web.Controllers
 
                 try
                 {
-                    var nombreExiste = await _zonaService.nombreZonaExiste(zona.NombreZona);
-                    if (nombreExiste != null)
+                    if (NombreExiste(zonasViewModel.NombreZona, zonasViewModel.ZonaId))
                     {
                         TempData["Accion"] = "Error";
                         TempData["Mensaje"] = "Este nombre de zona ya se encuentra registrado";
                         return RedirectToAction("IndexZona");
                     }
-                    await _zonaService.EditarZona(zona);
-                    TempData["Accion"] = "EditarZona";
-                    TempData["Mensaje"] = "Zona editada correctamente";
-                    return RedirectToAction("IndexZona");
+                        await _zonaService.EditarZona(zona);
+                        TempData["Accion"] = "EditarZona";
+                        TempData["Mensaje"] = "Zona editada correctamente";
+                        return RedirectToAction("IndexZona");
                 }
                 catch (Exception)
                 {
@@ -155,6 +157,10 @@ namespace CristalImb.Web.Controllers
             {
                 return RedirectToAction("IndexZona");
             }
+        }
+        private bool NombreExiste(string nombre, int id)
+        {
+            return _DbContext.zonas.Where(c => c.ZonaId != id).Any(p => p.NombreZona == nombre);
         }
     }
 }
