@@ -26,10 +26,13 @@
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
+            
             <div class="card-header text-center">
                 <a class="h1"><b>Cristal Inmobiliaria</b></a>
             </div>
+
             <div class="card-body">
+
                 <p class="login-box-msg">Ingresa tus datos para iniciar sesión.</p>
 
                 <form method="post" asp-action="Login">
@@ -69,8 +72,15 @@
 
 
                         <hr />
-                        <div>
-                            <a asp-action="OlvidePassword">Olvidé mi contraseña</a>
+                        <div class="col-12 row">
+                            <div class="col-6">
+                                <a asp-action="OlvidePassword">Olvidé mi contraseña</a>
+                            </div>
+                        </div>
+                        <div class="col-12 row">
+                            <div class="col-12">
+                                <a asp-action="IndexLanding" asp-controller="Landing">Volver</a>
+                            </div>
                         </div>
                     </div>
                 </form>
