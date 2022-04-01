@@ -153,8 +153,7 @@ namespace CristalImb.Web.Controllers
                     Telefono = propietariosViewModel.Telefono,
                     Celular = propietariosViewModel.Celular,
                     Correo = propietariosViewModel.Correo,
-                    Estado = propietariosViewModel.Estado,
-                    PropietarioId = propietariosViewModel.PropietarioId
+                    Estado = propietariosViewModel.Estado
                 };
 
                 try
