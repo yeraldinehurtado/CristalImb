@@ -110,8 +110,8 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    <script>
-        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) {
+<script>
+        @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("ErrorLogin")) {
         <text>
         Swal.fire({
         title: "Acceso denegado",
@@ -120,7 +120,7 @@
         })
         </text>
         }
-    </script>
+</script>
 </body>
 </html>
 @section Scripts{ 
