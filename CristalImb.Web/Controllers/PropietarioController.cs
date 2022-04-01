@@ -238,26 +238,38 @@ namespace CristalImb.Web.Controllers
                 try
                 {
                     int propietario = inmPropietariosViewModel.PropietarioId;
-                    foreach (var x in inmPropietariosViewModel.inmProp)
+
+                    if(inmPropietariosViewModel.inmProp == null)
                     {
-                        InmPropietarios inmPropietarios = new()
-                        {
-                            PropietarioId = propietario,
-                            InmuebleId = x.InmuebleId,
-                            FechaInicio = DateTime.Now,
-                            Estado = true,
-                            asociado = "Si"
-
-
-                    };
-                        await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
-                        await _inmuebleService.AlertaPropietario(inmPropietarios.InmuebleId);
-                        await _propietarioService.ActivarEstadoPropierario(inmPropietarios.PropietarioId);
-                        TempData["Accion"] = "GuardarPropInmueble";
-                        TempData["Mensaje"] = "inmueble(s) añadido con éxito";
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Debe ingresar por lo menos un inmueble";
+                        return RedirectToAction("IndexPropietario");
                     }
+                    else
+                    {
+                        foreach (var x in inmPropietariosViewModel.inmProp)
+                        {
+                            InmPropietarios inmPropietarios = new()
+                            {
+                                PropietarioId = propietario,
+                                InmuebleId = x.InmuebleId,
+                                FechaInicio = DateTime.Now,
+                                Estado = true,
+                                asociado = "Si"
+
+
+                            };
+                            await _inmPropietariosService.RegistrarInmPropietarios(inmPropietarios);
+                            await _inmuebleService.AlertaPropietario(inmPropietarios.InmuebleId);
+                            await _propietarioService.ActivarEstadoPropierario(inmPropietarios.PropietarioId);
+                            TempData["Accion"] = "GuardarPropInmueble";
+                            TempData["Mensaje"] = "inmueble(s) añadido con éxito";
+                        }
+
+                        return RedirectToAction("IndexPropietario");
+                    }
+
                     
-                    return RedirectToAction("IndexPropietario");
                 }
                 catch (Exception)
                 {
