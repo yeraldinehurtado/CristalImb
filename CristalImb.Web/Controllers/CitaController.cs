@@ -106,44 +106,22 @@ namespace CristalImb.Web.Controllers
 
         [Authorize(Roles = "Cliente")]
         [HttpPost]
-        public async Task<IActionResult> RegistrarCitaCliente(CitaViewModel citaViewModel)
+        public async Task<IActionResult> RegistrarCitaCliente(Cita cita)
         {
-            if (ModelState.IsValid)
+            Cita citas = await _citaService.ObtenerFechaExistente(cita.FechaHora);
+
+            if (citas == null)
             {
-                Cita cita = new()
-                {
-                    Identificacion = citaViewModel.Identificacion,
-                    Nombre = citaViewModel.Nombre,
-                    Apellido = citaViewModel.Apellido,
-                    Telefono = citaViewModel.Telefono,
-                    Correo = citaViewModel.Correo,
-                    Direccion = citaViewModel.Direccion,
-                    FechaHora = citaViewModel.FechaHora
-                };
-                try
-                {
-                    Cita citas = await _citaService.ObtenerFechaExistente(citaViewModel.FechaHora);
-                    if (citas == null)
-                    {
-                        cita.EstadoCitaId = 2;
-                        await _citaService.GuardarCita(cita);
-                        TempData["Accion"] = "GuardarCita";
-                        TempData["Mensaje"] = "Cita guardada con éxito.";
-                        return RedirectToAction("RegistrarCitaCliente");
-                    }
-                    else
-                    {
-                        TempData["Accion"] = "fechaHoraExiste";
-                        TempData["Mensaje"] = "La fecha y hora ingresada ya se encuentra registrada dentro del sistema";
-                        return RedirectToAction("RegistrarCitaCliente");
-                    }
-                }
-                catch (Exception)
-                {
-                    TempData["Accion"] = "Error";
-                    TempData["Mensaje"] = "Ingresaste un valor inválido";
-                    return RedirectToAction("RegistrarCitaCliente");
-                }
+                cita.EstadoCitaId = 2;
+                await _citaService.GuardarCita(cita);
+                TempData["Accion"] = "GuardarCita";
+                TempData["Mensaje"] = "Cita guardada con éxito.";
+            }
+            else
+            {
+                TempData["Accion"] = "fechaHoraExiste";
+                TempData["Mensaje"] = "La fecha y hora ingresada ya se encuentra registrada dentro del sistema";
+            }
 
             }
             TempData["Accion"] = "Error";
