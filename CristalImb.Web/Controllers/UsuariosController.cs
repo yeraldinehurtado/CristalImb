@@ -158,6 +158,8 @@ namespace CristalImb.Web.Controllers
 
 
                         await _usuariosService.GuardarUsuario(usuarioIdentity);
+                        TempData["Accion"] = "Registrar";
+                        TempData["Mensaje"] = "Usuario registrado correctamente";
                         MailMessage mensaje = new();
                         mensaje.To.Add(usuarioViewModel.Email);//destinatario
                         mensaje.Subject = "Cristalimb - registro en el sistema";
@@ -173,12 +175,16 @@ namespace CristalImb.Web.Controllers
                         return RedirectToAction("Login", "Usuarios");
                     }
                     else
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "No se pudo registrar el usuario.";
                         return View(usuarioViewModel);
                 }
                 catch (Exception)
                 {
 
-                    throw;
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "No se pudo registrar el usuario.";
+                    return View(usuarioViewModel);
                 }
 
             }
