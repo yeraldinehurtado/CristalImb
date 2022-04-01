@@ -120,43 +120,40 @@
             <!-- /.form-box -->
         </div><!-- /.card -->
     </div>
-    
-</body>
-</html>
-<script>
-    $(function () {
-        $("#datepicker").datepicker();
-    });
-
-    $(document).ready(function () {
-        $("#timepicker").timepicker();
-    });
-
-    $('.timepicker').timepicker({
-        timeFormat: 'h:mm p',
-        interval: 120,
-        minTime: '10',
-        maxTime: '6:00pm',
-        defaultTime: '11',
-        startTime: '10:00',
-        dynamic: false,
-        dropdown: true,
-        scrollbar: true
-    });
-
-    $("#datetimepicker").datetimepicker({
-        format: 'Y-m-d H:i:i',
-        formatTime: 'H:i:i',
-        formatDate: 'Y-m-d',
-        interval: 60
-    });
-</script>
-<script src="~/lib/limonte-sweetalert2/sweetalert2.min.js"></script>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/lib/limonte-sweetalert2/sweetalert2.min.js"></script>
 
     <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+
+        $(document).ready(function () {
+            $("#timepicker").timepicker();
+        });
+
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 120,
+            minTime: '10',
+            maxTime: '6:00pm',
+            defaultTime: '11',
+            startTime: '10:00',
+            dynamic: false,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $("#datetimepicker").datetimepicker({
+            format: 'Y-m-d H:i:i',
+            formatTime: 'H:i:i',
+            formatDate: 'Y-m-d',
+            interval: 60
+        });
+    </script>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+
+        <script>
     @if (TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("GuardarCita")) {
         <text>
         Swal.fire({
@@ -166,7 +163,12 @@
             })
         </text>
         }
-    </script>
-    
-}
+        </script>
+
+    }
+</body>
+</html>
+
+
+
 

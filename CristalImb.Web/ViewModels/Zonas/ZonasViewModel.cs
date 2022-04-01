@@ -9,7 +9,7 @@ namespace CristalImb.Web.ViewModels.Zonas
 
         [DisplayName("Nombre tipo de inmueble")]
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
+        [RegularExpression(@"^[a-zA-Z-ZñÑáéíóúÁÉÍÓÚ\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
         [StringLength(70, ErrorMessage = "Máximo 70 caracteres")]
         public string NombreZona { get; set; }
         public bool Estado { get; set; }

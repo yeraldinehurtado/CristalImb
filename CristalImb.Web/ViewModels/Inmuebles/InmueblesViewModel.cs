@@ -16,7 +16,7 @@ namespace CristalImb.Web.ViewModels.Inmuebles
         public string Codigo { get; set; }
 
         [DisplayName("Descripción")]
-        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s\0-9]+$", ErrorMessage = "Ingrese caracteres")]
+        [RegularExpression(@"^[a-zA-Z-ZñÑáéíóúÁÉÍÓÚ\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "El tipo es obligatorio")]
@@ -51,7 +51,7 @@ namespace CristalImb.Web.ViewModels.Inmuebles
 
         [DisplayName("Dirección")]  
         [Required(ErrorMessage = "La dirección es obligatorio")]
-        [RegularExpression(@"^[a-zA-Z\u00f1\u00d1\s\0-9]+$", ErrorMessage = "Ingrese caracteres")]
+        [RegularExpression(@"^[a-zA-Z-ZñÑáéíóúÁÉÍÓÚ\u00f1\u00d1\s]+$", ErrorMessage = "Ingrese caracteres")]
         public string Direccion { get; set; }
 
         public bool oferta { get; set; }
