@@ -44,7 +44,7 @@ namespace CristalImb.Web.Controllers
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "La identificación ya se encuentra registrado";
-                return RedirectToAction("IndexEmplead");
+                return RedirectToAction("IndexEmpleado");
             }
 
 
@@ -86,8 +86,8 @@ namespace CristalImb.Web.Controllers
                         if (identificacionExiste != null)
                         {
                             TempData["Accion"] = "Error";
-                            TempData["Mensaje"] = "El código del inmueble ya se encuentra registrado";
-                            return RedirectToAction("IndexInmueble");
+                            TempData["Mensaje"] = "La identificación ya se encuentra registrado";
+                            return RedirectToAction("IndexEmpleado");
                         }
 
 
