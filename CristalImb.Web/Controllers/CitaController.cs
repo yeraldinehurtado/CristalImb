@@ -184,6 +184,22 @@ namespace CristalImb.Web.Controllers
                     }
                     try
                     {
+                        var citas = await _citaService.ObtenerFechaExisteEditar(cita.FechaHora,cita.CitaId);
+                        if (citas == null)
+                        {
+                            await _citaService.EditarCita(cita);
+                            TempData["Accion"] = "EditarCita";
+                            TempData["Mensaje"] = "Cita editada con éxito.";
+                            return RedirectToAction("IndexCita");
+                        }
+                        else
+                        {
+                            TempData["Accion"] = "fechaHoraExiste";
+                            TempData["Mensaje"] = "La fecha y hora ingresada ya se encuentra registrada dentro del sistema";
+                            return RedirectToAction("IndexCita");
+                        }
+
+
                         await _citaService.EditarCita(cita);
                         TempData["Accion"] = "EditarCita";
                         TempData["Mensaje"] = "Cita editada con éxito.";

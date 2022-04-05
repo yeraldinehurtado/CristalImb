@@ -14,5 +14,6 @@ namespace CristalImb.Business.Abstract
         Task EditarCita(Cita cita);
         Task EliminarCita(int id);
         Task<Cita> ObtenerFechaExistente(string fechahora);
+        Task<Cita> ObtenerFechaExisteEditar(string fechahora, int id);
     }
 }

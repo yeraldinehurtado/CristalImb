@@ -40,6 +40,11 @@ namespace CristalImb.Business.Business
 
         }
 
+        public async Task<Cita> ObtenerFechaExisteEditar(string fechahora, int id)
+        {
+            return await _context.citas.FirstOrDefaultAsync(x => x.FechaHora == fechahora && x.CitaId != id);
+        }
+
         public async Task EditarCita(Cita cita)
         {
             _context.Update(cita);
