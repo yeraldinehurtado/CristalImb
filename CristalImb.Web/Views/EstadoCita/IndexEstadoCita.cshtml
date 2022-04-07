@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CristalImb.Model.Entities.EstadoCita>
 
 @{
-    ViewData["Title"] = "IndexEstadoCita";
+    ViewData["Title"] = "Estados de cita";
 }
 
 @section Styles{
@@ -32,8 +32,8 @@
                     </p>
                     <br />
                 </div>
-                <div>
-                    <table class="table table-striped table-bordered col-12" id="tabla">
+                <div class="table-responsive" style="width: 1000px; margin: 0 auto;">
+                    <table class="display nowrap" id="tabla" cellspacing="0" style="width: 100%;">
                         <thead class="bg-dark text-white">
                             <tr>
                                 <th>
@@ -60,7 +60,7 @@
                                         }
                                         else
                                         {
-                                            <p>Desactivo</p>
+                                            <p>Inactivo</p>
                                         }
                                     </td>
                                     <td>
@@ -78,7 +78,7 @@
                                         }
                                     </td>
                                     <td>
-                                         <a onclick="mostrarModal('@Url.Action("EditarEstadoCita","EstadoCita", new { id = x.EstadoCitaId }, Context.Request.Scheme)', 'Editar estado de cita')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                        <a onclick="mostrarModal('@Url.Action("EditarEstadoCita","EstadoCita", new { id = x.EstadoCitaId }, Context.Request.Scheme)', 'Editar estado de cita')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
                                         @*<a asp-action="EditarEstadoCita" asp-route-id="@x.EstadoCitaId" class="btn alert-primary"><i class="fas fa-edit"></i></a>*@
                                     </td>
                                 </tr>

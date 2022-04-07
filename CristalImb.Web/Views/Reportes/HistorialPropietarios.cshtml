@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CristalImb.Model.Entities.InmPropietarios>
 
 @{
-    ViewData["Title"] = "Historial propietarios";
+    ViewData["Title"] = "Historial propietarios e inmuebles";
 }
 
 @section Styles{
@@ -29,8 +29,8 @@
                     <br />
                     <br />
                 </div>
-                <div>
-                    <table class="table table-striped table-bordered col-12" id="tabla">
+                <div class="table-responsive" style="width: 1000px; margin: 0 auto;">
+                    <table class="display nowrap" id="tabla" cellspacing="0" style="width: 100%;">
                         <thead class="bg-dark text-white">
                             <tr>
                                 <th>
@@ -51,7 +51,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.FechaFin)
                                 </th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -72,12 +72,12 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelx => x.FechaInicio)
-                                    </td>                                   
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelx => x.FechaFin)
-                                        
+
                                     </td>
-                                   
+
                                 </tr>
                             }
                         </tbody>

@@ -11,11 +11,9 @@
                 <hr />
                 <div class="col-md-12 row">
                     <div class="botonCrear col-md-12 p-3 text-center accent-teal">
-                        <br />
                         <p>
                             <a onclick="mostrarModal('@Url.Action("CrearUsuarios","Usuarios", "null", Context.Request.Scheme)', 'Registrar usuario')" class="btn btn-outline-success"><i class="fas fa-plus"></i> Registrar usuario.</a>
                         </p>
-                        <br />
                     </div>
                     @*<div class="botonAsignar col-md-6 p-3 text-center accent-teal">
                             <br />
@@ -33,84 +31,85 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-11 align-self-center text-center">
-                    <table id="tabla" class="table">
-                        <thead class="bg-dark text-white">
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Identificacion)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.IdentityUser.Email)
-                                </th>
-                                <th> Rol </th>
-                                <th> Estado </th>
-                                <th> Estado </th>
-                                <th> Editar </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var usuario in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => usuario.Identificacion)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => usuario.IdentityUser.Email)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => usuario.Rol)
-                                    </td>
-                                    <td>
-                                        @if (usuario.Estado == true)
-                                        {
-                                            <p>Activo</p>
-                                        }
-                                        else
-                                        {
-                                            <p>Desactivo</p>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (usuario.Estado == true)
-                                        {
-                                            @if (usuario.Rol == "Administrador")
-                                            {
-                                                <p></p>
-                                            }
-                                            else
-                                            {
-                                                <form asp-action="ActualizarEstado" asp-route-id="@usuario.UsuarioId">
-                                                    <button type="submit"><i class="fas fa-toggle-on"></i></button>
-                                                </form>
-                                            }
+                    <div class="table-responsive">
+                        <table class="display nowrap" id="tabla" cellspacing="0" style="width: 100%;">
+                                <thead class="bg-dark text-white">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Identificacion)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IdentityUser.Email)
+                                        </th>
+                                        <th> Rol </th>
+                                        <th> Estado </th>
+                                        <th> Estado </th>
+                                        <th> Editar </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var usuario in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => usuario.Identificacion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => usuario.IdentityUser.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => usuario.Rol)
+                                            </td>
+                                            <td>
+                                                @if (usuario.Estado == true)
+                                                {
+                                                    <p>Activo</p>
+                                                }
+                                                else
+                                                {
+                                                    <p>Inactivo</p>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (usuario.Estado == true)
+                                                {
+                                                    @if (usuario.Rol == "Administrador")
+                                                    {
+                                                        <p></p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <form asp-action="ActualizarEstado" asp-route-id="@usuario.UsuarioId">
+                                                            <button type="submit"><i class="fas fa-toggle-on"></i></button>
+                                                        </form>
+                                                    }
 
-                                        }
-                                        else if (usuario.Estado == false)
-                                        {
-                                            @if (usuario.Rol == "Administrador")
-                                            {
-                                                <p></p>
-                                            }
-                                            else
-                                            {
-                                                <form asp-action="ActualizarEstado" asp-route-id="@usuario.UsuarioId">
-                                                    <button type="submit"><i class="fas fa-toggle-off"></i></button>
-                                                </form>
-                                            }
-                                        }
-                                        </td>
-                                    <td>
-                                        <a onclick="mostrarModal('@Url.Action("EditarUsuarios","Usuarios", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'Editar usuario')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
-                                        @*<a asp-action="EditarUsuario" asp-route-rol="@usuario.UsuarioId" class="btn alert-primary">Editar</a>*@
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
+                                                }
+                                                else if (usuario.Estado == false)
+                                                {
+                                                    @if (usuario.Rol == "Administrador")
+                                                    {
+                                                        <p></p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <form asp-action="ActualizarEstado" asp-route-id="@usuario.UsuarioId">
+                                                            <button type="submit"><i class="fas fa-toggle-off"></i></button>
+                                                        </form>
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                <a onclick="mostrarModal('@Url.Action("EditarUsuarios","Usuarios", new { id = usuario.UsuarioId }, Context.Request.Scheme)', 'Editar usuario')" class="btn alert-primary"><i class="fas fa-edit"></i></a>
+                                                @*<a asp-action="EditarUsuario" asp-route-rol="@usuario.UsuarioId" class="btn alert-primary">Editar</a>*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

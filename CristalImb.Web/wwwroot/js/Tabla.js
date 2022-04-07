@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
     $('#tabla').DataTable(
         {
+            "responsive": true,
+            "processing": true,
+            "serverSide": true,
+            "scrollX": true,
             language: {
                 "processing": "Procesando...",
                 "lengthMenu": "Mostrar _MENU_ registros",
@@ -179,7 +183,9 @@
                     }
                 },
                 "info": "Mostrando de _START_ a _END_ de _TOTAL_ entradas"
-            }
+            },
+            
         }
+        
     );
 });
